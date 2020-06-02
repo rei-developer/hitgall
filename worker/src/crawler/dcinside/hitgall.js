@@ -21,7 +21,6 @@ dotenv.config()
 const { MY_NAMESPACE } = process.env
 
 const getContent = async url => {
-    console.log(url, " 시작중입니다 겟컨텥츠")
     try {
         let regex, data
         const result = await new Promise((resolve, reject) => {
@@ -106,7 +105,6 @@ const download = async item => {
 }
 
 const submit = async (url, no) => {
-    console.log(no, url, '시작')
     try {
         const data = await getContent(url)
         if (!data)
@@ -123,7 +121,7 @@ const submit = async (url, no) => {
         if (!topicId)
             return console.err('database failed')
         if (data.images.length > 0) {
-            const jobs = data.images.map(item => new Promise(async resolve => {
+            const jobs = data.images.map(item => new Promise(async (resolve, reject) => {
                 const success = await download(item)
                 if (!success)
                     return reject({ message: 'download failed', status: 'fail' })
@@ -151,7 +149,6 @@ const getList = async url => {
                     const no = xArray[1]
                     items.push(no)
                 }
-                console.log(items)
                 resolve({ items, status: 'ok' })
             })
         })
