@@ -28,7 +28,6 @@ const getContent = async url => {
             request.get(url, header, (err, response, body) => {
                 if (err || response.statusCode !== 200 || body === '')
                     return reject({ message: err || 'non-content', status: 'fail' })
-                console.log(body)
                 // get author
                 regex = /<span class='nickname in' title='([\s\S]*?)'([\s\S]*?)>([\s\S]*?)<\/span>/gim
                 data = body.match(regex)
@@ -145,7 +144,6 @@ const getList = async url => {
             request.get(url, header, (err, response, body) => {
                 if (err || response.statusCode !== 200)
                     return reject({ message: err || 'non-content', status: 'fail' })
-                console.log(body)
                 let items = []
                 const regex = /<tr class="ub-content us-post" data-no="([\s\S]*?)" data-type="([\s\S]*?)">([\s\S]*?)<\/tr>/gim
                 let xArray
@@ -164,27 +162,26 @@ const getList = async url => {
     }
 }
 
-module.exports = async () => {
-    try {
-        const newestNo = await readTopic.getNewestNo() || 0
-        const url = 'https://gall.dcinside.com/board/lists?id=hit'
-        const list = await getList(url)
-        list.items = ['15829']
-        if (list.items.length > 0) {
-            const jobs = list.items.map(item => new Promise(async resolve => {
-                if (item === newestNo)
-                    return console.log("끝이네", newestNo)
+let page = 0
+const maxPage = 3
+
+const work = async () => {
+    const newestNo = await readTopic.getNewestNo() || 0
+    const url = `https://gall.dcinside.com/board/lists/?id=hit&page=${++page}`
+    const list = await getList(url)
+    if (list.items.length > 0) {
+        const jobs = list.items.map(item => new Promise(async resolve => {
+            if (item != newestNo) {
                 const success = await submit(`https://gall.dcinside.com/board/view/?id=hit&no=${item}`, item)
                 if (!success)
-                    return false
-                resolve(true)
-            }))
-            await Promise.all(jobs)
-            return true
-        }
-        return false
-    } catch (err) {
-        console.log(err)
-        return false
+                    return
+            }
+            if (page <= maxPage)
+                await work()
+        }))
+        await Promise.all(jobs)
     }
+    console.log('finish')
 }
+
+module.exports = async () => await work()
