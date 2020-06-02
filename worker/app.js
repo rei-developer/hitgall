@@ -1,7 +1,8 @@
+const schedule = require('node-schedule')
 const dcinsideHG = require('./src/crawler/dcinside/hitgall')
 
-const start = async () => {
-    await dcinsideHG()
-}
+// schedule.scheduleJob('00 * * * * *', () => {
+//     await dcinsideHG()
+// })
 
-start()
+await dcinsideHG()
