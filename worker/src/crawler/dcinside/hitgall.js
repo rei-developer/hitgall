@@ -26,8 +26,9 @@ const getContent = async url => {
         let regex, data
         const result = await new Promise((resolve, reject) => {
             request.get(url, header, (err, response, body) => {
-                if (err || response.statusCode !== 200)
+                if (err || response.statusCode !== 200 || body === '')
                     return reject({ message: err || 'non-content', status: 'fail' })
+                console.log(body)
                 // get author
                 regex = /<span class='nickname in' title='([\s\S]*?)'([\s\S]*?)>([\s\S]*?)<\/span>/gim
                 data = body.match(regex)
@@ -82,7 +83,7 @@ const getContent = async url => {
         })
         return result
     } catch (err) {
-        console.error(err)
+        console.log(err)
         return false
     }
 }
@@ -100,7 +101,7 @@ const download = async item => {
         })
         return result
     } catch (err) {
-        console.error(err)
+        console.log(err)
         return false
     }
 }
@@ -109,8 +110,8 @@ const submit = async (url, no) => {
     console.log(no, url, '시작')
     try {
         const data = await getContent(url)
-        if (data.status === 'fail')
-            return console.error(data.message)
+        if (!data)
+            return console.log('failed')
         const topicId = await createTopic({
             no,
             type: data.type,
@@ -133,7 +134,7 @@ const submit = async (url, no) => {
         }
         return true
     } catch (err) {
-        console.error(err)
+        console.log(err)
         return false
     }
 }
@@ -158,7 +159,7 @@ const getList = async url => {
         })
         return result
     } catch (err) {
-        console.error(err)
+        console.log(err)
         return false
     }
 }
@@ -168,6 +169,7 @@ module.exports = async () => {
         const newestNo = await readTopic.getNewestNo() || 0
         const url = 'https://gall.dcinside.com/board/lists?id=hit'
         const list = await getList(url)
+        list.items = ['15829']
         if (list.items.length > 0) {
             const jobs = list.items.map(item => new Promise(async resolve => {
                 if (item === newestNo)
@@ -182,7 +184,7 @@ module.exports = async () => {
         }
         return false
     } catch (err) {
-        console.error(err)
+        console.log(err)
         return false
     }
 }
