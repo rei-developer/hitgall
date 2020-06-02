@@ -1,6 +1,9 @@
 const fs = require('fs')
+const sharp = require('sharp')
+const { execFile } = require('child_process')
+const giflossy = require('giflossy')
 const moment = require('moment')
-const uuidv5 = require('uuid/v5')
+const uuidv5 = require('uuidv5')
 const dotenv = require('dotenv')
 const request = require('request')
 const header = {
@@ -20,7 +23,31 @@ dotenv.config()
 
 const { MY_NAMESPACE } = process.env
 
-const getContent = async url => {
+const getList = async url => {
+    try {
+        const result = await new Promise((resolve, reject) => {
+            request.get(url, header, (err, response, body) => {
+                if (err || response.statusCode !== 200)
+                    return reject({ message: err || 'non-content', status: 'fail' })
+                let items = []
+                const regex = /<tr class="ub-content us-post" data-no="([\s\S]*?)" data-type="([\s\S]*?)">([\s\S]*?)<\/tr>/gim
+                let xArray
+                while (xArray = regex.exec(body)) {
+                    const no = xArray[1]
+                    items.push(no)
+                }
+                resolve({ items, status: 'ok' })
+            })
+        })
+        return result
+    } catch (err) {
+        console.log(err)
+        return false
+    }
+}
+
+const getContent = async (url, no) => {
+    console.log(no, '시도중...')
     try {
         let regex, data
         const result = await new Promise((resolve, reject) => {
@@ -66,7 +93,7 @@ const getContent = async url => {
                         })
                     }
                     if (images.length > 0)
-                        images.map(item => content = content.replace(item.origin, `/img/${item.uuid}.gif`))
+                        images.map(item => content = content.replace(item.origin, `/img/${no}/${item.uuid}.gif`))
                 }
                 resolve({
                     type: 'DC',
@@ -86,27 +113,9 @@ const getContent = async url => {
     }
 }
 
-const download = async item => {
-    try {
-        const result = await new Promise((resolve, reject) => {
-            request.defaults({ encoding: null }).get(item.url, header, (err, response, body) => {
-                if (err || response.statusCode !== 200)
-                    return reject({ message: err || 'non-content', status: 'fail' })
-                const path = './img/' + item.uuid + '.gif'
-                const content = Buffer.from(body, 'base64')
-                fs.writeFile(path, content, () => resolve({ status: 'ok' }))
-            })
-        })
-        return result
-    } catch (err) {
-        console.log(err)
-        return false
-    }
-}
-
 const submit = async (url, no) => {
     try {
-        const data = await getContent(url)
+        const data = await getContent(url, no)
         if (!data)
             return console.log('failed')
         const topicId = await createTopic({
@@ -122,7 +131,7 @@ const submit = async (url, no) => {
             return console.err('database failed')
         if (data.images.length > 0) {
             const jobs = data.images.map(item => new Promise(async (resolve, reject) => {
-                const success = await download(item)
+                const success = await download(item, no)
                 if (!success)
                     return reject({ message: 'download failed', status: 'fail' })
                 resolve(true)
@@ -136,20 +145,25 @@ const submit = async (url, no) => {
     }
 }
 
-const getList = async url => {
+const download = async (item, no) => {
     try {
         const result = await new Promise((resolve, reject) => {
-            request.get(url, header, (err, response, body) => {
+            request.defaults({ encoding: null }).get(item.url, header, (err, response, body) => {
                 if (err || response.statusCode !== 200)
                     return reject({ message: err || 'non-content', status: 'fail' })
-                let items = []
-                const regex = /<tr class="ub-content us-post" data-no="([\s\S]*?)" data-type="([\s\S]*?)">([\s\S]*?)<\/tr>/gim
-                let xArray
-                while (xArray = regex.exec(body)) {
-                    const no = xArray[1]
-                    items.push(no)
-                }
-                resolve({ items, status: 'ok' })
+                const path = `./img/${no}/${item.uuid}.gif`
+                const content = Buffer.from(body, 'base64')
+                fs.writeFile(path, content, () => {
+                    execFile(giflossy, ['-O3', '--lossy=80', '-o', path, path], err => {
+                        if (err)
+                            return reject({ message: err, status: 'fail' })
+                        const thumbnail = sharp(content)
+                        thumbnail.metadata()
+                            .then(() => thumbnail.resize(100, 100).toBuffer())
+                            .then(result => fs.writeFile(`./img/thumb/${no}/${item.uuid}.gif`, result, () => console.log(path, 'done.')))
+                    })
+                    resolve({ status: 'ok' })
+                })
             })
         })
         return result
@@ -178,7 +192,7 @@ const work = async () => {
         }))
         await Promise.all(jobs)
     }
-    console.log('finish')
+    console.log(url, 'Finish...')
 }
 
 module.exports = async () => await work()

@@ -6,3 +6,5 @@ const dcinsideHG = require('./src/crawler/dcinside')
 // })
 
 dcinsideHG()
+
+// node app
