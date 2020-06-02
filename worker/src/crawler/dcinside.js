@@ -3,7 +3,7 @@ const sharp = require('sharp')
 const { execFile } = require('child_process')
 const giflossy = require('giflossy')
 const moment = require('moment')
-const uuidv5 = require('uuidv5')
+const { v5 } = require('uuid')
 const dotenv = require('dotenv')
 const request = require('request')
 const header = {
@@ -85,7 +85,7 @@ const getContent = async (url, no) => {
                     let xArray
                     while (xArray = regex.exec(content)) {
                         const imageUrl = xArray[1]
-                        const uuid = uuidv5(`${Date.now()}-${imageUrl}`, MY_NAMESPACE)
+                        const uuid = v5(`${Date.now()}-${imageUrl}`, MY_NAMESPACE)
                         images.push({
                             origin: imageUrl,
                             url: imageUrl.replace(/\:\/\/([^\/?#]+)/, '://images.dcinside.com'),
