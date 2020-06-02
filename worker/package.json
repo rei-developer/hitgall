@@ -1,6 +1,9 @@
 {
   "dependencies": {
     "dotenv": "^8.2.0",
+    "lodash": "^4.17.15",
+    "moment": "^2.26.0",
+    "mysql": "^2.18.1",
     "request": "^2.88.2"
   }
 }
