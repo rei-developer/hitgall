@@ -174,7 +174,7 @@ const work = async () => {
                     return
             }
             if (page <= maxPage)
-                await work()
+                setTimeout(async () => await work(), 5000)
         }))
         await Promise.all(jobs)
     }
