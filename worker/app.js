@@ -1,7 +1,7 @@
 const schedule = require('node-schedule')
-const dcinsideHG = require('./src/crawler/dcinside/hitgall')
+const dcinsideHG = require('./src/crawler/dcinside')
 
-// schedule.scheduleJob('00 * * * * *', () => {
+// schedule.scheduleJob('00 00 * * * *', () => {
 //     dcinsideHG()
 // })
 
