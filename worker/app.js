@@ -6,8 +6,7 @@
 //         type: 'DC',
 //         label: 'hit',
 //         page: 0,
-//         maxPage: 1,
-//         delay: 5000
+//         maxPage: 1
 //     })
 // })
 
@@ -16,6 +15,5 @@ cron({
     type: 'DC',
     label: 'hit',
     page: 0,
-    maxPage: 1,
-    delay: 5000
+    maxPage: 1
 })

@@ -1,9 +1,9 @@
 const { Storage } = require('@google-cloud/storage')
 const { v5 } = require('uuid')
-const { execFile } = require('child_process')
+// const { execFile } = require('child_process')
 const fs = require('fs')
 const sharp = require('sharp')
-const giflossy = require('giflossy')
+// const giflossy = require('giflossy')
 const moment = require('moment')
 const dotenv = require('dotenv')
 const request = require('request')
@@ -24,18 +24,17 @@ dotenv.config()
 
 const { BUCKET_NAME, MY_NAMESPACE } = process.env
 
-const storage = new Storage({ keyFilename: './key.json' })
+const storage = new Storage({ keyFilename: 'key.json' })
 
-const uploadFile = async (filename, move = false) => {
+const uploadFile = async filename => {
     await storage.bucket(BUCKET_NAME).upload(filename, {
         gzip: true,
+        destination: filename,
         metadata: {
             cacheControl: 'public, max-age=31536000',
         },
     })
-    // if (move)
-    //     await storage.bucket(BUCKET_NAME).file(filename).move(`${move}/${filename}`)
-    console.log(`${filename} uploaded to ${BUCKET_NAME}.`)
+    // console.log(`${filename} uploaded to ${BUCKET_NAME}.`)
 }
 
 const getTopics = async url => {
@@ -87,7 +86,7 @@ const getContent = async url => {
                     return reject('get title failed...')
                 const title = data[0].replace(regex, '$1').trim()
                 // get content
-                regex = /<div style="overflow:hidden;">([\s\S]*?)<\/div>/gim
+                regex = /<div class="inner clear">([\s\S]*?)<!--/gim
                 data = body.match(regex)
                 if (data.length < 1)
                     return reject('get topic content failed...')
@@ -131,22 +130,22 @@ const download = async (item, no) => {
             request.defaults({ encoding: null }).get(item.url, header, (err, response, body) => {
                 if (err || response.statusCode !== 200)
                     return reject(err || `${no}: ${item.url} download failed...`)
-                const path = `./img/${item.uuid}.gif`
-                const pathThumb = `./img/thumb/${item.uuid}.gif`
+                const path = `img/${item.uuid}.gif`
+                const pathThumb = `img/thumb/${item.uuid}.gif`
                 const content = Buffer.from(body, 'base64')
                 fs.writeFile(path, content, () => {
-                    execFile(giflossy, ['-O3', '--lossy=80', '-o', path, path], err => {
-                        if (err)
-                            return reject(err)
-                        const thumbnail = sharp(content)
-                        thumbnail.metadata()
-                            .then(() => thumbnail.resize(80, 80).toBuffer())
-                            .then(result => fs.writeFile(pathThumb, result, async () => {
-                                await uploadFile(path)
-                                await uploadFile(pathThumb)
-                                resolve()
-                            }))
-                    })
+                    // execFile(giflossy, ['-O3', '--lossy=80', '-o', path, path], err => {
+                    //     if (err)
+                    //         return reject(err)
+                    const thumbnail = sharp(content)
+                    thumbnail.metadata()
+                        .then(() => thumbnail.resize(80, 80).toBuffer())
+                        .then(result => fs.writeFile(pathThumb, result, async () => {
+                            await uploadFile(path)
+                            await uploadFile(pathThumb)
+                            resolve()
+                        }))
+                    // })
                 })
             })
         })
@@ -167,7 +166,7 @@ const save = async (options, no) => {
             const jobs = data.images.map(item => new Promise(async (resolve, reject) => {
                 const success = await download(item, no)
                 if (!success)
-                    return reject(`${no}: ${item} download failed...`)
+                    return reject(`${no}: ${item.url} download failed...`)
                 resolve()
             }))
             await Promise.all(jobs)
@@ -183,6 +182,7 @@ const save = async (options, no) => {
             thumbImageUUID: data.images.length > 0 ? data.images[0].uuid : '',
             created: data.created
         })
+        console.log(topicId.thumbImageUUID, 'uuid thumb image')
         if (!topicId)
             return false
         return true
@@ -199,20 +199,19 @@ const work = async options => {
         const topics = await getTopics(url)
         if (!topics || topics.length < 1)
             return console.log(url, 'failed...')
-        console.log(topics)
         const jobs = topics.map(item => new Promise(async (resolve, reject) => {
             if (no == item)
                 return reject('this is same topic.')
             const success = await save(options, item)
             if (!success)
                 return reject('save failed...')
-            if (options.page <= options.maxPage)
-                setTimeout(async () => await work(options), options.delay || 5000)
             resolve()
         }))
         const result = await Promise.all(jobs)
         if (!result)
             console.log(url, 'failed...')
+        if (options.page <= options.maxPage)
+            setTimeout(async () => await work(options), options.delay || 10000)
         return true
     } catch (err) {
         console.log(err)
