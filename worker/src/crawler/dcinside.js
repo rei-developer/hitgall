@@ -61,7 +61,7 @@ const getTopics = async url => {
     }
 }
 
-const getContent = async (url, no) => {
+const getContent = async url => {
     try {
         let regex, data
         const result = await new Promise((resolve, reject) => {
@@ -160,7 +160,7 @@ const download = async (item, no) => {
 const save = async (options, no) => {
     try {
         const url = `https://gall.dcinside.com/board/view/?id=${options.label}&no=${no}`
-        const data = await getContent(url, no)
+        const data = await getContent(url)
         if (!data)
             return false
         if (data.images.length > 0) {
