@@ -1,72 +1,94 @@
 <template>
-  <div class="container">
     <div>
-      <logo />
-      <h1 class="title">
-        HitGall
-      </h1>
-      <h2 class="subtitle">
-        www.hitgall.com
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+        <adsbygoogle/>
+        <div class='articles desktop-only'>
+            <div class='article-box'>
+                <HitArticle :limit='5'/>
+            </div>
+            <div class='article-box'>
+                <Article domain='talk' :limit='10'/>
+                <Article domain='girl' :limit='10'/>
+            </div>
+            <div class='article-box'>
+                <PhotoArticle domain='talk' :limit='6'/>
+                <PhotoArticle domain='girl' :limit='6'/>
+            </div>
+        </div>
+        <div class='articles mobile-only'>
+            <b-form-group class='mb-3'>
+                <b-form-radio-group
+                    size='sm'
+                    v-model='domain'
+                    :options='domainList'
+                    button-variant='primary'
+                    buttons
+                    name='radios-btn-default'/>
+                <span v-if='$store.state.user.isLogged'>
+                    <nuxt-link :to='`/board/girl/write`'>
+                        <b-button
+                            class='float-right'
+                            size='sm'
+                            variant='primary'
+                            @shortkey='$router.push({ path: "/board/girl/write" })'>
+                            <font-awesome-icon icon='pencil-alt'/>
+                            쓰기
+                        </b-button>
+                    </nuxt-link>
+                </span>
+            </b-form-group>
+            <HitArticle :limit='3'/>
+            <Article domain='all' :limit='20'/>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+    import Article from '~/components/article'
+    import HitArticle from '~/components/article/hit.vue'
+    import PhotoArticle from '~/components/article/photo.vue'
 
-export default {
-  components: {
-    Logo
-  }
-}
+    export default {
+        components: {
+			Article,
+            HitArticle,
+            PhotoArticle
+        },
+        data() {
+            return {
+                domain: 'girl',
+                domainList: [
+                    {
+                        text: '토크',
+                        value: 'talk'
+                    },
+                    {
+                        text: '연예',
+                        value: 'girl'
+                    }
+                ]
+            }
+        },
+        watch: { 
+            domain: function() {
+                this.$router.push({ path: `/board/${this.domain}` })
+            }
+        }
+    }
 </script>
 
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
+<style lang='less' scoped>
+    .articles {
+        padding: 5px;
+        background-color: #fff;
+        &.mobile-only {
+            padding: 0;
+            background-color: #F9F9F9;
+        }
+    }
+    .article-box {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        &:last-child { margin: 0 }
+    }
 </style>
