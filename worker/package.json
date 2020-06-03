@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@google-cloud/storage": "^5.0.1",
     "child_process": "^1.0.2",
     "dotenv": "^8.2.0",
     "giflossy": "^3.0.41",

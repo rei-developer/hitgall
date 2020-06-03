@@ -91,3 +91,6 @@ sw.*
 
 # Images
 img/
+
+# Google cloud storage key file
+key.json

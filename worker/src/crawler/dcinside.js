@@ -1,9 +1,10 @@
+const { Storage } = require('@google-cloud/storage')
+const { v5 } = require('uuid')
+const { execFile } = require('child_process')
 const fs = require('fs')
 const sharp = require('sharp')
-const { execFile } = require('child_process')
 const giflossy = require('giflossy')
 const moment = require('moment')
-const { v5 } = require('uuid')
 const dotenv = require('dotenv')
 const request = require('request')
 const header = {
@@ -21,22 +22,36 @@ const readTopic = require('../database/topic/read')
 
 dotenv.config()
 
-const { MY_NAMESPACE } = process.env
+const { BUCKET_NAME, MY_NAMESPACE } = process.env
 
-const getList = async url => {
+const storage = new Storage({ keyFilename: './key.json' })
+
+const uploadFile = async (filename, move = false) => {
+    await storage.bucket(BUCKET_NAME).upload(filename, {
+        gzip: true,
+        metadata: {
+            cacheControl: 'public, max-age=31536000',
+        },
+    })
+    // if (move)
+    //     await storage.bucket(BUCKET_NAME).file(filename).move(`${move}/${filename}`)
+    console.log(`${filename} uploaded to ${BUCKET_NAME}.`)
+}
+
+const getTopics = async url => {
     try {
         const result = await new Promise((resolve, reject) => {
             request.get(url, header, (err, response, body) => {
-                if (err || response.statusCode !== 200)
-                    return reject({ message: err || 'non-content', status: 'fail' })
-                let items = []
+                if (err || response.statusCode !== 200 || body === '')
+                    return reject(err || 'get topics failed...')
                 const regex = /<tr class="ub-content us-post" data-no="([\s\S]*?)" data-type="([\s\S]*?)">([\s\S]*?)<\/tr>/gim
+                let items = []
                 let xArray
                 while (xArray = regex.exec(body)) {
                     const no = xArray[1]
                     items.push(no)
                 }
-                resolve({ items, status: 'ok' })
+                resolve(items)
             })
         })
         return result
@@ -47,36 +62,35 @@ const getList = async url => {
 }
 
 const getContent = async (url, no) => {
-    console.log(no, '시도중...')
     try {
         let regex, data
         const result = await new Promise((resolve, reject) => {
             request.get(url, header, (err, response, body) => {
                 if (err || response.statusCode !== 200 || body === '')
-                    return reject({ message: err || 'non-content', status: 'fail' })
+                    return reject(err || 'get content failed...')
                 // get author
                 regex = /<span class='nickname in' title='([\s\S]*?)'([\s\S]*?)>([\s\S]*?)<\/span>/gim
                 data = body.match(regex)
                 if (data.length < 1)
-                    return reject({ message: 'non-author', status: 'fail' })
+                    return reject('get author failed...')
                 const author = data[0].replace(regex, '$1').trim()
                 // get created
                 regex = /<span class="gall_date" title="([\s\S]*?)">([\s\S]*?)<\/span>/gim
                 data = body.match(regex)
                 if (data.length < 1)
-                    return reject({ message: 'non-created', status: 'fail' })
+                    return reject('get created failed...')
                 const created = data[0].replace(regex, '$1').trim()
                 // get title
                 regex = /<span class="title_subject">([\s\S]*?)<\/span>/gim
                 data = body.match(regex)
                 if (data.length < 1)
-                    return reject({ message: 'non-title', status: 'fail' })
+                    return reject('get title failed...')
                 const title = data[0].replace(regex, '$1').trim()
                 // get content
                 regex = /<div style="overflow:hidden;">([\s\S]*?)<\/div>/gim
                 data = body.match(regex)
                 if (data.length < 1)
-                    return reject({ message: 'non-content', status: 'fail' })
+                    return reject('get topic content failed...')
                 let content = data[0].replace(regex, '$1').trim()
                 // get image url
                 let images = []
@@ -93,52 +107,18 @@ const getContent = async (url, no) => {
                         })
                     }
                     if (images.length > 0)
-                        images.map(item => content = content.replace(item.origin, `/img/${no}/${item.uuid}.gif`))
+                        images.map(item => content = content.replace(item.origin, `/img/${item.uuid}.gif`))
                 }
                 resolve({
-                    type: 'DC',
                     author,
                     title,
                     content,
                     created: moment(created).format(),
-                    images,
-                    status: 'ok'
+                    images
                 })
             })
         })
         return result
-    } catch (err) {
-        console.log(err)
-        return false
-    }
-}
-
-const submit = async (url, no) => {
-    try {
-        const data = await getContent(url, no)
-        if (!data)
-            return console.log('failed')
-        const topicId = await createTopic({
-            no,
-            type: data.type,
-            author: data.author,
-            title: data.title,
-            content: data.content,
-            originUrl: url,
-            created: data.created
-        })
-        if (!topicId)
-            return console.err('database failed')
-        if (data.images.length > 0) {
-            const jobs = data.images.map(item => new Promise(async (resolve, reject) => {
-                const success = await download(item, no)
-                if (!success)
-                    return reject({ message: 'download failed', status: 'fail' })
-                resolve(true)
-            }))
-            await Promise.all(jobs)
-        }
-        return true
     } catch (err) {
         console.log(err)
         return false
@@ -147,51 +127,97 @@ const submit = async (url, no) => {
 
 const download = async (item, no) => {
     try {
-        const result = await new Promise((resolve, reject) => {
+        await new Promise((resolve, reject) => {
             request.defaults({ encoding: null }).get(item.url, header, (err, response, body) => {
                 if (err || response.statusCode !== 200)
-                    return reject({ message: err || 'non-content', status: 'fail' })
-                const path = `./img/${no}/${item.uuid}.gif`
+                    return reject(err || `${no}: ${item.url} download failed...`)
+                const path = `./img/${item.uuid}.gif`
+                const pathThumb = `./img/thumb/${item.uuid}.gif`
                 const content = Buffer.from(body, 'base64')
                 fs.writeFile(path, content, () => {
                     execFile(giflossy, ['-O3', '--lossy=80', '-o', path, path], err => {
                         if (err)
-                            return reject({ message: err, status: 'fail' })
+                            return reject(err)
                         const thumbnail = sharp(content)
                         thumbnail.metadata()
                             .then(() => thumbnail.resize(100, 100).toBuffer())
-                            .then(result => fs.writeFile(`./img/thumb/${no}/${item.uuid}.gif`, result, () => resolve({ status: 'ok' })))
+                            .then(result => fs.writeFile(pathThumb, result, async () => {
+                                await uploadFile(path)
+                                await uploadFile(pathThumb)
+                                resolve()
+                            }))
                     })
                 })
             })
         })
-        return result
+        return true
     } catch (err) {
         console.log(err)
         return false
     }
 }
 
-let page = 0
-const maxPage = 3
-
-const work = async () => {
-    const newestNo = await readTopic.getNewestNo() || 0
-    const url = `https://gall.dcinside.com/board/lists/?id=hit&page=${++page}`
-    const list = await getList(url)
-    if (list.items.length > 0) {
-        const jobs = list.items.map(item => new Promise(async resolve => {
-            if (item != newestNo) {
-                const success = await submit(`https://gall.dcinside.com/board/view/?id=hit&no=${item}`, item)
+const save = async (options, no) => {
+    try {
+        const url = `https://gall.dcinside.com/board/view/?id=${options.label}&no=${no}`
+        const data = await getContent(url, no)
+        if (!data)
+            return false
+        if (data.images.length > 0) {
+            const jobs = data.images.map(item => new Promise(async (resolve, reject) => {
+                const success = await download(item, no)
                 if (!success)
-                    return
-            }
-            if (page <= maxPage)
-                setTimeout(async () => await work(), 5000)
-        }))
-        await Promise.all(jobs)
+                    return reject(`${no}: ${item} download failed...`)
+                resolve()
+            }))
+            await Promise.all(jobs)
+        }
+        const topicId = await createTopic({
+            no,
+            type: options.type,
+            label: options.label,
+            author: data.author,
+            title: data.title,
+            content: data.content,
+            originUrl: url,
+            thumbImageUUID: data.images.length > 0 ? data.images[0].uuid : '',
+            created: data.created
+        })
+        if (!topicId)
+            return false
+        return true
+    } catch (err) {
+        console.log(err)
+        return false
     }
-    console.log(url, 'Finish...')
 }
 
-module.exports = async () => await work()
+const work = async options => {
+    try {
+        const url = `https://gall.dcinside.com/board/lists/?id=${options.label}&page=${++options.page}`
+        const no = await readTopic.getNo() || 0
+        const topics = await getTopics(url)
+        if (!topics || topics.length < 1)
+            return console.log(url, 'failed...')
+        console.log(topics)
+        const jobs = topics.map(item => new Promise(async (resolve, reject) => {
+            if (no == item)
+                return reject('this is same topic.')
+            const success = await save(options, item)
+            if (!success)
+                return reject('save failed...')
+            if (options.page <= options.maxPage)
+                setTimeout(async () => await work(options), options.delay || 5000)
+            resolve()
+        }))
+        const result = await Promise.all(jobs)
+        if (!result)
+            console.log(url, 'failed...')
+        return true
+    } catch (err) {
+        console.log(err)
+        return false
+    }
+}
+
+module.exports = async options => await work(options)
