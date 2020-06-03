@@ -34,10 +34,11 @@ const uploadFile = async filename => {
             cacheControl: 'public, max-age=31536000',
         },
     })
-    // console.log(`${filename} uploaded to ${BUCKET_NAME}.`)
+    console.log(`${filename} uploaded to ${BUCKET_NAME}.`)
 }
 
 const getTopics = async url => {
+    console.log(url, 'get topics...')
     try {
         const result = await new Promise((resolve, reject) => {
             request.get(url, header, (err, response, body) => {
@@ -61,6 +62,7 @@ const getTopics = async url => {
 }
 
 const getContent = async url => {
+    console.log(url, 'get content...')
     try {
         let regex, data
         const result = await new Promise((resolve, reject) => {
@@ -125,6 +127,7 @@ const getContent = async url => {
 }
 
 const download = async (item, no) => {
+    console.log(item.rul, no, 'downloading...')
     try {
         await new Promise((resolve, reject) => {
             request.defaults({ encoding: null }).get(item.url, header, (err, response, body) => {
@@ -157,6 +160,7 @@ const download = async (item, no) => {
 }
 
 const save = async (options, no) => {
+    console.log(no, 'saving...')
     try {
         const url = `https://gall.dcinside.com/board/view/?id=${options.label}&no=${no}`
         const data = await getContent(url)
