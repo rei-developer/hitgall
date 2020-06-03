@@ -179,10 +179,9 @@ const save = async (options, no) => {
             title: data.title,
             content: data.content,
             originUrl: url,
-            thumbImageUUID: data.images.length > 0 ? data.images[0].uuid : '',
+            thumbImageUUID: data.images.length > 0 ? `${data.images[0].uuid}.gif` : '',
             created: data.created
         })
-        console.log(topicId.thumbImageUUID, 'uuid thumb image')
         if (!topicId)
             return false
         return true
