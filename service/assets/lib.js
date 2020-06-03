@@ -7,6 +7,9 @@ module.exports.getBoardName = domain => {
         case 'all':
             name = '전체글'
             break
+        case 'save':
+            name = '외부 저장소'
+            break
         case 'notice':
             name = '공지사항'
             break
@@ -15,12 +18,6 @@ module.exports.getBoardName = domain => {
             break
         case 'talk':
             name = '토크'
-            break
-        case 'girl':
-            name = '연예'
-            break
-        case 'anime':
-            name = '애니'
             break
     }
     return name
