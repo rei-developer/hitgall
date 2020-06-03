@@ -38,7 +38,7 @@
             <div class='loading-bar'>
                 <div class='subject'>{{ getBoardName(domain) }}</div>
                 <div class='counter'>
-                    <!-- <strong>{{ numberWithCommas(counts.count) }}</strong> (오늘 {{ counts.today }}) -->
+                    <strong>{{ numberWithCommas(counts.count) }}</strong> (오늘 {{ counts.today }})
                 </div>
                 <client-only>
                     <ScaleLoader
@@ -73,7 +73,7 @@
                             </div>
                             <div class='subject'>
                                 <div class='thumb' v-if='item.imageUrl'>
-                                    <img :src='`/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
+                                    <img :src='`https://storage.googleapis.com/hitgall/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
                                 </div>
                                 <div>
                                     <span :style='item.color !== "" ? `color: #${item.color}` : ""'>
@@ -115,7 +115,7 @@
                             </div>
                             <div class='subject'>
                                 <div class='thumb' v-if='item.imageUrl'>
-                                    <img :src='`/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
+                                    <img :src='`https://storage.googleapis.com/hitgall/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
                                 </div>
                                 <div>
                                     <span :style='item.color !== "" ? `color: #${item.color}` : ""'>
@@ -151,7 +151,7 @@
                         <nuxt-link :to='`/${item.id}?page=${page}${category !== "" ? "&category=" + category : ""}`'>
                             <div class='content'>
                                 <div class='image'>
-                                    <img :src='item.imageUrl ? `/img/thumb/${item.imageUrl}` : "/default.png"' @error='imageUrlAlt'>
+                                    <img :src='item.imageUrl ? `https://storage.googleapis.com/hitgall/img/thumb/${item.imageUrl}` : "/default.png"' @error='imageUrlAlt'>
                                 </div>
                                 <div class='subject'>
                                     <span class='notice'>공지</span>
@@ -196,7 +196,7 @@
                         <nuxt-link :to='`/${item.id}?page=${page}${category !== "" ? "&category=" + category : ""}`'>
                             <div class='content'>
                                 <div class='image'>
-                                    <img :src='item.imageUrl ? `/img/thumb/${item.imageUrl}` : "/default.png"' @error='imageUrlAlt'>
+                                    <img :src='item.imageUrl ? `https://storage.googleapis.com/hitgall/img/thumb/${item.imageUrl}` : "/default.png"' @error='imageUrlAlt'>
                                 </div>
                                 <div class='subject'>
                                     <span class='category' v-if='item.category'>{{ item.category }}</span>

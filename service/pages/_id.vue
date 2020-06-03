@@ -218,10 +218,10 @@
                 }
             if (store.state.user.isLogged)
                 store.commit('user/setNoticeCount', data.count)
-            const regex = /<p><\/p>/gim
-            data.topic.content = data.topic.content.replace(regex, '<p><br></p>')
-            // const regex = /<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>/gim
-            // data.topic.content = data.topic.content.replace(regex, `<img src="$1">`)
+            const regex1 = /<p><\/p>/gim
+            const regex2 = /<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>/gim
+            data.topic.content = data.topic.content.replace(regex1, '<p><br></p>')
+            data.topic.content = data.topic.content.replace(regex2, `<img src="https://storage.googleapis.com/hitgall$1">`)
             return {
                 id,
                 topic: data.topic,
