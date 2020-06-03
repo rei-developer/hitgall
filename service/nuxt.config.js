@@ -44,7 +44,7 @@ module.exports = {
 		'nuxt-fontawesome',
 		'nuxt-clipboard2',
 		'@nuxtjs/proxy',
-		'@nuxtjs/dotenv'
+		'@nuxtjs/dotenv',
 		['@nuxtjs/axios', { proxy: true }],
 		['@nuxtjs/recaptcha', {
 			hideBadge: true,
@@ -89,5 +89,5 @@ module.exports = {
 	},
 	env: {
 		SOCKET_HOST_URL: 'https://www.hitgall.com'
-	}
+	},
 }
