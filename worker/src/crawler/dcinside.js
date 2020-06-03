@@ -127,7 +127,7 @@ const getContent = async url => {
 }
 
 const download = async (item, no) => {
-    console.log(item.rul, no, 'downloading...')
+    console.log(item.url, no, 'downloading...')
     try {
         await new Promise((resolve, reject) => {
             request.defaults({ encoding: null }).get(item.url, header, (err, response, body) => {
