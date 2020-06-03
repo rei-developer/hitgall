@@ -140,7 +140,7 @@ const download = async (item, no) => {
                             return reject(err)
                         const thumbnail = sharp(content)
                         thumbnail.metadata()
-                            .then(() => thumbnail.resize(100, 100).toBuffer())
+                            .then(() => thumbnail.resize(80, 80).toBuffer())
                             .then(result => fs.writeFile(pathThumb, result, async () => {
                                 await uploadFile(path)
                                 await uploadFile(pathThumb)
