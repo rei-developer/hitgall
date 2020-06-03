@@ -38,7 +38,7 @@
             <div class='loading-bar'>
                 <div class='subject'>{{ getBoardName(domain) }}</div>
                 <div class='counter'>
-                    <strong>{{ numberWithCommas(counts.count) }}</strong> (오늘 {{ counts.today }})
+                    <!-- <strong>{{ numberWithCommas(counts.count) }}</strong> (오늘 {{ counts.today }}) -->
                 </div>
                 <client-only>
                     <ScaleLoader

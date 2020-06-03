@@ -19,3 +19,8 @@ module.exports = async columns => {
         return false
     }
 }
+
+module.exports.topicCounts = async topicId => await pool.query(
+    'INSERT INTO TopicCounts (topicId) VALUES (?)',
+    [topicId]
+)

@@ -188,6 +188,7 @@ const save = async (options, no) => {
         })
         if (!topicId)
             return false
+        await createTopic.topicCounts(topicId)
         return true
     } catch (err) {
         console.log(err)
