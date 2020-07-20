@@ -26,7 +26,7 @@
     "pbkdf2-password": "^1.2.1",
     "qs": "^6.9.0",
     "redis": "^2.8.0",
-    "sharp": "^0.23.3",
+    "sharp": "^0.25.4",
     "socket.io": "^2.2.0",
     "socket.io-redis": "^5.2.0",
     "uuid": "^3.3.2"
