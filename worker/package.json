@@ -1,15 +1,13 @@
 {
   "dependencies": {
-    "@google-cloud/storage": "^5.0.1",
-    "child_process": "^1.0.2",
+    "@google-cloud/storage": "^5.1.2",
+    "axios": "^0.19.2",
+    "cheerio": "^1.0.0-rc.3",
     "dotenv": "^8.2.0",
-    "giflossy": "^3.0.41",
-    "lodash": "^4.17.15",
-    "moment": "^2.26.0",
     "mysql": "^2.18.1",
     "node-schedule": "^1.3.2",
     "request": "^2.88.2",
     "sharp": "^0.25.4",
-    "uuid": "^8.1.0"
+    "uuid": "^8.2.0"
   }
 }
