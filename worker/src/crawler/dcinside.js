@@ -27,7 +27,10 @@ const header = {
 
 let options = {
     type: '',
+    label: '',
     board: '',
+    extendedLink: '',
+    maxPage: 0,
     timeout: 0
 }
 let page = 1
@@ -53,9 +56,10 @@ const getHtml = async url => {
 }
 
 const getList = async () => {
-    if (page >= 3)
+    if (page >= options.maxPage)
         return console.log(`Finish one's work...`)
-    const url = `https://gall.dcinside.com/board/lists/?id=${options.board}&page=${page++}`
+    const url = `https://gall.dcinside.com/board/lists/?id=${options.board}&page=${page++}${options.extendedLink}`
+    console.log(url)
     await getHtml(url)
         .then(html => {
             let ulList = []
@@ -91,7 +95,7 @@ const getTopic = async () => {
             const title = $('.title_subject').text()
             const author = $('.nickname.in').eq(0).attr('title')
             const created = $('.gall_date').eq(0).attr('title')
-            const content = $('.writing_view_box').children().html()
+            const content = $('.writing_view_box').html()
             return {
                 no,
                 title,
@@ -106,6 +110,7 @@ const getTopic = async () => {
             const images = imageData.images
             if (images.length > 0)
                 images.map(item => downloadImage(data.no, item))
+            console.log(data)
             return {
                 topic: data,
                 images
@@ -127,6 +132,7 @@ const saveTopic = async (topic, images) => {
         const saveId = await createSave({
             no: topic.no,
             type: options.type,
+            label: options.label,
             board: options.board,
             author: topic.author,
             title: topic.title,
@@ -171,19 +177,21 @@ const changeImageUrl = content => {
     let array
     const regex = /<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>/gim
     array = content.match(regex)
-    if (array.length > 0) {
-        array.map(item => {
-            const regex2 = /((http|https):\/\/)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gim
-            const origin = item.match(regex2)[0]
-            const url = origin.replace(/\:\/\/([^\/?#]+)/, '://images.dcinside.com')
-            const uuid = v5(`${Date.now()}-${url}`, MY_NAMESPACE)
-            content = content.replace(item, `[img src="/save/img/${uuid}.gif"]`)
-            images.push({
-                origin,
-                url,
-                uuid
+    if (array) {
+        if (array.length > 0) {
+            array.map(item => {
+                const regex2 = /((http|https):\/\/)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gim
+                const origin = item.match(regex2)[0]
+                const url = origin.replace(/\:\/\/([^\/?#]+)/, '://images.dcinside.com')
+                const uuid = v5(`${Date.now()}-${url}`, MY_NAMESPACE)
+                content = content.replace(item, `[img src="/save/img/${uuid}.gif"]`)
+                images.push({
+                    origin,
+                    url,
+                    uuid
+                })
             })
-        })
+        }
     }
     return {
         content,
