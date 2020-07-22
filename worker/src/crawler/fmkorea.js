@@ -81,12 +81,18 @@ const getTopic = async () => {
     fsExtra.emptyDirSync('save/img')
     fsExtra.emptyDirSync('save/thumb')
     await getHtml(url)
-        .then(html => {
+        .then(async html => {
+            let count = 0
+            let loopContinue = true
+            while (loopContinue) {
+                await (waitLazyImageLoad(count).catch(() => loopContinue = false))
+                count++
+            }
             const $ = cheerio.load(html.data, { decodeEntities: false })
-            const title = $('.title_subject').text()
-            const author = $('.nickname.in').eq(0).attr('title')
-            const created = $('.gall_date').eq(0).attr('title')
-            const content = $('.writing_view_box').html()
+            const title = $('.np_18px_span').text()
+            const author = $('.btm_area').find('.nick').text()
+            const created = $('.date.m_no').text()
+            const content = $('.rd_body').find('.xe_content').html()
             return {
                 no,
                 title,
@@ -96,7 +102,7 @@ const getTopic = async () => {
             }
         })
         .then(async data => {
-            const imageData = changeImageUrl(data.content)
+            const imageData = changeImageUrl(data.no, data.content)
             data.content = filter(imageData.content)
             const images = imageData.images
             if (images.length > 0)
@@ -108,9 +114,9 @@ const getTopic = async () => {
             }
         })
         .then(async data => {
-            const success = await saveTopic(data.topic, data.images, url)
-            if (!success)
-                return console.log('failed...')
+            // const success = await saveTopic(data.topic, data.images, url)
+            // if (!success)
+            //     return console.log('failed...')
             topics.shift()
             const duration = options.timeout + data.topic.content.length
             console.log(`Re-activate in ${(duration / 1000).toFixed(1)} ms...`)
@@ -142,13 +148,21 @@ const saveTopic = async (topic, images, url) => {
     }
 }
 
+const waitLazyImageLoad = count => {
+    return new Promise((resolve, reject) => {
+        if (count > 3)
+            reject()
+        setTimeout(() => resolve(), 1000)
+    })
+}
+
 const downloadImage = (no, item) => {
-    request.defaults({ encoding: null }).get(item.url, header, (error, response, body) => {
+    request.defaults({ encoding: null }).get(item.url, (error, response, body) => {
         if (error || response.statusCode !== 200)
             return console.log(`${item.url} download failed...`)
         const filename = `/${item.uuid}.gif`
-        const path = `save/img/${no}`
-        const pathThumb = `save/thumb/${no}`
+        const path = `save/img/${options.type}-${no}`
+        const pathThumb = `save/thumb/${options.type}-${no}`
         const content = Buffer.from(body, 'base64')
         !fs.existsSync(path) && fs.mkdirSync(path)
         !fs.existsSync(pathThumb) && fs.mkdirSync(pathThumb)
@@ -164,7 +178,7 @@ const downloadImage = (no, item) => {
     })
 }
 
-const changeImageUrl = content => {
+const changeImageUrl = (no, content) => {
     let images = []
     let array
     const regex = /<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>/gim
@@ -172,13 +186,18 @@ const changeImageUrl = content => {
     if (array) {
         if (array.length > 0) {
             array.map(item => {
+                console.log(item)
+
+                // const regex = /lazy\/img\/transparent.gif/gim
+                // if (content.match(regex))
+                //     console.log(content)
+
+
                 const regex2 = /((http|https):\/\/)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gim
-                const origin = item.match(regex2)[0]
-                const url = origin.replace(/\:\/\/([^\/?#]+)/, '://images.dcinside.com')
+                const url = `https://${item.match(regex2)[0]}`
                 const uuid = v5(`${Date.now()}-${url}`, MY_NAMESPACE)
-                content = content.replace(item, `[img src="/save/img/${uuid}.gif"]`)
+                content = content.replace(item, `[img src="/save/img/${options.type}-${no}/${uuid}.gif"]`)
                 images.push({
-                    origin,
                     url,
                     uuid
                 })

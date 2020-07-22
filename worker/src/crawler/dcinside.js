@@ -105,7 +105,7 @@ const getTopic = async () => {
             }
         })
         .then(async data => {
-            const imageData = changeImageUrl(data.content)
+            const imageData = changeImageUrl(data.no, data.content)
             data.content = filter(imageData.content)
             const images = imageData.images
             if (images.length > 0)
@@ -156,8 +156,8 @@ const downloadImage = (no, item) => {
         if (error || response.statusCode !== 200)
             return console.log(`${item.url} download failed...`)
         const filename = `/${item.uuid}.gif`
-        const path = `save/img/${no}`
-        const pathThumb = `save/thumb/${no}`
+        const path = `save/img/${options.type}-${no}`
+        const pathThumb = `save/thumb/${options.type}-${no}`
         const content = Buffer.from(body, 'base64')
         !fs.existsSync(path) && fs.mkdirSync(path)
         !fs.existsSync(pathThumb) && fs.mkdirSync(pathThumb)
@@ -173,7 +173,7 @@ const downloadImage = (no, item) => {
     })
 }
 
-const changeImageUrl = content => {
+const changeImageUrl = (no, content) => {
     let images = []
     let array
     const regex = /<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>/gim
@@ -185,9 +185,8 @@ const changeImageUrl = content => {
                 const origin = item.match(regex2)[0]
                 const url = origin.replace(/\:\/\/([^\/?#]+)/, '://images.dcinside.com')
                 const uuid = v5(`${Date.now()}-${url}`, MY_NAMESPACE)
-                content = content.replace(item, `[img src="/save/img/${uuid}.gif"]`)
+                content = content.replace(item, `[img src="/save/img/${options.type}-${no}/${uuid}.gif"]`)
                 images.push({
-                    origin,
                     url,
                     uuid
                 })
