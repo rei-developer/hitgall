@@ -14,16 +14,6 @@ dotenv.config()
 
 const { BUCKET_NAME, MY_NAMESPACE } = process.env
 const storage = new Storage({ keyFilename: 'key.json' })
-const header = {
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-    'Accept-Encoding': 'gzip, deflate',
-    'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
-    'Cache-Control': 'max-age=0',
-    'Connection': 'keep-alive',
-    'Host': 'gall.dcinside.com',
-    'Upgrade-Insecure-Requests': '1',
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36'
-}
 
 let options = {
     type: '',
@@ -49,7 +39,7 @@ const uploadFile = async filename => {
 
 const getHtml = async url => {
     try {
-        return await axios.get(url, { header })
+        return await axios.get(url)
     } catch (error) {
         console.error(error)
     }
@@ -58,15 +48,16 @@ const getHtml = async url => {
 const getList = async () => {
     if (page > options.maxPage)
         return console.log(`Finish one's work...`)
-    const url = `https://gall.dcinside.com/board/lists/?id=${options.board}&page=${page++}${options.extendedLink}`
+    const url = `https://www.fmkorea.com/index.php?mid=${options.board}&page=${page++}${options.extendedLink}`
     console.log(url)
     await getHtml(url)
         .then(html => {
             let ulList = []
             const $ = cheerio.load(html.data)
-            const $bodyList = $('.gall_listwrap.list').find('tr.us-post')
+            const $bodyList = $('.fm_best_widget').find('li')
             $bodyList.each(function (i, el) {
-                ulList[i] = $(this).attr('data-no')
+                const link = $(this).find('.hotdeal_var8').attr('href')
+                ulList[i] = link.replace(/[^0-9]+/gim, '')
             })
             return ulList
         })
@@ -80,7 +71,7 @@ const getTopic = async () => {
     if (topics.length < 1)
         return getList()
     const no = topics[0]
-    const url = `https://m.dcinside.com/board/${options.board}/${no}`
+    const url = `https://www.fmkorea.com/best/${options.board}/${no}`
     console.log(url)
     const exist = await readSave.isExist(url)
     if (exist) {
@@ -166,8 +157,8 @@ const downloadImage = (no, item) => {
             thumbnail.metadata()
                 .then(() => thumbnail.resize(80, 80).toBuffer())
                 .then(result => fs.writeFile(pathThumb + filename, result, async () => {
-                    await uploadFile(path + filename)
-                    await uploadFile(pathThumb + filename)
+                    // await uploadFile(path + filename)
+                    // await uploadFile(pathThumb + filename)
                 }))
         })
     })
