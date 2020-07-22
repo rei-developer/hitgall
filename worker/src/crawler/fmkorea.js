@@ -145,7 +145,7 @@ const saveTopic = async (topic, images, url) => {
 const downloadImage = (no, item) => {
     request.defaults({ encoding: null }).get(item.url, header, (error, response, body) => {
         if (error || response.statusCode !== 200)
-            return reject(error || `${item.url} download failed...`)
+            return console.log(`${item.url} download failed...`)
         const filename = `/${item.uuid}.gif`
         const path = `save/img/${no}`
         const pathThumb = `save/thumb/${no}`
