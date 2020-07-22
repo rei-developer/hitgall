@@ -90,7 +90,7 @@ sw.*
 *.swp
 
 # Images
-img/
+save/
 
 # Google cloud storage key file
 key.json

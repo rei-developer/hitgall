@@ -1,6 +1,7 @@
 const { Storage } = require('@google-cloud/storage')
 const { v5 } = require('uuid')
 const fs = require('fs')
+const fsExtra = require('fs-extra')
 const sharp = require('sharp')
 const axios = require('axios')
 const cheerio = require('cheerio')
@@ -53,7 +54,7 @@ const getHtml = async url => {
 
 const getList = async () => {
     if (page >= 3)
-        return console.log('end working...')
+        return console.log(`Finish one's work...`)
     const url = `https://gall.dcinside.com/board/lists/?id=${options.board}&page=${page++}`
     await getHtml(url)
         .then(html => {
@@ -82,6 +83,8 @@ const getTopic = async () => {
         topics.shift()
         return getTopic()
     }
+    fsExtra.emptyDirSync('save/img')
+    fsExtra.emptyDirSync('save/thumb')
     await getHtml(url)
         .then(html => {
             const $ = cheerio.load(html.data, { decodeEntities: false })
@@ -101,23 +104,8 @@ const getTopic = async () => {
             const imageData = changeImageUrl(data.content)
             data.content = filter(imageData.content)
             const images = imageData.images
-            if (images.length > 0) {
-                try {
-                    const jobs = images.map(item => new Promise(async (resolve, reject) => {
-                        const success = await downloadImage(data.no, item)
-                        if (!success)
-                            return reject(`${item.url} download failed...`)
-                        resolve()
-                    }))
-                    await Promise.all(jobs)
-                } catch (error) {
-                    console.log(error)
-                    return {
-                        topic: data,
-                        images
-                    }
-                }
-            }
+            if (images.length > 0)
+                images.map(item => downloadImage(data.no, item))
             return {
                 topic: data,
                 images
@@ -128,9 +116,9 @@ const getTopic = async () => {
             if (!success)
                 return console.log('failed...')
             topics.shift()
-            const duration = data.topic.content.length
-            console.log(options.timeout + duration + " 후에 로드")
-            setTimeout(() => getTopic(), options.timeout + duration)
+            const duration = options.timeout + data.topic.content.length
+            console.log(`Re-activate in ${(duration / 1000).toFixed(1)} ms...`)
+            setTimeout(() => getTopic(), duration)
         })
 }
 
@@ -156,35 +144,26 @@ const saveTopic = async (topic, images) => {
     }
 }
 
-const downloadImage = async (no, item) => {
-    try {
-        await new Promise((resolve, reject) => {
-            request.defaults({ encoding: null }).get(item.url, header, (error, response, body) => {
-                if (error || response.statusCode !== 200)
-                    return reject(error || `${item.url} download failed...`)
-                const filename = `/${item.uuid}.gif`
-                const path = `save/img/${no}`
-                const pathThumb = `save/thumb/${no}`
-                const content = Buffer.from(body, 'base64')
-                !fs.existsSync(path) && fs.mkdirSync(path)
-                !fs.existsSync(pathThumb) && fs.mkdirSync(pathThumb)
-                fs.writeFile(path + filename, content, () => {
-                    const thumbnail = sharp(content)
-                    thumbnail.metadata()
-                        .then(() => thumbnail.resize(80, 80).toBuffer())
-                        .then(result => fs.writeFile(pathThumb + filename, result, async () => {
-                            await uploadFile(path + filename)
-                            await uploadFile(pathThumb + filename)
-                            resolve()
-                        }))
-                })
-            })
+const downloadImage = (no, item) => {
+    request.defaults({ encoding: null }).get(item.url, header, (error, response, body) => {
+        if (error || response.statusCode !== 200)
+            return reject(error || `${item.url} download failed...`)
+        const filename = `/${item.uuid}.gif`
+        const path = `save/img/${no}`
+        const pathThumb = `save/thumb/${no}`
+        const content = Buffer.from(body, 'base64')
+        !fs.existsSync(path) && fs.mkdirSync(path)
+        !fs.existsSync(pathThumb) && fs.mkdirSync(pathThumb)
+        fs.writeFile(path + filename, content, () => {
+            const thumbnail = sharp(content)
+            thumbnail.metadata()
+                .then(() => thumbnail.resize(80, 80).toBuffer())
+                .then(result => fs.writeFile(pathThumb + filename, result, async () => {
+                    await uploadFile(path + filename)
+                    await uploadFile(pathThumb + filename)
+                }))
         })
-        return true
-    } catch (error) {
-        console.log(error)
-        return false
-    }
+    })
 }
 
 const changeImageUrl = content => {
