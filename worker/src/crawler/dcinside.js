@@ -57,7 +57,7 @@ const getHtml = async url => {
 
 const getList = async () => {
     if (page > options.maxPage)
-        return console.log(`Finish one's work...`)
+        return console.log(`Finish one's work... ${new Date().getDate()}`)
     const url = `https://gall.dcinside.com/board/lists/?id=${options.board}&page=${page++}${options.extendedLink}`
     console.log(url)
     await getHtml(url)

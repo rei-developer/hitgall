@@ -47,7 +47,7 @@ const getHtml = async url => {
 
 const getList = async () => {
     if (page > options.maxPage)
-        return console.log(`Finish one's work...`)
+        return console.log(`Finish one's work... ${new Date().getDate()}`)
     const url = `https://www.fmkorea.com/index.php?mid=${options.board}&page=${page++}${options.extendedLink}`
     console.log(url)
     await getHtml(url)
