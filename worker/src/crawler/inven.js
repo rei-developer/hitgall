@@ -20,7 +20,7 @@ const header = {
     'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
     'Cache-Control': 'max-age=0',
     'Connection': 'keep-alive',
-    'Host': 'www.ygosu.com',
+    'Host': 'www.inven.co.kr',
     'Upgrade-Insecure-Requests': '1',
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36'
 }
@@ -51,18 +51,18 @@ const getHtml = async url => {
 const getList = async () => {
     if (page > options.maxPage)
         return console.log(`Finish one's work... ${new Date().getDate()}`)
-    const url = `https://www.ygosu.com/community/${options.board}/?page=${page++}${options.extendedLink || ''}`
+    const url = `http://www.inven.co.kr/board/webzine/${options.board}?sort=PID&p=${page++}${options.extendedLink || ''}`
     console.log(url)
     await getHtml(url)
         .then(html => {
             let ulList = []
             const $ = cheerio.load(html.data)
-            const $bodyList = $('table.bd_list').children('tbody').find('tr')
+            const $bodyList = $('form[name=board_list1]').find('tbody').find('tr.ls')
             $bodyList.each(function (i, el) {
-                const votes = $(this).find('td.vote').text()
+                const votes = $(this).find('td.req').text()
                 if (!options.limitVotes || votes >= options.limitVotes) {
-                    const link = $(this).find('td.tit').children('a').attr('href')
-                    const match = link.match(/([a-zA-Z0-9-_])+\/[0-9]+/gim)[0]
+                    const link = $(this).find('a.sj_ln').attr('href')
+                    const match = link.match(/[0-9]+/gim)[1]
                     ulList[i] = match
                 }
             })
@@ -77,9 +77,8 @@ const getList = async () => {
 const getTopic = async () => {
     if (topics.length < 1)
         return getList()
-    const link = topics[0]
-    const no = link.split('/')[1]
-    const url = `https://www.ygosu.com/community/real_article/${link}`
+    const no = topics[0]
+    const url = `http://www.inven.co.kr/board/webzine/${options.board}/${no}`
     console.log(url)
     const exist = await readSave.isExist(url)
     if (exist) {
@@ -91,16 +90,15 @@ const getTopic = async () => {
     await getHtml(url)
         .then(html => {
             const $ = cheerio.load(html.data, { decodeEntities: false })
-            const title = $('.board_top').children('.tit').children('h3').html()
-                .replace(/<span>(.*?)<\/span>/gim, '')
-                .replace(/<em>(.*?)<\/em>/gim, '')
-                .trim()
-            const author = $('#contain_user_info').children('.nickname').find('a').text()
-            const created = $('.board_top').children('.info').find('.date').text().match(/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/gim)[0]
-            const content = $('.board_body').children('.container').html()
+            const title = $('.articleTitle').text().trim()
+            const category = $('.articleCategory').text().replace(/[\[\]]/gim, '').trim()
+            const author = $('.articleWriter').text().trim()
+            const created = $('.articleDate').text()
+            const content = $('#powerbbsContent').html()
             return {
                 no,
                 title,
+                category,
                 author,
                 created,
                 content
@@ -136,6 +134,7 @@ const saveTopic = async (topic, images, url) => {
             type: options.type,
             label: options.label,
             board: options.board,
+            category: topic.category,
             author: topic.author,
             title: topic.title,
             content: topic.content,

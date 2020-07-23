@@ -17,7 +17,7 @@ const reserved = ({ path, subject, type, label, board, extendedLink, maxPage, li
     })
 }
 
-const start = async () => {
+(async () => {
     const workers = await readWorker()
     workers.map(item => {
         reserved({
@@ -33,18 +33,16 @@ const start = async () => {
         })
     })
     console.log(`I'm working start!!`)
-}
-
-start()
+})()
 
 // const cron = require(`./src/crawler/fmkorea`)
 // cron({
-//     type : 'FM',
-//     label : '포텐터짐',
-//     board : 'best',
-//     extendedLink : '&sort_index=popular',
-//     maxPage : 3,
-//     timeout : 15000
+//     type: 'FM',
+//     label: '포텐터짐',
+//     board: 'best',
+//     extendedLink: '&sort_index=popular',
+//     maxPage: 3,
+//     timeout: 15000
 // })
 
 // const cron = require(`./src/crawler/dcinside`)
@@ -56,4 +54,15 @@ start()
 //     maxPage: 3,
 //     limitVotes: 2000,
 //     timeout: 15000
+// })
+
+// const cron = require(`./src/crawler/inven`)
+// cron({
+//     type: 'IV',
+//     label: '오이갤',
+//     board: '2097',
+//     extendedLink: '&my=chu',
+//     maxPage: 3,
+//     limitVotes: 10,
+//     timeout: 5000
 // })

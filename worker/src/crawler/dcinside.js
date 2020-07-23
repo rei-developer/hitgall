@@ -67,7 +67,6 @@ const getList = async () => {
             return ulList.filter(item => item)
         })
         .then(res => {
-            console.log(res)
             topics = res
             getTopic()
         })
