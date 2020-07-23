@@ -59,11 +59,15 @@ const getList = async () => {
             const $ = cheerio.load(html.data)
             const $bodyList = $('.gall_listwrap.list').find('tr.us-post')
             $bodyList.each(function (i, el) {
-                ulList[i] = $(this).attr('data-no')
+                const votes = $(this).find('td.gall_recommend').text()
+                console.log(votes)
+                if (!options.limitVotes || votes >= options.limitVotes)
+                    ulList[i] = $(this).attr('data-no')
             })
-            return ulList
+            return ulList.filter(item => item)
         })
         .then(res => {
+            console.log(res)
             topics = res
             getTopic()
         })
