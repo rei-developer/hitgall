@@ -20,7 +20,7 @@ const header = {
     'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
     'Cache-Control': 'max-age=0',
     'Connection': 'keep-alive',
-    'Host': 'gall.dcinside.com',
+    'Host': 'theqoo.net',
     'Upgrade-Insecure-Requests': '1',
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36'
 }
@@ -51,18 +51,17 @@ const getHtml = async url => {
 const getList = async () => {
     if (page > options.maxPage)
         return console.log(`Finish one's work... ${new Date().getDate()}`)
-    const url = `https://gall.dcinside.com/board/lists/?id=${options.board}&page=${page++}${options.extendedLink || ''}`
+    const url = `https://theqoo.net/index.php?mid=${options.board}&page=${page++}${options.extendedLink || ''}`
     console.log(url)
     await getHtml(url)
         .then(html => {
             let ulList = []
             const $ = cheerio.load(html.data)
-            const $bodyList = $('.gall_listwrap.list').find('tr.us-post')
+            const $bodyList = $('table.theqoo_board_table').children('tbody').find('tr:not(.notice):not(.notice_expand)')
             $bodyList.each(function (i, el) {
-                const votes = $(this).find('td.gall_recommend').text()
-                console.log(votes)
-                if (!options.limitVotes || votes >= options.limitVotes)
-                    ulList[i] = $(this).attr('data-no')
+                const link = $(this).find('td.title').children('a').eq(0).attr('href')
+                const match = link.match(/[0-9]+/gim)[1]
+                ulList[i] = match
             })
             return ulList.filter(item => item)
         })
@@ -76,7 +75,7 @@ const getTopic = async () => {
     if (topics.length < 1)
         return getList()
     const no = topics[0]
-    const url = `https://m.dcinside.com/board/${options.board}/${no}`
+    const url = `https://theqoo.net/${no}`
     console.log(url)
     const exist = await readSave.isExist(url)
     if (exist) {
@@ -87,14 +86,13 @@ const getTopic = async () => {
     await getHtml(url)
         .then(html => {
             const $ = cheerio.load(html.data, { decodeEntities: false })
-            const title = $('.title_subject').text()
-            const author = $('.nickname.in').eq(0).attr('title')
-            const created = $('.gall_date').eq(0).attr('title')
-            const content = $('.writing_view_box').html()
+            const title = $('.theqoo_document_header').children('span.title').text().trim()
+            const created = $('.btm_area').children('.side.fr').text().trim()
+            const content = $('.rd_body').find('.xe_content').html()
             return {
                 no,
                 title,
-                author,
+                author: '무명의 더쿠',
                 created,
                 content
             }
@@ -155,13 +153,13 @@ const downloadImage = (no, item, index) => {
         const content = Buffer.from(body, 'base64')
         !fs.existsSync(path) && fs.mkdirSync(path)
         fs.writeFile(path + filename, content, () => {
-            await uploadFile(path + filename)
+            // await uploadFile(path + filename)
             if (index < 1) {
                 const thumbnail = sharp(content)
                 thumbnail.metadata()
                     .then(() => thumbnail.resize(80, 80).toBuffer())
                     .then(result => fs.writeFile(`${path}/thumb.png`, result, async () => {
-                        await uploadFile(`${path}/thumb.png`)
+                        // await uploadFile(`${path}/thumb.png`)
                     }))
             }
         })
@@ -171,18 +169,15 @@ const downloadImage = (no, item, index) => {
 const changeImageUrl = (no, content) => {
     let images = []
     let array
-    const regex = /<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>/gim
+    const regex = /https:\/\/img.theqoo.net\/([a-zA-Z]{5})/gim
     array = content.match(regex)
     if (array) {
         if (array.length > 0) {
-            array.map(item => {
-                const regex2 = /((http|https):\/\/)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gim
-                const origin = item.match(regex2)[0]
-                const url = origin.replace(/\:\/\/([^\/?#]+)/, '://images.dcinside.com')
+            array.map(url => {
                 const uuid = v5(`${Date.now()}-${url}`, MY_NAMESPACE)
-                content = content.replace(item, `[img src="/save/img/${options.type}-${no}/${uuid}.gif"]`)
+                content = content.replace(url, `[img src="/save/img/${options.type}-${no}/${uuid}.gif"]`)
                 images.push({
-                    url,
+                    url: `https://img.theqoo.net/img/${url.replace(regex, '$1')}.jpg`,
                     uuid
                 })
             })
@@ -197,6 +192,7 @@ const changeImageUrl = (no, content) => {
 const filter = text => {
     let result = []
     text = text.replace(/<br>/gim, '[br]')
+    text = text.replace(/<(\/script|script)((.|\n)*)(\/script|script)>/gim, '')
     text = text.replace(/(<([^>]+)>)/gim, '')
     text = text.replace(/\[img[^\]]*src=[\"']?([^>\"']+)[\"']?[^\]]*\]/gim, `<p><img src="$1"></p>`)
     result = text.trim().split('[br]')

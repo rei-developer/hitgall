@@ -56,13 +56,11 @@ const reserved = ({ path, subject, type, label, board, extendedLink, maxPage, li
 //     timeout: 15000
 // })
 
-// const cron = require(`./src/crawler/inven`)
-// cron({
-//     type: 'IV',
-//     label: '오이갤',
-//     board: '2097',
-//     extendedLink: '&my=chu',
-//     maxPage: 3,
-//     limitVotes: 10,
-//     timeout: 5000
-// })
+const cron = require(`./src/crawler/theqoo`)
+cron({
+    type: 'TQ',
+    label: 'HOT',
+    board: 'hot',
+    maxPage: 3,
+    timeout: 5000
+})

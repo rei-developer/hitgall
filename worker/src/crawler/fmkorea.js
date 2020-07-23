@@ -82,7 +82,6 @@ const getTopic = async () => {
         return getTopic()
     }
     fsExtra.emptyDirSync('save/img')
-    fsExtra.emptyDirSync('save/thumb')
     await getHtml(url)
         .then(async html => {
             let count = 0
@@ -109,7 +108,7 @@ const getTopic = async () => {
             data.content = filter(imageData.content)
             const images = imageData.images
             if (images.length > 0)
-                images.map(item => downloadImage(data.no, item))
+                images.map((item, index) => downloadImage(data.no, item, index))
             console.log(data)
             return {
                 topic: data,
@@ -138,8 +137,8 @@ const saveTopic = async (topic, images, url) => {
             title: topic.title,
             content: topic.content,
             url,
-            thumbImageUUID: images.length > 0 ? `${images[0].uuid}.gif` : '',
-            created: topic.created
+            created: topic.created,
+            isImage: images.length > 0 ? 1 : 0
         })
         if (!saveId)
             return false
@@ -159,24 +158,24 @@ const waitLazyImageLoad = count => {
     })
 }
 
-const downloadImage = (no, item) => {
+const downloadImage = (no, item, index) => {
     request.defaults({ encoding: null }).get(item.url, header, (error, response, body) => {
         if (error || response.statusCode !== 200)
             return console.log(`${item.url} download failed...`)
         const filename = `/${item.uuid}.gif`
         const path = `save/img/${options.type}-${no}`
-        const pathThumb = `save/thumb/${options.type}-${no}`
         const content = Buffer.from(body, 'base64')
         !fs.existsSync(path) && fs.mkdirSync(path)
-        !fs.existsSync(pathThumb) && fs.mkdirSync(pathThumb)
         fs.writeFile(path + filename, content, () => {
-            const thumbnail = sharp(content)
-            thumbnail.metadata()
-                .then(() => thumbnail.resize(80, 80).toBuffer())
-                .then(result => fs.writeFile(pathThumb + filename, result, async () => {
-                    // await uploadFile(path + filename)
-                    // await uploadFile(pathThumb + filename)
-                }))
+            // await uploadFile(path + filename)
+            if (index < 1) {
+                const thumbnail = sharp(content)
+                thumbnail.metadata()
+                    .then(() => thumbnail.resize(80, 80).toBuffer())
+                    .then(result => fs.writeFile(`${path}/thumb.png`, result, async () => {
+                        // await uploadFile(`${path}/thumb.png`)
+                    }))
+            }
         })
     })
 }
@@ -194,7 +193,7 @@ const changeImageUrl = (no, content) => {
                 // const regex = /lazy\/img\/transparent.gif/gim
                 // if (content.match(regex))
                 //     console.log(content)
-
+                
 
                 const regex2 = /((http|https):\/\/)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gim
                 const url = `https://${item.match(regex2)[0]}`
