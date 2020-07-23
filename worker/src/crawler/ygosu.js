@@ -20,7 +20,7 @@ const header = {
     'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
     'Cache-Control': 'max-age=0',
     'Connection': 'keep-alive',
-    'Host': 'gall.dcinside.com',
+    'Host': 'www.ygosu.com',
     'Upgrade-Insecure-Requests': '1',
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36'
 }
@@ -51,19 +51,25 @@ const getHtml = async url => {
 const getList = async () => {
     if (page > options.maxPage)
         return console.log(`Finish one's work... ${new Date().getDate()}`)
-    const url = `https://gall.dcinside.com/board/lists/?id=${options.board}&page=${page++}${options.extendedLink || ''}`
+    const url = `https://www.ygosu.com/community/${options.board}/?page=${page++}${options.extendedLink || ''}`
     console.log(url)
     await getHtml(url)
         .then(html => {
             let ulList = []
             const $ = cheerio.load(html.data)
-            const $bodyList = $('.gall_listwrap.list').find('tr.us-post')
+            const $bodyList = $('table.bd_list').children('tbody').find('tr')
             $bodyList.each(function (i, el) {
-                ulList[i] = $(this).attr('data-no')
+                const votes = $(this).find('td.vote').text()
+                if (!options.limitVotes || votes >= options.limitVotes) {
+                    const link = $(this).find('td.tit').children('a').attr('href')
+                    const match = link.match(/([a-zA-Z0-9-_])+\/[0-9]+/gim)[0]
+                    ulList[i] = match
+                }
             })
-            return ulList
+            return ulList.filter(item => item)
         })
         .then(res => {
+            console.log(res)
             topics = res
             getTopic()
         })
@@ -72,8 +78,9 @@ const getList = async () => {
 const getTopic = async () => {
     if (topics.length < 1)
         return getList()
-    const no = topics[0]
-    const url = `https://m.dcinside.com/board/${options.board}/${no}`
+    const link = topics[0]
+    const no = link.split('/')[1]
+    const url = `https://www.ygosu.com/community/real_article/${link}`
     console.log(url)
     const exist = await readSave.isExist(url)
     if (exist) {
@@ -85,10 +92,13 @@ const getTopic = async () => {
     await getHtml(url)
         .then(html => {
             const $ = cheerio.load(html.data, { decodeEntities: false })
-            const title = $('.title_subject').text()
-            const author = $('.nickname.in').eq(0).attr('title')
-            const created = $('.gall_date').eq(0).attr('title')
-            const content = $('.writing_view_box').html()
+            const title = $('.board_top').children('.tit').children('h3').html()
+                .replace(/<span>(.*?)<\/span>/gim, '')
+                .replace(/<em>(.*?)<\/em>/gim, '')
+                .trim()
+            const author = $('#contain_user_info').children('.nickname').find('a').text()
+            const created = $('.board_top').children('.info').find('.date').text().match(/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/gim)[0]
+            const content = $('.board_body').children('.container').html()
             return {
                 no,
                 title,
@@ -174,9 +184,8 @@ const changeImageUrl = (no, content) => {
     if (array) {
         if (array.length > 0) {
             array.map(item => {
-                const regex2 = /((http|https):\/\/)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gim
-                const origin = item.match(regex2)[0]
-                const url = origin.replace(/\:\/\/([^\/?#]+)/, '://images.dcinside.com')
+                const regex2 = /((http|https):\/\/)?[-a-zA-Z0-9@:%._\/\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gim
+                const url = item.match(regex2)[0]
                 const uuid = v5(`${Date.now()}-${url}`, MY_NAMESPACE)
                 content = content.replace(item, `[img src="/save/img/${options.type}-${no}/${uuid}.gif"]`)
                 images.push({
@@ -195,6 +204,7 @@ const changeImageUrl = (no, content) => {
 const filter = text => {
     let result = []
     text = text.replace(/<br>/gim, '[br]')
+    text = text.replace(/<(\/script|script)((.|\n)*)(\/script|script)>/gim, '')
     text = text.replace(/(<([^>]+)>)/gim, '')
     text = text.replace(/\[img[^\]]*src=[\"']?([^>\"']+)[\"']?[^\]]*\]/gim, `<p><img src="$1"></p>`)
     result = text.trim().split('[br]')

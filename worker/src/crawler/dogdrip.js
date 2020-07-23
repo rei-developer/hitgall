@@ -20,7 +20,7 @@ const header = {
     'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
     'Cache-Control': 'max-age=0',
     'Connection': 'keep-alive',
-    'Host': 'gall.dcinside.com',
+    'Host': 'www.dogdrip.net',
     'Upgrade-Insecure-Requests': '1',
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36'
 }
@@ -51,15 +51,17 @@ const getHtml = async url => {
 const getList = async () => {
     if (page > options.maxPage)
         return console.log(`Finish one's work... ${new Date().getDate()}`)
-    const url = `https://gall.dcinside.com/board/lists/?id=${options.board}&page=${page++}${options.extendedLink || ''}`
+    const url = `https://www.dogdrip.net/index.php?mid=${options.board}&page=${page++}${options.extendedLink || ''}`
     console.log(url)
     await getHtml(url)
         .then(html => {
             let ulList = []
             const $ = cheerio.load(html.data)
-            const $bodyList = $('.gall_listwrap.list').find('tr.us-post')
+            const $bodyList = $('table.table-divider').children('tbody').find('tr:not(.notice)')
             $bodyList.each(function (i, el) {
-                ulList[i] = $(this).attr('data-no')
+                const link = $(this).find('a.link-reset').eq(0).attr('href')
+                const match = link.match(/document_srl=[0-9]+/gim)[0]
+                ulList[i] = match.replace(/[^0-9]+/gim, '')
             })
             return ulList
         })
@@ -73,7 +75,7 @@ const getTopic = async () => {
     if (topics.length < 1)
         return getList()
     const no = topics[0]
-    const url = `https://m.dcinside.com/board/${options.board}/${no}`
+    const url = `https://www.dogdrip.net/${no}`
     console.log(url)
     const exist = await readSave.isExist(url)
     if (exist) {
@@ -85,10 +87,10 @@ const getTopic = async () => {
     await getHtml(url)
         .then(html => {
             const $ = cheerio.load(html.data, { decodeEntities: false })
-            const title = $('.title_subject').text()
-            const author = $('.nickname.in').eq(0).attr('title')
-            const created = $('.gall_date').eq(0).attr('title')
-            const content = $('.writing_view_box').html()
+            const title = $('h4.margin-bottom-xsmall').text()
+            const author = $('.article-head').find('span.margin-right-small').eq(0).text().trim()
+            const created = $('.article-head').find('span.margin-right-small').eq(1).text().trim()
+            const content = $('#article_1').find('.xe_content').html()
             return {
                 no,
                 title,
@@ -174,9 +176,8 @@ const changeImageUrl = (no, content) => {
     if (array) {
         if (array.length > 0) {
             array.map(item => {
-                const regex2 = /((http|https):\/\/)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gim
-                const origin = item.match(regex2)[0]
-                const url = origin.replace(/\:\/\/([^\/?#]+)/, '://images.dcinside.com')
+                const regex2 = /((http|https):\/\/)?[-a-zA-Z0-9@:%._\/\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gim
+                const url = `https://www.dogdrip.net${item.match(regex2)[0]}`
                 const uuid = v5(`${Date.now()}-${url}`, MY_NAMESPACE)
                 content = content.replace(item, `[img src="/save/img/${options.type}-${no}/${uuid}.gif"]`)
                 images.push({

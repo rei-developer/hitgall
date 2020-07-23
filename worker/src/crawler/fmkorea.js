@@ -14,15 +14,18 @@ dotenv.config()
 
 const { BUCKET_NAME, MY_NAMESPACE } = process.env
 const storage = new Storage({ keyFilename: 'key.json' })
-
-let options = {
-    type: '',
-    label: '',
-    board: '',
-    extendedLink: '',
-    maxPage: 0,
-    timeout: 0
+const header = {
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+    'Accept-Encoding': 'gzip, deflate',
+    'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
+    'Cache-Control': 'max-age=0',
+    'Connection': 'keep-alive',
+    'Host': 'www.fmkorea.com',
+    'Upgrade-Insecure-Requests': '1',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36'
 }
+
+let options
 let page = 1
 let topics = []
 
@@ -39,7 +42,7 @@ const uploadFile = async filename => {
 
 const getHtml = async url => {
     try {
-        return await axios.get(url)
+        return await axios.get(url, { header })
     } catch (error) {
         console.error(error)
     }
@@ -48,7 +51,7 @@ const getHtml = async url => {
 const getList = async () => {
     if (page > options.maxPage)
         return console.log(`Finish one's work... ${new Date().getDate()}`)
-    const url = `https://www.fmkorea.com/index.php?mid=${options.board}&page=${page++}${options.extendedLink}`
+    const url = `https://www.fmkorea.com/index.php?mid=${options.board}&page=${page++}${options.extendedLink || ''}`
     console.log(url)
     await getHtml(url)
         .then(html => {
@@ -157,7 +160,7 @@ const waitLazyImageLoad = count => {
 }
 
 const downloadImage = (no, item) => {
-    request.defaults({ encoding: null }).get(item.url, (error, response, body) => {
+    request.defaults({ encoding: null }).get(item.url, header, (error, response, body) => {
         if (error || response.statusCode !== 200)
             return console.log(`${item.url} download failed...`)
         const filename = `/${item.uuid}.gif`
