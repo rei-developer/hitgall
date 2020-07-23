@@ -4,16 +4,16 @@ const readWorker = require('./src/database/worker/read')
 const reserved = ({ path, subject, type, label, board, extendedLink, maxPage, limitVotes, timeout, timer }) => {
     console.log(`[예약] ${subject} - ${timer}`)
     schedule.scheduleJob(timer, () => {
-        const cron = require(`./src/crawler/${path}`)
-        cron({
-            type,
-            label,
-            board,
-            extendedLink,
-            maxPage,
-            limitVotes,
-            timeout
-        })
+        // const cron = require(`./src/crawler/${path}`)
+        // cron({
+        //     type,
+        //     label,
+        //     board,
+        //     extendedLink,
+        //     maxPage,
+        //     limitVotes,
+        //     timeout
+        // })
     })
 }
 
