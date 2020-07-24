@@ -40,8 +40,14 @@ module.exports.getBoardName = domain => {
         case 'langrisser':
             name = '랑그릿사 갤러리'
             break
-        case 'tsukutu':
+        case 'tsukuru':
             name = '쯔꾸르 갤러리'
+            break
+        case 'counterside':
+            name = '카운터사이드 갤러리'
+            break
+        case 'yandere':
+            name = '얀데레 스위치 갤러리'
             break
         default:
             name = domain + ' 갤러리'

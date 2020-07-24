@@ -49,7 +49,7 @@ module.exports.getTopics = async ctx => {
         select: 0
     }
     const page = body.page || 0
-    const limit = body.limit || 20
+    const limit = body.limit || 42
     if (page < 0)
         return
     if (limit < 5 || limit > 50)
@@ -66,8 +66,28 @@ module.exports.getTopics = async ctx => {
     obj.isAllowed = 1
     const count = await readTopic.count(obj)
     const categories = await readBoard.categories(domain)
-    const notices = await readTopic.notices(domain)
-    const topics = await readTopic.topics(obj, searches, page, limit)
+    let notices = await readTopic.notices(domain)
+    if (notices) {
+        notices = notices.map(item => {
+            const ip = item.ip.split('.')
+            if (ip && ip.length >= 3)
+                item.ip = `${ip[0]}.${ip[1]}.*.*`
+            else
+                item.ip = ''
+            return item
+        })
+    }
+    let topics = await readTopic.topics(obj, searches, page, limit)
+    if (topics) {
+        topics = topics.map(item => {
+            const ip = item.ip.split('.')
+            if (ip && ip.length >= 3)
+                item.ip = `${ip[0]}.${ip[1]}.*.*`
+            else
+                item.ip = ''
+            return item
+        })
+    }
     ctx.body = {
         count,
         categories,
@@ -109,7 +129,17 @@ module.exports.getPosts = async ctx => {
     if (limit < 10 || limit > 50)
         return
     const count = await readPost.count(topicId)
-    const posts = await readPost.posts(topicId, page, count) //limit -> count 임시
+    let posts = await readPost.posts(topicId, page, count) //limit -> count 임시
+    if (posts) {
+        posts = posts.map(item => {
+            const ip = item.ip.split('.')
+            if (ip && ip.length >= 3)
+                item.ip = `${ip[0]}.${ip[1]}.*.*`
+            else
+                item.ip = ''
+            return item
+        })
+    }
     ctx.body = {
         count,
         posts
@@ -167,8 +197,12 @@ module.exports.getContent = async ctx => {
             message: '접근할 수 없거나 삭제된 페이지입니다.',
             status: 'fail'
         }
-    topic.ip = ""
-    topic.header = ""
+    const ip = topic.ip.split('.')
+    if (ip && ip.length >= 3)
+        topic.ip = `${ip[0]}.${ip[1]}.*.*`
+    else
+        topic.ip = ''
+    topic.header = ''
     const images = topic.isImage > 0
         ? await readTopic.topicImages(id)
         : []
@@ -453,10 +487,10 @@ module.exports.createTopicVotes = async ctx => {
             move = 'DEFAULT'
             await updateTopic.updateTopicByIsBest(id)
             await User.setUpExpAndPoint(targetUser, -20, -20)
-        // } else if (topic.hates - topic.likes >= DELETE_LIMIT) {
-        //     move = 'DELETE'
-        //     await updateTopic.updateTopicByIsAllowed(id)
-        //     await User.setUpExpAndPoint(targetUser, -10, -10)
+            // } else if (topic.hates - topic.likes >= DELETE_LIMIT) {
+            //     move = 'DELETE'
+            //     await updateTopic.updateTopicByIsAllowed(id)
+            //     await User.setUpExpAndPoint(targetUser, -10, -10)
         } else {
             await User.setUpExpAndPoint(targetUser, -5, -5)
         }

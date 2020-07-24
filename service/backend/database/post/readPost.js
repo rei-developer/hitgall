@@ -54,6 +54,7 @@ module.exports.posts = async (topicId, page, limit) => {
 			p.content,
 			p.stickerId,
 			p.stickerSelect,
+			p.ip,
 			p.created,
 			p.updated,
 			tp.author tagAuthor,

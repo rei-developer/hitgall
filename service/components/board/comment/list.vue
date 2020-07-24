@@ -41,7 +41,10 @@
                             <div>
                                 <!-- <img :src='`/level/${item.level}.png`'> -->
                                 <img class='icon' :src='`/icon/${item.icon}`' v-if='item.icon !== null && item.icon !== ""'>
-                                <span class='author'>{{ item.author }}</span>
+                                <span class='author'>
+                                    {{ item.author }}
+                                    <span class='ip' v-if='item.userId < 1 && item.ip !== ""'>({{ item.ip }})</span>
+                                </span>
                                 <span class='regdate'>{{ $moment(item.updated).fromNow() }}</span>
                             </div>
                             <div :class='item.userId === topic.userId ? "writer" : ""'>
@@ -366,6 +369,11 @@
                                 > span.author {
                                     color: rgb(68, 68, 68);
                                     font-weight: 700;
+                                    > span.ip {
+                                        color: #666;
+                                        font-size: 11px;
+                                        font-weight: normal;
+                                    }
                                 }
                                 > span.regdate {
                                     padding: 0 6px;

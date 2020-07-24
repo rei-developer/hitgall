@@ -7,7 +7,7 @@
             v-if='id > 0'/>
         <div class='containerSubject marginTop'>
             <font-awesome-icon icon='cart-arrow-down'/>
-            디시콘샵 ({{ numberWithCommas(count) }})
+            힛갤콘샵 ({{ numberWithCommas(count) }})
             <div class='stickerPointInfo'>
                 <font-awesome-icon icon='gift'/>
                 <span class='bold'>{{ numberWithCommas($store.state.user.point) }}</span>

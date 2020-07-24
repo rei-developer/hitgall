@@ -35,8 +35,9 @@
                 <li @click='forceUpdate'><nuxt-link to='/board/honkai3'>붕괴3</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/monmusu'>몬무스</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/langrisser'>랑그릿사</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/tsukutu'>쯔꾸르</nuxt-link></li>
-                <li v-shortkey.once='["t"]' @shortkey='move("/sticker")' ><nuxt-link to='/sticker'>디시콘</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/tsukuru'>쯔꾸르</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/counterside'>카운터사이드</nuxt-link></li>
+                <li v-shortkey.once='["t"]' @shortkey='move("/sticker")' ><nuxt-link to='/sticker'>힛갤콘</nuxt-link></li>
             </ul>
             <!-- login part -->
             <ul class='right'>
@@ -79,11 +80,13 @@
                 <li @click='forceUpdate'><nuxt-link to='/board/honkai3'>붕괴3 갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/monmusu'>몬무스 갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/langrisser'>랑그릿사 갤러리</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/tsukutu'>쯔꾸르 갤러리</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/tsukuru'>쯔꾸르 갤러리</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/counterside'>카운터사이드 갤러리</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/yandere'>얀데레 스위치 갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/request'>갤러리 신청</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/notice'>공지사항</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/feedback'>건의사항</nuxt-link></li>
-                <li><nuxt-link to='/sticker'>디시콘</nuxt-link></li>
+                <li><nuxt-link to='/sticker'>힛갤콘</nuxt-link></li>
             </ul>
         </b-sidebar>
     </div>

@@ -2,7 +2,7 @@
     <div class='StickerInventory'>
         <div class='title'>
             <font-awesome-icon icon='info-circle'/>
-            디시콘 인벤토리
+            힛갤콘 인벤토리
             <button class='close' @click='$emit("close")'>×</button>
         </div>
         <div class='content'>

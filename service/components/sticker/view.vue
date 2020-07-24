@@ -2,7 +2,7 @@
     <div class='StickerView'>
         <div class='title'>
             <font-awesome-icon icon='info-circle'/>
-            디시콘 정보
+            힛갤콘 정보
             <button class='close' @click='$emit("close")'>×</button>
         </div>
         <div class='content'>

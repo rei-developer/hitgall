@@ -68,12 +68,13 @@
                     <!-- <img :src='`/level/${topic.level}.png`'> -->
                     <img class='icon' :src='`/icon/${topic.icon}`' v-if='topic.icon !== null && topic.icon !== ""'>
                     {{ topic.author }}
+                    <span class='ip' v-if='topic.userId < 1 && topic.ip !== ""'>({{ topic.ip }})</span>
                 </div>
                 <div class='info'>
                     <div>
                         <span class='desktop-only'>조회 <strong>{{ numberWithCommas(topic.hits) }}</strong></span>
                         <span class='desktop-only'>댓글 <strong>1</strong></span>
-                        <span>힛게로 <strong>{{ numberWithCommas(topic.likes) }}</strong></span>
+                        <span>추천 <strong>{{ numberWithCommas(topic.likes) }}</strong></span>
                         <span>비추천 <strong>{{ numberWithCommas(topic.hates) }}</strong></span>
                     </div>
                     <div>
@@ -88,7 +89,7 @@
             <div class='bottom-box'>
                 <div class='likes' @click='votes()'>
                     <div/>
-                    <div>힛게로<span>{{ numberWithCommas(topic.likes) }}</span></div>
+                    <div>추천<span>{{ numberWithCommas(topic.likes) }}</span></div>
                 </div>
                 <div class='hates' @click='votes(false)'>
                     <div/>
@@ -438,6 +439,10 @@
                     height: 16px;
                     margin-top: -3px;
                     border-radius: 2px;
+                }
+                > span.ip {
+                    color: #666;
+                    font-size: 11px;
                 }
             }
             > .info {

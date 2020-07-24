@@ -79,7 +79,7 @@
                                     <span :style='item.color !== "" ? `color: #${item.color}` : ""'>
                                         <span class='category' v-if='item.category'>{{ item.category }}</span>
                                         <strong>{{ item.title }}</strong>
-                                        <span class='newest' v-if='$moment().diff($moment(item.created), "days") <= 1'>N</span>
+                                        <!-- <span class='newest' v-if='$moment().diff($moment(item.created), "days") <= 1'>N</span> -->
                                     </span>
                                     <span v-if='item.postsCount > 0'>
                                         [{{ item.postsCount }}]
@@ -93,6 +93,7 @@
                                 <!-- <img :src='`/level/${item.level}.png`'> -->
                                 <img class='icon' :src='`/icon/${item.icon}`' v-if='item.icon !== null && item.icon !== ""'>
                                 {{ item.author }}
+                                <span class='ip' v-if='item.userId < 1 && item.ip !== ""'>({{ item.ip }})</span>
                             </div>
                             <div>{{ getCreated(item.created) }}</div>
                             <div>{{ numberWithCommas(item.hits) }}</div>
@@ -121,7 +122,7 @@
                                     <span :style='item.color !== "" ? `color: #${item.color}` : ""'>
                                         <span class='category' v-if='item.category'>{{ item.category }}</span>
                                         {{ item.title }}
-                                        <span class='newest' v-if='$moment().diff($moment(item.created), "days") <= 1'>N</span>
+                                        <!-- <span class='newest' v-if='$moment().diff($moment(item.created), "days") <= 1'>N</span> -->
                                     </span>
                                     <span v-if='item.postsCount > 0'>
                                         [{{ item.postsCount }}]
@@ -135,6 +136,7 @@
                                 <!-- <img :src='`/level/${item.level}.png`'> -->
                                 <img class='icon' :src='`/icon/${item.icon}`' v-if='item.icon !== null && item.icon !== ""'>
                                 {{ item.author }}
+                                <span class='ip' v-if='item.userId < 1 && item.ip !== ""'>({{ item.ip }})</span>
                             </div>
                             <div>{{ getCreated(item.created) }}</div>
                             <div>{{ numberWithCommas(item.hits) }}</div>
@@ -164,6 +166,7 @@
                                         <!-- <img :src='`/level/${item.level}.png`'> -->
                                         <img class='icon' :src='`/icon/${item.icon}`' v-if='item.icon !== null && item.icon !== ""'>
                                         {{ item.author }}
+                                        <span class='ip' v-if='item.userId < 1 && item.ip !== ""'>({{ item.ip }})</span>
                                     </div>
                                     <div class='info'>
                                         <span>
@@ -222,6 +225,7 @@
                                         <!-- <img :src='`/level/${item.level}.png`'> -->
                                         <img class='icon' :src='`/icon/${item.icon}`' v-if='item.icon !== null && item.icon !== ""'>
                                         {{ item.author }}
+                                        <span class='ip' v-if='item.userId < 1 && item.ip !== ""'>({{ item.ip }})</span>
                                     </div>
                                 </div>
                                 <div class='comment'>
@@ -608,6 +612,10 @@
                                     margin-top: -3px;
                                     border-radius: 2px;
                                 }
+                                > span.ip {
+                                    color: #666;
+                                    font-size: 11px;
+                                }
                             }
                             &:nth-child(1) { width: 70px }
                             &:nth-child(3) { width: 160px }
@@ -702,6 +710,10 @@
                                         height: 16px;
                                         margin-top: -3px;
                                         border-radius: 2px;
+                                    }
+                                    > span.ip {
+                                        color: #666;
+                                        font-size: 11px;
                                     }
                                 }
                             }
