@@ -35,7 +35,7 @@
             <aside/>
         </footer>
         <!-- music player -->
-        <!-- <Aplayer class='desktop-only'/> -->
+        <Aplayer v-if='$store.state.user.isLogged && ( $store.state.user.level > 1 || $store.state.user.point > 300 || $store.state.user.isAdmin > 0 )' />
     </div>
 </template>
 
@@ -44,7 +44,7 @@
     import Header from '~/components/header'
     import Sidebar from '~/components/sidebar.vue'
     import Footer from '~/components/footer.vue'
-    // import Aplayer from '~/components/aplayer.vue'
+    import Aplayer from '~/components/aplayer.vue'
     
     export default {
         components: {
@@ -52,13 +52,13 @@
             Header,
             Sidebar,
             Footer,
-            // Aplayer
+            Aplayer
         },
         data() {
             return {
                 ver: {
                     backend: 0,
-                    frontend: 12
+                    frontend: 334
                 }
             }
         },
@@ -139,8 +139,6 @@
 </script>
 
 <style lang='less' scope>
-    @primary: #9BA9FB;
-
     body { background-color: #F9F9F9 }
 
     section {
@@ -150,8 +148,8 @@
 
     header.header {
         margin-bottom: 1rem;
+        background-color: #30425f;
         // background-image: url(/navbg.jpg);
-        background-color: @primary;
         box-shadow: 1px 1px 8px rgba(0, 0, 0, .25);
     }
 

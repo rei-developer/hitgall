@@ -4,12 +4,13 @@
     .desktop-only, aside, article.sidebar { display: none }
 
     header {
+        background-color: #5B6882 !important;
         nav > ul {
             > li {
                 display: none;
                 &.logo {
                     display: inline-block;
-                    margin-left: 5px;
+                    margin-left: 10px;
                 }
             }
             &.right > li { display: inline-block }
@@ -21,7 +22,7 @@
 }
 
 .content {
-    img, embed, video {
+    img, video {
         max-width: 100% !important;
         height: auto !important;
         cursor: pointer;

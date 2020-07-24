@@ -13,9 +13,9 @@
                             <font-awesome-icon icon='user-circle'/>
                         </b-input-group-prepend>
                         <b-form-input
-                            placeholder='아이디'
                             v-model='form.username'
                             :state='state.username'
+                            placeholder='아이디'
                             autofocus/>
                     </b-input-group>
                 </b-form-group>
@@ -25,10 +25,10 @@
                             <font-awesome-icon icon='key'/>
                         </b-input-group-prepend>
                         <b-form-input
-                            type='password'
-                            placeholder='비밀번호'
                             v-model='form.password'
-                            :state='state.password'/>
+                            type='password'
+                            :state='state.password'
+                            placeholder='비밀번호'/>
                     </b-input-group>
                 </b-form-group>
                 <b-form-group v-if='message'>
@@ -37,13 +37,11 @@
                     </b-form-invalid-feedback>
                 </b-form-group>
                 <b-form-group>
-                    <b-form-checkbox v-model='form.checked'>로그인 유지</b-form-checkbox>
+                    <b-form-checkbox v-model='form.checked'>
+                        로그인 유지
+                    </b-form-checkbox>
                 </b-form-group>
-                <b-button
-                    type='submit'
-                    variant='primary'>
-                    로그인
-                </b-button>
+                <b-button type='submit' variant='primary'>로그인</b-button>
                 <nuxt-link to='/signup'>
                     <b-button variant='link'>회원가입</b-button>
                 </nuxt-link>

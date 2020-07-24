@@ -2,7 +2,7 @@
     <div>
         <article class='best'>
             <h2>
-                <span>일간베스트</span>
+                <span>애니동 일간베스트</span>
                 <nuxt-link to='/hit'>
                     <font-awesome-icon icon='plus'/>
                 </nuxt-link>
@@ -15,12 +15,12 @@
                 </ul>
             </div>
         </article>
-        <!-- <article class='counter'>
+        <article class='counter'>
             <span>
                 <font-awesome-icon icon='file-alt'/>
                 {{ counts.count }} (<span>+{{counts.today}}</span>)
             </span>
-        </article> -->
+        </article>
         <article class='side'>
             <ul>
                 <li>
@@ -29,19 +29,31 @@
                 <li>
                     <nuxt-link to='/board/feedback'>건의사항</nuxt-link>
                 </li>
+                <!-- <li>
+                    <nuxt-link to='/anime'>애니 편성표</nuxt-link>
+                </li> -->
             </ul>
         </article>
         <article class='side'>
             <ul>
                 <li class='active'>
-                    <nuxt-link to='/board/talk'>토크</nuxt-link>
+                    <nuxt-link to='/board/anime'>애니동</nuxt-link>
                 </li>
                 <li>
-                    <nuxt-link to='/board/girl'>연예</nuxt-link>
+                    <nuxt-link to='/board/game'>게임동</nuxt-link>
                 </li>
-                <!-- <li>
-                    <nuxt-link to='/board/anime'>애니</nuxt-link>
-                </li> -->
+                <li>
+                    <nuxt-link to='/board/nendo'>넨도동</nuxt-link>
+                </li>
+                <li>
+                    <nuxt-link to='/board/draw'>그림동</nuxt-link>
+                </li>
+                <li>
+                    <nuxt-link to='/board/news'>뉴스동</nuxt-link>
+                </li>
+                <li>
+                    <nuxt-link to='/board/review'>리뷰동</nuxt-link>
+                </li>
             </ul>
         </article>
         <!-- <article class='service'>
@@ -51,7 +63,7 @@
             </nuxt-link>
         </article> -->
         <article class='shortcut'>
-            <nuxt-link to='/169399'>
+            <nuxt-link to='/1'>
                 <font-awesome-icon icon='check-square'/>
                 힛갤 단축키 안내
             </nuxt-link>

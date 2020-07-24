@@ -43,9 +43,11 @@
         </b-form-group>
         <article class='topic-view'>
             <h6>
+                <div class='regdate'>
+                    <span>{{ $moment(topic.created).fromNow() }}</span>
+                </div>
                 <div class='category' v-if='topic.category'>{{ topic.category }}</div>
                 <div class='subject' :style='topic.color !== "" ? `color: #${topic.color}` : ""'>{{ topic.title }}</div>
-                <div class='regdate'>{{ $moment(topic.created).fromNow() }}</div>
             </h6>
             <div class='profile'>
                 <div class='image' v-if='topic.profile'>
@@ -69,13 +71,13 @@
                 </div>
                 <div class='info'>
                     <div>
-                        <span>조회 <strong>{{ numberWithCommas(topic.hits) }}</strong></span>
+                        <span class='desktop-only'>조회 <strong>{{ numberWithCommas(topic.hits) }}</strong></span>
                         <span class='desktop-only'>댓글 <strong>1</strong></span>
-                        <span>데뷔 <strong>{{ numberWithCommas(topic.likes) }}</strong></span>
-                        <!-- <span>탈락 <strong>{{ numberWithCommas(topic.hates) }}</strong></span> -->
+                        <span>힛게로 <strong>{{ numberWithCommas(topic.likes) }}</strong></span>
+                        <span>씹선비 <strong>{{ numberWithCommas(topic.hates) }}</strong></span>
                     </div>
                     <div>
-                        <span @click='copyLink(`https://www.hitgall.com/${ id }`)'>https://www.hitgall.com/{{ id }}</span>
+                        <span @click='copyLink(`https://www.hitgall.com/{{ id }}`)'>https://www.hitgall.com/{{ id }}</span>
                     </div>
                 </div>
             </div>
@@ -86,16 +88,16 @@
             <div class='bottom-box'>
                 <div class='likes' @click='votes()'>
                     <div/>
-                    <div>데뷔<span>{{ numberWithCommas(topic.likes) }}</span></div>
+                    <div>힛게로<span>{{ numberWithCommas(topic.likes) }}</span></div>
                 </div>
-                <!-- <div class='hates' @click='votes(false)'>
+                <div class='hates' @click='votes(false)'>
                     <div/>
-                    <div>탈락<span>{{ numberWithCommas(topic.hates) }}</span></div>
-                </div> -->
+                    <div>씹선비<span>{{ numberWithCommas(topic.hates) }}</span></div>
+                </div>
                 <div class='qrcode'>
                     <client-only>
                         <qriously
-                            foreground='#9BA9FB'
+                            foreground='#30425f'
                             :padding='0'
                             :value='`https://www.hitgall.com/${id}`'
                             :size='80'/>
@@ -218,10 +220,10 @@
                 }
             if (store.state.user.isLogged)
                 store.commit('user/setNoticeCount', data.count)
-            const regex1 = /<p><\/p>/gim
-            const regex2 = /<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>/gim
-            data.topic.content = data.topic.content.replace(regex1, '<p><br></p>')
-            data.topic.content = data.topic.content.replace(regex2, `<img src="https://storage.googleapis.com/hitgall$1">`)
+            const regex = /<p><\/p>/gim
+            data.topic.content = data.topic.content.replace(regex, '<p><br></p>')
+            // const regex = /<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>/mig
+            // data.topic.content = data.topic.content.replace(regex, `<img src="$1">`)
             return {
                 id,
                 topic: data.topic,
@@ -364,7 +366,7 @@
                     { property: 'og:image', content: `https://www.hitgall.com/profile/${this.topic.profile}` },
                     { property: 'og:type', content: 'website' },
                     { property: 'og:updated_time', content: this.topic.updated },
-                    { hid: `${this.id}`, name: `${this.topic.content.substr(0, 100)}`, content: '힛갤 - 서브컬쳐 커뮤니티' }
+                    { hid: `${this.id}`, name: `${this.topic.content.substr(0, 100)}`, content: '힛갤' }
                 ]
             }
         }
@@ -372,40 +374,42 @@
 </script>
 
 <style lang='less' scoped>
-    @primary: #9BA9FB;
-    @primary-focus: #8698FB;
+    @primary: #30425f;
+    @primary-focus: #29313E;
 
     // desktop
     article.topic-view {
         border-bottom: 1px solid #eee;
         background-color: #fff;
         > h6 {
-            display: flex;
-            min-height: 32px;
+            height: 32px;
             margin: 0;
             padding: .5rem;
             color: #fff;
-            border-bottom: 1px solid rgba(0, 0, 0, .1);
+            border-bottom: 1px solid rgba(0, 0, 0, .2);
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
             background-color: @primary;
             > .category {
-                height: fit-content;
-                margin-right: 5px;
-                padding: 1px 5px;
+                display: inline-block;
+                padding: 4px 8px;
                 color: @primary;
                 font-size: 12px;
                 font-weight: 700;
-                border-radius: 5px;
+                border-radius: 4px;
                 background-color: #f5f5f5;
             }
             > .subject {
-                flex: 1;
+                max-width: calc(100vw - 80px);
                 font-size: 14px;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
             }
             > .regdate {
-                margin-top: 2px;
-                font-size: 11px;
+                margin-top: -4px;
+                float: right;
+                > span { font-size: 11px }
             }
         }
         > .profile {

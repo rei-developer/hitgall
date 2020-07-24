@@ -9,7 +9,7 @@
                 <ul>
                     <li v-for='(item, index) in topics' :key='index'>
                         <nuxt-link :to='`/${item.id}`'>
-                            <img :src='`https://storage.googleapis.com/hitgall/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
+                            <img :src='`/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
                             <strong>{{ getBoardName(item.boardDomain) }}</strong>
                             <div>{{ item.title }}</div>
                         </nuxt-link>
@@ -29,7 +29,7 @@
                     <nuxt-link :to='`/${item.id}`'>
                         <div class='content'>
                             <div class='image'>
-                                <img :src='item.imageUrl ? `https://storage.googleapis.com/hitgall/img/thumb/${item.imageUrl}` : "/default.png"' @error='imageUrlAlt'>
+                                <img :src='item.imageUrl ? `/img/thumb/${item.imageUrl}` : "/default.png"' @error='imageUrlAlt'>
                             </div>
                             <div class='subject'>
                                 <span :style='item.color !== "" ? `color: #${item.color}` : ""'>
@@ -111,7 +111,7 @@
 </script>
 
 <style lang='less' scoped>
-    @primary: #9BA9FB;
+    @primary: #30425f;
 
     article.widget {
         width: 100%;
@@ -191,7 +191,7 @@
                 margin: 0;
                 padding: .5rem 0 0 5px;
                 font-size: 14px;
-                border-bottom: 1px solid rgba(0, 0, 0, .1);
+                border-bottom: 1px solid rgba(0, 0, 0, .2);
                 border-top-left-radius: 10px;
                 border-top-right-radius: 10px;
                 background-color: @primary;
@@ -267,6 +267,21 @@
                                     font-weight: normal;
                                     > span:nth-child(2) { margin: 0 .5rem }
                                 }
+                                > .author {
+                                    position: absolute;
+                                    right: 0;
+                                    bottom: 5px;
+                                    margin-right: 5px;
+                                    color: @primary;
+                                    font-weight: bold;
+                                    > img:nth-child(1) { margin-top: -3px }
+                                    > img:nth-child(2) {
+                                        width: 16px;
+                                        height: 16px;
+                                        margin-top: -3px;
+                                        border-radius: 2px;
+                                    }
+                                }
                             }
                             > .comment {
                                 width: 40px;
@@ -276,7 +291,7 @@
                                     height: 30px;
                                     margin: 21px 0 0 5px;
                                     padding-top: 5px;
-                                    color: #333;
+                                    color: @primary;
                                     font-size: 12px;
                                     font-weight: 700;
                                     text-align: center;

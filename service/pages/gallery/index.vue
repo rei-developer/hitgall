@@ -104,13 +104,13 @@
 </script>
 
 <style lang='less' scoped>
-    @primary: #9BA9FB;
+    @primary: #30425f;
     
     h5 {
         height: 32px;
         margin: 0;
         padding: 3px 6px;
-        border-bottom: 1px solid rgba(0, 0, 0, .1);
+        border-bottom: 1px solid rgba(0, 0, 0, .2);
         border-radius: 10px 10px 0 0;
         background-color: @primary;
         color: #fff;

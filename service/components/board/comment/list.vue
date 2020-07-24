@@ -306,7 +306,7 @@
 </script>
 
 <style lang='less' scope>
-    @primary: #9BA9FB;
+    @primary: #30425f;
 
     article.comment-view {
         > h6 {
@@ -315,7 +315,7 @@
             padding: .5rem 0 0 5px;
             color: #fff;
             font-size: 14px;
-            border-bottom: 1px solid rgba(0, 0, 0, .1);
+            border-bottom: 1px solid rgba(0, 0, 0, .2);
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
             background-color: @primary;
@@ -386,7 +386,6 @@
                                 > .sticker {
                                     width: 100px;
                                     height: 100px;
-                                    margin-top: 5px;
                                     > img { border-radius: 4px }
                                 }
                                 > span {
@@ -395,10 +394,7 @@
                                     overflow-wrap: break-word;
                                 }
                             }
-                            &.writer > span {
-                                color: #061EA4;
-                                font-weight: 700;
-                            }
+                            &.writer > span { color: #2d99e1 }
                         }
                     }
                     > .more {
@@ -420,6 +416,7 @@
                                 position: absolute;
                                 top: calc(50% - 8px);
                                 margin-left: 8px;
+                                color: @primary;
                             }
                         }
                     }
@@ -431,5 +428,18 @@
     .dropdown-item {
         padding: 0.25rem .75rem;
         font-size: 13px;
+    }
+    .hitomiReader {
+    padding: 2px 4px;
+    background: #29313D;
+    color: #FFF;
+    font-size: 11px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 5px;
+    }
+    .hitomiReader:hover {
+    color: #FFF;
+    opacity: 0.8;
     }
 </style>

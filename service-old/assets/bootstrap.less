@@ -1,0 +1,76 @@
+@primary: #9BA9FB;
+@primary-focus: #8698FB;
+
+.btn-primary {
+  background-color: @primary;
+  border-color: @primary;
+}
+
+.btn-primary:hover {
+  background-color: @primary-focus;
+  border-color: @primary-focus;
+}
+
+.btn-primary:focus, .btn-primary.focus {
+  background-color: @primary-focus;
+  border-color: @primary-focus;
+  box-shadow: 0 0 0 0.2rem rgba(155, 169, 251, 0.5);
+}
+
+.btn-primary.disabled, .btn-primary:disabled {
+  background-color: @primary;
+  border-color: @primary;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle {
+  background-color: @primary-focus;
+  border-color: @primary-focus;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-primary.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(155, 169, 251, 0.5);
+}
+
+.btn-link {
+  color: @primary;
+}
+
+.btn-link:hover {
+  color: @primary-focus;
+}
+
+.btn-link:focus, .btn-link.focus {
+  box-shadow: none;
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+  border-color:  @primary;
+  background-color:  @primary;
+}
+
+.custom-control-input:focus ~ .custom-control-label::before {
+  box-shadow: 0 0 0 0.2rem rgba(155, 169, 251, 0.25);
+}
+
+.form-control:focus {
+  box-shadow: 0 0 0 0.2rem rgba(155, 169, 251, 0.25);
+}
+
+.page-link {
+  color: @primary;
+}
+
+.page-link:hover {
+  color: @primary-focus;
+}
+
+.page-link:focus {
+  box-shadow: 0 0 0 0.2rem rgba(155, 169, 251, 0.25);
+}
+
+.page-item.active .page-link {
+  background-color: @primary;
+  border-color: @primary;
+}

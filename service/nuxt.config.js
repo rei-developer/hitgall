@@ -1,5 +1,8 @@
 module.exports = {
 	mode: 'universal',
+	/*
+	** Headers of the page
+	*/
 	head: {
 		title: '힛갤',
 		meta: [
@@ -18,12 +21,21 @@ module.exports = {
 			{ src: 'https://www.google.com/recaptcha/api.js?render=6LfO7_0UAAAAAGPyu2MULjvStvaMMpzGADpWZOku' }
 		]
 	},
+	/*
+	** Customize the progress-bar color
+	*/
 	loading: { color: '#2D99E1' },
+	/*
+	** Global CSS
+	*/
 	css: [
 		'~/assets/bootstrap.less',
 		'~/assets/stylesheets.less',
 		'~/assets/vue-toastification.css'
 	],
+	/*
+	** Plugins to load before mounting the App
+	*/
 	plugins: [
 		{ src: '@/plugins/socket.io.js' },
 		{ src: '@/plugins/v-viewer.js', mode: 'client' },
@@ -36,15 +48,20 @@ module.exports = {
 		{ src: '@/plugins/vue-toastification.js', mode: 'client' },
 		{ src: '@/plugins/vue-waterfall.js', mode: 'client' }
 	],
+	/*
+	** Nuxt.js dev-modules
+	*/
 	buildModules: [
 		'@nuxtjs/eslint-module',
 	],
+	/*
+	** Nuxt.js modules
+	*/
 	modules: [
 		'bootstrap-vue/nuxt',
 		'nuxt-fontawesome',
 		'nuxt-clipboard2',
 		'@nuxtjs/proxy',
-		'@nuxtjs/dotenv',
 		['@nuxtjs/axios', { proxy: true }],
 		['@nuxtjs/recaptcha', {
 			hideBadge: true,
@@ -53,12 +70,12 @@ module.exports = {
 		}],
 		//['@nuxtjs/google-analytics',{
 		// id: 'UA-127341158-2'}],
-		['@nuxtjs/google-adsense'],
+		// ['@nuxtjs/google-adsense'],
 		['@nuxtjs/moment', ['ko']],
 	],
-	'google-adsense': {
-		id: 'ca-pub-1970014826190934'
-	},
+	// 'google-adsense': {
+	//   id: 'ca-pub-5633529273423665'
+	// },
 	fontawesome: {
 		imports: [
 			{
@@ -67,6 +84,15 @@ module.exports = {
 			}
 		]
 	},
+	/*
+	** Axios module configuration
+	** See https://axios.nuxtjs.org/options
+	*/
+	axios: {
+	},
+	/*
+	** Build configuration
+	*/
 	build: {
 		babel: {
 			presets({ isServer }) {

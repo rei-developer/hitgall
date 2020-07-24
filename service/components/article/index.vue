@@ -28,7 +28,7 @@
                     <nuxt-link :to='`/${item.id}`'>
                         <div class='content'>
                             <div class='image'>
-                                <img :src='item.imageUrl ? `https://storage.googleapis.com/hitgall/img/thumb/${item.imageUrl}` : "/default.png"' @error='imageUrlAlt'>
+                                <img :src='item.imageUrl ? `/img/thumb/${item.imageUrl}` : "/default.png"' @error='imageUrlAlt'>
                             </div>
                             <div class='subject'>
                                 <span :style='item.color !== "" ? `color: #${item.color}` : ""'>
@@ -137,7 +137,7 @@
 </script>
 
 <style lang='less' scoped>
-    @primary: #9BA9FB;
+    @primary: #30425f;
 
     article.widget {
         > .desktop-only {
@@ -213,7 +213,7 @@
                 padding: .5rem 0 0 5px;
                 color: #fff;
                 font-size: 14px;
-                border-bottom: 1px solid rgba(0, 0, 0, .1);
+                border-bottom: 1px solid rgba(0, 0, 0, .2);
                 background-color: @primary;
             }
             > ul {
@@ -277,7 +277,7 @@
                                     height: 30px;
                                     margin: 13px 0 0 5px;
                                     padding-top: 5px;
-                                    color: #333;
+                                    color: @primary;
                                     font-size: 12px;
                                     font-weight: 700;
                                     text-align: center;

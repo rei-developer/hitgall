@@ -25,10 +25,8 @@ const auth = async (token, ip) => {
 module.exports.authRecaptcha = async (token, ip) => {
     try {
         const res = await auth(token, ip)
-        if (!res.success || res.score < 0.9)
-            return false
-        else
-            return true
+        if (!res.success || res.score < 0.9) return false
+        else return true
     } catch (e) {
         throw e
     }

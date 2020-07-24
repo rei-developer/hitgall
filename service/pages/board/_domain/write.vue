@@ -13,7 +13,7 @@
 					<b-form-input type='color' v-model='form.color' style='width: 120px'/>
 				</b-form-group>
 			</span>
-			<b-form-group label='분류' v-if='categories.length > 0'>
+			<b-form-group label='분류'>
 				<b-form-radio-group
 					size='sm'
 					v-model='form.category'
@@ -561,7 +561,7 @@
 </script>
 
 <style lang='less' scoped>
-	@primary: #9BA9FB;
+	@primary: #30425f;
 
 	.client-only-placeholder {
 		height: 385px;

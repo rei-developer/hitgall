@@ -109,7 +109,7 @@ module.exports.getPosts = async ctx => {
     if (limit < 10 || limit > 50)
         return
     const count = await readPost.count(topicId)
-    const posts = await readPost.posts(topicId, page, limit)
+    const posts = await readPost.posts(topicId, page, count) //limit -> count 임시
     ctx.body = {
         count,
         posts
@@ -390,7 +390,7 @@ module.exports.createTopicVotes = async ctx => {
         }
     const targetUser = await readUser(topic.userId)
     const ip = ctx.get('x-real-ip')
-    if (targetUser === user.id || topic.ip === ip)
+    if (topic.userId === user.id || topic.ip === ip)
         return ctx.body = {
             message: '본인에게 투표할 수 없습니다.',
             status: 'fail'
@@ -472,9 +472,9 @@ module.exports.createPostVotes = async ctx => {
         return ctx.body = {
             status: 'fail'
         }
-    const targetUser = await readUser(post.userId)
+    //const targetUser = await readUser(post.userId)
     const ip = ctx.get('x-real-ip')
-    if (targetUser === user.id || post.ip === ip)
+    if (post.userId === user.id || post.ip === ip)
         return ctx.body = {
             message: '본인에게 투표할 수 없습니다.',
             status: 'fail'
@@ -551,7 +551,7 @@ module.exports.updateTopic = async ctx => {
         // TODO: 관리자 전용 커스텀
         if (color !== '')
             color = ''
-        if (topic.isNotice < 1 && isNotice > 0)
+        if (isNotice > 0)
             isNotice = 0
     }
     const isPoll = !poll.hide

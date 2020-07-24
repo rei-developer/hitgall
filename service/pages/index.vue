@@ -1,17 +1,20 @@
 <template>
     <div>
-        <adsbygoogle/>
         <div class='articles desktop-only'>
             <div class='article-box'>
                 <HitArticle :limit='5'/>
             </div>
             <div class='article-box'>
-                <Article domain='talk' :limit='10'/>
-                <Article domain='girl' :limit='10'/>
+                <Article domain='anime' :limit='5'/>
+                <Article domain='game' :limit='5'/>
             </div>
             <div class='article-box'>
-                <PhotoArticle domain='talk' :limit='6'/>
-                <PhotoArticle domain='girl' :limit='6'/>
+                <Article domain='news' :limit='5'/>
+                <Article domain='review' :limit='5'/>
+            </div>
+            <div class='article-box'>
+                <PhotoArticle domain='nendo' :limit='6'/>
+                <PhotoArticle domain='draw' :limit='6'/>
             </div>
         </div>
         <div class='articles mobile-only'>
@@ -24,12 +27,12 @@
                     buttons
                     name='radios-btn-default'/>
                 <span v-if='$store.state.user.isLogged'>
-                    <nuxt-link :to='`/board/girl/write`'>
+                    <nuxt-link :to='`/board/anime/write`'>
                         <b-button
                             class='float-right'
                             size='sm'
                             variant='primary'
-                            @shortkey='$router.push({ path: "/board/girl/write" })'>
+                            @shortkey='$router.push({ path: "/board/anime/write" })'>
                             <font-awesome-icon icon='pencil-alt'/>
                             쓰기
                         </b-button>
@@ -55,15 +58,23 @@
         },
         data() {
             return {
-                domain: 'girl',
+                domain: 'anime',
                 domainList: [
                     {
-                        text: '토크',
-                        value: 'talk'
+                        text: '애니동',
+                        value: 'anime'
                     },
                     {
-                        text: '연예',
-                        value: 'girl'
+                        text: '게임동',
+                        value: 'game'
+                    },
+                    {
+                        text: '넨도동',
+                        value: 'nendo'
+                    },
+                    {
+                        text: '그림동',
+                        value: 'draw'
                     }
                 ]
             }

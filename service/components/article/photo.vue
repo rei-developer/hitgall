@@ -1,15 +1,15 @@
 <template>
     <article class='widget'>
         <h6>
-            <span>{{ getBoardName(domain) }} 갤러리</span>
+            <span>{{ getBoardName(domain) }}</span>
             <nuxt-link :to='`/board/${domain}`'>더보기</nuxt-link>
         </h6>
         <div>
             <ul>
                 <li v-for='(item, index) in getTopics(0)' :key='index'>
                     <nuxt-link :to='`${item.id}`'>
-                        <img :src='`https://storage.googleapis.com/hitgall/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
-                        <!-- <strong>OP</strong> -->
+                        <img :src='`/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
+                        <strong>OP</strong>
                         <div>{{ item.title }}</div>
                     </nuxt-link>
                 </li>
@@ -17,8 +17,8 @@
             <ul>
                 <li v-for='(item, index) in getTopics(3)' :key='index'>
                     <nuxt-link :to='`${item.id}`'>
-                        <img :src='`https://storage.googleapis.com/hitgall/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
-                        <!-- <strong>OP</strong> -->
+                        <img :src='`/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
+                        <strong>OP</strong>
                         <div>{{ item.title }}</div>
                     </nuxt-link>
                 </li>

@@ -61,7 +61,7 @@ module.exports.createImage = type => async ctx => {
                         image
                             .metadata()
                             .then(
-                                metadata => image.resize(Math.min(metadata.width, 960)).jpeg(80).toBuffer()
+                                metadata => image.resize(Math.min(metadata.width, 960)).withMetadata().rotate().jpeg(80).toBuffer()
                             )
                             .then(
                                 result => fs.writeFile(`./pick/${filename}`, result, () => fs.unlink(`./img/${filename}`, () => { }))
@@ -69,7 +69,7 @@ module.exports.createImage = type => async ctx => {
                     } else {
                         image
                             .metadata()
-                            .then(() => image.resize(100, 100).toBuffer())
+                            .then(() => image.resize(100, 100).withMetadata().rotate().toBuffer())
                             .then(
                                 result => fs.writeFile(`./profile/${filename}`, result, () => fs.unlink(`./img/${filename}`, () => { }))
                             )
@@ -79,13 +79,13 @@ module.exports.createImage = type => async ctx => {
                     const thumbnail = sharp(data)
                     thumbnail
                         .metadata()
-                        .then(() => thumbnail.resize(100, 100).toBuffer())
+                        .then(() => thumbnail.resize(100, 100).withMetadata().rotate().toBuffer())
                         .then(result => fs.writeFile(`./img/thumb/${filename}`, result, () => { }))
                 } else if (type === 'pick') {
                     const thumbnail = sharp(data)
                     thumbnail
                         .metadata()
-                        .then(() => thumbnail.resize(80, 80).toBuffer())
+                        .then(() => thumbnail.resize(80, 80).withMetadata().rotate().toBuffer())
                         .then(result => fs.writeFile(`./pick/thumb/${filename}`, result, () => { }))
                 }
             })

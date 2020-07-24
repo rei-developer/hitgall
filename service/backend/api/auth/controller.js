@@ -102,8 +102,8 @@ exports.sendMail = async ctx => {
     const decrypt = Crypto
         .encrypt(email)
         .replace(/=+/g, '')
-    const subject = `[힛갤] 회원가입 인증코드 발송 안내`
-    const content = `<p><h1>힛갤</h1></p>
+    const subject = `[아이돌보드] 회원가입 인증코드 발송 안내`
+    const content = `<p><h1>아이돌보드</h1></p>
     <p><h3>인증코드 : ${decrypt}</h3></p>
     <p>위의 인증코드를 기입해주세요.</p>`
     try {
