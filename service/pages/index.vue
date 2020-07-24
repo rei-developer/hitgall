@@ -85,12 +85,12 @@
 
 <style lang='less' scoped>
     .articles {
-        padding: 5px;
-        background-color: #fff;
-        &.mobile-only {
-            padding: 0;
-            background-color: #F9F9F9;
-        }
+        // padding: 5px;
+        // background-color: #fff;
+        // &.mobile-only {
+        //     padding: 0;
+        //     background-color: #F9F9F9;
+        // }
     }
     .article-box {
         display: flex;

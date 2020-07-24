@@ -1,6 +1,6 @@
 <template>
     <article class='widget'>
-        <div class='desktop-only'>
+        <!-- <div class='desktop-only'>
             <h6>
                 <span>{{ getBoardName(domain) }}</span>
                 <nuxt-link :to='`/board/${domain}`'>더보기</nuxt-link>
@@ -17,8 +17,8 @@
                     </li>
                 </ul>
             </div>
-        </div>
-        <div class='mobile-only'>
+        </div> -->
+        <div class='mobile-only-test'>
             <h6>
                 <font-awesome-icon icon='folder-open'/>
                 최신 게시물
@@ -140,72 +140,72 @@
     @primary: #30425f;
 
     article.widget {
-        > .desktop-only {
-            width: 461px;
-            border: 1px solid #ccc;
-            background-color: #fff;
-            > h6 {
-                background-color: #fbfbfb;
-                height: 24px;
-                line-height: 24px;
-                margin: 0;
-                padding: 0 5px;
-                > span {
-                    color: #333;
-                    font-size: 13px;
-                    font-weight: bold;
-                }
-                > a {
-                    float: right;
-                    color: rgb(85, 85, 85);
-                    font-size: 12px;
-                    text-decoration: none;
-                    cursor: pointer;
-                }
-            }
-            > div {
-                padding: 5px;
-                border-top: 1px solid rgb(204, 204, 204);
-                > ul {
-                    margin: 0;
-                    padding: 0;
-                    list-style: none;
-                    > li {
-                        > a {
-                            display: inline-block;
-                            width: 380px;
-                            height: 26px;
-                            line-height: 26px;
-                            padding: 1px 5px;
-                            vertical-align: top;
-                            color: rgb(51, 51, 51);
-                            font-size: 12px;
-                            text-decoration: none;
-                            text-overflow: ellipsis;
-                            white-space: nowrap;
-                            word-wrap: normal;
-                            overflow: hidden;
-                            cursor: pointer;
-                        }
-                        > span {
-                            display: inline-block;
-                            width: 64px;
-                            line-height: 1;
-                            padding: 3px 6px;
-                            color: #fff;
-                            font-size: 10.8px;
-                            font-weight: bold;
-                            text-align: center;
-                            vertical-align: baseline;
-                            white-space: nowrap;
-                            border-radius: 2.7px;
-                            background-color: rgba(0, 0, 0, 0.2);
-                        }
-                    }
-                }
-            }
-        }
-        > .mobile-only {
+        // > .desktop-only {
+        //     width: 461px;
+        //     border: 1px solid #ccc;
+        //     background-color: #fff;
+        //     > h6 {
+        //         background-color: #fbfbfb;
+        //         height: 24px;
+        //         line-height: 24px;
+        //         margin: 0;
+        //         padding: 0 5px;
+        //         > span {
+        //             color: #333;
+        //             font-size: 13px;
+        //             font-weight: bold;
+        //         }
+        //         > a {
+        //             float: right;
+        //             color: rgb(85, 85, 85);
+        //             font-size: 12px;
+        //             text-decoration: none;
+        //             cursor: pointer;
+        //         }
+        //     }
+        //     > div {
+        //         padding: 5px;
+        //         border-top: 1px solid rgb(204, 204, 204);
+        //         > ul {
+        //             margin: 0;
+        //             padding: 0;
+        //             list-style: none;
+        //             > li {
+        //                 > a {
+        //                     display: inline-block;
+        //                     width: 380px;
+        //                     height: 26px;
+        //                     line-height: 26px;
+        //                     padding: 1px 5px;
+        //                     vertical-align: top;
+        //                     color: rgb(51, 51, 51);
+        //                     font-size: 12px;
+        //                     text-decoration: none;
+        //                     text-overflow: ellipsis;
+        //                     white-space: nowrap;
+        //                     word-wrap: normal;
+        //                     overflow: hidden;
+        //                     cursor: pointer;
+        //                 }
+        //                 > span {
+        //                     display: inline-block;
+        //                     width: 64px;
+        //                     line-height: 1;
+        //                     padding: 3px 6px;
+        //                     color: #fff;
+        //                     font-size: 10.8px;
+        //                     font-weight: bold;
+        //                     text-align: center;
+        //                     vertical-align: baseline;
+        //                     white-space: nowrap;
+        //                     border-radius: 2.7px;
+        //                     background-color: rgba(0, 0, 0, 0.2);
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+        > .mobile-only-test {
             background-color: #fff;
             > h6 {
                 height: 32px;

@@ -15,12 +15,12 @@
                 </ul>
             </div>
         </article>
-        <article class='counter'>
+        <!-- <article class='counter'>
             <span>
                 <font-awesome-icon icon='file-alt'/>
                 {{ counts.count }} (<span>+{{counts.today}}</span>)
             </span>
-        </article>
+        </article> -->
         <article class='side'>
             <ul>
                 <li>
@@ -43,10 +43,22 @@
                     <nuxt-link to='/board/anime'>애니메이션 갤러리</nuxt-link>
                 </li>
                 <li>
-                    <nuxt-link to='/board/kawai3'>키아나 갤러리</nuxt-link>
+                    <nuxt-link to='/board/lastorigin'>라스트 오리진 갤러리</nuxt-link>
                 </li>
                 <li>
-                    <nuxt-link to='/board/lastorigin'>라스트 오리진 갤러리</nuxt-link>
+                    <nuxt-link to='/board/skyrim'>스카이림 갤러리</nuxt-link>
+                </li>
+                <li>
+                    <nuxt-link to='/board/honkai3'>붕괴3 갤러리</nuxt-link>
+                </li>
+                <li>
+                    <nuxt-link to='/board/monmusu'>몬무스 갤러리</nuxt-link>
+                </li>
+                <li>
+                    <nuxt-link to='/board/langrisser'>랑그랏사 갤러리</nuxt-link>
+                </li>
+                <li>
+                    <nuxt-link to='/board/tsukutu'>쯔꾸르 갤러리</nuxt-link>
                 </li>
             </ul>
         </article>

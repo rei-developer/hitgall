@@ -11,7 +11,7 @@
                 <font-awesome-icon icon='arrow-up'/>
                 인기글
             </b-button> -->
-			<span>
+			<span v-if='domain !== "all"'>
 				<nuxt-link :to='`/board/${domain}/write`'>
 					<b-button
 						class='float-right'
@@ -255,7 +255,7 @@
                     <font-awesome-icon icon='arrow-up'/>
                     인기글
                 </b-button> -->
-                <div>
+                <div v-if='domain !== "all"'>
                     <nuxt-link :to='`/board/${domain}/write`'>
                         <b-button
                             size='sm'

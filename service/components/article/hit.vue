@@ -1,6 +1,6 @@
 <template>
     <article class='widget'>
-        <div class='desktop-only'>
+        <!-- <div class='desktop-only'>
             <h6>
                 <span>HIT 갤러리</span>
                 <nuxt-link to='/hit'>더보기</nuxt-link>
@@ -16,8 +16,8 @@
                     </li>
                 </ul>
             </div>
-        </div>
-        <div class='mobile-only'>
+        </div> -->
+        <div class='mobile-only-test'>
             <h6>
                 <nuxt-link to='/hit'>
                     <font-awesome-icon icon='star'/>
@@ -115,76 +115,76 @@
 
     article.widget {
         width: 100%;
-        > .desktop-only {
-            border: 1px solid #ccc;
-            > h6 {
-                background-color: #fbfbfb;
-                height: 24px;
-                line-height: 24px;
-                margin: 0;
-                padding: 0 5px;
-                > span {
-                    color: rgb(45, 153, 225);
-                    font-size: 14px;
-                    font-weight: 700;
-                }
-                > a {
-                    float: right;
-                    color: rgb(85, 85, 85);
-                    font-size: 12px;
-                    text-decoration: none;
-                    cursor: pointer;
-                }
-            }
-            > div {
-                padding: 5px;
-                border-top: 1px solid rgb(204, 204, 204);
-                > ul {
-                    display: flex;
-                    justify-content: space-between;
-                    margin: 0;
-                    padding: 0;
-                    list-style: none;
-                    > li {
-                        width: 179.5px;
-                        > a {
-                            position: relative;
-                            text-decoration: none;
-                            > img {
-                                width: 100%;
-                                height: 135px;
-                                border-radius: 4px;
-                            }
-                            > strong {
-                                position: absolute;
-                                left: 0;
-                                bottom: 53px;
-                                width: 100%;
-                                padding: 2px 0 3px;
-                                color: #fff;
-                                font-size: 12px;
-                                font-weight: 400;
-                                text-align: center;
-                                border-top-left-radius: 4px;
-                                border-top-right-radius: 4px;
-                                background-color: #000;
-                                opacity: .6;
-                            }
-                            > div {
-                                margin-top: 4px;
-                                color: #333;
-                                font-size: 12px;
-                                text-overflow: ellipsis;
-                                white-space: nowrap;
-                                word-wrap: normal;
-                                overflow: hidden;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        > .mobile-only {
+        // > .desktop-only {
+        //     border: 1px solid #ccc;
+        //     > h6 {
+        //         background-color: #fbfbfb;
+        //         height: 24px;
+        //         line-height: 24px;
+        //         margin: 0;
+        //         padding: 0 5px;
+        //         > span {
+        //             color: rgb(45, 153, 225);
+        //             font-size: 14px;
+        //             font-weight: 700;
+        //         }
+        //         > a {
+        //             float: right;
+        //             color: rgb(85, 85, 85);
+        //             font-size: 12px;
+        //             text-decoration: none;
+        //             cursor: pointer;
+        //         }
+        //     }
+        //     > div {
+        //         padding: 5px;
+        //         border-top: 1px solid rgb(204, 204, 204);
+        //         > ul {
+        //             display: flex;
+        //             justify-content: space-between;
+        //             margin: 0;
+        //             padding: 0;
+        //             list-style: none;
+        //             > li {
+        //                 width: 179.5px;
+        //                 > a {
+        //                     position: relative;
+        //                     text-decoration: none;
+        //                     > img {
+        //                         width: 100%;
+        //                         height: 135px;
+        //                         border-radius: 4px;
+        //                     }
+        //                     > strong {
+        //                         position: absolute;
+        //                         left: 0;
+        //                         bottom: 53px;
+        //                         width: 100%;
+        //                         padding: 2px 0 3px;
+        //                         color: #fff;
+        //                         font-size: 12px;
+        //                         font-weight: 400;
+        //                         text-align: center;
+        //                         border-top-left-radius: 4px;
+        //                         border-top-right-radius: 4px;
+        //                         background-color: #000;
+        //                         opacity: .6;
+        //                     }
+        //                     > div {
+        //                         margin-top: 4px;
+        //                         color: #333;
+        //                         font-size: 12px;
+        //                         text-overflow: ellipsis;
+        //                         white-space: nowrap;
+        //                         word-wrap: normal;
+        //                         overflow: hidden;
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+        > .mobile-only-test {
             background-color: #fff;
             > h6 {
                 height: 32px;

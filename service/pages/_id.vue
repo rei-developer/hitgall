@@ -27,7 +27,7 @@
                 <font-awesome-icon icon='arrow-up'/>
                 인기글
             </b-button> -->
-            <span>
+            <span v-if='topic.boardDomain !== "all"'>
                 <nuxt-link :to='`/board/${topic.boardDomain}/write`'>
                     <b-button
                         class='float-right'

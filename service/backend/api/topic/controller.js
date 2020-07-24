@@ -215,6 +215,8 @@ module.exports.createTopic = async ctx => {
         poll,
         images
     } = ctx.request.body
+    if (domain === null || domain === '')
+        domain = 'anime'
     if (title === '' || content === '<p></p>')
         return
     title = Filter.disable(title)
@@ -446,10 +448,10 @@ module.exports.createTopicVotes = async ctx => {
             move = 'DEFAULT'
             await updateTopic.updateTopicByIsBest(id)
             await User.setUpExpAndPoint(targetUser, -20, -20)
-        } else if (topic.hates - topic.likes >= DELETE_LIMIT) {
-            move = 'DELETE'
-            await updateTopic.updateTopicByIsAllowed(id)
-            await User.setUpExpAndPoint(targetUser, -10, -10)
+        // } else if (topic.hates - topic.likes >= DELETE_LIMIT) {
+        //     move = 'DELETE'
+        //     await updateTopic.updateTopicByIsAllowed(id)
+        //     await User.setUpExpAndPoint(targetUser, -10, -10)
         } else {
             await User.setUpExpAndPoint(targetUser, -5, -5)
         }
