@@ -80,52 +80,57 @@
             color: #FFF;
             font-size: .9rem;
             font-weight: bold;
+            > button.close {
+                position: absolute;
+                top: 2px;
+                right: 2px;
+                width: 24px;
+                height: 24px;
+                line-height: 0;
+                margin: 0;
+                border: none;
+                background: transparent;
+                color: #FFF;
+                text-align: center;
+                outline: none;
+                cursor: pointer;
+            }
         }
-        .close {
-            position: absolute;
-            top: 2px;
-            right: 2px;
-            width: 24px;
-            height: 24px;
-            line-height: 0;
-            margin: 0;
-            border: none;
-            background: transparent;
-            color: #FFF;
-            text-align: center;
-            cursor: pointer;
-            outline: none;
+        > .content {
+            padding: 12px;
+            > .item {
+                height: 64px;
+                margin-bottom: 2px;
+                overflow-x: scroll;
+                overflow-y: hidden;
+                white-space: nowrap;
+                > img {
+                    width: 41px;
+                    height: 41px;
+                    margin: 2px;
+                    border-radius: .25rem;
+                    &:hover {
+                        opacity: .8;
+                        cursor: pointer;
+                    }
+                }
+            }
+            > .itemList {
+                height: 300px;
+                overflow: auto;
+                > img {
+                    margin: 2px;
+                    width: 100px;
+                    height: 100px;
+                    float: left;
+                    &:hover {
+                        border: 1px solid #333;
+                        opacity: .8;
+                        cursor: pointer;
+                    }
+                }
+            }
         }
-        .content { padding: 12px }
-        .item {
-            height: 64px;
-            margin-bottom: 2px;
-            overflow-x: scroll;
-            overflow-y: hidden;
-            white-space: nowrap;
-        }
-        .item img {
-            width: 41px;
-            height: 41px;
-            margin: 2px;
-            border-radius: .25rem;
-        }
-        .itemList {
-            height: 300px;
-            overflow: auto;
-        }
-        .itemList img {
-            margin: 2px;
-            width: 100px;
-            height: 100px;
-            float: left;
-        }
-        .item img:hover,
-        .itemList img:hover {
-            opacity: .8;
-            cursor: pointer;
-        }
-        .itemList img:hover { border: 1px solid #333 }
     }
 
     @media (max-width: 1024px) {

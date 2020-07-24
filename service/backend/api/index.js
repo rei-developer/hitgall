@@ -7,6 +7,7 @@ const notice = require('./notice')
 const pick = require('./pick')
 const sticker = require('./sticker')
 const topic = require('./topic')
+const save = require('./save')
 
 const VERSION = 334
 
@@ -24,5 +25,6 @@ app.use('/notice', notice.routes())
 app.use('/pick', pick.routes())
 app.use('/sticker', sticker.routes())
 app.use('/topic', topic.routes())
+app.use('/save', save.routes())
 
 module.exports = app
