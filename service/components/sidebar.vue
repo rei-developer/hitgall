@@ -37,10 +37,16 @@
         <article class='side'>
             <ul>
                 <li class='active'>
+                    <nuxt-link to='/board/girl'>연예 갤러리</nuxt-link>
+                </li>
+                <li>
                     <nuxt-link to='/board/anime'>애니메이션 갤러리</nuxt-link>
                 </li>
                 <li>
                     <nuxt-link to='/board/kawai3'>키아나 갤러리</nuxt-link>
+                </li>
+                <li>
+                    <nuxt-link to='/board/lastorigin'>라스트 오리진 갤러리</nuxt-link>
                 </li>
             </ul>
         </article>

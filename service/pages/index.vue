@@ -5,12 +5,16 @@
                 <HitArticle :limit='5'/>
             </div>
             <div class='article-box'>
+                <Article domain='girl' :limit='5'/>
                 <Article domain='anime' :limit='5'/>
-                <Article domain='kawai3' :limit='5'/>
             </div>
             <div class='article-box'>
+                <Article domain='kawai3' :limit='5'/>
+                <Article domain='lastorigin' :limit='5'/>
+            </div>
+            <div class='article-box'>
+                <PhotoArticle domain='girl' :limit='6'/>
                 <PhotoArticle domain='anime' :limit='6'/>
-                <PhotoArticle domain='kawai3' :limit='6'/>
             </div>
         </div>
         <div class='articles mobile-only'>
@@ -61,8 +65,20 @@
                         value: 'all'
                     },
                     {
-                        text: '애갤',
+                        text: '연예',
+                        value: 'girl'
+                    },
+                    {
+                        text: '애니',
                         value: 'anime'
+                    },
+                    {
+                        text: '키아나',
+                        value: 'kawai3'
+                    },
+                    {
+                        text: '라스트 오리진',
+                        value: 'lastorigin'
                     },
                     {
                         text: '갤러리 신청',

@@ -16,11 +16,17 @@ module.exports.getBoardName = domain => {
         case 'request':
             name = '갤러리 신청'
             break
+        case 'girl':
+            name = '연예 갤러리'
+            break
         case 'anime':
             name = '애니메이션 갤러리'
             break
         case 'kawai3':
             name = '키아나 갤러리'
+            break
+        case 'lastorigin':
+            name = '라스트 오리진 갤러리'
             break
         default:
             name = domain + ' 갤러리'

@@ -28,8 +28,10 @@
                         갤러리 신청
                     </nuxt-link>
                 </li>
-                <li @click='forceUpdate'><nuxt-link to='/board/anime'>애니메이션 갤러리</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/kawai3'>키아나 갤러리</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/girl'>연예</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/anime'>애니</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/kawai3'>키아나</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/lastorigin'>라스트 오리진</nuxt-link></li>
                 <li v-shortkey.once='["t"]' @shortkey='move("/sticker")' ><nuxt-link to='/sticker'>스티커</nuxt-link></li>
             </ul>
             <!-- login part -->
@@ -66,8 +68,10 @@
             <ul>
                 <li @click='forceUpdate'><nuxt-link to='/hit'>HIT</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/gallery'>짤수집</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/girl'>연예 갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/anime'>애니메이션 갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/kawai3'>키아나 갤러리</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/lastorigin'>라스트 오리진 갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/request'>갤러리 신청</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/notice'>공지사항</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/feedback'>건의사항</nuxt-link></li>
