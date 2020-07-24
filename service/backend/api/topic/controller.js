@@ -215,9 +215,6 @@ module.exports.createTopic = async ctx => {
         poll,
         images
     } = ctx.request.body
-
-console.log(domain)
-
     if (domain === null || domain === '')
         domain = 'anime'
     if (title === '' || content === '<p></p>')
@@ -404,6 +401,11 @@ module.exports.createTopicVotes = async ctx => {
         return ctx.body = {
             status: 'fail'
         }
+    if (topic.userId < 1)
+        return ctx.body = {
+            message: '현재 유동닉이 쓴 글은 추천할 수 없습니다. 조만간 구현됩니다.',
+            status: 'fail'
+        }
     const targetUser = await readUser(topic.userId)
     const ip = ctx.get('x-real-ip')
     if (topic.userId === user.id || topic.ip === ip)
@@ -486,6 +488,11 @@ module.exports.createPostVotes = async ctx => {
     const post = await readPost(id)
     if (!post)
         return ctx.body = {
+            status: 'fail'
+        }
+    if (post.userId < 1)
+        return ctx.body = {
+            message: '현재 유동닉이 쓴 댓글은 추천할 수 없습니다. 조만간 구현됩니다.',
             status: 'fail'
         }
     //const targetUser = await readUser(post.userId)
