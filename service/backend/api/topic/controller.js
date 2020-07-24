@@ -591,7 +591,7 @@ module.exports.updateTopic = async ctx => {
     const trashImages = imagesByURL.filter(item => !findImages.includes(item))
     if (trashImages) {
         const jobs = trashImages.map(image => new Promise(async resolve => {
-            fs.unlink(`./img/${image}`, err => {
+            fs.unlink(`img/${image}`, err => {
                 if (err)
                     console.log(err)
                 resolve(true)
@@ -599,7 +599,7 @@ module.exports.updateTopic = async ctx => {
         }))
         await Promise.all(jobs)
         const jobsForThumb = trashImages.map(image => new Promise(async resolve => {
-            fs.unlink(`./img/thumb/${image}`, err => {
+            fs.unlink(`img/thumb/${image}`, err => {
                 if (err)
                     console.log(err)
                 resolve(true)
@@ -687,7 +687,7 @@ module.exports.deleteTopic = async ctx => {
     const images = await readTopic.topicImages(id)
     if (images) {
         const jobs = images.map(image => new Promise(async resolve => {
-            fs.unlink(`./img/${image.imageUrl}`, err => {
+            fs.unlink(`img/${image.imageUrl}`, err => {
                 if (err)
                     console.log(err)
                 resolve(true)
@@ -695,7 +695,7 @@ module.exports.deleteTopic = async ctx => {
         }))
         await Promise.all(jobs)
         const jobsForThumb = images.map(image => new Promise(async resolve => {
-            fs.unlink(`./img/thumb/${image.imageUrl}`, err => {
+            fs.unlink(`img/thumb/${image.imageUrl}`, err => {
                 if (err)
                     console.log(err)
                 resolve(true)

@@ -1,3 +1,23 @@
+const { Storage } = require('@google-cloud/storage')
+
+const dotenv = require('dotenv')
+
+dotenv.config()
+
+const { BUCKET_NAME } = process.env
+const storage = new Storage({ keyFilename: 'key.json' })
+
+const uploadFile = async filename => {
+    await storage.bucket(BUCKET_NAME).upload(filename, {
+        gzip: true,
+        destination: filename,
+        metadata: {
+            cacheControl: 'public, max-age=31536000',
+        },
+    })
+    console.log(`${filename} uploaded to ${BUCKET_NAME}.`)
+}
+
 const fs = require('fs')
 const sharp = require('sharp')
 const { execFile } = require('child_process')
@@ -10,7 +30,7 @@ module.exports.createImage = type => async ctx => {
     // ex).webp.mp4 형식 수정
     try {
         if (checker) {
-            fs.readFile(`./img/${filename}`, (err, data) => {
+            fs.readFile(`img/${filename}`, (err, data) => {
                 if (err)
                     return ctx.body = {
                         message: err,
@@ -18,7 +38,7 @@ module.exports.createImage = type => async ctx => {
                     }
                 if (checkerByGIF) {
                     execFile(giflossy, [
-                        '-O3', '--lossy=80', '-o', `./img/${filename}`, `./img/${filename}`
+                        '-O3', '--lossy=80', '-o', `img/${filename}`, `img/${filename}`
                     ], err => {
                         if (err)
                             return ctx.body = {
@@ -27,9 +47,13 @@ module.exports.createImage = type => async ctx => {
                             }
                         if (type === 'icon')
                             fs.writeFile(
-                                `./icon/${filename}`,
+                                `icon/${filename}`,
                                 data,
-                                () => fs.unlink(`./img/${filename}`, () => { })
+                                () => fs.unlink(`img/${filename}`, async () => {
+
+                                    await uploadFile(`img/${filename}`)
+
+                                })
                             )
                     })
                 } else {
@@ -40,7 +64,11 @@ module.exports.createImage = type => async ctx => {
                             .then(
                                 metadata => image.resize(Math.min(metadata.width, 960)).withMetadata().rotate().jpeg(80).toBuffer()
                             )
-                            .then(result => fs.writeFile(`./img/${filename}`, result, () => { }))
+                            .then(result => fs.writeFile(`img/${filename}`, result, async () => {
+
+                                await uploadFile(`img/${filename}`)
+
+                            }))
                     } else if (type === 'background') {
                         image
                             .metadata()
@@ -48,14 +76,14 @@ module.exports.createImage = type => async ctx => {
                                 metadata => image.resize(Math.min(metadata.width, 960)).jpeg(80).toBuffer()
                             )
                             .then(
-                                result => fs.writeFile(`./background/${filename}`, result, () => fs.unlink(`./img/${filename}`, () => { }))
+                                result => fs.writeFile(`background/${filename}`, result, () => fs.unlink(`img/${filename}`, () => { }))
                             )
                     } else if (type === 'icon') {
                         image
                             .metadata()
                             .then(() => image.resize(23, 23).toBuffer())
                             .then(
-                                result => fs.writeFile(`./icon/${filename}`, result, () => fs.unlink(`./img/${filename}`, () => { }))
+                                result => fs.writeFile(`icon/${filename}`, result, () => fs.unlink(`img/${filename}`, () => { }))
                             )
                     } else if (type === 'pick') {
                         image
@@ -64,14 +92,14 @@ module.exports.createImage = type => async ctx => {
                                 metadata => image.resize(Math.min(metadata.width, 960)).withMetadata().rotate().jpeg(80).toBuffer()
                             )
                             .then(
-                                result => fs.writeFile(`./pick/${filename}`, result, () => fs.unlink(`./img/${filename}`, () => { }))
+                                result => fs.writeFile(`pick/${filename}`, result, () => fs.unlink(`img/${filename}`, () => { }))
                             )
                     } else {
                         image
                             .metadata()
                             .then(() => image.resize(100, 100).withMetadata().rotate().toBuffer())
                             .then(
-                                result => fs.writeFile(`./profile/${filename}`, result, () => fs.unlink(`./img/${filename}`, () => { }))
+                                result => fs.writeFile(`profile/${filename}`, result, () => fs.unlink(`img/${filename}`, () => { }))
                             )
                     }
                 }
@@ -80,13 +108,17 @@ module.exports.createImage = type => async ctx => {
                     thumbnail
                         .metadata()
                         .then(() => thumbnail.resize(100, 100).withMetadata().rotate().toBuffer())
-                        .then(result => fs.writeFile(`./img/thumb/${filename}`, result, () => { }))
+                        .then(result => fs.writeFile(`img/thumb/${filename}`, result, async () => {
+
+                            await uploadFile(`img/thumb/${filename}`)
+
+                        }))
                 } else if (type === 'pick') {
                     const thumbnail = sharp(data)
                     thumbnail
                         .metadata()
                         .then(() => thumbnail.resize(80, 80).withMetadata().rotate().toBuffer())
-                        .then(result => fs.writeFile(`./pick/thumb/${filename}`, result, () => { }))
+                        .then(result => fs.writeFile(`pick/thumb/${filename}`, result, () => { }))
                 }
             })
             ctx.body = {
@@ -94,7 +126,7 @@ module.exports.createImage = type => async ctx => {
                 status: 'ok'
             }
         } else {
-            fs.unlink(`./img/${filename}`, () => { })
+            fs.unlink(`img/${filename}`, () => { })
             ctx.body = {
                 message: 'gif, png, jpg, jpeg, webp만 가능',
                 status: 'fail'
