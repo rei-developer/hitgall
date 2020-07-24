@@ -2,7 +2,7 @@
     <div>
         <h5 @click='shuffle'>
             <font-awesome-icon icon='camera'/>
-            <strong>갤러리</strong>
+            <strong>짤수집</strong>
         </h5>
         <article class='gallery' v-viewer='{ title: false }'>
             <client-only>

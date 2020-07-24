@@ -1,4 +1,4 @@
-const readSave = require('../../database/topic/readSave')
+const readSave = require('../../database/save/readSave')
 
 module.exports.getSaveCounts = async ctx => {
     const counts = await readSave.counts()

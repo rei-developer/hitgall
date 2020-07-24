@@ -58,23 +58,19 @@
         },
         data() {
             return {
-                domain: 'anime',
+                domain: 'all',
                 domainList: [
                     {
-                        text: '애니동',
+                        text: '전체',
+                        value: 'all'
+                    },
+                    {
+                        text: '애갤',
                         value: 'anime'
                     },
-                    {
-                        text: '게임동',
-                        value: 'game'
-                    },
-                    {
-                        text: '넨도동',
-                        value: 'nendo'
-                    },
-                    {
-                        text: '그림동',
-                        value: 'draw'
+                                        {
+                        text: '갤러리 신청',
+                        value: 'request'
                     }
                 ]
             }

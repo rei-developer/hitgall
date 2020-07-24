@@ -19,16 +19,17 @@
                 <li v-shortkey.once='["y"]' @shortkey='move("/gallery")' @click='forceUpdate'>
                     <nuxt-link to='/gallery'>
                         <font-awesome-icon icon='camera'/>
-                        갤러리
+                        짤수집
                     </nuxt-link>
                 </li>
-                <li v-shortkey.once='["a"]' @shortkey='move("/board/anime")' @click='forceUpdate'><nuxt-link to='/board/anime'>애니동</nuxt-link></li>
-                <li v-shortkey.once='["g"]' @shortkey='move("/board/game")' @click='forceUpdate'><nuxt-link to='/board/game'>게임동</nuxt-link></li>
-                <li v-shortkey.once='["f"]' @shortkey='move("/board/nendo")' @click='forceUpdate'><nuxt-link to='/board/nendo'>넨도동</nuxt-link></li>
-                <!-- <li @click='forceUpdate'><nuxt-link to='/board/music'>음악동</nuxt-link></li> -->
-                <li v-shortkey.once='["d"]' @shortkey='move("/board/draw")' @click='forceUpdate'><nuxt-link to='/board/draw'>그림동</nuxt-link></li>
-                <li v-shortkey.once='["n"]' @shortkey='move("/board/news")' @click='forceUpdate'><nuxt-link to='/board/news'>뉴스동</nuxt-link></li>
-                <li v-shortkey.once='["v"]' @shortkey='move("/board/review")' @click='forceUpdate'><nuxt-link to='/board/review'>리뷰동</nuxt-link></li>
+                <li @click='forceUpdate'>
+                    <nuxt-link to='/board/request'>
+                        <font-awesome-icon icon='image'/>
+                        갤러리 신청
+                    </nuxt-link>
+                </li>
+                <li @click='forceUpdate'><nuxt-link to='/board/anime'>애니메이션 갤러리</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/kawai3'>키아나 갤러리</nuxt-link></li>
                 <li v-shortkey.once='["t"]' @shortkey='move("/sticker")' ><nuxt-link to='/sticker'>스티커</nuxt-link></li>
             </ul>
             <!-- login part -->
@@ -64,13 +65,10 @@
             shadow>
             <ul>
                 <li @click='forceUpdate'><nuxt-link to='/hit'>HIT</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/gallery'>갤러리</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/anime'>애니동</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/game'>게임동</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/nendo'>넨도동</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/draw'>그림동</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/news'>뉴스동</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/review'>리뷰동</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/gallery'>짤수집</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/anime'>애니메이션 갤러리</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/kawai3'>키아나 갤러리</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/request'>갤러리 신청</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/notice'>공지사항</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/feedback'>건의사항</nuxt-link></li>
                 <li><nuxt-link to='/sticker'>스티커</nuxt-link></li>
