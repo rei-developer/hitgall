@@ -55,7 +55,7 @@
                     <nuxt-link to='/board/monmusu'>몬무스 갤러리</nuxt-link>
                 </li>
                 <li>
-                    <nuxt-link to='/board/langrisser'>랑그랏사 갤러리</nuxt-link>
+                    <nuxt-link to='/board/langrisser'>랑그릿사 갤러리</nuxt-link>
                 </li>
                 <li>
                     <nuxt-link to='/board/tsukutu'>쯔꾸르 갤러리</nuxt-link>

@@ -38,7 +38,7 @@ module.exports.getBoardName = domain => {
             name = '몬무스 갤러리'
             break
         case 'langrisser':
-            name = '랑그랏사 갤러리'
+            name = '랑그릿사 갤러리'
             break
         case 'tsukutu':
             name = '쯔꾸르 갤러리'

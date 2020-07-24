@@ -215,6 +215,9 @@ module.exports.createTopic = async ctx => {
         poll,
         images
     } = ctx.request.body
+
+console.log(domain)
+
     if (domain === null || domain === '')
         domain = 'anime'
     if (title === '' || content === '<p></p>')

@@ -50,7 +50,7 @@
                                     {{ item.tagAuthor }}
                                 </div>
                                 <div class='sticker' v-if='item.stickerId > 0'>
-                                    <img :src='`/sticker/${item.stickerId}/${item.stickerSelect}`'>
+                                    <img :src='`https://storage.googleapis.com/hitgall/sticker/${item.stickerId}/${item.stickerSelect}`'>
                                 </div>
                                 <span v-html='item.content'/>
                             </div>

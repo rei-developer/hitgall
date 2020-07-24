@@ -301,25 +301,31 @@
 					html: data.topic.content
 				}
 			}
-			const token = store.state.user.isLogged ? store.state.user.token : ''
-            const data = await $axios.$get(
-                `/api/topic/save`,
-                { headers: { 'x-access-token': token } }
-            )
-			if (data.status === 'fail')
-				return console.log(data.message)
+			if (store.state.user.isLogged) {
+				const token = store.state.user.token
+				const data = await $axios.$get(
+					`/api/topic/save`,
+					{ headers: { 'x-access-token': token } }
+				)
+				if (data.status === 'fail')
+					return console.log(data.message)
+				return {
+					domain,
+					categories,
+					form: {
+						color: data.topic.color
+							? '#' + data.topic.color
+							: '',
+						title: data.topic.title,
+						content: data.topic.content,
+						isNotice: data.topic.isNotice > 0
+					},
+					html: data.topic.content
+				}
+			}
 			return {
 				domain,
-				categories,
-				form: {
-					color: data.topic.color
-						? '#' + data.topic.color
-						: '',
-					title: data.topic.title,
-					content: data.topic.content,
-					isNotice: data.topic.isNotice > 0
-				},
-				html: data.topic.content
+				categories
 			}
 		},
         mounted() {
@@ -434,6 +440,9 @@
 					poll: this.poll,
 					images: this.images
 				}
+
+				console.log(this.domain)
+
 				const headers = { 'x-access-token': token }
 				const data = this.id > 0
 					? await this.$axios.$patch(url, form, { headers })
