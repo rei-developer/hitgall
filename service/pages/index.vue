@@ -6,15 +6,11 @@
             </div>
             <div class='article-box'>
                 <Article domain='anime' :limit='5'/>
-                <Article domain='game' :limit='5'/>
+                <Article domain='kawai3' :limit='5'/>
             </div>
             <div class='article-box'>
-                <Article domain='news' :limit='5'/>
-                <Article domain='review' :limit='5'/>
-            </div>
-            <div class='article-box'>
-                <PhotoArticle domain='nendo' :limit='6'/>
-                <PhotoArticle domain='draw' :limit='6'/>
+                <PhotoArticle domain='anime' :limit='6'/>
+                <PhotoArticle domain='kawai3' :limit='6'/>
             </div>
         </div>
         <div class='articles mobile-only'>
@@ -68,7 +64,7 @@
                         text: '애갤',
                         value: 'anime'
                     },
-                                        {
+                    {
                         text: '갤러리 신청',
                         value: 'request'
                     }

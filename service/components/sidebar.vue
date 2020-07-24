@@ -2,7 +2,7 @@
     <div>
         <article class='best'>
             <h2>
-                <span>애니동 일간베스트</span>
+                <span>HIT</span>
                 <nuxt-link to='/hit'>
                     <font-awesome-icon icon='plus'/>
                 </nuxt-link>
@@ -29,30 +29,18 @@
                 <li>
                     <nuxt-link to='/board/feedback'>건의사항</nuxt-link>
                 </li>
-                <!-- <li>
-                    <nuxt-link to='/anime'>애니 편성표</nuxt-link>
-                </li> -->
+                <li>
+                    <nuxt-link to='/board/request'>갤러리 신청</nuxt-link>
+                </li>
             </ul>
         </article>
         <article class='side'>
             <ul>
                 <li class='active'>
-                    <nuxt-link to='/board/anime'>애니동</nuxt-link>
+                    <nuxt-link to='/board/anime'>애니메이션 갤러리</nuxt-link>
                 </li>
                 <li>
-                    <nuxt-link to='/board/game'>게임동</nuxt-link>
-                </li>
-                <li>
-                    <nuxt-link to='/board/nendo'>넨도동</nuxt-link>
-                </li>
-                <li>
-                    <nuxt-link to='/board/draw'>그림동</nuxt-link>
-                </li>
-                <li>
-                    <nuxt-link to='/board/news'>뉴스동</nuxt-link>
-                </li>
-                <li>
-                    <nuxt-link to='/board/review'>리뷰동</nuxt-link>
+                    <nuxt-link to='/board/kawai3'>키아나 갤러리</nuxt-link>
                 </li>
             </ul>
         </article>

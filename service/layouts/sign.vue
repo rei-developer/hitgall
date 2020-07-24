@@ -12,7 +12,7 @@
         position: fixed;
         width: 100%;
         height: 100%;
-        background-image: url('/background.jpg');
+        // background-image: url('/background.jpg');
         background-size: cover;
         background-repeat: no-repeat;
         background-position-y: -20rem;
