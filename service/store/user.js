@@ -45,6 +45,6 @@ export const mutations = {
     signOut: state => {
         state.token = ''
         state.isLogged = false
-        localStorage.removeItem('token')
+        localStorage.removeItem('tk')
     }
 }

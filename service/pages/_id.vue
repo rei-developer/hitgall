@@ -283,7 +283,7 @@
             },
             async downloadWithAxios(url, name) {
                 await fetch(
-                    `${location.origin}/img/${url}`,
+                    `https://storage.googleapis.com/hitgall/img/${url}`,
                     {
                         headers: { 'Accept': 'image/*', },
                         responseType: 'arraybuffer'

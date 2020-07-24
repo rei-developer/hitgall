@@ -28,7 +28,7 @@
                     <nuxt-link :to='`/${item.id}`'>
                         <div class='content'>
                             <div class='image'>
-                                <img :src='item.imageUrl ? `/img/thumb/${item.imageUrl}` : "/default.png"' @error='imageUrlAlt'>
+                                <img :src='item.imageUrl ? `https://storage.googleapis.com/hitgall/img/thumb/${item.imageUrl}` : "/default.png"' @error='imageUrlAlt'>
                             </div>
                             <div class='subject'>
                                 <span :style='item.color !== "" ? `color: #${item.color}` : ""'>
