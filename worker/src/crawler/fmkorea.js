@@ -74,7 +74,7 @@ const getTopic = async () => {
     if (topics.length < 1)
         return getList()
     const no = topics[0]
-    const url = `https://www.fmkorea.com/best/${options.board}/${no}`
+    const url = `https://www.fmkorea.com/best/${options.board}/3003471038`
     console.log(url)
     const exist = await readSave.isExist(url)
     if (exist) {
@@ -116,9 +116,9 @@ const getTopic = async () => {
             }
         })
         .then(async data => {
-            // const success = await saveTopic(data.topic, data.images, url)
-            // if (!success)
-            //     return console.log('failed...')
+            const success = await saveTopic(data.topic, data.images, url)
+            if (!success)
+                return console.log('failed...')
             topics.shift()
             const duration = options.timeout + data.topic.content.length
             console.log(`Re-activate in ${(duration / 1000).toFixed(1)} ms...`)
@@ -167,13 +167,13 @@ const downloadImage = (no, item, index) => {
         const content = Buffer.from(body, 'base64')
         !fs.existsSync(path) && fs.mkdirSync(path)
         fs.writeFile(path + filename, content, () => {
-            // await uploadFile(path + filename)
+            await uploadFile(path + filename)
             if (index < 1) {
                 const thumbnail = sharp(content)
                 thumbnail.metadata()
                     .then(() => thumbnail.resize(80, 80).toBuffer())
                     .then(result => fs.writeFile(`${path}/thumb.png`, result, async () => {
-                        // await uploadFile(`${path}/thumb.png`)
+                        await uploadFile(`${path}/thumb.png`)
                     }))
             }
         })
@@ -183,20 +183,15 @@ const downloadImage = (no, item, index) => {
 const changeImageUrl = (no, content) => {
     let images = []
     let array
-    const regex = /<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>/gim
-    array = content.match(regex)
+    const regex1 = /src="\/\/image.fmkorea.com\/classes\/lazy\/img\/transparent.gif" data-original/gim
+    content = content.replace(regex1, 'src')
+    const regex2 = /<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>/gim
+    array = content.match(regex2)
     if (array) {
         if (array.length > 0) {
             array.map(item => {
-                console.log(item)
-
-                // const regex = /lazy\/img\/transparent.gif/gim
-                // if (content.match(regex))
-                //     console.log(content)
-                
-
-                const regex2 = /((http|https):\/\/)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gim
-                const url = `https://${item.match(regex2)[0]}`
+                const regex3 = /((http|https):\/\/)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gim
+                const url = `https://${item.match(regex3)[0]}`
                 const uuid = v5(`${Date.now()}-${url}`, MY_NAMESPACE)
                 content = content.replace(item, `[img src="/save/img/${options.type}-${no}/${uuid}.gif"]`)
                 images.push({
