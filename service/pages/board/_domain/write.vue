@@ -546,7 +546,7 @@
                 return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
             },
             imageUrlAlt(event) {
-                event.target.src = 'http://localhost:3000/default.png'
+                event.target.src = '/default.png'
             },
             toast(text, variant = 'default') {
                 this.$bvToast.toast(text, {

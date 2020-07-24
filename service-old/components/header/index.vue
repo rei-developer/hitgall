@@ -91,7 +91,7 @@
                 this.$router.push({ path })
             },
             imageUrlAlt(event) {
-                event.target.src = 'http://localhost:3000/default.png'
+                event.target.src = '/default.png'
             },
             signOut() {
                 if (!this.$store.state.user.isLogged)

@@ -80,7 +80,7 @@
                 }, 60000)
             },
             imageUrlAlt(event) {
-                event.target.src = 'http://localhost:3000/default.png'
+                event.target.src = '/default.png'
             }
         }
     }
