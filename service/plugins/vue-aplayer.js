@@ -2,6 +2,6 @@ import Vue from 'vue'
 import APlayer from '@moefe/vue-aplayer'
 
 Vue.use(APlayer, {
-    defaultCover: 'https://github.com/u3u.png',
+    defaultCover: 'http://localhost:3000/default.png',
     productionTip: false
 })

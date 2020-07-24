@@ -11,7 +11,7 @@
                 <font-awesome-icon icon='arrow-up'/>
                 인기글
             </b-button> -->
-			<span v-if='$store.state.user.isLogged'>
+			<span>
 				<nuxt-link :to='`/board/${domain}/write`'>
 					<b-button
 						class='float-right'
@@ -90,8 +90,8 @@
                                 </div>
                             </div>
                             <div class='author'>
-                                <img :src='`/level/${item.level}.png`'>
-                                <img class='icon' :src='`/icon/${item.icon}`' v-if='item.icon !== ""'>
+                                <!-- <img :src='`/level/${item.level}.png`'> -->
+                                <img class='icon' :src='`/icon/${item.icon}`' v-if='item.icon !== null && item.icon !== ""'>
                                 {{ item.author }}
                             </div>
                             <div>{{ getCreated(item.created) }}</div>
@@ -132,8 +132,8 @@
                                 </div>
                             </div>
                             <div class='author'>
-                                <img :src='`/level/${item.level}.png`'>
-                                <img class='icon' :src='`/icon/${item.icon}`' v-if='item.icon !== ""'>
+                                <!-- <img :src='`/level/${item.level}.png`'> -->
+                                <img class='icon' :src='`/icon/${item.icon}`' v-if='item.icon !== null && item.icon !== ""'>
                                 {{ item.author }}
                             </div>
                             <div>{{ getCreated(item.created) }}</div>
@@ -161,8 +161,8 @@
                                     </span>
                                     <span class='newest' v-if='$moment().diff($moment(item.created), "days") <= 1'>N</span>
                                     <div class='author'>
-                                        <img :src='`/level/${item.level}.png`'>
-                                        <img class='icon' :src='`/icon/${item.icon}`' v-if='item.icon !== ""'>
+                                        <!-- <img :src='`/level/${item.level}.png`'> -->
+                                        <img class='icon' :src='`/icon/${item.icon}`' v-if='item.icon !== null && item.icon !== ""'>
                                         {{ item.author }}
                                     </div>
                                     <div class='info'>
@@ -219,8 +219,8 @@
                                         </span>
                                     </div>
                                     <div class='author'>
-                                        <img :src='`/level/${item.level}.png`'>
-                                        <img class='icon' :src='`/icon/${item.icon}`' v-if='item.icon !== ""'>
+                                        <!-- <img :src='`/level/${item.level}.png`'> -->
+                                        <img class='icon' :src='`/icon/${item.icon}`' v-if='item.icon !== null && item.icon !== ""'>
                                         {{ item.author }}
                                     </div>
                                 </div>
@@ -255,7 +255,7 @@
                     <font-awesome-icon icon='arrow-up'/>
                     인기글
                 </b-button> -->
-                <div v-if='$store.state.user.isLogged'>
+                <div>
                     <nuxt-link :to='`/board/${domain}/write`'>
                         <b-button
                             size='sm'
@@ -446,7 +446,7 @@
                 return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
             },
             imageUrlAlt(event) {
-                event.target.src = 'https://github.com/u3u.png'
+                event.target.src = 'http://localhost:3000/default.png'
             },
             toast(text, variant = 'default') {
                 this.$bvToast.toast(text, {

@@ -203,11 +203,8 @@ module.exports.getSavedContent = async ctx => {
 }
 
 module.exports.createTopic = async ctx => {
-    const user = await User.getUser(ctx.get('x-access-token'))
-    if (!user)
-        return ctx.body = {
-            status: 'fail'
-        }
+    const token = ctx.get('x-access-token')
+    const user = token !== '' ? await User.getUser(token) : null
     let {
         domain,
         isNotice,
@@ -227,12 +224,25 @@ module.exports.createTopic = async ctx => {
     const isAdminOnly = await readBoard.isAdminOnly(domain)
     if (isAdminOnly < 0)
         return
-    if (user.isAdmin < isAdminOnly)
-        return ctx.body = {
-            message: '권한이 없습니다.',
-            status: 'fail'
+    if (user) {
+        if (user.isAdmin < isAdminOnly)
+            return ctx.body = {
+                message: '권한이 없습니다.',
+                status: 'fail'
+            }
+        if (user.isAdmin < 1) {
+            // TODO: 관리자 전용 커스텀
+            if (color !== '')
+                color = ''
+            if (isNotice > 0)
+                isNotice = 0
         }
-    if (user.isAdmin < 1) {
+    } else {
+        if (isAdminOnly > 0)
+            return ctx.body = {
+                message: '권한이 없습니다.',
+                status: 'fail'
+            }
         // TODO: 관리자 전용 커스텀
         if (color !== '')
             color = ''
@@ -246,11 +256,11 @@ module.exports.createTopic = async ctx => {
         ? true
         : false
     const topicId = await createTopic({
-        userId: user.id,
+        userId: user ? user.id : 0,
         boardDomain: domain,
         category,
         color,
-        author: user.nickname,
+        author: user ? user.nickname : 'ㅇㅇ',
         title,
         content,
         ip,
@@ -268,8 +278,10 @@ module.exports.createTopic = async ctx => {
     }
     if (isImage)
         await createTopic.createTopicImages(topicId, domain, images)
-    await deleteTopic.topicSaves(user.id)
-    await User.setUpPoint(user, 10)
+    if (user) {
+        await deleteTopic.topicSaves(user.id)
+        await User.setUpPoint(user, 10)
+    }
     await socket.newTopic(global.io, topicId, domain, title)
     ctx.body = {
         topicId,
@@ -319,11 +331,8 @@ module.exports.createTopicSave = async ctx => {
 }
 
 module.exports.createPost = async ctx => {
-    const user = await User.getUser(ctx.get('x-access-token'))
-    if (!user)
-        return ctx.body = {
-            status: 'fail'
-        }
+    const token = ctx.get('x-access-token')
+    const user = token !== '' ? await User.getUser(token) : null
     let {
         topicId,
         topicUserId,
@@ -340,11 +349,11 @@ module.exports.createPost = async ctx => {
     const ip = ctx.get('x-real-ip')
     const header = ctx.header['user-agent']
     const postId = await createPost({
-        userId: user.id,
+        userId: user ? user.id : 0,
         topicId,
         postRootId,
         postParentId,
-        author: user.nickname,
+        author: user ? user.nickname : 'ㅇㅇ',
         content,
         stickerId: sticker.id,
         stickerSelect: sticker.select,
@@ -354,17 +363,19 @@ module.exports.createPost = async ctx => {
     const postsCount = await readPost.count(topicId)
     const posts = await readPost.posts(topicId, 0, 100)
     await createPost.createPostCounts(postId)
-    await User.setUpPoint(user, 5)
-    const items = []
-    if (user.id !== topicUserId)
-        items.push(topicUserId)
-    if (postUserId && user.id !== postUserId && topicUserId !== postUserId && postUserId > 0)
-        items.push(postUserId)
-    const jobs = items.map(receiver => new Promise(async resolve => {
-        await createNotice(receiver, topicId, postId)
-        resolve(true)
-    }))
-    await Promise.all(jobs)
+    if (user) {
+        await User.setUpPoint(user, 5)
+        const items = []
+        if (user.id !== topicUserId)
+            items.push(topicUserId)
+        if (postUserId && user.id !== postUserId && topicUserId !== postUserId && postUserId > 0)
+            items.push(postUserId)
+        const jobs = items.map(receiver => new Promise(async resolve => {
+            await createNotice(receiver, topicId, postId)
+            resolve(true)
+        }))
+        await Promise.all(jobs)
+    }
     await socket.newPost(global.io, topicId)
     ctx.body = {
         postId,

@@ -104,7 +104,7 @@
                 }, 60000)
             },
             imageUrlAlt(event) {
-                event.target.src = 'https://github.com/u3u.png'
+                event.target.src = 'http://localhost:3000/default.png'
             }
         }
     }

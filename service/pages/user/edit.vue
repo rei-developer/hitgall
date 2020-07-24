@@ -156,6 +156,13 @@
 						block>
 						프로필 편집
 					</b-button>
+					<b-button
+						type='submit'
+						variant='primary'
+						@click='signOut'
+						block>
+						로그아웃
+					</b-button>
 				</b-form>
 			</div>
 		</b-overlay>
@@ -308,6 +315,12 @@
 					this.$store.commit('user/setNickname', this.nickname)
 				this.$store.commit('setLoading')
 			},
+			signOut() {
+                if (!this.$store.state.user.isLogged)
+                    return
+				this.$store.commit('user/signOut')
+				this.$router.push({ path: '/' })
+            },
 			numberWithCommas(x) {
 				return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 			},

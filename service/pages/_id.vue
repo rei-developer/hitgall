@@ -27,7 +27,7 @@
                 <font-awesome-icon icon='arrow-up'/>
                 인기글
             </b-button> -->
-            <span v-if='$store.state.user.isLogged'>
+            <span>
                 <nuxt-link :to='`/board/${topic.boardDomain}/write`'>
                     <b-button
                         class='float-right'
@@ -65,8 +65,8 @@
                     </div>
                 </div>
                 <div class='author'>
-                    <img :src='`/level/${topic.level}.png`'>
-                    <img class='icon' :src='`/icon/${topic.icon}`' v-if='topic.icon !== ""'>
+                    <!-- <img :src='`/level/${topic.level}.png`'> -->
+                    <img class='icon' :src='`/icon/${topic.icon}`' v-if='topic.icon !== null && topic.icon !== ""'>
                     {{ topic.author }}
                 </div>
                 <div class='info'>
@@ -74,7 +74,7 @@
                         <span class='desktop-only'>조회 <strong>{{ numberWithCommas(topic.hits) }}</strong></span>
                         <span class='desktop-only'>댓글 <strong>1</strong></span>
                         <span>힛게로 <strong>{{ numberWithCommas(topic.likes) }}</strong></span>
-                        <span>씹선비 <strong>{{ numberWithCommas(topic.hates) }}</strong></span>
+                        <span>비추천 <strong>{{ numberWithCommas(topic.hates) }}</strong></span>
                     </div>
                     <div>
                         <span @click='copyLink(`https://www.hitgall.com/{{ id }}`)'>https://www.hitgall.com/{{ id }}</span>
@@ -92,7 +92,7 @@
                 </div>
                 <div class='hates' @click='votes(false)'>
                     <div/>
-                    <div>씹선비<span>{{ numberWithCommas(topic.hates) }}</span></div>
+                    <div>비추천<span>{{ numberWithCommas(topic.hates) }}</span></div>
                 </div>
                 <div class='qrcode'>
                     <client-only>
@@ -338,7 +338,7 @@
                 return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
             },
             imageUrlAlt(event) {
-                event.target.src = 'https://github.com/u3u.png'
+                event.target.src = 'http://localhost:3000/default.png'
             },
             playSound(sound) {
                 if (!sound)

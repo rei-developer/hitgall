@@ -1,6 +1,6 @@
 <template>
     <article class='comment-write'>
-        <div v-if='$store.state.user.isLogged'>
+        <div>
             <StickerInventory
                 v-on:use='use'
                 v-on:close='close'
@@ -13,7 +13,7 @@
                 <div class='label'>에게 대댓글 작성</div>
             </div>
             <div class='content'>
-                <div class='profile desktop-only'>
+                <div class='profile desktop-only' v-if='$store.state.user.isLogged'>
                     <img :src='$store.state.user.profileImageUrl' @error='imageUrlAlt'>
                 </div>
                 <div class='write-box'>
@@ -41,7 +41,7 @@
             <div class='footer'>
                 <div class='sticker'
                     @click='clear'
-                    v-if='stickers.sticker'>
+                    v-if='stickers.sticker && $store.state.user.isLogged'>
                     <div class='item'>
                         <div class='image'>
                             <img :src='`/sticker/${stickers.sticker.id}/${stickers.select}.${stickers.sticker.ext}`' @error='imageUrlAlt'>
@@ -52,13 +52,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div v-else>
-            <div class='signin-box'>
-                <nuxt-link to='/signin'>
-                    계정이 있으시다면 로그인하세요
-                </nuxt-link>
             </div>
         </div>
     </article>
@@ -87,9 +80,9 @@
                     return
                 if (!this.stickers.sticker && this.content === '')
                     return this.toast('내용을 입력하세요.', 'danger')
-                if (!this.$store.state.user.isLogged)
-                    return this.toast('로그인하세요.', 'warning')
-                const token = this.$store.state.user.token
+                // if (!this.$store.state.user.isLogged)
+                    // return this.toast('로그인하세요.', 'warning')
+                const token = this.$store.state.user.token || ''
                 this.loading = true
                 let result
                 if (this.edit) {
@@ -151,7 +144,7 @@
                 }
             },
             imageUrlAlt(event) {
-                event.target.src = 'https://github.com/u3u.png'
+                event.target.src = 'http://localhost:3000/default.png'
             },
             toast(text, variant = 'default') {
                 this.$bvToast.toast(text, {

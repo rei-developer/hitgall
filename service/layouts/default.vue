@@ -35,7 +35,7 @@
             <aside/>
         </footer>
         <!-- music player -->
-        <Aplayer v-if='$store.state.user.isLogged && ( $store.state.user.level > 1 || $store.state.user.point > 300 || $store.state.user.isAdmin > 0 )' />
+        <!-- <Aplayer v-if='$store.state.user.isLogged && ( $store.state.user.level > 1 || $store.state.user.point > 300 || $store.state.user.isAdmin > 0 )' /> -->
     </div>
 </template>
 
@@ -44,7 +44,7 @@
     import Header from '~/components/header'
     import Sidebar from '~/components/sidebar.vue'
     import Footer from '~/components/footer.vue'
-    import Aplayer from '~/components/aplayer.vue'
+    // import Aplayer from '~/components/aplayer.vue'
     
     export default {
         components: {
@@ -52,33 +52,33 @@
             Header,
             Sidebar,
             Footer,
-            Aplayer
+            // Aplayer
         },
         data() {
             return {
                 ver: {
                     backend: 0,
-                    frontend: 334
+                    frontend: 335
                 }
             }
         },
         beforeMount() {
-            this.$socket.on('newBest', data => {
-                this.$toast(`[HIT] ${data.title}`, {
-                    timeout: 5000,
-                    icon: false,
-                    onClick: () => this.move(data)
-                })
-                this.playSound('/bb1.mp3')
-            })
-            this.$socket.on('newTopic', data => {
-                this.$toast(data.title, {
-                    timeout: 5000,
-                    icon: false,
-                    onClick: () => this.move(data)
-                })
-                this.playSound('/bb1.mp3')
-            })
+            // this.$socket.on('newBest', data => {
+            //     this.$toast(`[HIT] ${data.title}`, {
+            //         timeout: 5000,
+            //         icon: false,
+            //         onClick: () => this.move(data)
+            //     })
+            //     this.playSound('/bb1.mp3')
+            // })
+            // this.$socket.on('newTopic', data => {
+            //     this.$toast(data.title, {
+            //         timeout: 5000,
+            //         icon: false,
+            //         onClick: () => this.move(data)
+            //     })
+            //     this.playSound('/bb1.mp3')
+            // })
         },
         mounted() {
             this.checkVersion()

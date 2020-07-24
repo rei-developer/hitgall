@@ -91,7 +91,7 @@
                 return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
             },
             imageUrlAlt(event) {
-                event.target.src = 'https://github.com/u3u.png'
+                event.target.src = 'http://localhost:3000/default.png'
             },
             playSound(sound) {
                 if (!sound)

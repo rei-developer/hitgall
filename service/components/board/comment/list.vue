@@ -39,8 +39,8 @@
                         </div>
                         <div class='content'>
                             <div>
-                                <img :src='`/level/${item.level}.png`'>
-                                <img class='icon' :src='`/icon/${item.icon}`' v-if='item.icon !== ""'>
+                                <!-- <img :src='`/level/${item.level}.png`'> -->
+                                <img class='icon' :src='`/icon/${item.icon}`' v-if='item.icon !== null && item.icon !== ""'>
                                 <span class='author'>{{ item.author }}</span>
                                 <span class='regdate'>{{ $moment(item.updated).fromNow() }}</span>
                             </div>
@@ -284,7 +284,7 @@
                 return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
             },
             imageUrlAlt(event) {
-                event.target.src = 'https://github.com/u3u.png'
+                event.target.src = 'http://localhost:3000/default.png'
             },
             playSound(sound) {
                 if (!sound)

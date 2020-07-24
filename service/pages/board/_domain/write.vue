@@ -402,8 +402,8 @@
 			async submit() {
 				if (this.loading)
 					return
-				if (!this.$store.state.user.isLogged)
-					return this.toast('로그인하세요.', 'warning')
+				// if (!this.$store.state.user.isLogged)
+				// 	return this.toast('로그인하세요.', 'warning')
 				if (this.form.title === '')
 					return this.toast('제목을 입력하세요.', 'danger')
 				if (this.html === '' || this.html === '<p></p>')
@@ -420,7 +420,7 @@
 				await this.imageUploadToServer(this.$refs.dropzone.getAcceptedFiles())
 			},
 			async write() {
-				const token = this.$store.state.user.token
+				const token = this.$store.state.user.token || ''
 				const url = this.id > 0
 					? `/api/topic/edit/${this.id}`
 					: '/api/topic/write'
@@ -447,7 +447,7 @@
 			async autoWrite() {
 				if (this.loading || !this.$store.state.user.isLogged || (this.form.title === '' && (this.html === '' || this.html === '<p></p>')))
 					return
-				const token = this.$store.state.user.token
+				const token = this.$store.state.user.token || ''
 				const data = await this.$axios.$post(
 					'/api/topic/write/save',
 					{
@@ -537,7 +537,8 @@
 				const update = setTimeout(async () => {
 					if (this.$nuxt.$route.name !== 'board-domain-write')
 						return clearTimeout(update)
-                    this.autoWrite()
+					if (this.$store.state.user.isLogged)
+                    	this.autoWrite()
 					this.realtimeUpdate()
                 }, 30000)
             },
@@ -545,7 +546,7 @@
                 return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
             },
             imageUrlAlt(event) {
-                event.target.src = 'https://github.com/u3u.png'
+                event.target.src = 'http://localhost:3000/default.png'
             },
             toast(text, variant = 'default') {
                 this.$bvToast.toast(text, {

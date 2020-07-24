@@ -41,7 +41,7 @@
                         <div class='profile'>
                             <img :src='$store.state.user.profileImageUrl' @error='imageUrlAlt'>
                         </div>
-                        <img :src='`/level/${$store.state.user.level}.png`'>
+                        <!-- <img :src='`/level/${$store.state.user.level}.png`'> -->
                         <img :src='`/icon/${$store.state.user.icon}`' v-if='$store.state.user.icon !== ""'>
                         <strong>{{ $store.state.user.nickname }}</strong>
                     </nuxt-link>
@@ -100,7 +100,7 @@
                 this.$router.push({ path })
             },
             imageUrlAlt(event) {
-                event.target.src = 'https://github.com/u3u.png'
+                event.target.src = 'http://localhost:3000/default.png'
             },
             signOut() {
                 if (!this.$store.state.user.isLogged)
