@@ -72,6 +72,16 @@ module.exports.adminBoardBlinds = async domain => {
     return result
 }
 
+module.exports.adminBoardRemoveLogs = async domain => {
+    const result = await pool.query(
+        `SELECT * FROM RemoveLogs WHERE domain = ?`,
+        [domain]
+    )
+    if (result.length < 1)
+        return false
+    return result
+}
+
 module.exports.isAdminOnly = async domain => {
     const result = await pool.query(
         'SELECT isAdminOnly FROM Boards WHERE domain = ?',

@@ -189,8 +189,8 @@
 							<div>처리일</div>
 							<div>처리자</div>
 						</h6>
-						<ul v-if='blinds.length > 0'>
-							<li v-for='(item, index) in blinds' :key='index'>
+						<ul v-if='removes.length > 0'>
+							<li v-for='(item, index) in removes' :key='index'>
 								<div>
 									<div>{{ item.id }}</div>
 									<div>{{ item.author }}</div>
@@ -241,7 +241,14 @@
 					description: '',
 					blockDate: null,
 					created: null
-				},
+                },
+                removes: {
+                    id: 0,
+					author: '',
+					ip: '',
+					description: '',
+					created: null
+                },
                 menu: 'default',
                 menuList: [
                     {
@@ -272,6 +279,9 @@
 				switch (this.menu) {
                 case 'blind':
                     this.getBlinds()
+                    break
+                case 'remove':
+                    this.getRemoves()
                     break
 				default:
                     this.getData()
@@ -314,6 +324,22 @@
                     }
                 if(data.blinds)
                     this.blinds = data.blinds
+            },
+            async getRemoves() {
+                const domain = this.$route.params.domain || ''
+                const token = this.$store.state.user.isLogged ? this.$store.state.user.token : ''
+                const data = await this.$axios.$get(
+                    `/api/board/admin/${domain}/remove/list`,
+                    { headers: { 'x-access-token': token } }
+                )
+                if (data.status === 'fail')
+                    this.error = {
+                        state: true,
+                        title: '오류가 발생했습니다.',
+                        content: data.message
+                    }
+                if(data.removes)
+                    this.removes = data.removes
             },
             unblock: async function(ip) {
    				const domain = this.$route.params.domain || ''

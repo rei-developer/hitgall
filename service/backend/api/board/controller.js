@@ -67,6 +67,31 @@ module.exports.getAdminBoardBlinds = async ctx => {
     }
 }
 
+module.exports.getAdminBoardRemoveLogs = async ctx => {
+    const user = await User.getUser(ctx.get('x-access-token'))
+    if (!user)
+        return ctx.body = {
+            message: '접근할 수 없습니다.',
+            status: 'fail'
+        }
+    const { domain } = ctx.params
+    if (!domain || domain === '')
+        return ctx.body = {
+            message: '존재하지 않는 갤러리입니다.',
+            status: 'fail'
+        }
+    const level = await readBoard.adminBoardManagerLevel(user.id, domain)
+    if (!level && user.isAdmin < 1)
+        return ctx.body = {
+            message: '권한이 없습니다.',
+            status: 'fail'
+        }
+    const removes = await readBoard.adminBoardRemoveLogs(domain)
+    ctx.body = {
+        removes
+    }
+}
+
 module.exports.getAdminBoardInfo = async ctx => {
     const user = await User.getUser(ctx.get('x-access-token'))
     if (!user)
