@@ -75,7 +75,7 @@
         },
         mounted() {
             this.getData()
-            this.realtimeUpdate()
+            // this.realtimeUpdate()
         },
         methods: {
             getBoardName(domain) {

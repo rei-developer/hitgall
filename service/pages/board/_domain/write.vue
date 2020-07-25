@@ -197,7 +197,7 @@
 						<font-awesome-icon icon='image'/>
 						이미지 첨부
 					</h3>
-					<p class='subtitle'>이곳에 이미지를 드롭하세요...</p>
+					<p class='subtitle'>이곳에 이미지를 드롭하세요... (짤당 10MB)</p>
 				</div>
 			</dropzone>
 			<b-button-group class='submit'>
@@ -475,7 +475,7 @@
 				if (index >= files.length)
 					return await this.write()
 				const file = files[index]
-				const LIMITS = 10485760
+				const LIMITS = 15360000
 				const formData = new FormData()
 				formData.append('type', 'file')
 				formData.append('image', file, file.name)
