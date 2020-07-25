@@ -53,6 +53,9 @@ module.exports = {
 	*/
 	buildModules: [
 		'@nuxtjs/eslint-module',
+		['@nuxtjs/google-analytics', {
+			id: 'UA-122960304-1'
+		}]
 	],
 	/*
 	** Nuxt.js modules
