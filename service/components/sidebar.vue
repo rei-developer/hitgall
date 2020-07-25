@@ -46,6 +46,9 @@
                     <nuxt-link to='/board/lastorigin'>라스트 오리진 갤러리</nuxt-link>
                 </li>
                 <li @click='forceUpdate'>
+                    <nuxt-link to='/board/gfl'>소녀전선 갤러리</nuxt-link>
+                </li>
+                <li @click='forceUpdate'>
                     <nuxt-link to='/board/koikatsu'>코이카츠 갤러리</nuxt-link>
                 </li>
                 <li @click='forceUpdate'>

@@ -52,6 +52,9 @@ module.exports.getBoardName = domain => {
         case 'yandere':
             name = '얀데레 스위치 갤러리'
             break
+        case 'gfl':
+            name = '소녀전선 갤러리'
+            break
         default:
             name = domain + ' 갤러리'
             break
