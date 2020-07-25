@@ -88,7 +88,7 @@ module.exports.getTopics = async ctx => {
         notices = notices.map(item => {
             const ip = item.ip.split('.')
             if (ip && ip.length >= 3)
-                item.ip = `${ip[0]}.${ip[1]}.*.*`
+                item.ip = `${ip[0]}.${ip[1]}`
             else
                 item.ip = ''
             return item
@@ -99,7 +99,7 @@ module.exports.getTopics = async ctx => {
         topics = topics.map(item => {
             const ip = item.ip.split('.')
             if (ip && ip.length >= 3)
-                item.ip = `${ip[0]}.${ip[1]}.*.*`
+                item.ip = `${ip[0]}.${ip[1]}`
             else
                 item.ip = ''
             return item
@@ -151,7 +151,7 @@ module.exports.getPosts = async ctx => {
         posts = posts.map(item => {
             const ip = item.ip.split('.')
             if (ip && ip.length >= 3)
-                item.ip = `${ip[0]}.${ip[1]}.*.*`
+                item.ip = `${ip[0]}.${ip[1]}`
             else
                 item.ip = ''
             return item
@@ -216,7 +216,7 @@ module.exports.getContent = async ctx => {
         }
     const ip = topic.ip.split('.')
     if (ip && ip.length >= 3)
-        topic.ip = `${ip[0]}.${ip[1]}.*.*`
+        topic.ip = `${ip[0]}.${ip[1]}`
     else
         topic.ip = ''
     topic.header = ''
