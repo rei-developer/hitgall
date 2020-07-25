@@ -35,6 +35,7 @@
                     </nuxt-link>
                 </li>
                 <li @click='forceUpdate'><nuxt-link to='/board/request'>갤러리 개설 신청</nuxt-link></li>
+                <li v-if='$store.state.user.isLogged'><nuxt-link to='/board/admin'>갤러리 관리</nuxt-link></li>
             </ul>
             <!-- login part -->
             <ul class='right'>
@@ -85,6 +86,7 @@
                 <li @click='forceUpdate'><nuxt-link to='/board/notice'>공지사항</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/feedback'>건의사항</nuxt-link></li>
                 <li><nuxt-link to='/sticker'>힛갤콘</nuxt-link></li>
+                <li><nuxt-link to='/board/admin'>갤러리 관리</nuxt-link></li>
             </ul>
         </b-sidebar>
     </div>

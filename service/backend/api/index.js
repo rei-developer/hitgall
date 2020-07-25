@@ -1,5 +1,6 @@
 const Router = require('koa-router')
 const auth = require('./auth')
+const board = require('./board')
 const poll = require('./poll')
 const cloud = require('./cloud')
 const icon = require('./icon')
@@ -9,7 +10,7 @@ const sticker = require('./sticker')
 const topic = require('./topic')
 const save = require('./save')
 
-const VERSION = 341
+const VERSION = 342
 
 const app = new Router()
 
@@ -18,6 +19,7 @@ app.get('/version', ctx => ctx.body = {
     status: 'ok'
 })
 app.use('/auth', auth.routes())
+app.use('/board', board.routes())
 app.use('/poll', poll.routes())
 app.use('/cloud', cloud.routes())
 app.use('/icon', icon.routes())
