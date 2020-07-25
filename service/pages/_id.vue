@@ -258,8 +258,6 @@
                     this.$store.commit('setLoading')
                     return this.toast(data.message || '오류가 발생했습니다.', 'danger')
                 }
-                if (!flag)
-                    this.playSound('/hates.mp3')
                 data.move === 'BEST' ? this.toast('HIT 게시판으로 이전되었습니다!', 'primary') : this.toast('투표했습니다.', 'success')
                 this.$store.commit('setLoading')
             },

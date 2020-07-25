@@ -36,7 +36,7 @@
         </article>
         <article class='side'>
             <ul>
-                <li class='active' @click='forceUpdate'>
+                <li @click='forceUpdate'>
                     <nuxt-link to='/board/girl'>연예 갤러리</nuxt-link>
                 </li>
                 <li @click='forceUpdate'>
@@ -44,6 +44,9 @@
                 </li>
                 <li @click='forceUpdate'>
                     <nuxt-link to='/board/lastorigin'>라스트 오리진 갤러리</nuxt-link>
+                </li>
+                <li @click='forceUpdate'>
+                    <nuxt-link to='/board/koikatsu'>코이카츠 갤러리</nuxt-link>
                 </li>
                 <li @click='forceUpdate'>
                     <nuxt-link to='/board/skyrim'>스카이림 갤러리</nuxt-link>
@@ -64,7 +67,7 @@
                     <nuxt-link to='/board/counterside'>카운터사이드 갤러리</nuxt-link>
                 </li>
                 <li @click='forceUpdate'>
-                    <nuxt-link to='/board/yandere'>얀데레 스위치 갤러리</nuxt-link>
+                    <nuxt-link to='/board/yandere'>얀데레 갤러리</nuxt-link>
                 </li>
             </ul>
         </article>

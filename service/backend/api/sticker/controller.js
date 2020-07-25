@@ -88,7 +88,12 @@ module.exports.createInventoryItem = async ctx => {
             .format('YYYY-MM-DD HH:mm:ss')
         await createSticker.inventoryItem(user.id, id, date)
     }
-    await User.setUpPoint(user, -(sticker.price * buyNum))
+    try {
+        await User.setUpPoint(user, -(sticker.price * buyNum))
+    } catch (e) {
+        console.log(e)
+        console.log(" 이거 뜨면 스티커 오류다 ")
+    }
     ctx.body = {
         date,
         status: 'ok'

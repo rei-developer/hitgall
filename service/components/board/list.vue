@@ -37,20 +37,22 @@
                 name='radios-btn-default'/>
         </b-form-group>
         <article class='topic-list'>
-            <div class='loading-bar'>
-                <div class='subject'>{{ getBoardName(domain) }}</div>
-                <div class='counter'>
-                    <strong>{{ numberWithCommas(counts.count) }}</strong> (오늘 {{ counts.today }})
+            <nuxt-link :to='`/board/${domain}`'>
+                <div class='loading-bar' @click='forceUpdate'>
+                    <div class='subject'>{{ getBoardName(domain) }}</div>
+                    <div class='counter'>
+                        <strong>{{ numberWithCommas(counts.count) }}</strong> (오늘 {{ counts.today }})
+                    </div>
+                    <client-only>
+                        <ScaleLoader
+                            :height='16'
+                            :width='4'
+                            magin='2px'
+                            color='#fff'
+                            v-if='loading'/>
+                    </client-only>
                 </div>
-                <client-only>
-                    <ScaleLoader
-                        :height='16'
-                        :width='4'
-                        magin='2px'
-                        color='#fff'
-                        v-if='loading'/>
-                </client-only>
-            </div>
+            </nuxt-link>
             <div class='desktop-only'>
                 <h6>
                     <div>#</div>
@@ -477,36 +479,38 @@
     @primary: #30425f;
     
     article.topic-list {
-        > .loading-bar {
-            height: 32px;
-            border-bottom: 1px solid rgba(0, 0, 0, .2);
-            border-radius: 10px 10px 0 0;
-            background-color: @primary;
-            position: relative;
-            > .subject {
-                position: absolute;
-                top: 0;
-                left: 5px;
-                color: #fff;
-                font-size: 21px;
-                font-weight: 700;
-                text-shadow: #666 1px 1px;
-            }
-            > .counter {
-                position: absolute;
-                top: 6px;
-                right: 6px;
-                padding: 0 10px 1px;
-                color: @primary;
-                font-size: 12px;
-                border-radius: 7px;
-                background-color: #fff;
-                > strong { font-size: 13px }
-            }
-            > div:nth-child(3) {
-                width: 40px;
-                margin: 0 auto;
-                padding-top: 6px;
+        > a {
+            > .loading-bar {
+                height: 32px;
+                border-bottom: 1px solid rgba(0, 0, 0, .2);
+                border-radius: 10px 10px 0 0;
+                background-color: @primary;
+                position: relative;
+                > .subject {
+                    position: absolute;
+                    top: 0;
+                    left: 5px;
+                    color: #fff;
+                    font-size: 21px;
+                    font-weight: 700;
+                    text-shadow: #666 1px 1px;
+                }
+                > .counter {
+                    position: absolute;
+                    top: 6px;
+                    right: 6px;
+                    padding: 0 10px 1px;
+                    color: @primary;
+                    font-size: 12px;
+                    border-radius: 7px;
+                    background-color: #fff;
+                    > strong { font-size: 13px }
+                }
+                > div:nth-child(3) {
+                    width: 40px;
+                    margin: 0 auto;
+                    padding-top: 6px;
+                }
             }
         }
         > .desktop-only {
@@ -560,7 +564,7 @@
                             background-color: #f9f9f9;
                             > .subject > .thumb { visibility: visible }
                         }
-                        &:visited > .subject > div > span:nth-child(1) { color: #AAA }
+                        &:visited > .subject > div > span:nth-child(1) { color: #770088 }
                         > div {
                             padding: .5rem;
                             color: #212529;
@@ -659,7 +663,7 @@
                         color: #333;
                         font-size: 12px;
                         text-decoration: none;
-                        &:visited > .content > .subject { color: #AAA }
+                        &:visited > .content > .subject { color: #770088 }
                         > .content {
                             display: flex;
                             > .image {

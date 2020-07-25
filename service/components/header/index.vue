@@ -16,28 +16,25 @@
                         HIT
                     </nuxt-link>
                 </li>
+                <li @click='forceUpdate'>
+                    <nuxt-link to='/all'>
+                        <font-awesome-icon icon='folder-open'/>
+                        전체글
+                    </nuxt-link>
+                </li>
                 <li v-shortkey.once='["y"]' @shortkey='move("/gallery")' @click='forceUpdate'>
                     <nuxt-link to='/gallery'>
                         <font-awesome-icon icon='camera'/>
-                        짤
+                        짤수집
                     </nuxt-link>
                 </li>
-                <li @click='forceUpdate'>
-                    <nuxt-link to='/board/request'>
-                        <font-awesome-icon icon='image'/>
-                        갤 신청
+                <li v-shortkey.once='["t"]' @shortkey='move("/sticker")' @click='forceUpdate'>
+                    <nuxt-link to='/sticker'>
+                        <font-awesome-icon icon='smile'/>
+                        힛갤콘
                     </nuxt-link>
                 </li>
-                <li @click='forceUpdate'><nuxt-link to='/board/girl'>연예</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/anime'>애니</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/lastorigin'>라스트 오리진</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/skyrim'>스카이림</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/honkai3'>붕괴3</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/monmusu'>몬무스</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/langrisser'>랑그릿사</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/tsukuru'>쯔꾸르</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/counterside'>카운터사이드</nuxt-link></li>
-                <li v-shortkey.once='["t"]' @shortkey='move("/sticker")' ><nuxt-link to='/sticker'>힛갤콘</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/request'>갤러리 개설 신청</nuxt-link></li>
             </ul>
             <!-- login part -->
             <ul class='right'>
@@ -76,13 +73,14 @@
                 <li @click='forceUpdate'><nuxt-link to='/board/girl'>연예 갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/anime'>애니메이션 갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/lastorigin'>라스트 오리진 갤러리</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/koikatsu'>코이카츠 갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/skyrim'>스카이림 갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/honkai3'>붕괴3 갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/monmusu'>몬무스 갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/langrisser'>랑그릿사 갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/tsukuru'>쯔꾸르 갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/counterside'>카운터사이드 갤러리</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/yandere'>얀데레 스위치 갤러리</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/yandere'>얀데레 갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/request'>갤러리 신청</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/notice'>공지사항</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/feedback'>건의사항</nuxt-link></li>

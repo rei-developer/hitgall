@@ -28,6 +28,9 @@ module.exports.getBoardName = domain => {
         case 'lastorigin':
             name = '라스트 오리진 갤러리'
             break
+        case 'koikatsu':
+            name = '코이카츠 갤러리'
+            break
         case 'skyrim':
             name = '스카이림 갤러리'
             break

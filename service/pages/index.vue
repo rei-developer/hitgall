@@ -53,20 +53,12 @@
                         value: 'all'
                     },
                     {
-                        text: '연예',
-                        value: 'girl'
+                        text: '공지사항',
+                        value: 'notice'
                     },
                     {
-                        text: '애니',
-                        value: 'anime'
-                    },
-                    {
-                        text: '키아나',
-                        value: 'kawai3'
-                    },
-                    {
-                        text: '라스트 오리진',
-                        value: 'lastorigin'
+                        text: '건의사항',
+                        value: 'feedback'
                     },
                     {
                         text: '갤러리 신청',
