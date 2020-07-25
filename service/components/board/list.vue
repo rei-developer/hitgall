@@ -123,6 +123,7 @@
                                 <div>
                                     <span :style='item.color !== "" ? `color: #${item.color}` : ""'>
                                         <span class='category' v-if='item.category'>{{ item.category }}</span>
+                                        <img class='icon' src='/star.gif' v-if='item.isBest > 0'>
                                         {{ item.title }}
                                         <!-- <span class='newest' v-if='$moment().diff($moment(item.created), "days") <= 1'>N</span> -->
                                     </span>
@@ -154,39 +155,39 @@
                         v-for='item in notices' :key='item.id'>
                         <nuxt-link :to='`/${item.id}?page=${page}${category !== "" ? "&category=" + category : ""}`'>
                             <div class='content'>
-                                <div class='image'>
-                                    <img :src='item.imageUrl ? `https://storage.googleapis.com/hitgall/img/thumb/${item.imageUrl}` : "/default.png"' @error='imageUrlAlt'>
-                                </div>
                                 <div class='subject'>
                                     <span class='notice'>공지</span>
                                     <span class='category' v-if='item.category'>{{ item.category }}</span>
                                     <span :style='item.color !== "" ? `color: #${item.color}` : ""'>
                                         <strong>{{ item.title }}</strong>
                                     </span>
-                                    <span class='newest' v-if='$moment().diff($moment(item.created), "days") <= 1'>N</span>
+                                    <!-- <span class='newest' v-if='$moment().diff($moment(item.created), "days") <= 1'>N</span> -->
                                     <div class='author'>
-                                        <!-- <img :src='`/level/${item.level}.png`'> -->
-                                        <img class='icon' :src='`/${item.admin ? "admin" : "user" + (item.userId > 0 ? 1 : 0) + (item.boardLevel || 0)}.png`'>
-                                        {{ item.author }}
-                                        <span class='ip' v-if='item.userId < 1 && item.ip !== ""'>({{ item.ip }})</span>
-                                    </div>
-                                    <div class='info'>
-                                        <span>
+                                        <span class='writer'>
+                                            <!-- <img :src='`/level/${item.level}.png`'> -->
+                                            <img class='icon' :src='`/${item.admin ? "admin" : "user" + (item.userId > 0 ? 1 : 0) + (item.boardLevel || 0)}.png`'>
+                                            {{ item.author }}
+                                            <span class='ip' v-if='item.userId < 1 && item.ip !== ""'>({{ item.ip }})</span>
+                                        </span>
+                                        <span class='info'>
                                             <font-awesome-icon icon='history'/>
                                             {{ $moment(item.created).fromNow() }}
                                         </span>
-                                        <span>
+                                        <span class='info'>
                                             <font-awesome-icon icon='eye'/>
                                             {{ numberWithCommas(item.hits) }}
                                         </span>
-                                        <span v-if='item.likes > 0'>
+                                        <span class='info' v-if='item.likes > 0'>
                                             <font-awesome-icon icon='star'/>
                                             {{ numberWithCommas(item.likes) }}
                                         </span>
                                     </div>
                                 </div>
+                                <div class='image' v-if='item.imageUrl'>
+                                    <img :src='`https://storage.googleapis.com/hitgall/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
+                                </div>
                                 <div class='comment'>
-                                    <span :class='item.postsCount >= 5 ? "hot" : ""'>
+                                    <span :class='item.postsCount >= 10 ? "hot" : ""'>
                                         {{ item.postsCount }}
                                     </span>
                                 </div>
@@ -200,39 +201,40 @@
                         v-for='item in topics' :key='item.id'>
                         <nuxt-link :to='`/${item.id}?page=${page}${category !== "" ? "&category=" + category : ""}`'>
                             <div class='content'>
-                                <div class='image'>
-                                    <img :src='item.imageUrl ? `https://storage.googleapis.com/hitgall/img/thumb/${item.imageUrl}` : "/default.png"' @error='imageUrlAlt'>
-                                </div>
                                 <div class='subject'>
                                     <span class='category' v-if='item.category'>{{ item.category }}</span>
+                                    <img class='icon' src='/star.gif' v-if='item.isBest > 0'>
                                     <span :style='item.color !== "" ? `color: #${item.color}` : ""'>
                                         {{ item.title }}
                                     </span>
-                                    <span class='newest' v-if='$moment().diff($moment(item.created), "days") <= 1'>N</span>
-                                    <div class='info'>
-                                        <span>
+                                    <!-- <span class='newest' v-if='$moment().diff($moment(item.created), "days") <= 1'>N</span> -->
+                                    <div class='author'>
+                                        <span class='writer'>
+                                            <!-- <img :src='`/level/${item.level}.png`'> -->
+                                            <img class='icon' :src='`/${item.admin ? "admin" : "user" + (item.userId > 0 ? 1 : 0) + (item.boardLevel || 0)}.png`'>
+                                            {{ item.author }}
+                                            <span class='ip' v-if='item.userId < 1 && item.ip !== ""'>({{ item.ip }})</span>
+                                        </span>
+                                        <span class='info'>
                                             <font-awesome-icon icon='history'/>
                                             {{ $moment(item.created).fromNow() }}
                                         </span>
-                                        <span>
+                                        <span class='info'>
                                             <font-awesome-icon icon='eye'/>
                                             {{ numberWithCommas(item.hits) }}
                                         </span>
-                                        <span v-if='item.likes > 0'>
+                                        <span class='info' v-if='item.likes > 0'>
                                             <font-awesome-icon icon='star'/>
                                             {{ numberWithCommas(item.likes) }}
                                         </span>
                                     </div>
-                                    <div class='author'>
-                                        <!-- <img :src='`/level/${item.level}.png`'> -->
-                                        <img class='icon' :src='`/${item.admin ? "admin" : "user" + (item.userId > 0 ? 1 : 0) + (item.boardLevel || 0)}.png`'>
-                                        {{ item.author }}
-                                        <span class='ip' v-if='item.userId < 1 && item.ip !== ""'>({{ item.ip }})</span>
-                                    </div>
+                                </div>
+                                <div class='image' v-if='item.imageUrl'>
+                                    <img :src='`https://storage.googleapis.com/hitgall/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
                                 </div>
                                 <div class='comment'>
                                     <div v-if='item.postsCount > 0'>
-                                        <span :class='item.postsCount >= 5 ? "hot" : ""'>
+                                        <span :class='item.postsCount >= 10 ? "hot" : ""'>
                                             {{ item.postsCount }}
                                         </span>
                                     </div>
@@ -645,10 +647,10 @@
                 list-style: none;
                 &.notice > li { background-color: #f7f8fa }
                 > li {
-                    height: 73px;
+                    min-height: 58px;
                     border-bottom: 1px solid #e9ecef;
                     &.view {
-                        height: 76px;
+                        // min-height: 66px;
                         border-top: 2px solid @primary;
                         border-bottom: 2px solid @primary;
                         > a > .content > .subject {
@@ -663,24 +665,17 @@
                         &:visited > .content > .subject { color: #770088 }
                         > .content {
                             display: flex;
-                            > .image {
-                                > img {
-                                    width: 72px;
-                                    height: 72px;
-                                    padding: 5px;
-                                    border-radius: 10px;
-                                }
-                            }
                             > .subject {
-                                position: relative;
+                                // position: relative;
                                 flex: 1;
-                                max-width: calc(100vw - 100px);
+                                // max-width: calc(100vw - 40px);
                                 padding: .5rem 0 .5rem .5rem;
                                 color: #212529;
                                 font-size: 14px;
-                                white-space: nowrap;
+                                // white-space: nowrap;
                                 text-overflow: ellipsis;
                                 overflow: hidden;
+                                > img { margin-bottom: 3px }
                                 > span.notice, > span.category, > span.newest {
                                     margin-right: 2px;
                                     padding: 2px 4px;
@@ -699,31 +694,37 @@
                                     color: #fff;
                                     background-color: @primary;
                                 }
-                                > .info {
-                                    margin-top: 2px;
-                                    color: #666;
-                                    font-size: 11px;
-                                    font-weight: normal;
-                                    > span:nth-child(2) { margin: 0 .5rem }
-                                }
                                 > .author {
-                                    position: absolute;
-                                    right: 0;
-                                    bottom: 5px;
-                                    margin-right: 5px;
-                                    color: @primary;
-                                    font-weight: bold;
-                                    > img:nth-child(1) { margin-top: -3px }
-                                    > img:nth-child(2) {
-                                        width: 16px;
-                                        height: 16px;
-                                        margin-top: -3px;
-                                        border-radius: 2px;
+                                    > span.writer {
+                                        margin: 5px 10px 0 0;
+                                        color: @primary;
+                                        font-weight: bold;
+                                        > img:nth-child(1) { margin-top: -3px }
+                                        > img:nth-child(2) {
+                                            width: 16px;
+                                            height: 16px;
+                                            margin-top: -3px;
+                                            border-radius: 2px;
+                                        }
+                                        > span.ip {
+                                            color: #666;
+                                            font-size: 11px;
+                                        }
                                     }
-                                    > span.ip {
+                                    > span.info {
+                                        margin-top: 2px;
                                         color: #666;
                                         font-size: 11px;
+                                        font-weight: normal;
                                     }
+                                }
+                            }
+                            > .image {
+                                > img {
+                                    width: 62px;
+                                    height: 62px;
+                                    padding: 5px;
+                                    border-radius: 10px;
                                 }
                             }
                             > .comment {
@@ -732,7 +733,7 @@
                                 > div {
                                     width: 30px;
                                     height: 30px;
-                                    margin: 21px 0 0 5px;
+                                    margin: 16px 0 0 5px;
                                     padding-top: 5px;
                                     color: @primary;
                                     font-size: 12px;

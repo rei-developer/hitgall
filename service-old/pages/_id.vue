@@ -161,7 +161,6 @@
     import 'viewerjs/dist/viewer.css'
 
     export default {
-        scrollToTop: true,
         components: {
             Poll,
             BoardList,
