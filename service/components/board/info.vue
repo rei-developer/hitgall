@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class='desktop-only'>
         <div class='board-title'>{{ board.name }} 갤러리</div>
         <div class='board-info'>
             <div class='image'>

@@ -80,7 +80,7 @@ module.exports.getAdminBoardInfo = async ctx => {
             message: '존재하지 않는 갤러리입니다.',
             status: 'fail'
         }
-    const board = await readBoard.infomation(user.id, user.isAdmin, domain)
+    const board = await readBoard.adminBoardInfo(user.id, user.isAdmin, domain)
     ctx.body = {
         board
     }
@@ -99,7 +99,7 @@ module.exports.updateAdminBoardInfo = async ctx => {
             message: '존재하지 않는 갤러리입니다.',
             status: 'fail'
         }
-    const board = await readBoard.infomation(user.id, user.isAdmin, domain)
+    const board = await readBoard.adminBoardInfo(user.id, user.isAdmin, domain)
     if (!board)
         return ctx.body = {
             message: '권한이 없습니다.',
@@ -132,7 +132,7 @@ module.exports.deleteAdminBoardBlind = async ctx => {
             message: '존재하지 않는 갤러리입니다.',
             status: 'fail'
         }
-    const board = await readBoard.infomation(user.id, user.isAdmin, domain)
+    const board = await readBoard.adminBoardInfo(user.id, user.isAdmin, domain)
     if (!board)
         return ctx.body = {
             message: '권한이 없습니다.',
