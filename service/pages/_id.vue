@@ -48,7 +48,7 @@
         <article class='topic-view'>
             <h6>
                 <div class='regdate'>
-                    <span>{{ $moment(topic.created).fromNow() }}</span>
+                    <span>{{ $moment(topic.created).format("YY/MM/DD HH:mm:ss") }}</span>
                 </div>
                 <div class='category' v-if='topic.category'>{{ topic.category }}</div>
                 <div class='subject' :style='topic.color !== "" ? `color: #${topic.color}` : ""'>{{ topic.title }}</div>
@@ -59,7 +59,7 @@
                 </div>
                 <div class='author'>
                     <!-- <img :src='`/level/${topic.level}.png`'> -->
-                    <img class='icon' :src='`/icon/${topic.icon}`' v-if='topic.icon !== null && topic.icon !== ""'>
+                    <img class='icon' :src='`/tmp${topic.boardLevel || 0}.png`'>
                     {{ topic.author }}
                     <span class='ip' v-if='topic.userId < 1 && topic.ip !== ""'>({{ topic.ip }})</span>
                 </div>

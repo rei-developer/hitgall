@@ -392,6 +392,7 @@ module.exports.createPost = async ctx => {
     const token = ctx.get('x-access-token')
     const user = token !== '' ? await User.getUser(token) : null
     let {
+        domain,
         writer,
         password,
         topicId,
@@ -415,6 +416,7 @@ module.exports.createPost = async ctx => {
         topicId,
         postRootId,
         postParentId,
+        boardDomain: domain,
         author: user ? user.nickname : writer,
         password,
         content,

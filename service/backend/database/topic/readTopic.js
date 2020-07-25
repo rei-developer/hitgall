@@ -26,10 +26,12 @@ module.exports = async id => {
 			u.level,
 			u.icon,
             u.isAdmin admin,
+            bm.level boardLevel,
             (SELECT imageUrl FROM TopicImages WHERE topicId = t.id LIMIT 1) imageUrl
 		FROM Topics t
 		LEFT JOIN TopicCounts tc ON tc.topicId = t.id
-		LEFT JOIN Users u ON u.id = t.userId
+        LEFT JOIN Users u ON u.id = t.userId
+        LEFT JOIN BoardManagers bm ON (bm.userId = t.userId AND bm.boardDomain = t.boardDomain)
 		WHERE t.id = ?`,
         [id]
     )
@@ -122,10 +124,12 @@ module.exports.notices = async domain => {
 			tc.likes,
 			u.level,
 			u.icon,
-			u.isAdmin admin
+            u.isAdmin admin,
+            bm.level boardLevel
 		FROM Topics t
 		LEFT JOIN TopicCounts tc ON tc.topicId = t.id
-		LEFT JOIN Users u ON u.id = t.userId
+        LEFT JOIN Users u ON u.id = t.userId
+        LEFT JOIN BoardManagers bm ON (bm.userId = t.userId AND bm.boardDomain = t.boardDomain)
 		WHERE t.boardDomain = ? AND t.isNotice = 1
 		ORDER BY t.id DESC`,
         [domain]
@@ -184,12 +188,14 @@ module.exports.topics = async (columns, searches, page, limit) => {
 				u.profileImageUrl profile,
 				u.level,
 				u.icon,
-				u.isAdmin admin,
+                u.isAdmin admin,
+                bm.level boardLevel,
 				(SELECT imageUrl FROM TopicImages WHERE topicId = t.id LIMIT 1) imageUrl,
 				(SELECT COUNT(*) FROM Posts WHERE topicId = t.id) postsCount
 			FROM Topics t
 			LEFT JOIN TopicCounts tc ON tc.topicId = t.id
-			LEFT JOIN Users u ON u.id = t.userId
+            LEFT JOIN Users u ON u.id = t.userId
+            LEFT JOIN BoardManagers bm ON (bm.userId = t.userId AND bm.boardDomain = t.boardDomain)
 			WHERE ${keys.map(key => `t.${key} = ?`).join(' AND ')}${query}
 			ORDER BY t.id DESC
 			LIMIT ?, ?`,

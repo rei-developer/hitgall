@@ -29,12 +29,12 @@
                         <div class='content'>
                             <div>
                                 <!-- <img :src='`/level/${item.level}.png`'> -->
-                                <img class='icon' :src='`/icon/${item.icon}`' v-if='item.icon !== null && item.icon !== ""'>
+                                <img class='icon' :src='`/tmp${item.boardLevel || 0}.png`'>
                                 <span class='author'>
                                     {{ item.author }}
                                     <span class='ip' v-if='item.userId < 1 && item.ip !== ""'>({{ item.ip }})</span>
                                 </span>
-                                <span class='regdate'>{{ $moment(item.updated).fromNow() }}</span>
+                                <span class='regdate'>{{ $moment(item.updated).format("YY/MM/DD HH:mm:ss") }}</span>
                             </div>
                             <div :class='item.userId === topic.userId ? "writer" : ""'>
                                 <div class='tagUser' v-if='item.tagUserId'>
@@ -68,13 +68,15 @@
                             :topicUserId='topic.userId'
                             :postUserId='item.userId'
                             :postRootId='item.postRootId || item.id'
-                            :postParentId='item.id'/>
+                            :postParentId='item.id'
+                            :domain='topic.boardDomain'/>
                     </div>
                     <div v-if='item.id === tempPostUpdateId'>
                         <PostWrite
                             :id='item.id'
                             :edit='true'
-                            :pureContent='item.content.replace(/<br>+/g, "\n")'/>
+                            :pureContent='item.content.replace(/<br>+/g, "\n")'
+                            :domain='topic.boardDomain'/>
                     </div>
                 </li>
             </ul>
@@ -82,7 +84,8 @@
                 <PostWrite
                     :id='id'
                     :pureContent='""'
-                    :topicUserId='topic.userId'/>
+                    :topicUserId='topic.userId'
+                    :domain='topic.boardDomain'/>
             </div>
         </article>
         <b-button-group class='mt-3' v-if='newPostsCount > 0'>

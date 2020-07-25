@@ -93,7 +93,7 @@
                             </div>
                             <div class='author'>
                                 <!-- <img :src='`/level/${item.level}.png`'> -->
-                                <img class='icon' :src='`/icon/${item.icon}`' v-if='item.icon !== null && item.icon !== ""'>
+                                <img class='icon' :src='`/tmp${item.boardLevel || 0}.png`'>
                                 {{ item.author }}
                                 <span class='ip' v-if='item.userId < 1 && item.ip !== ""'>({{ item.ip }})</span>
                             </div>
@@ -136,7 +136,7 @@
                             </div>
                             <div class='author'>
                                 <!-- <img :src='`/level/${item.level}.png`'> -->
-                                <img class='icon' :src='`/icon/${item.icon}`' v-if='item.icon !== null && item.icon !== ""'>
+                                <img class='icon' :src='`/tmp${item.boardLevel || 0}.png`'>
                                 {{ item.author }}
                                 <span class='ip' v-if='item.userId < 1 && item.ip !== ""'>({{ item.ip }})</span>
                             </div>
@@ -166,7 +166,7 @@
                                     <span class='newest' v-if='$moment().diff($moment(item.created), "days") <= 1'>N</span>
                                     <div class='author'>
                                         <!-- <img :src='`/level/${item.level}.png`'> -->
-                                        <img class='icon' :src='`/icon/${item.icon}`' v-if='item.icon !== null && item.icon !== ""'>
+                                        <img class='icon' :src='`/tmp${item.boardLevel || 0}.png`'>
                                         {{ item.author }}
                                         <span class='ip' v-if='item.userId < 1 && item.ip !== ""'>({{ item.ip }})</span>
                                     </div>
@@ -225,7 +225,7 @@
                                     </div>
                                     <div class='author'>
                                         <!-- <img :src='`/level/${item.level}.png`'> -->
-                                        <img class='icon' :src='`/icon/${item.icon}`' v-if='item.icon !== null && item.icon !== ""'>
+                                        <img class='icon' :src='`/tmp${item.boardLevel || 0}.png`'>
                                         {{ item.author }}
                                         <span class='ip' v-if='item.userId < 1 && item.ip !== ""'>({{ item.ip }})</span>
                                     </div>

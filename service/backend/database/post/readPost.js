@@ -64,11 +64,13 @@ module.exports.posts = async (topicId, page, limit) => {
 			u.profileImageUrl profile,
 			u.level,
 			u.icon,
-			u.isAdmin admin
+			u.isAdmin admin,
+			bm.level boardLevel
 		FROM Posts p
 		LEFT JOIN Posts tp ON tp.id = p.postParentId
 		LEFT JOIN PostCounts pc ON pc.postId = p.id
 		LEFT JOIN Users u ON u.id = p.userId
+		LEFT JOIN BoardManagers bm ON (bm.userId = p.userId AND bm.boardDomain = p.boardDomain)
 		WHERE p.topicId = ?
 		ORDER BY IF(ISNULL(p.postRootId), p.id, p.postRootId), p.id
 		LIMIt ?, ?`,

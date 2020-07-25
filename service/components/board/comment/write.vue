@@ -70,7 +70,7 @@
 
     export default {
         components: { StickerInventory },
-        props: ['id', 'edit', 'pureContent', 'author', 'topicUserId', 'postUserId', 'postRootId', 'postParentId'],
+        props: ['id', 'edit', 'pureContent', 'author', 'topicUserId', 'postUserId', 'postRootId', 'postParentId', 'domain'],
         data() {
             return {
                 writer: '',
@@ -126,6 +126,7 @@
                 } else {
                     const data = await this.$axios.$post('/api/topic/write/post',
                         {
+                            domain: this.domain,
                             writer: this.writer,
                             password: this.password,
                             topicId: this.id,
