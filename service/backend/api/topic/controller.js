@@ -1,8 +1,22 @@
+const { Storage } = require('@google-cloud/storage')
+
+const dotenv = require('dotenv')
+
+dotenv.config()
+
+const { BUCKET_NAME } = process.env
+const storage = new Storage({ keyFilename: 'key.json' })
+
+const deleteFile = async filename => {
+    await storage.bucket(BUCKET_NAME).file(filename).delete()
+    console.log(`gs://${bucketName}/${filename} deleted.`)
+}
+
 const fs = require('fs')
 const redis = require('redis')
 const moment = require('moment')
 const Filter = require('../../lib/filter')
-const socket = require('../../lib/socket.io')
+// const socket = require('../../lib/socket.io')
 const User = require('../../lib/user')
 const createPoll = require('../../database/poll/createPoll')
 const createNotice = require('../../database/notice/createNotice')
@@ -320,7 +334,7 @@ module.exports.createTopic = async ctx => {
         await deleteTopic.topicSaves(user.id)
         await User.setUpPoint(user, 10)
     }
-    await socket.newTopic(global.io, topicId, domain, title)
+    // await socket.newTopic(global.io, topicId, domain, title)
     ctx.body = {
         topicId,
         status: 'ok'
@@ -414,7 +428,7 @@ module.exports.createPost = async ctx => {
         }))
         await Promise.all(jobs)
     }
-    await socket.newPost(global.io, topicId)
+    // await socket.newPost(global.io, topicId)
     ctx.body = {
         postId,
         postsCount,
@@ -471,7 +485,7 @@ module.exports.createTopicVotes = async ctx => {
             move = 'BEST'
             await updateTopic.updateTopicByIsBest(id, 1)
             await User.setUpExpAndPoint(targetUser, 100, 100)
-            await socket.newBest(global.io, id, topic.boardDomain, topic.title)
+            // await socket.newBest(global.io, id, topic.boardDomain, topic.title)
         } else {
             await User.setUpExpAndPoint(targetUser, 5, 5)
         }
@@ -490,16 +504,16 @@ module.exports.createTopicVotes = async ctx => {
         }
         await updateTopic.updateTopicCountsByHates(id)
     }
-    await socket.vote(
-        global.io,
-        id,
-        likes
-            ? ++topic.likes
-            : topic.likes,
-        likes
-            ? topic.hates
-            : ++topic.hates
-    )
+    // await socket.vote(
+    //     global.io,
+    //     id,
+    //     likes
+    //         ? ++topic.likes
+    //         : topic.likes,
+    //     likes
+    //         ? topic.hates
+    //         : ++topic.hates
+    // )
     ctx.body = {
         move: '',
         status: 'ok'
@@ -550,17 +564,17 @@ module.exports.createPostVotes = async ctx => {
         await updatePost.updatePostCountsByLikes(id)
     else
         await updatePost.updatePostCountsByHates(id)
-    await socket.votePost(
-        global.io,
-        post.topicId,
-        id,
-        likes
-            ? ++post.likes
-            : post.likes,
-        likes
-            ? post.hates
-            : ++post.hates
-    )
+    // await socket.votePost(
+    //     global.io,
+    //     post.topicId,
+    //     id,
+    //     likes
+    //         ? ++post.likes
+    //         : post.likes,
+    //     likes
+    //         ? post.hates
+    //         : ++post.hates
+    // )
     ctx.body = {
         status: 'ok'
     }
@@ -642,17 +656,19 @@ module.exports.updateTopic = async ctx => {
     const trashImages = imagesByURL.filter(item => !findImages.includes(item))
     if (trashImages) {
         const jobs = trashImages.map(image => new Promise(async resolve => {
-            fs.unlink(`img/${image}`, err => {
+            fs.unlink(`img/${image}`, async err => {
                 if (err)
                     console.log(err)
+                await deleteFile(`img/${image}`).catch(console.error)
                 resolve(true)
             })
         }))
         await Promise.all(jobs)
         const jobsForThumb = trashImages.map(image => new Promise(async resolve => {
-            fs.unlink(`img/thumb/${image}`, err => {
+            fs.unlink(`img/thumb/${image}`, async err => {
                 if (err)
                     console.log(err)
+                await deleteFile(`img/thumb/${image}`).catch(console.error)
                 resolve(true)
             })
         }))
@@ -738,17 +754,19 @@ module.exports.deleteTopic = async ctx => {
     const images = await readTopic.topicImages(id)
     if (images) {
         const jobs = images.map(image => new Promise(async resolve => {
-            fs.unlink(`img/${image.imageUrl}`, err => {
+            fs.unlink(`img/${image.imageUrl}`, async err => {
                 if (err)
                     console.log(err)
+                await deleteFile(`img/${image.imageUrl}`).catch(console.error)
                 resolve(true)
             })
         }))
         await Promise.all(jobs)
         const jobsForThumb = images.map(image => new Promise(async resolve => {
-            fs.unlink(`img/thumb/${image.imageUrl}`, err => {
+            fs.unlink(`img/thumb/${image.imageUrl}`, async err => {
                 if (err)
                     console.log(err)
+                await deleteFile(`img/thumb/${image}`).catch(console.error)
                 resolve(true)
             })
         }))

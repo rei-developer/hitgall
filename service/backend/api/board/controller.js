@@ -2,7 +2,7 @@ const fs = require('fs')
 const redis = require('redis')
 const moment = require('moment')
 const Filter = require('../../lib/filter')
-const socket = require('../../lib/socket.io')
+// const socket = require('../../lib/socket.io')
 const User = require('../../lib/user')
 
 const readBoard = require('../../database/board/readBoard')

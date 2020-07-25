@@ -52,7 +52,7 @@
                     <nuxt-link to='/board/koikatsu'>코이카츠 갤러리</nuxt-link>
                 </li>
                 <li @click='forceUpdate'>
-                    <nuxt-link to='/board/skyrim'>스카이림 갤러리</nuxt-link>
+                    <nuxt-link to='/board/skyrim'>베데스다 갤러리</nuxt-link>
                 </li>
                 <li @click='forceUpdate'>
                     <nuxt-link to='/board/honkai3'>붕괴3 갤러리</nuxt-link>

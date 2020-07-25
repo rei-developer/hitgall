@@ -32,9 +32,7 @@
                     <b-button
                         class='float-right'
                         size='sm'
-                        variant='primary'
-                        v-shortkey.once='["w"]'
-                        @shortkey='$router.push({ path: "/board/" + topic.boardDomain + "/write" })'>
+                        variant='primary'>
                         <font-awesome-icon icon='pencil-alt'/>
                         쓰기
                     </b-button>

@@ -32,7 +32,7 @@ module.exports.getBoardName = domain => {
             name = '코이카츠 갤러리'
             break
         case 'skyrim':
-            name = '스카이림 갤러리'
+            name = '베데스다 갤러리'
             break
         case 'honkai3':
             name = '붕괴3 갤러리'

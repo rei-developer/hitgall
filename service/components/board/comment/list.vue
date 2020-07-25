@@ -122,19 +122,19 @@
             }
         },
         beforeMount() {
-            this.$socket.on('newPost', () => {
-                // this.playSound('https://soundbible.com/mp3/Blop-Mark_DiAngelo-79054334.mp3')
-                this.newPostsCount++
-            })
-            this.$socket.on('votePost', data => {
-                this.posts = this.posts.map(post => {
-                    if (post.id === data.postId) {
-                        post.likes = data.likes
-                        post.hates = data.hates
-                    }
-                    return post
-                })
-            })
+            // this.$socket.on('newPost', () => {
+            //     // this.playSound('https://soundbible.com/mp3/Blop-Mark_DiAngelo-79054334.mp3')
+            //     this.newPostsCount++
+            // })
+            // this.$socket.on('votePost', data => {
+            //     this.posts = this.posts.map(post => {
+            //         if (post.id === data.postId) {
+            //             post.likes = data.likes
+            //             post.hates = data.hates
+            //         }
+            //         return post
+            //     })
+            // })
         },
         mounted() {
             this.viewPostId = this.$route.query.postId

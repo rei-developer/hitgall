@@ -37,7 +37,7 @@ module.exports = {
 	** Plugins to load before mounting the App
 	*/
 	plugins: [
-		{ src: '@/plugins/socket.io.js' },
+		// { src: '@/plugins/socket.io.js' },
 		{ src: '@/plugins/v-viewer.js', mode: 'client' },
 		{ src: '@/plugins/vue-aplayer.js', mode: 'client' },
 		{ src: '@/plugins/vue-avatar.js', mode: 'client' },
@@ -108,7 +108,8 @@ module.exports = {
 				]
 			}
 		},
-		vendor: ['vuex', 'socket.io-client'],
+		vendor: ['vuex'],
+		// vendor: ['vuex', 'socket.io-client'],
 	},
 	proxy: {
 		'/api': 'http://localhost:3000'

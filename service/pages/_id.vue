@@ -32,9 +32,7 @@
                     <b-button
                         class='float-right'
                         size='sm'
-                        variant='primary'
-                        v-shortkey.once='["w"]'
-                        @shortkey='$router.push({ path: "/board/" + topic.boardDomain + "/write" })'>
+                        variant='primary'>
                         <font-awesome-icon icon='pencil-alt'/>
                         쓰기
                     </b-button>
@@ -129,11 +127,11 @@
                         수정
                     </b-button>
                 </nuxt-link>
-                <b-button size='sm' @click='removeHandler'>
-                    <font-awesome-icon icon='trash'/>
-                    삭제
-                </b-button>
             </span>
+            <b-button size='sm' @click='removeHandler'>
+                <font-awesome-icon icon='trash'/>
+                삭제
+            </b-button>
             <b-button-group class='float-right'>
                 <b-button size='sm' @click='scrollToBoardList'>
                     <font-awesome-icon icon='arrow-down'/>
@@ -225,15 +223,15 @@
             }
         },
         beforeMount() {
-            this.$socket.emit('join', this.id)
-            this.$socket.on('vote', data => {
-                this.topic.likes = data.likes
-                this.topic.hates = data.hates
-            })
+            // this.$socket.emit('join', this.id)
+            // this.$socket.on('vote', data => {
+            //     this.topic.likes = data.likes
+            //     this.topic.hates = data.hates
+            // })
         },
         beforeDestroy() {
-            this.$socket.emit('leave', this.id)
-            this.$socket.removeAllListeners()
+            // this.$socket.emit('leave', this.id)
+            // this.$socket.removeAllListeners()
         },
         methods: {
             // handleClick(e) {
@@ -290,12 +288,12 @@
                 })
             },
             removeHandler: async function() {
-                if (this.id < 1 || !this.$store.state.user.isLogged)
+                if (this.id < 1)
                     return
                 this.$bvModal.show('bv-remove-modal')
             },
             remove: async function() {
-                const token = this.$store.state.user.token
+                const token = this.$store.state.user.token || ''
                 this.$store.commit('setLoading', true)
                 const data = await this.$axios.$delete(
                     '/api/topic/delete',

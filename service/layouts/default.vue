@@ -87,7 +87,7 @@
             this.updateNotices()
         },
         beforeDestroy() {
-            this.$socket.removeAllListeners()
+            // this.$socket.removeAllListeners()
             // this.$socket.clear()
         },
         methods: {

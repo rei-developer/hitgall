@@ -12,10 +12,17 @@
                 </div>
                 <div class='label'>에게 대댓글 작성</div>
             </div>
+            <!-- <div class='name-box'>
+                <input
+                    class='writer'
+                    placeholder='닉네임'
+                    v-model='writer'/>
+                <input
+                    class='password'
+                    placeholder='비밀번호'
+                    v-model='password'/>
+            </div> -->
             <div class='content'>
-                <div class='profile desktop-only' v-if='$store.state.user.isLogged'>
-                    <img :src='$store.state.user.profileImageUrl' @error='imageUrlAlt'>
-                </div>
                 <div class='write-box'>
                     <textarea
                         rows='3'
@@ -63,6 +70,8 @@
         props: ['id', 'edit', 'pureContent', 'author', 'topicUserId', 'postUserId', 'postRootId', 'postParentId'],
         data() {
             return {
+                writer: '',
+                password: '',
                 content: this.pureContent,
                 stickers: {
                     sticker: null,
@@ -88,6 +97,8 @@
                         '/api/topic/edit/post',
                         {
                             id: this.id,
+                            writer: this.writer,
+                            password: this.password,
                             content: this.content,
                             sticker: {
                                 id: this.stickers.sticker ? this.stickers.sticker.id : 0,
@@ -100,6 +111,8 @@
                 } else {
                     const data = await this.$axios.$post('/api/topic/write/post',
                         {
+                            writer: this.writer,
+                            password: this.password,
                             topicId: this.id,
                             topicUserId: this.topicUserId,
                             postUserId: this.postUserId,
@@ -184,6 +197,17 @@
                     font-weight: normal;
                 }
             }
+            > .name-box {
+                > input {
+                    width: 180px;
+                    margin: 0 .05rem .5rem 0;
+                    padding: .25rem .5rem;
+                    color: #000;
+                    font-size: 14px;
+                    border: 1px solid #ccc;
+                    outline: none;
+                }
+            }
             > .content {
                 display: flex;
                 > .profile {
@@ -202,7 +226,7 @@
                     > textarea {
                         height: 4.5rem;
                         padding: .5rem;
-                        font-size: 13px;
+                        font-size: 14px;
                         border: 1px solid #ccc;
                         outline: none !important;
                     }

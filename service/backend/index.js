@@ -24,14 +24,14 @@ app
     .use(router.allowedMethods())
 
 const server = require('http').createServer(app.callback())
-const socket = require('./lib/socket.io')
-const redis = require('socket.io-redis')
-const io = require('socket.io')(server)
-io.adapter(redis({ host: 'localhost', port: 6379 }))
+// const socket = require('./lib/socket.io')
+// const redis = require('socket.io-redis')
+// const io = require('socket.io')(server)
+// io.adapter(redis({ host: 'localhost', port: 6379 }))
 
-global.io = io
+// global.io = io
 
-socket.start(io)
+// socket.start(io)
 
 async function start() {
     const nuxt = new Nuxt(config)
