@@ -1,7 +1,23 @@
 const pool = require('..')
 const _ = require('lodash')
 
-module.exports.infomation = async (userId, isAdmin, domain) => {
+module.exports.info = async domain => {
+    const result = await pool.query(
+        `SELECT
+            *,
+            u.username masterId,
+            u.nickname masterName
+        FROM Boards b
+        LEFT JOIN Users u ON u.id = b.masterId
+        WHERE domain = ?`,
+        [domain]
+    )
+    if (result.length < 1)
+        return false
+    return result[0]
+}
+
+module.exports.adminBoardInfo = async (userId, isAdmin, domain) => {
     const result = await pool.query(
         `SELECT * FROM Boards WHERE (masterId = ? OR ? > 0) AND domain = ?`,
         [userId, isAdmin, domain]
@@ -15,6 +31,18 @@ module.exports.adminBoards = async (userId, isAdmin) => {
     const result = await pool.query(
         `SELECT * FROM Boards WHERE masterId = ? OR ? > 0`,
         [userId, isAdmin]
+    )
+    if (result.length < 1)
+        return false
+    return result
+}
+
+module.exports.adminBoardBlinds = async domain => {
+
+    console.log("adminBoardBlinds", domain, " 입니다")
+    const result = await pool.query(
+        `SELECT * FROM Blinds WHERE domain = ?`,
+        [domain]
     )
     if (result.length < 1)
         return false
