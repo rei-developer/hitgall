@@ -28,7 +28,7 @@
                     </b-button>
                 </div>
                 <div class='howMany'>
-                    <b-input v-model='buyNum' :min='1' :max='20'></b-input>
+                    <b-input v-model='buyNum' type='range' min='1' max='20'></b-input>
                 </div>
                 <div class='info'>
                     <div>기간제 {{ sticker.days * buyNum }}일</div>
