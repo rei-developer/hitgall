@@ -23,9 +23,8 @@ const deleteTopic = require('../../database/topic/deleteTopic')
 
 // const client = redis.createClient()
 
-const BURN_LIMIT = 1
-const BEST_LIMIT = 3
-const DELETE_LIMIT = 10
+const BEST_LIMIT = 7
+// const DELETE_LIMIT = 10
 
 module.exports.getTopicCounts = async ctx => {
     const { domain } = ctx.params
@@ -41,6 +40,7 @@ module.exports.getTopics = async ctx => {
     const {
         ...body
     } = ctx.request.body
+    const best = body.best || 0
     const domain = body.domain || 'all'
     const userId = body.userId || 0
     const category = body.category || ''
@@ -55,8 +55,10 @@ module.exports.getTopics = async ctx => {
     if (limit < 5 || limit > 50)
         return
     const obj = {}
+    if (best > 0)
+        obj.isBest = 1
     if (domain === 'best')
-        obj.isBest = 2
+        obj.isBest = 1
     else if (domain !== 'all')
         obj.boardDomain = domain
     if (userId > 0)
@@ -465,13 +467,9 @@ module.exports.createTopicVotes = async ctx => {
     await createTopic.createTopicVotes(user.id, id, ip)
     let move = ''
     if (likes) {
-        if (topic.isBest === 0 && topic.likes - topic.hates >= BURN_LIMIT) {
-            move = 'BURN'
-            await updateTopic.updateTopicByIsBest(id, 1)
-            await User.setUpExpAndPoint(targetUser, 20, 20)
-        } else if (topic.isBest === 1 && topic.likes - topic.hates >= BEST_LIMIT) {
+        if (topic.isBest === 0 && topic.likes - topic.hates >= BEST_LIMIT) {
             move = 'BEST'
-            await updateTopic.updateTopicByIsBest(id, 2)
+            await updateTopic.updateTopicByIsBest(id, 1)
             await User.setUpExpAndPoint(targetUser, 100, 100)
             await socket.newBest(global.io, id, topic.boardDomain, topic.title)
         } else {
@@ -479,11 +477,7 @@ module.exports.createTopicVotes = async ctx => {
         }
         await updateTopic.updateTopicCountsByLikes(id)
     } else {
-        if (topic.isBest === 2 && topic.hates - topic.likes >= BEST_LIMIT) {
-            move = 'BURN'
-            await updateTopic.updateTopicByIsBest(id, 1)
-            await User.setUpExpAndPoint(targetUser, -100, -100)
-        } else if (topic.isBest === 1 && topic.hates - topic.likes >= BURN_LIMIT) {
+        if (topic.isBest === 1 && topic.hates - topic.likes >= BEST_LIMIT) {
             move = 'DEFAULT'
             await updateTopic.updateTopicByIsBest(id)
             await User.setUpExpAndPoint(targetUser, -20, -20)

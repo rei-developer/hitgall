@@ -23,20 +23,9 @@
                     v-for='(item, index) in posts' :key='index'>
                     <div>
                         <div class='re' v-if='item.tagUserId'/>
-                        <div class='image' v-if='item.profile'>
+                        <!-- <div class='image' v-if='item.profile'>
                             <img :src='`/profile/${item.profile}`' @error='imageUrlAlt'>
-                        </div>
-                        <div class='image' v-else>
-                            <div>
-                                <client-only>
-                                    <avatar
-                                        :username='item.author'
-                                        :inline='true'
-                                        :size='48'
-                                        :rounded='false'/>
-                                </client-only>
-                            </div>
-                        </div>
+                        </div> -->
                         <div class='content'>
                             <div>
                                 <!-- <img :src='`/level/${item.level}.png`'> -->

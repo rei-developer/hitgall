@@ -23,11 +23,10 @@ module.exports = async id => {
 			tc.hits,
 			tc.likes,
 			tc.hates,
-			u.profileImageUrl profile,
-			u.backgroundImageUrl background,
 			u.level,
 			u.icon,
-			u.isAdmin admin
+            u.isAdmin admin,
+            (SELECT imageUrl FROM TopicImages WHERE topicId = t.id LIMIT 1) imageUrl
 		FROM Topics t
 		LEFT JOIN TopicCounts tc ON tc.topicId = t.id
 		LEFT JOIN Users u ON u.id = t.userId

@@ -50,19 +50,8 @@
                 <div class='subject' :style='topic.color !== "" ? `color: #${topic.color}` : ""'>{{ topic.title }}</div>
             </h6>
             <div class='profile'>
-                <div class='image' v-if='topic.profile'>
-                    <img :src='`/profile/${topic.profile}`' @error='imageUrlAlt'>
-                </div>
-                <div class='image' v-else>
-                    <div>
-                        <client-only>
-                            <avatar
-                                :username='topic.author'
-                                :inline='true'
-                                :size='72'
-                                :rounded='false'/>
-                        </client-only>
-                    </div>
+                <div class='image'>
+                    <img :src='`https://storage.googleapis.com/hitgall/img/${topic.imageUrl}`' @error='imageUrlAlt'>
                 </div>
                 <div class='author'>
                     <!-- <img :src='`/level/${topic.level}.png`'> -->
@@ -73,7 +62,7 @@
                 <div class='info'>
                     <div>
                         <span class='desktop-only'>조회 <strong>{{ numberWithCommas(topic.hits) }}</strong></span>
-                        <span class='desktop-only'>댓글 <strong>1</strong></span>
+                        <!-- <span class='desktop-only'>댓글 <strong>1</strong></span> -->
                         <span>추천 <strong>{{ numberWithCommas(topic.likes) }}</strong></span>
                         <span>비추천 <strong>{{ numberWithCommas(topic.hates) }}</strong></span>
                     </div>
@@ -364,7 +353,7 @@
                     { property: 'og:site_name', content: '힛갤' },
                     { property: 'og:title', content: this.topic.title },
                     { property: 'og:description', content: this.topic.content.substr(0, 200) },
-                    { property: 'og:image', content: `https://www.hitgall.com/profile/${this.topic.profile}` },
+                    { property: 'og:image', content: this.topic.imageUrl ? `https://storage.googleapis.com/hitgall/img/${this.topic.imageUrl}` : '/default.png' },
                     { property: 'og:type', content: 'website' },
                     { property: 'og:updated_time', content: this.topic.updated },
                     { hid: `${this.id}`, name: `${this.topic.content.substr(0, 100)}`, content: '힛갤' }

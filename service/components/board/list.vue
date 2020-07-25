@@ -7,10 +7,12 @@
                     목록
                 </b-button>
             </nuxt-link>
-            <!-- <b-button size='sm' variant='primary'>
-                <font-awesome-icon icon='arrow-up'/>
-                인기글
-            </b-button> -->
+            <nuxt-link :to='`/board/${domain}?best=1`'>
+                <b-button size='sm' variant='primary' @click='forceUpdate({ best: true })'>
+                    <font-awesome-icon icon='arrow-up'/>
+                    개념글
+                </b-button>
+            </nuxt-link>
 			<span v-if='domain !== "all"'>
 				<nuxt-link :to='`/board/${domain}/write`'>
 					<b-button
@@ -255,10 +257,12 @@
                     :number-of-pages='100'
                     v-model='page'
                     size='sm'/>
-                <!-- <b-button size='sm' variant='primary'>
-                    <font-awesome-icon icon='arrow-up'/>
-                    인기글
-                </b-button> -->
+                <nuxt-link :to='`/board/${domain}?best=1`'>
+                    <b-button size='sm' variant='primary' @click='forceUpdate({ best: true })'>
+                        <font-awesome-icon icon='arrow-up'/>
+                        개념글
+                    </b-button>
+                </nuxt-link>
                 <div v-if='domain !== "all"'>
                     <nuxt-link :to='`/board/${domain}/write`'>
                         <b-button
@@ -317,6 +321,7 @@
         props: ['id', 'purePage', 'domain'],
         data() {
             return {
+                best: 0,
                 category: '',
                 categories: [],
                 notices: [],
@@ -347,6 +352,7 @@
             }
         },
         mounted() {
+            this.best = this.$route.query.best || 0
             this.category = this.$route.query.category || ''
             this.getData()
 			this.getCount()
@@ -366,6 +372,7 @@
                 const data = await this.$axios.$post(
                     '/api/topic/list',
                     {
+                        best: this.best,
                         domain: this.domain,
                         category: this.category,
                         searches: this.searches,
@@ -431,9 +438,10 @@
                 })
             },
             linkGen(page) {
-                return `/board/${this.domain}?page=${page}${this.category !== '' ? '&category=' + this.category : ''}`
+                return `/board/${this.domain}?page=${page}${this.best > 0 ? '&best=' + this.best : ''}${this.category !== '' ? '&category=' + this.category : ''}`
             },
-            forceUpdate() {
+            forceUpdate({ best }) {
+                this.best = best ? 1 : 0
                 this.$store.commit('forceUpdate')
             },
             realtimeUpdate() {
@@ -552,7 +560,7 @@
                             background-color: #f9f9f9;
                             > .subject > .thumb { visibility: visible }
                         }
-                        &:visited > .subject > div > span:nth-child(1) { color: #999 }
+                        &:visited > .subject > div > span:nth-child(1) { color: #AAA }
                         > div {
                             padding: .5rem;
                             color: #212529;
@@ -651,7 +659,7 @@
                         color: #333;
                         font-size: 12px;
                         text-decoration: none;
-                        &:visited { color: #999 }
+                        &:visited > .content > .subject { color: #AAA }
                         > .content {
                             display: flex;
                             > .image {
