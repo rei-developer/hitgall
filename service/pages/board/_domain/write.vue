@@ -376,8 +376,8 @@
                 content: this.form.content,
                 onUpdate: ({ getHTML }) => this.html = getHTML()
 			})
-			this.form.writer = localStorage.notUserID
-            this.form.password = localStorage.notUserPW
+			this.form.writer = localStorage.notUserID || 'ㅇㅇ'
+            this.form.password = localStorage.notUserPW || ''
 			const instance = this.$refs.dropzone.dropzone
 			const editor = this.editor
 			const getContent = this.getContent

@@ -37,9 +37,32 @@ module.exports.adminBoards = async (userId, isAdmin) => {
     return result
 }
 
-module.exports.adminBoardBlinds = async domain => {
+module.exports.adminBoardManagers = async domain => {
+    const result = await pool.query(
+        `SELECT
+            *,
+            u.nickname
+        FROM BoardManagers bm
+        LEFT JOIN Users u ON u.userId = bm.userId
+        WHERE bm.boardId = (SELECT id FROM Boards WHERE domain = ?)`,
+        [domain]
+    )
+    if (result.length < 1)
+        return false
+    return result
+}
 
-    console.log("adminBoardBlinds", domain, " 입니다")
+module.exports.adminBoardManagerLevel = async (userId, domain) => {
+    const result = await pool.query(
+        `SELECT level FROM BoardManagers WHERE userId = ? AND boardId = (SELECT id FROM Boards WHERE domain = ?)`,
+        [userId, domain]
+    )
+    if (result.length < 1)
+        return false
+    return result[0].level
+}
+
+module.exports.adminBoardBlinds = async domain => {
     const result = await pool.query(
         `SELECT * FROM Blinds WHERE domain = ?`,
         [domain]

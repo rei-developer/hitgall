@@ -68,6 +68,35 @@
 						곧 오픈 예정
 					</div>
 					<hr>
+                    <label>
+						<font-awesome-icon icon='image'/>
+						기준 정보
+					</label>
+					<b-form-group class='mb-sm-2'>
+						<b-input-group size='sm'>
+							<b-input-group-prepend is-text>
+								개념글 기준
+							</b-input-group-prepend>
+							<b-form-input
+                                type='number'
+								:placeholder='board.bestLimit'
+								v-model='board.bestLimit'
+								autofocus/>
+						</b-input-group>
+                    </b-form-group>
+                    <b-form-group class='mb-sm-2'>
+                        <b-input-group size='sm'>
+							<b-input-group-prepend is-text>
+								공지사항 노출 개수
+							</b-input-group-prepend>
+							<b-form-input
+                                type='number'
+								:placeholder='board.noticeLimit'
+								v-model='board.noticeLimit'
+								autofocus/>
+						</b-input-group>
+					</b-form-group>
+					<hr>
 					<label>
 						<font-awesome-icon icon='calendar-check'/>
 						날짜 정보
@@ -240,13 +269,13 @@
 		},
 		watch: { 
             menu: function() {
-				switch(this.menu){
-case 'blind':
-                this.getBlinds()
-						break
-					default:
-                this.getData()
-						break
+				switch (this.menu) {
+                case 'blind':
+                    this.getBlinds()
+                    break
+				default:
+                    this.getData()
+					break
 				}
             }
         },
@@ -270,23 +299,23 @@ case 'blind':
 				this.domain = domain
                 this.board = data.board
 			},
-			 async getBlinds() {
+            async getBlinds() {
                 const domain = this.$route.params.domain || ''
                 const token = this.$store.state.user.isLogged ? this.$store.state.user.token : ''
-                 const data = await this.$axios.$get(
-                `/api/board/admin/${domain}/blind/list`,
-                { headers: { 'x-access-token': token } }
-            )
+                const data = await this.$axios.$get(
+                    `/api/board/admin/${domain}/blind/list`,
+                    { headers: { 'x-access-token': token } }
+                )
                 if (data.status === 'fail')
                     this.error = {
                         state: true,
                         title: '오류가 발생했습니다.',
                         content: data.message
-					}
-			if( data.blinds)
-                this.blinds = data.blinds
-			},
-			 unblock: async function(ip) {
+                    }
+                if(data.blinds)
+                    this.blinds = data.blinds
+            },
+            unblock: async function(ip) {
    				const domain = this.$route.params.domain || ''
                 const token = this.$store.state.user.isLogged ? this.$store.state.user.token : ''
                 this.$store.commit('setLoading', true)
@@ -354,7 +383,9 @@ case 'blind':
 				const data = await this.$axios.$patch(
 					`/api/board/admin/${this.domain}/edit`,
 					{
-						description: this.board.description
+                        description: this.board.description,
+                        bestLimit: this.board.bestLimit,
+                        noticeLimit: this.board.noticeLimit
 					},
 					{ headers: { 'x-access-token': token } }
 				)

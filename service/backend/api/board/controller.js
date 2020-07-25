@@ -55,8 +55,8 @@ module.exports.getAdminBoardBlinds = async ctx => {
             message: '존재하지 않는 갤러리입니다.',
             status: 'fail'
         }
-    const board = await readBoard.adminBoardInfo(user.id, user.isAdmin, domain)
-    if (!board)
+    const level = await readBoard.adminBoardManagerLevel(user.id, domain)
+    if (!level && user.isAdmin < 1)
         return ctx.body = {
             message: '권한이 없습니다.',
             status: 'fail'
@@ -99,8 +99,8 @@ module.exports.updateAdminBoardInfo = async ctx => {
             message: '존재하지 않는 갤러리입니다.',
             status: 'fail'
         }
-    const board = await readBoard.adminBoardInfo(user.id, user.isAdmin, domain)
-    if (!board)
+    const level = await readBoard.adminBoardManagerLevel(user.id, domain)
+    if (!level && user.isAdmin < 1)
         return ctx.body = {
             message: '권한이 없습니다.',
             status: 'fail'
@@ -132,8 +132,8 @@ module.exports.deleteAdminBoardBlind = async ctx => {
             message: '존재하지 않는 갤러리입니다.',
             status: 'fail'
         }
-    const board = await readBoard.adminBoardInfo(user.id, user.isAdmin, domain)
-    if (!board)
+    const level = await readBoard.adminBoardManagerLevel(user.id, domain)
+    if (!level && user.isAdmin < 1)
         return ctx.body = {
             message: '권한이 없습니다.',
             status: 'fail'

@@ -93,8 +93,8 @@
             }
         },
         mounted() {
-            this.writer = localStorage.notUserID
-            this.password = localStorage.notUserPW
+            this.writer = localStorage.notUserID || 'ㅇㅇ'
+            this.password = localStorage.notUserPW || ''
         },
         methods: {
             submit: async function() {
