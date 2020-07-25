@@ -39,7 +39,7 @@ module.exports.createImage = type => async ctx => {
                 if (checkerByGIF) {
                     execFile(giflossy, [
                         '-O3', '--lossy=80', '-o', `img/${filename}`, `img/${filename}`
-                    ], err => {
+                    ], async err => {
                         if (err)
                             return ctx.body = {
                                 message: err,
@@ -53,14 +53,8 @@ module.exports.createImage = type => async ctx => {
                                     await uploadFile(`img/${filename}`)
                                 })
                             )
-                        if (type === 'topic')
-                            fs.writeFile(
-                                `img/${filename}`,
-                                data,
-                                () => fs.unlink(`img/${filename}`, async () => {
-                                    await uploadFile(`img/${filename}`)
-                                })
-                            )
+                        else if (type === 'topic')
+                            await uploadFile(`img/${filename}`)
                     })
                 } else {
                     const image = sharp(data)
