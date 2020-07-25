@@ -111,20 +111,14 @@
 						</b-input-group>
 					</b-form-group>
 					<b-form-group class='mb-sm-2'>
-						<b-input-group size='sm'>
-							<b-input-group-prepend is-text>
-								경험치
-							</b-input-group-prepend>
-							<b-form-input
-								:value='`${numberWithCommas(exp)} / ${numberWithCommas(maxExp)} (${per}%)`'
-								readonly/>
-						</b-input-group>
+						<b-progress
+							:value='per'
+							variant='danger'
+							show-progress
+							animated>
+							<b-progress-bar :value='per' :label='`${numberWithCommas(exp)} / ${numberWithCommas(maxExp)} (${per}%)`'/>
+						</b-progress>
 					</b-form-group>
-					<b-progress
-						:value='per'
-						variant='danger'
-						show-progress
-						animated/>
 					<hr>
 					<label>
 						<font-awesome-icon icon='calendar-check'/>
@@ -157,11 +151,15 @@
 						프로필 편집
 					</b-button>
 					<b-button
-						type='submit'
 						variant='primary'
 						@click='signOut'
 						block>
 						로그아웃
+					</b-button>
+					<b-button
+						variant='danger'
+						block>
+						회원 탈퇴 (개발중)
 					</b-button>
 				</b-form>
 			</div>
@@ -405,13 +403,13 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to top, rgba(0, 0, 0, .5), transparent);
+    /* background: linear-gradient(to top, rgba(0, 0, 0, .5), transparent); */
   }
   .accountForm .profile .nickname {
     position: absolute;
     left: 6rem;
     bottom: .2rem;
-    color: #FFF;
+    color: #333;
     font-size: 1.4rem;
     font-weight: bold;
   }

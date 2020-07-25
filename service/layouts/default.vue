@@ -15,13 +15,13 @@
         <main>
             <aside/>
             <section class='panel'>
-                <!-- sidebar -->
-                <article class='sidebar'>
-                    <Sidebar/>
-                </article>
                 <!-- inner -->
                 <article class='inner'>
                     <nuxt/>
+                </article>
+                <!-- sidebar -->
+                <article class='sidebar'>
+                    <Sidebar/>
                 </article>
             </section>
             <aside/>
@@ -160,7 +160,7 @@
             > article.sidebar {
                 flex-basis: 210px;
                 flex-shrink: 0;
-                margin-right: 10px;
+                margin-left: 10px;
             }
             > article.inner { flex: 1 }
         }
