@@ -147,20 +147,20 @@ module.exports.topics = async (columns, searches, page, limit) => {
     if (searches.text !== '') {
         switch (searches.select) {
             case 1:
-                query = ' AND MATCH (t.content) AGAINST (?)'
+                query = ' AND MATCH (t.title) AGAINST (?)'
                 data = [searches.text]
                 break
             case 2:
-                query = ' AND MATCH (t.title) AGAINST (?) OR MATCH (t.content) AGAINST (?)'
-                data = [searches.text, searches.text]
+                query = ' AND MATCH (t.content) AGAINST (?)'
+                data = [searches.text]
                 break
             case 3:
                 query = ' AND MATCH (t.author) AGAINST (?)'
                 data = [searches.text]
                 break
             default:
-                query = ' AND MATCH (t.title) AGAINST (?)'
-                data = [searches.text]
+                query = ' AND MATCH (t.title) AGAINST (?) OR MATCH (t.content) AGAINST (?)'
+                data = [searches.text, searches.text]
                 break
         }
     }

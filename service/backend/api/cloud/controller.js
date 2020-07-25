@@ -51,7 +51,7 @@ module.exports.createImage = type => async ctx => {
                                 data,
                                 () => fs.unlink(`img/${filename}`, async () => {
 
-                                    await uploadFile(`img/${filename}`)
+                                    // await uploadFile(`img/${filename}`)
 
                                 })
                             )
@@ -66,7 +66,7 @@ module.exports.createImage = type => async ctx => {
                             )
                             .then(result => fs.writeFile(`img/${filename}`, result, async () => {
 
-                                await uploadFile(`img/${filename}`)
+                                // await uploadFile(`img/${filename}`)
 
                             }))
                     } else if (type === 'background') {
@@ -107,6 +107,7 @@ module.exports.createImage = type => async ctx => {
                     const thumbnail = sharp(data)
                     thumbnail
                         .metadata()
+                        .then(async () => await uploadFile(`img/${filename}`))
                         .then(() => thumbnail.resize(100, 100).withMetadata().rotate().toBuffer())
                         .then(result => fs.writeFile(`img/thumb/${filename}`, result, async () => {
 

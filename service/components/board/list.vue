@@ -287,9 +287,9 @@
                         :text='getSearchLabel()'
                         variant='primary'
                         size='sm'>
-                        <b-dropdown-item @click='searches.select = 0'>제목</b-dropdown-item>
-                        <b-dropdown-item @click='searches.select = 1'>본문</b-dropdown-item>
-                        <b-dropdown-item @click='searches.select = 2'>전체</b-dropdown-item>
+                        <b-dropdown-item @click='searches.select = 0'>제목 + 본문</b-dropdown-item>
+                        <b-dropdown-item @click='searches.select = 1'>제목</b-dropdown-item>
+                        <b-dropdown-item @click='searches.select = 2'>본문</b-dropdown-item>
                         <b-dropdown-item @click='searches.select = 3'>작성자</b-dropdown-item>
                     </b-dropdown>
                 </template>
@@ -414,7 +414,7 @@
                     : createdFormat
             },
             getSearchLabel() {
-                const labels = ['제목', '본문', '전체', '작성자']
+                const labels = ['제목+본문', '제목', '본문', '작성자']
                 return labels[this.searches.select]
             },
             search() {

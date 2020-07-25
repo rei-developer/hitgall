@@ -63,8 +63,8 @@
                     <div>
                         <span class='desktop-only'>조회 <strong>{{ numberWithCommas(topic.hits) }}</strong></span>
                         <!-- <span class='desktop-only'>댓글 <strong>1</strong></span> -->
-                        <span>추천 <strong>{{ numberWithCommas(topic.likes) }}</strong></span>
-                        <span>비추천 <strong>{{ numberWithCommas(topic.hates) }}</strong></span>
+                        <span>개념 <strong>{{ numberWithCommas(topic.likes) }}</strong></span>
+                        <span>비추 <strong>{{ numberWithCommas(topic.hates) }}</strong></span>
                     </div>
                     <div>
                         <span @click='copyLink(`https://www.hitgall.com/{{ id }}`)'>https://www.hitgall.com/{{ id }}</span>
@@ -77,12 +77,16 @@
             </div>
             <div class='bottom-box'>
                 <div class='likes' @click='votes()'>
-                    <div/>
-                    <div>추천<span>{{ numberWithCommas(topic.likes) }}</span></div>
+                    <div>
+                        <font-awesome-icon icon='star'/>
+                    </div>
+                    <div>개념<span>{{ numberWithCommas(topic.likes) }}</span></div>
                 </div>
                 <div class='hates' @click='votes(false)'>
-                    <div/>
-                    <div>비추천<span>{{ numberWithCommas(topic.hates) }}</span></div>
+                    <div>
+                        <font-awesome-icon icon='arrow-down'/>
+                    </div>
+                    <div>비추<span>{{ numberWithCommas(topic.hates) }}</span></div>
                 </div>
                 <div class='qrcode'>
                     <client-only>
@@ -382,6 +386,7 @@
             background-color: @primary;
             > .category {
                 display: inline-block;
+                margin-bottom: 2px;
                 padding: 4px 8px;
                 color: @primary;
                 font-size: 12px;
@@ -390,6 +395,7 @@
                 background-color: #f5f5f5;
             }
             > .subject {
+                display: inline-block;
                 max-width: calc(100vw - 80px);
                 font-size: 14px;
                 white-space: nowrap;
@@ -477,18 +483,18 @@
                 height: 80px;
                 margin: 0 5px;
                 padding: 2px;
-                border: 2px solid #ddd;
+                color: #fff;
+                // border: 2px solid #ddd;
                 border-radius: 500rem;
+                background: @primary;
                 cursor: pointer;
-                &:hover { border: 2px solid @primary }
+                // &:hover { border: 2px solid @primary }
                 > div:nth-child(1) {
                     width: 72px;
                     height: 46px;
+                    font-size: 35px;
                     border-radius: 500rem 500rem 0 0;
-                    background-color: #fff;
-                    background-size: 66px;
-                    background-position: 3px -10px;
-                    background-repeat: none;
+                    > svg { padding-left: 3px }
                 }
                 > div:nth-child(2) {
                     padding-top: 2px;
@@ -497,12 +503,9 @@
                     > span { margin-left: 4px }
                 }
             }
-            > .likes {
-                > div:nth-child(1) { background-image: url(/likes.jpg) }
-                > div:nth-child(2) > span { color: #2D99E1 }
-            }
+            > .likes > div:nth-child(2) > span { color: #2D99E1 }
             > .hates {
-                > div:nth-child(1) { background-image: url(/hates.png) }
+                background: #AAA;
                 > div:nth-child(2) > span { color: #D83722 }
             }
             > .qrcode {

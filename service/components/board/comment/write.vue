@@ -22,8 +22,7 @@
                         placeholder='이곳에 내용을 입력하세요.'
                         v-model='content'
                         v-on:keyup.alt.83='submit'
-                        v-shortkey='["alt", "s"]' @shortkey='submit'
-                        autofocus/>
+                        v-shortkey='["alt", "s"]' @shortkey='submit'/>
                 </div>
                 <div class='commit'>
                     <div class='sticker' @click='stickers.hide = false'>스티커</div>
