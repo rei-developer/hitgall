@@ -50,9 +50,15 @@ module.exports.createImage = type => async ctx => {
                                 `icon/${filename}`,
                                 data,
                                 () => fs.unlink(`img/${filename}`, async () => {
-
-                                    // await uploadFile(`img/${filename}`)
-
+                                    await uploadFile(`img/${filename}`)
+                                })
+                            )
+                        if (type === 'topic')
+                            fs.writeFile(
+                                `img/${filename}`,
+                                data,
+                                () => fs.unlink(`img/${filename}`, async () => {
+                                    await uploadFile(`img/${filename}`)
                                 })
                             )
                     })
@@ -62,12 +68,10 @@ module.exports.createImage = type => async ctx => {
                         image
                             .metadata()
                             .then(
-                                metadata => image.withMetadata().rotate().toBuffer()
+                                metadata => image.resize(Math.min(metadata.width, 960)).withMetadata().rotate().jpeg(80).toBuffer()
                             )
                             .then(result => fs.writeFile(`img/${filename}`, result, async () => {
-
-                                // await uploadFile(`img/${filename}`)
-
+                                await uploadFile(`img/${filename}`)
                             }))
                     } else if (type === 'background') {
                         image
@@ -107,12 +111,9 @@ module.exports.createImage = type => async ctx => {
                     const thumbnail = sharp(data)
                     thumbnail
                         .metadata()
-                        .then(async () => await uploadFile(`img/${filename}`))
                         .then(() => thumbnail.resize(100, 100).withMetadata().rotate().toBuffer())
                         .then(result => fs.writeFile(`img/thumb/${filename}`, result, async () => {
-
                             await uploadFile(`img/thumb/${filename}`)
-
                         }))
                 } else if (type === 'pick') {
                     const thumbnail = sharp(data)
