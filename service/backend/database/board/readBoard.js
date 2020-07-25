@@ -54,7 +54,7 @@ module.exports.adminBoardManagers = async domain => {
 
 module.exports.adminBoardManagerLevel = async (userId, domain) => {
     const result = await pool.query(
-        `SELECT level FROM BoardManagers WHERE userId = ? AND boardId = (SELECT id FROM Boards WHERE domain = ?)`,
+        `SELECT level FROM BoardManagers WHERE userId = ? AND boardDomain = ?`,
         [userId, domain]
     )
     if (result.length < 1)

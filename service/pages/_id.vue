@@ -17,6 +17,7 @@
             <div>정말로 글을 삭제하시겠습니까?</div>
             <b-form-group class='mt-1' v-if='!$store.state.user.isLogged'>
                 <b-form-input
+                    type='password'
                     placeholder='비밀번호'
                     v-model='removePassword'
                     required/>
@@ -59,7 +60,7 @@
                 </div>
                 <div class='author'>
                     <!-- <img :src='`/level/${topic.level}.png`'> -->
-                    <img class='icon' :src='`/tmp${topic.boardLevel || 0}.png`'>
+                    <img class='icon' :src='`/${topic.admin ? "admin" : "user" + (topic.userId > 0 ? 1 : 0) + (topic.boardLevel || 0)}.png`'>
                     {{ topic.author }}
                     <span class='ip' v-if='topic.userId < 1 && topic.ip !== ""'>({{ topic.ip }})</span>
                 </div>
@@ -192,7 +193,8 @@
                     isBest: false,
                     isNotice: false,
                     profile: '',
-                    admin: 0
+                    admin: 0,
+                    boardLevel: 0
                 },
                 removePassword: '',
                 images: [],
@@ -314,7 +316,7 @@
                     this.$store.commit('setLoading')
                     return this.toast(data.message || '오류가 발생했습니다.', 'danger')
                 }
-                this.$router.go(-1)
+                this.toast('글을 삭제했습니다.', 'success')
             },
             scrollToTop() {
                 this.$nextTick(() => {

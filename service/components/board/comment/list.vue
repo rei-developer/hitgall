@@ -29,7 +29,7 @@
                         <div class='content'>
                             <div>
                                 <!-- <img :src='`/level/${item.level}.png`'> -->
-                                <img class='icon' :src='`/tmp${item.boardLevel || 0}.png`'>
+                                <img class='icon' :src='`/${item.admin ? "admin" : "user" + (item.userId > 0 ? 1 : 0) + (item.boardLevel || 0)}.png`'>
                                 <span class='author'>
                                     {{ item.author }}
                                     <span class='ip' v-if='item.userId < 1 && item.ip !== ""'>({{ item.ip }})</span>
@@ -348,7 +348,7 @@
                         flex: 1;
                         > div {
                             margin: 8px;
-                            font-size: 12px;
+                            font-size: 13px;
                             word-break: break-all;
                             &:nth-child(1) {
                                 > img:nth-child(1) { margin-top: -3px }

@@ -758,7 +758,7 @@ module.exports.deleteTopic = async ctx => {
             message: '비밀번호가 일치하지 않습니다.',
             status: 'fail'
         }
-    const level = await readBoard.adminBoardManagerLevel(user.id, domain)
+    const level = await readBoard.adminBoardManagerLevel(user.id, topic.boardDomain)
     if (user && user.isAdmin < 1 && !level && topic.userId !== user.id)
         return ctx.body = {
             message: '삭제 권한이 없습니다.',
@@ -798,8 +798,8 @@ module.exports.deleteTopic = async ctx => {
         await updateTopic.updateTopicByIsAllowed(id)
     if (user && (level || user.isAdmin > 0))
         await createRemoveLog(user.id, topic.boardDomain, topic.author, topic.title, topic.ip)
-    if (topic.userId > 0)
-        await User.setUpPoint(topic.userId, -20)
+    // if (topic.userId > 0)
+    //     await User.setUpPoint(topic.userId, -20)
     ctx.body = {
         status: 'ok'
     }

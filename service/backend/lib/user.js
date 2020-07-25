@@ -104,7 +104,7 @@ module.exports.setUpExp = async (user, exp) => {
 
 module.exports.setUpPoint = async (user, point) => {
     await updateUser({
-        point: user.point + point
+        point: Number(user.point) + Number(point)
     }, user.id)
 }
 
