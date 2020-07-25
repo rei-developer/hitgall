@@ -62,7 +62,7 @@ module.exports.createImage = type => async ctx => {
                         image
                             .metadata()
                             .then(
-                                metadata => image.resize(Math.min(metadata.width, metadata.height)).withMetadata().rotate().jpeg(80).toBuffer()
+                                metadata => image.withMetadata().rotate().toBuffer()
                             )
                             .then(result => fs.writeFile(`img/${filename}`, result, async () => {
 
