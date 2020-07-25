@@ -22,6 +22,7 @@ const createPoll = require('../../database/poll/createPoll')
 const createNotice = require('../../database/notice/createNotice')
 const createPost = require('../../database/post/createPost')
 const createTopic = require('../../database/topic/createTopic')
+const createRemoveLog = require('../../database/removeLog/createRemoveLog')
 const readBoard = require('../../database/board/readBoard')
 const readNotice = require('../../database/notice/readNotice')
 const readPost = require('../../database/post/readPost')
@@ -260,6 +261,8 @@ module.exports.createTopic = async ctx => {
         isNotice,
         category,
         color,
+        writer,
+        password,
         title,
         content,
         poll,
@@ -269,6 +272,8 @@ module.exports.createTopic = async ctx => {
         domain = 'anime'
     if (title === '' || content === '<p></p>')
         return
+    writer = Filter.disable(writer)
+    password = Filter.disable(password)
     title = Filter.disable(title)
     content = Filter.topic(content)
     if (color !== '')
@@ -312,7 +317,8 @@ module.exports.createTopic = async ctx => {
         boardDomain: domain,
         category,
         color,
-        author: user ? user.nickname : 'ㅇㅇ',
+        author: user ? user.nickname : writer,
+        password,
         title,
         content,
         ip,
@@ -386,6 +392,8 @@ module.exports.createPost = async ctx => {
     const token = ctx.get('x-access-token')
     const user = token !== '' ? await User.getUser(token) : null
     let {
+        writer,
+        password,
         topicId,
         topicUserId,
         postUserId,
@@ -397,6 +405,8 @@ module.exports.createPost = async ctx => {
     topicUserId = Number(topicUserId)
     if (postUserId)
         postUserId = Number(postUserId)
+    writer = Filter.post(writer)
+    password = Filter.post(password)
     content = Filter.post(content)
     const ip = ctx.get('x-real-ip')
     const header = ctx.header['user-agent']
@@ -405,7 +415,8 @@ module.exports.createPost = async ctx => {
         topicId,
         postRootId,
         postParentId,
-        author: user ? user.nickname : 'ㅇㅇ',
+        author: user ? user.nickname : writer,
+        password,
         content,
         stickerId: sticker.id,
         stickerSelect: sticker.select,
@@ -732,21 +743,24 @@ module.exports.updatePost = async ctx => {
 }
 
 module.exports.deleteTopic = async ctx => {
-    const user = await User.getUser(ctx.get('x-access-token'))
-    if (!user)
-        return
-    const { id } = ctx.request.body
+    const { id, password } = ctx.request.body
     if (id < 1)
         return ctx.body = {
             status: 'fail'
         }
+    const token = ctx.get('x-access-token')
+    const user = token !== '' ? await User.getUser(token) : null
     const topic = await readTopic.edit(id)
-    if (!topic.userId)
+    if (!user && password !== topic.password)
         return ctx.body = {
+            message: '비밀번호가 일치하지 않습니다.',
             status: 'fail'
         }
-    if (user.isAdmin < 1 && topic.userId !== user.id)
-        return
+    if (user && user.isAdmin < 1 && topic.userId !== user.id)
+        return ctx.body = {
+            message: '삭제 권한이 없습니다.',
+            status: 'fail'
+        }
     if (topic.isPoll) {
         await deletePoll(id)
         await deletePoll.pollVotes(id)
@@ -775,11 +789,14 @@ module.exports.deleteTopic = async ctx => {
     }
     await deleteNotice.topicId(id)
     await deletePost.topicId(id)
-    if (user.isAdmin > 0)
+    if (user && user.isAdmin > 0)
         await deleteTopic(id)
     else
         await updateTopic.updateTopicByIsAllowed(id)
-    await User.setUpPoint(user, -20)
+    if (user)
+        await createRemoveLog(user.id, topic.boardDomain, topic.author, topic.title, topic.ip)
+    if (topic.userId > 0)
+        await User.setUpPoint(topic.userId, -20)
     ctx.body = {
         status: 'ok'
     }

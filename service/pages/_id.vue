@@ -14,7 +14,13 @@
             size='sm'
             auto-focus-button='ok'
             centered>
-            정말로 삭제하시겠습니까?
+            <div>정말로 글을 삭제하시겠습니까?</div>
+            <b-form-group class='mt-1' v-if='!$store.state.user.isLogged'>
+                <b-form-input
+                    placeholder='비밀번호'
+                    v-model='removePassword'
+                    required/>
+            </b-form-group>
         </b-modal>
         <b-form-group class='mb-3'>
             <nuxt-link :to='`/board/${topic.boardDomain}`'>
@@ -120,14 +126,12 @@
                     목록
                 </b-button>
             </nuxt-link>
-            <span v-if='$store.state.user.isLogged && ($store.state.user.isAdmin > 0 || topic.userId === $store.state.user.id)'>
-                <nuxt-link :to='`/board/${topic.boardDomain}/write?id=${id}`'>
-                    <b-button size='sm'>
-                        <font-awesome-icon icon='edit'/>
-                        수정
-                    </b-button>
-                </nuxt-link>
-            </span>
+            <nuxt-link :to='`/board/${topic.boardDomain}/write?id=${id}`'>
+                <b-button size='sm'>
+                    <font-awesome-icon icon='edit'/>
+                    수정
+                </b-button>
+            </nuxt-link>
             <b-button size='sm' @click='removeHandler'>
                 <font-awesome-icon icon='trash'/>
                 삭제
@@ -190,6 +194,7 @@
                     profile: '',
                     admin: 0
                 },
+                removePassword: '',
                 images: [],
                 error: false,
                 loading: true
@@ -298,7 +303,10 @@
                 const data = await this.$axios.$delete(
                     '/api/topic/delete',
                     {
-                        data: { id: this.id },
+                        data: {
+                            id: this.id,
+                            password: this.removePassword
+                        },
                         headers: { 'x-access-token': token }
                     }
                 )

@@ -47,7 +47,7 @@ module.exports.userId = async id => {
 
 module.exports.edit = async id => {
     const result = await pool.query(
-        'SELECT userId, isPoll, isImage FROM Topics WHERE id = ?',
+        'SELECT userId, boardDomain, author, password, title, ip, isPoll, isImage FROM Topics WHERE id = ?',
         [id]
     )
     if (result.length < 1)

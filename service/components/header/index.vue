@@ -83,6 +83,8 @@
                 <li @click='forceUpdate'><nuxt-link to='/board/tsukuru'>쯔꾸르 갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/counterside'>카운터사이드 갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/yandere'>얀데레 갤러리</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/mmd'>MMD 갤러리</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/ai_girl'>AI 소녀 갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/request'>갤러리 신청</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/notice'>공지사항</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/feedback'>건의사항</nuxt-link></li>

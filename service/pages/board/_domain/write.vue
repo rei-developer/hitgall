@@ -13,7 +13,7 @@
 					<b-form-input type='color' v-model='form.color' style='width: 120px'/>
 				</b-form-group>
 			</span>
-			<b-form-group label='분류' v-if='categories.length > 0'>
+			<b-form-group v-if='categories.length > 0'>
 				<b-form-radio-group
 					size='sm'
 					v-model='form.category'
@@ -22,8 +22,18 @@
 					buttons
 					name='radios-btn-default'/>
 			</b-form-group>
-			<b-form-group label='제목'>
-				<b-form-input placeholder='100글자 제한' v-model='form.title' trim autofocus/>
+			<b-form-group v-if='!$store.state.user.isLogged'>
+				<b-form inline>
+					<b-input-group class='mb-2 mr-sm-2 mb-sm-0'>
+						<b-input placeholder='닉네임' v-model='form.writer' trim/>
+					</b-input-group>
+					<b-input-group class='mb-2 mr-sm-2 mb-sm-0'>
+						<b-input type='password' placeholder='비밀번호' v-model='form.password' trim/>
+					</b-input-group>
+				</b-form>
+			</b-form-group>
+			<b-form-group>
+				<b-form-input placeholder='제목' v-model='form.title' trim autofocus/>
 			</b-form-group>
 			<div v-if='!poll.hide'>
 				<b-form-group label='설문조사 질문'>
@@ -255,6 +265,8 @@
 				form: {
 					category: '',
 					color: '',
+					writer: '',
+					password: '',
 					title: '',
 					content: '<p></p>',
 					isNotice: false
@@ -328,6 +340,14 @@
 				categories
 			}
 		},
+    	watch: { 
+            'form.writer': function() {
+                localStorage.setItem('notUserID', this.form.writer)
+            },
+            'form.password': function() {
+                localStorage.setItem('notUserPW', this.form.password)
+            }
+        },
         mounted() {
             this.editor = new Editor({
 				// autoFocus: true,
@@ -355,7 +375,9 @@
                 ],
                 content: this.form.content,
                 onUpdate: ({ getHTML }) => this.html = getHTML()
-            })
+			})
+			this.form.writer = localStorage.notUserID
+            this.form.password = localStorage.notUserPW
 			const instance = this.$refs.dropzone.dropzone
 			const editor = this.editor
 			const getContent = this.getContent
@@ -435,6 +457,8 @@
 					isNotice: this.form.isNotice,
 					category: this.form.category,
 					color: this.form.color,
+					writer: this.form.writer,
+					password: this.form.password,
 					title: this.form.title,
 					content: this.html,
 					poll: this.poll,
@@ -590,6 +614,7 @@
 		background-color: #fff;
 	}
 
+	textarea { resize: both }
 	textarea.textBox { margin-bottom: 2px }
 
 	.savedTime {

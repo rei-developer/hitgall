@@ -291,8 +291,9 @@
                         <b-dropdown-item @click='searches.select = 3'>작성자</b-dropdown-item>
                     </b-dropdown>
                 </template>
+                <!-- 
+                    v-b-tooltip.focus title='잠시 갱신이 중단됩니다.' -->
                 <b-form-input
-                    v-b-tooltip.focus title='잠시 갱신이 중단됩니다.'
                     placeholder='2글자 이상'
                     v-on:keyup.enter='search'
                     v-model='searches.text'

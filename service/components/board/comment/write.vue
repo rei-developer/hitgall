@@ -12,16 +12,19 @@
                 </div>
                 <div class='label'>에게 대댓글 작성</div>
             </div>
-            <!-- <div class='name-box'>
+            <div class='name-box' v-if='!$store.state.user.isLogged'>
                 <input
+                    maxlength='20'
                     class='writer'
                     placeholder='닉네임'
                     v-model='writer'/>
                 <input
+                    maxlength='200'
+                    type='password'
                     class='password'
                     placeholder='비밀번호'
                     v-model='password'/>
-            </div> -->
+            </div>
             <div class='content'>
                 <div class='write-box'>
                     <textarea
@@ -80,6 +83,18 @@
                 },
                 loading: false
             }
+        },
+        watch: { 
+            writer: function() {
+                localStorage.setItem('notUserID', this.writer)
+            },
+            password: function() {
+                localStorage.setItem('notUserPW', this.password)
+            }
+        },
+        mounted() {
+            this.writer = localStorage.notUserID
+            this.password = localStorage.notUserPW
         },
         methods: {
             submit: async function() {
@@ -199,8 +214,8 @@
             }
             > .name-box {
                 > input {
-                    width: 180px;
-                    margin: 0 .05rem .5rem 0;
+                    width: 120px;
+                    margin: 0 0 5px 0;
                     padding: .25rem .5rem;
                     color: #000;
                     font-size: 14px;
