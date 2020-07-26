@@ -62,11 +62,7 @@
                     <!-- <img :src='`/level/${topic.level}.png`'> -->
                     <img class='icon' :src='`/${topic.admin ? "admin" : "user" + (topic.userId > 0 ? 1 : 0) + (topic.boardLevel || 0)}.png`'>
                     {{ topic.author }}
-<<<<<<< HEAD
                     <span class='ip' v-if='topic.userId < 1 && topic.ip !== ""'>({{ topic.ip }})</span>
-=======
-                    <span class='ip' v-if='topic.userId < 1 && ip !== ""'>({{ topic.ip }})</span>
->>>>>>> c76aab47c01b66169471340782aa7ac340a5932c
                 </div>
                 <div class='info'>
                     <div>
