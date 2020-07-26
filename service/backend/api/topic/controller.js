@@ -318,7 +318,7 @@ module.exports.createTopic = async ctx => {
         boardDomain: domain,
         category,
         color,
-        author: writer,
+        author: user ? user.nickname : writer,
         password,
         title,
         content,
@@ -419,7 +419,7 @@ module.exports.createPost = async ctx => {
         postRootId,
         postParentId,
         boardDomain: domain,
-        author: writer,
+        author: user ? user.nickname : writer,
         password,
         content,
         stickerId: sticker.id,
@@ -466,14 +466,14 @@ module.exports.createTopicVotes = async ctx => {
         return ctx.body = {
             status: 'fail'
         }
-    // if (topic.userId < 1)
-    //     return ctx.body = {
-    //         message: '현재 유동닉이 쓴 글은 추천할 수 없습니다. 조만간 구현됩니다.',
-    //         status: 'fail'
-    //     }
-    const targetUser = await readUser(topic.userId) || 0
+    if (topic.userId < 1)
+        return ctx.body = {
+            message: '현재 유동닉이 쓴 글은 추천할 수 없습니다. 조만간 구현됩니다.',
+            status: 'fail'
+        }
+    const targetUser = await readUser(topic.userId)
     const ip = ctx.get('x-real-ip')
-    if (topic.ip === ip) // topic.userId === user.id || 
+    if (topic.userId === user.id || topic.ip === ip)
         return ctx.body = {
             message: '본인에게 투표할 수 없습니다.',
             status: 'fail'
@@ -499,27 +499,23 @@ module.exports.createTopicVotes = async ctx => {
         if (topic.isBest === 0 && topic.likes - topic.hates >= BEST_LIMIT) {
             move = 'BEST'
             await updateTopic.updateTopicByIsBest(id, 1)
-            if (targetUser > 0)
-                await User.setUpExpAndPoint(targetUser, 100, 100)
+            await User.setUpExpAndPoint(targetUser, 100, 100)
             // await socket.newBest(global.io, id, topic.boardDomain, topic.title)
         } else {
-            if (targetUser > 0)
-                await User.setUpExpAndPoint(targetUser, 5, 5)
+            await User.setUpExpAndPoint(targetUser, 5, 5)
         }
         await updateTopic.updateTopicCountsByLikes(id)
     } else {
         if (topic.isBest === 1 && topic.hates - topic.likes >= BEST_LIMIT) {
             move = 'DEFAULT'
             await updateTopic.updateTopicByIsBest(id)
-            if (targetUser > 0)
-                await User.setUpExpAndPoint(targetUser, -20, -20)
+            await User.setUpExpAndPoint(targetUser, -20, -20)
             // } else if (topic.hates - topic.likes >= DELETE_LIMIT) {
             //     move = 'DELETE'
             //     await updateTopic.updateTopicByIsAllowed(id)
             //     await User.setUpExpAndPoint(targetUser, -10, -10)
         } else {
-            if (targetUser > 0)
-                await User.setUpExpAndPoint(targetUser, -5, -5)
+            await User.setUpExpAndPoint(targetUser, -5, -5)
         }
         await updateTopic.updateTopicCountsByHates(id)
     }
@@ -551,14 +547,14 @@ module.exports.createPostVotes = async ctx => {
         return ctx.body = {
             status: 'fail'
         }
-    // if (post.userId < 1)
-    //     return ctx.body = {
-    //         message: '현재 유동닉이 쓴 댓글은 추천할 수 없습니다. 조만간 구현됩니다.',
-    //         status: 'fail'
-    //     }
+    if (post.userId < 1)
+        return ctx.body = {
+            message: '현재 유동닉이 쓴 댓글은 추천할 수 없습니다. 조만간 구현됩니다.',
+            status: 'fail'
+        }
     //const targetUser = await readUser(post.userId)
     const ip = ctx.get('x-real-ip')
-    if (post.ip === ip) // post.userId === user.id ||
+    if (post.userId === user.id || post.ip === ip)
         return ctx.body = {
             message: '본인에게 투표할 수 없습니다.',
             status: 'fail'

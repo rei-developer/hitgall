@@ -25,22 +25,11 @@ module.exports.getInventoryItem = async ctx => {
 
 module.exports.getInventory = async ctx => {
     const user = await User.getUser(ctx.get('x-access-token'))
-    const defaultItems = [{
-        id: 130,
-        number: 22,
-        ext: 'jpg',
-        name: '페페 야구'
-    }, {
-        id: 167,
-        number: 57,
-        ext: 'jpg',
-        name: '페페 모음'
-    }]
-    let inventory = user
-        ? (await readSticker.inventory(user.id) || [])
-        : []
+    if (!user)
+        return
+    const inventory = await readSticker.inventory(user.id)
     ctx.body = {
-        inventory: [...defaultItems, ...inventory],
+        inventory,
         status: 'ok'
     }
 }

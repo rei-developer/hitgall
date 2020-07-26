@@ -9,12 +9,6 @@
                         <img src='/icon.png'>
                     </nuxt-link>
                 </li>
-                <!-- sidebar -->
-                <li class='sidebar mobile-only' v-b-toggle.sidebar-backdrop>
-                    <span>
-                        <font-awesome-icon icon='bars'/>
-                    </span>
-                </li>
                 <!-- menu -->
                 <li v-shortkey.once='["h"]' @shortkey='move("/hit")' @click='forceUpdate'>
                     <nuxt-link to='/hit'>
@@ -63,7 +57,7 @@
                 </li>
             </ul>
         </nav>
-        <div class='openSidebar desktop-only'>
+        <div class='openSidebar'>
             <b-button pill size='lg' variant='primary' v-b-toggle.sidebar-backdrop>
                 <font-awesome-icon icon='bars'/>
             </b-button>
@@ -177,8 +171,7 @@
             > li {
                 float: left;
                 position: relative;
-                outline: none;
-                > a, span {
+                > a {
                     font-size: 14px;
                     color: #fff;
                     text-decoration: none;
@@ -188,10 +181,6 @@
                         color: #fff;
                         text-decoration: none;
                     }
-                }
-                > span {
-                    font-size: 24px;
-                    padding: 7px 14px;
                 }
                 &.logo {
                     > a {

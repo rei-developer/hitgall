@@ -35,7 +35,9 @@
         },
         methods: {
             getData: async function() {
-                const token = this.$store.state.user.token || ''
+                if (!this.$store.state.user.isLogged)
+                    return
+                const token = this.$store.state.user.token
                 const data = await this.$axios.$get(
                     `/api/sticker/list`,
                     { headers: { 'x-access-token': token } }
