@@ -4,6 +4,29 @@ const createSticker = require('../../database/sticker/createSticker')
 const readSticker = require('../../database/sticker/readSticker')
 const updateSticker = require('../../database/sticker/updateSticker')
 
+module.exports.getInventoryItemView = async ctx => {
+    const { id } = ctx.params
+    if (id < 1)
+        return
+    let days = 0
+    const token = ctx.get('x-access-token')
+    const user = token !== '' ? await User.getUser(token) : null
+    if (user) {
+        const check = await readSticker.check(user.id, id)
+        if (!check)
+            return ctx.body = {
+                status: 'fail'
+            }
+        days = moment(check.regdate).diff(moment(), 'days')
+    }
+    const sticker = await readSticker.sticker(id)
+    ctx.body = {
+        sticker,
+        days,
+        status: 'ok'
+    }
+}
+
 module.exports.getInventoryItem = async ctx => {
     const { id } = ctx.params
     if (id < 1)

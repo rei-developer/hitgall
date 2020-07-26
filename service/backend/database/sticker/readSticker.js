@@ -27,6 +27,16 @@ module.exports.count = async columns => {
     }
 }
 
+module.exports.sticker = async id => {
+    const result = await pool.query(
+        'SELECT * FROM Stickers WHERE id = ?',
+        [id]
+    )
+    if (result.length < 1)
+        return false
+    return result[0]
+}
+
 module.exports.stickers = async (columns, page, limit) => {
     let keys = []
     let values = []
