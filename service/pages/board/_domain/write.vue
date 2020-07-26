@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
 	<b-overlay
 		:show='loading'
 		rounded='sm'>
@@ -9,53 +8,6 @@
 					<b-form-checkbox v-model='form.isNotice' switch>
 						공지사항
 					</b-form-checkbox>
-=======
-	<div>
-		<b-modal
-            id='bv-back-modal'
-            @ok='$router.push({ path: `/board/${domain}` })'
-            title='알림'
-            title-tag='h6'
-            cancel-title='취소'
-            ok-title='확인'
-            size='sm'
-            auto-focus-button='ok'
-            centered>
-			정말로 취소하시겠습니까?
-        </b-modal>
-		<b-overlay
-			:show='loading'
-			rounded='sm'>
-			<article class='writeBox'>
-				<span v-if='$store.state.user.isAdmin > 0'>
-					<b-form-group>
-						<b-form-checkbox v-model='form.isNotice' switch>
-							공지사항
-						</b-form-checkbox>
-					</b-form-group>
-					<b-form-group label='색상'>
-						<b-form-input type='color' v-model='form.color' style='width: 120px'/>
-					</b-form-group>
-				</span>
-				<b-form-group v-if='categories.length > 0'>
-					<b-form-radio-group
-						size='sm'
-						v-model='form.category'
-						:options='categories'
-						button-variant='primary'
-						buttons
-						name='radios-btn-default'/>
-				</b-form-group>
-				<b-form-group v-if='!$store.state.user.isLogged'>
-					<b-form inline>
-						<b-input-group class='mb-2 mr-sm-2 mb-sm-0'>
-							<b-input placeholder='닉네임' v-model='form.writer' trim/>
-						</b-input-group>
-						<b-input-group class='mb-2 mr-sm-2 mb-sm-0'>
-							<b-input type='password' placeholder='비밀번호' v-model='form.password' trim/>
-						</b-input-group>
-					</b-form>
->>>>>>> c76aab47c01b66169471340782aa7ac340a5932c
 				</b-form-group>
 				<b-form-group label='색상'>
 					<b-form-input type='color' v-model='form.color' style='width: 120px'/>
