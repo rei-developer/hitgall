@@ -95,7 +95,7 @@
                                 <!-- <img :src='`/level/${item.level}.png`'> -->
                                 <img class='icon' :src='`/${item.admin ? "admin" : "user" + (item.userId > 0 ? 1 : 0) + (item.boardLevel || 0)}.png`'>
                                 {{ item.author }}
-                                <span class='ip' v-if='item.ip !== ""'>({{ item.ip }})</span>
+                                <span class='ip' v-if='item.userId < 1 && item.ip !== ""'>({{ item.ip }})</span>
                             </div>
                             <div>{{ getCreated(item.created) }}</div>
                             <div>{{ numberWithCommas(item.hits) }}</div>
@@ -139,7 +139,7 @@
                                 <!-- <img :src='`/level/${item.level}.png`'> -->
                                 <img class='icon' :src='`/${item.admin ? "admin" : "user" + (item.userId > 0 ? 1 : 0) + (item.boardLevel || 0)}.png`'>
                                 {{ item.author }}
-                                <span class='ip' v-if='item.ip !== ""'>({{ item.ip }})</span>
+                                <span class='ip' v-if='item.userId < 1 && item.ip !== ""'>({{ item.ip }})</span>
                             </div>
                             <div>{{ getCreated(item.created) }}</div>
                             <div>{{ numberWithCommas(item.hits) }}</div>
@@ -167,7 +167,7 @@
                                             <!-- <img :src='`/level/${item.level}.png`'> -->
                                             <img class='icon' :src='`/${item.admin ? "admin" : "user" + (item.userId > 0 ? 1 : 0) + (item.boardLevel || 0)}.png`'>
                                             {{ item.author }}
-                                            <span class='ip' v-if='item.ip !== ""'>({{ item.ip }})</span>
+                                            <span class='ip' v-if='item.userId < 1 && item.ip !== ""'>({{ item.ip }})</span>
                                         </span>
                                         <span class='info'>
                                             <font-awesome-icon icon='history'/>
@@ -213,7 +213,7 @@
                                             <!-- <img :src='`/level/${item.level}.png`'> -->
                                             <img class='icon' :src='`/${item.admin ? "admin" : "user" + (item.userId > 0 ? 1 : 0) + (item.boardLevel || 0)}.png`'>
                                             {{ item.author }}
-                                            <span class='ip' v-if='item.ip !== ""'>({{ item.ip }})</span>
+                                            <span class='ip' v-if='item.userId < 1 && item.ip !== ""'>({{ item.ip }})</span>
                                         </span>
                                         <span class='info'>
                                             <font-awesome-icon icon='history'/>
@@ -456,7 +456,11 @@
                 }, 60000)
             },
             numberWithCommas(x) {
-                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                try {
+                    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                } catch {
+                    return x
+                }
             },
             imageUrlAlt(event) {
                 event.target.src = '/default.png'

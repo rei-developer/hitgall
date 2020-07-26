@@ -35,12 +35,12 @@
 						buttons
 						name='radios-btn-default'/>
 				</b-form-group>
-				<b-form-group>
+				<b-form-group v-if='!$store.state.user.isLogged'>
 					<b-form inline>
 						<b-input-group class='mb-2 mr-sm-2 mb-sm-0'>
 							<b-input placeholder='닉네임' v-model='form.writer' trim/>
 						</b-input-group>
-						<b-input-group class='mb-2 mr-sm-2 mb-sm-0' v-if='!$store.state.user.isLogged'>
+						<b-input-group class='mb-2 mr-sm-2 mb-sm-0'>
 							<b-input type='password' placeholder='비밀번호' v-model='form.password' trim/>
 						</b-input-group>
 					</b-form>
@@ -397,7 +397,7 @@
                 content: this.form.content,
                 onUpdate: ({ getHTML }) => this.html = getHTML()
 			})
-			this.form.writer = this.$store.state.user.isLogged ? (localStorage.notUserID || this.$store.state.user.nickname) : (localStorage.notUserID || 'ㅇㅇ')
+			this.form.writer = localStorage.notUserID || 'ㅇㅇ'
             this.form.password = localStorage.notUserPW || ''
 			const instance = this.$refs.dropzone.dropzone
 			const editor = this.editor
@@ -597,7 +597,11 @@
                 }, 30000)
             },
 			numberWithCommas(x) {
-                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                try {
+                    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                } catch {
+                    return x
+                }
             },
             imageUrlAlt(event) {
                 event.target.src = '/default.png'

@@ -273,7 +273,7 @@ module.exports.createTopic = async ctx => {
     if (title === '' || content === '<p></p>')
         return
     writer = Filter.disable(writer)
-    writer = !writer || writer === '' ? (user ? user.nickname : 'ㅇㅇ') : writer
+    writer = !writer || writer === '' ? 'ㅇㅇ' : writer
     password = Filter.disable(password)
     title = Filter.disable(title)
     content = Filter.topic(content)
@@ -318,7 +318,7 @@ module.exports.createTopic = async ctx => {
         boardDomain: domain,
         category,
         color,
-        author: writer,
+        author: user ? user.nickname : writer,
         password,
         title,
         content,
@@ -408,7 +408,7 @@ module.exports.createPost = async ctx => {
     if (postUserId)
         postUserId = Number(postUserId)
     writer = Filter.post(writer)
-    writer = !writer || writer === '' ? (user ? user.nickname : 'ㅇㅇ') : writer
+    writer = !writer || writer === '' ? 'ㅇㅇ' : writer
     password = Filter.post(password)
     content = Filter.post(content)
     const ip = ctx.get('x-real-ip')
@@ -419,7 +419,7 @@ module.exports.createPost = async ctx => {
         postRootId,
         postParentId,
         boardDomain: domain,
-        author: writer,
+        author: user ? user.nickname : writer,
         password,
         content,
         stickerId: sticker.id,

@@ -62,7 +62,7 @@
                     <!-- <img :src='`/level/${topic.level}.png`'> -->
                     <img class='icon' :src='`/${topic.admin ? "admin" : "user" + (topic.userId > 0 ? 1 : 0) + (topic.boardLevel || 0)}.png`'>
                     {{ topic.author }}
-                    <span class='ip' v-if='topic.ip !== ""'>({{ topic.ip }})</span>
+                    <span class='ip' v-if='topic.userId < 1 && ip !== ""'>({{ topic.ip }})</span>
                 </div>
                 <div class='info'>
                     <div>
@@ -334,7 +334,11 @@
                 })
             },
             numberWithCommas(x) {
-                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                try {
+                    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                } catch {
+                    return x
+                }
             },
             imageUrlAlt(event) {
                 event.target.src = '/default.png'

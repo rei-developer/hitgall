@@ -117,7 +117,7 @@
                     return this.message = data.message || '알 수 없는 오류가 발생했습니다. 나중에 다시 시도하세요.'
                 }
                 localStorage.setItem('tk', data.token)
-                localStorage.removeItem('notUserID')
+                // localStorage.removeItem('notUserID')
                 location.href = '/'
             },
             // async checkRecaptcha() {

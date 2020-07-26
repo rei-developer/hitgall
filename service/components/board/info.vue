@@ -35,7 +35,11 @@
                 this.board = data.board
             },
             numberWithCommas(x) {
-                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                try {
+                    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                } catch {
+                    return x
+                }
             },
             imageUrlAlt(event) {
                 event.target.src = '/default.png'

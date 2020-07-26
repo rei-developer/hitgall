@@ -12,7 +12,7 @@
                 </div>
                 <div class='label'>에게 대댓글 작성</div>
             </div>
-            <div class='name-box'>
+            <div class='name-box' v-if='!$store.state.user.isLogged'>
                 <input
                     maxlength='20'
                     class='writer'
@@ -23,8 +23,7 @@
                     type='password'
                     class='password'
                     placeholder='비밀번호'
-                    v-model='password'
-                    v-if='!$store.state.user.isLogged'/>
+                    v-model='password'/>
             </div>
             <div class='content'>
                 <div class='write-box'>
@@ -94,7 +93,7 @@
             }
         },
         mounted() {
-            this.writer = this.$store.state.user.isLogged ? (localStorage.notUserID || this.$store.state.user.nickname) : (localStorage.notUserID || 'ㅇㅇ')
+            this.writer = localStorage.notUserID || 'ㅇㅇ'
             this.password = localStorage.notUserPW || ''
         },
         methods: {

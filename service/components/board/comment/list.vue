@@ -32,7 +32,7 @@
                                 <img class='icon' :src='`/${item.admin ? "admin" : "user" + (item.userId > 0 ? 1 : 0) + (item.boardLevel || 0)}.png`'>
                                 <span class='author'>
                                     {{ item.author }}
-                                    <span class='ip' v-if='item.ip !== ""'>({{ item.ip }})</span>
+                                    <span class='ip' v-if='item.userId < 1 && item.ip !== ""'>({{ item.ip }})</span>
                                 </span>
                                 <span class='regdate'>{{ $moment(item.updated).format("YY/MM/DD HH:mm:ss") }}</span>
                             </div>
@@ -287,7 +287,11 @@
                 })
             },
             numberWithCommas(x) {
-                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                try {
+                    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                } catch {
+                    return x
+                }
             },
             imageUrlAlt(event) {
                 event.target.src = '/default.png'
