@@ -92,6 +92,7 @@
                 <li @click='forceUpdate'><nuxt-link to='/board/bang_dream'>BanG Dream 갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/stwitch'>스트라이크 위치스 갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/azur_lane'>벽람항로 갤러리</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/manjuu'>Manjuu 갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/tsukuru'>쯔꾸르 갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/yandere'>얀데레 갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/girlcafe'>걸 카페 건 갤러리</nuxt-link></li>
