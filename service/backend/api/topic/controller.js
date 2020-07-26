@@ -9,7 +9,7 @@ const storage = new Storage({ keyFilename: 'key.json' })
 
 const deleteFile = async filename => {
     await storage.bucket(BUCKET_NAME).file(filename).delete()
-    console.log(`gs://${bucketName}/${filename} deleted.`)
+    console.log(`gs://${BUCKET_NAME}/${filename} deleted.`)
 }
 
 const fs = require('fs')
