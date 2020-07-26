@@ -78,13 +78,16 @@
                 <li @click='forceUpdate'><nuxt-link to='/board/koikatsu'>코이카츠 갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/skyrim'>베데스다 갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/honkai3'>붕괴3 갤러리</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/monmusu'>몬무스 갤러리</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/langrisser'>랑그릿사 갤러리</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/tsukuru'>쯔꾸르 갤러리</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/ar_knights'>명일방주 갤러리</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/epic7'>에픽세븐 갤러리</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/pmmm'>마법소녀 마도카 마기카 갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/counterside'>카운터사이드 갤러리</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/monmusu'>몬무스 갤러리</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/tsukuru'>쯔꾸르 갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/yandere'>얀데레 갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/mmd'>MMD 갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/ai_girl'>AI 소녀 갤러리</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/langrisser'>랑그릿사 갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/request'>갤러리 신청</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/notice'>공지사항</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/feedback'>건의사항</nuxt-link></li>
