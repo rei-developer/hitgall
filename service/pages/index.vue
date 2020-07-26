@@ -1,5 +1,6 @@
 <template>
     <div>
+        <adsbygoogle/>
         <!-- <div class='articles desktop-only'>
             <div class='article-box'>
                 <HitArticle :limit='5'/>
