@@ -60,7 +60,17 @@ module.exports.getAdminBoardBlinds = async ctx => {
             message: '권한이 없습니다.',
             status: 'fail'
         }
-    const blinds = await readBoard.adminBoardBlinds(domain)
+    let blinds = await readBoard.adminBoardBlinds(domain)
+    if (blinds) {
+        blinds = blinds.map(item => {
+            const ip = item.ip.split('.')
+            if (ip && ip.length >= 3)
+                item.ip = `${ip[0]}.${ip[1]}`
+            else
+                item.ip = ''
+            return item
+        })
+    }
     ctx.body = {
         blinds
     }

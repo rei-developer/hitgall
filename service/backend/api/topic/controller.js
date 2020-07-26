@@ -209,7 +209,7 @@ module.exports.getContent = async ctx => {
     const { id } = ctx.params
     const user = await User.getUser(ctx.get('x-access-token'))
     let topic = await readTopic(id)
-    if (!topic || topic.isAllowed < 1 || (topic.boardDomain === 'feedback' && (!user || (user.isAdmin < 1 && topic.userId !== user.id))))
+    if (!topic || topic.isAllowed < 1)
         return ctx.body = {
             message: '접근할 수 없거나 삭제된 페이지입니다.',
             status: 'fail'

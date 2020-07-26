@@ -44,6 +44,7 @@
                 <li @click='forceUpdate'><nuxt-link to='/board/monmusu'>몬무스 갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/tsukuru'>쯔꾸르 갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/yandere'>얀데레 갤러리</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/girlcafe'>걸 카페 건 갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/mmd'>MMD 갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/ai_girl'>AI 소녀 갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/langrisser'>랑그릿사 갤러리</nuxt-link></li>

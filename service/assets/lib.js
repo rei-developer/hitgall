@@ -70,6 +70,9 @@ module.exports.getBoardName = domain => {
         case 'pmmm':
             name = '마법소녀 마도카 마기카 갤러리'
             break
+        case 'girlcafe':
+            name = '걸 카페 건 갤러리'
+            break
         default:
             name = domain + ' 갤러리'
             break

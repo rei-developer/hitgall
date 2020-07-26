@@ -64,7 +64,7 @@
                     <li
                         :class='id == item.id ? "view" : ""'
                         v-for='item in notices' :key='item.id'>
-                        <nuxt-link :to='`/${item.id}?page=${page}${category !== "" ? "&category=" + category : ""}`'>
+                        <nuxt-link :to='`/${item.id}?page=${page}${best > 0 ? "&best=" + best : ""}${category !== "" ? "&category=" + category : ""}`'>
                             <div>
                                 <span v-if='id == item.id'>
                                     <font-awesome-icon icon='angle-right'/>
@@ -107,7 +107,7 @@
                     <li
                         :class='id == item.id ? "view" : ""'
                         v-for='(item, index) in topics' :key='index'>
-                        <nuxt-link :to='`/${item.id}?page=${page}${category !== "" ? "&category=" + category : ""}`'>
+                        <nuxt-link :to='`/${item.id}?page=${page}${best > 0 ? "&best=" + best : ""}${category !== "" ? "&category=" + category : ""}`'>
                             <div>
                                 <span v-if='id == item.id'>
                                     <font-awesome-icon icon='angle-right'/>
@@ -153,7 +153,7 @@
                     <li
                         :class='id == item.id ? "view" : ""'
                         v-for='item in notices' :key='item.id'>
-                        <nuxt-link :to='`/${item.id}?page=${page}${category !== "" ? "&category=" + category : ""}`'>
+                        <nuxt-link :to='`/${item.id}?page=${page}${best > 0 ? "&best=" + best : ""}${category !== "" ? "&category=" + category : ""}`'>
                             <div class='content'>
                                 <div class='subject'>
                                     <span class='notice'>공지</span>
@@ -199,7 +199,7 @@
                     <li
                         :class='id == item.id ? "view" : ""'
                         v-for='item in topics' :key='item.id'>
-                        <nuxt-link :to='`/${item.id}?page=${page}${category !== "" ? "&category=" + category : ""}`'>
+                        <nuxt-link :to='`/${item.id}?page=${page}${best > 0 ? "&best=" + best : ""}${category !== "" ? "&category=" + category : ""}`'>
                             <div class='content'>
                                 <div class='subject'>
                                     <span class='category' v-if='item.category'>{{ item.category }}</span>
@@ -253,18 +253,18 @@
                 </div>
             </div>
             <div class='bottom'>
-                <b-pagination-nav
-                    :link-gen='linkGen'
-                    :limit='10'
-                    :number-of-pages='100'
-                    v-model='page'
-                    size='sm'/>
                 <nuxt-link :to='`/board/${domain}?best=1`'>
                     <b-button size='sm' variant='primary' @click='forceUpdate({ best: true })'>
                         <font-awesome-icon icon='arrow-up'/>
                         개념글
                     </b-button>
                 </nuxt-link>
+                <b-pagination-nav
+                    :link-gen='linkGen'
+                    :limit='10'
+                    :number-of-pages='100'
+                    v-model='page'
+                    size='sm'/>
                 <div v-if='domain !== "all"'>
                     <nuxt-link :to='`/board/${domain}/write`'>
                         <b-button
@@ -347,8 +347,8 @@
 				this.getCount()
             },
             category: function() {
-                this.page = 1
-                this.getData(true, true)
+                this.page = this.$route.query.page || 1
+                this.getData(true)
                 this.getCount()
             }
         },
@@ -368,8 +368,15 @@
                     return
 				this.loading = true
                 this.$store.commit('setLoading', true)
-                if (forceUpdate)
+                if (forceUpdate) {
+                    this.category = ''
+                    this.searches = {
+                        text: '',
+                        select: 0,
+                        state: false
+                    }
                     this.page = 1
+                }
                 const data = await this.$axios.$post(
                     '/api/topic/list',
                     {
