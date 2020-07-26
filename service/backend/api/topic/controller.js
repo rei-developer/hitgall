@@ -223,6 +223,9 @@ module.exports.getContent = async ctx => {
     const images = topic.isImage > 0
         ? await readTopic.topicImages(id)
         : []
+    const boardLevel = user
+        ? (user.isAdmin < 1 ? await readBoard.adminBoardManagerLevel(user.id, topic.boardDomain) : 3)
+        : 0
     await updateTopic.updateTopicCountsByHits(id)
     let count = 0
     if (user) {
@@ -232,6 +235,7 @@ module.exports.getContent = async ctx => {
     ctx.body = {
         topic,
         images,
+        boardLevel,
         count
     }
 }
@@ -281,6 +285,17 @@ module.exports.createTopic = async ctx => {
     const isAdminOnly = await readBoard.isAdminOnly(domain)
     if (isAdminOnly < 0)
         return
+    const ip = ctx.get('x-real-ip')
+    const header = ctx.header['user-agent']
+    const isExist = await readBoard.adminBoardBlind(domain, ip)
+    if (isExist) {
+        const days = moment().diff(moment(isExist.blockDate), 'days')
+        if (days <= 0)
+            return ctx.body = {
+                message: `현재 해당 갤러리에서 차단된 상태입니다. (${moment(isExist.blockDate).format('YYYY-MM-DD')} 까지)`,
+                status: 'fail'
+            }
+    }
     if (user) {
         if (user.isAdmin < isAdminOnly)
             return ctx.body = {
@@ -306,8 +321,6 @@ module.exports.createTopic = async ctx => {
         if (isNotice > 0)
             isNotice = 0
     }
-    const ip = ctx.get('x-real-ip')
-    const header = ctx.header['user-agent']
     const isPoll = !poll.hide
     const isImage = images.length > 0
         ? true
@@ -411,6 +424,15 @@ module.exports.createPost = async ctx => {
     content = Filter.post(content)
     const ip = ctx.get('x-real-ip')
     const header = ctx.header['user-agent']
+    const isExist = await readBoard.adminBoardBlind(domain, ip)
+    if (isExist) {
+        const days = moment().diff(moment(isExist.blockDate), 'days')
+        if (days <= 0)
+            return ctx.body = {
+                message: `현재 해당 갤러리에서 차단된 상태입니다. (${moment(isExist.blockDate).format('YYYY-MM-DD')} 까지)`,
+                status: 'fail'
+            }
+    }
     const postId = await createPost({
         userId: user ? user.id : 0,
         topicId,

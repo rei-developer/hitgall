@@ -29,7 +29,13 @@ module.exports.adminBoardInfo = async (userId, isAdmin, domain) => {
 
 module.exports.adminBoards = async (userId, isAdmin) => {
     const result = await pool.query(
-        `SELECT * FROM Boards WHERE masterId = ? OR ? > 0`,
+        `SELECT
+            bm.level boardLevel,
+            b.domain,
+            b.name
+        FROM BoardManagers bm
+        LEFT JOIN Boards b ON b.domain = bm.boardDomain
+        WHERE bm.userId = ? OR ? > 0`,
         [userId, isAdmin]
     )
     if (result.length < 1)
@@ -60,6 +66,16 @@ module.exports.adminBoardManagerLevel = async (userId, domain) => {
     if (result.length < 1)
         return false
     return result[0].level
+}
+
+module.exports.adminBoardBlind = async (domain, ip) => {
+    const result = await pool.query(
+        `SELECT blockDate FROM Blinds WHERE domain = ? AND ip = ?`,
+        [domain, ip]
+    )
+    if (result.length < 1)
+        return false
+    return result[0]
 }
 
 module.exports.adminBoardBlinds = async domain => {

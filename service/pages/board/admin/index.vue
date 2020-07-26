@@ -20,13 +20,14 @@
                 <ul v-if='boards'>
                     <li v-for='(item, index) in boards' :key='index'>
                         <div>
-                            <div>{{ item.id }}</div>
+                            <div>{{ index + 1 }}</div>
                             <div class='subject'>
                                 <!-- <div class='thumb' v-if='item.imageUrl'>
                                     <img :src='`https://storage.googleapis.com/hitgall/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
                                 </div> -->
                                 <div>
                                     <span>
+                                        <img class='icon' :src='`/user1${item.boardLevel || 0}.png`'>
                                         {{ item.name }}
                                     </span>
                                 </div>
