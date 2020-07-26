@@ -18,7 +18,8 @@ module.exports = {
 			{ rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Nunito&display=swap' }
 		],
 		script: [
-			{ src: 'https://www.google.com/recaptcha/api.js?render=6LfO7_0UAAAAAGPyu2MULjvStvaMMpzGADpWZOku' }
+			{ src: 'https://www.google.com/recaptcha/api.js?render=6LfO7_0UAAAAAGPyu2MULjvStvaMMpzGADpWZOku' },
+			{ src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js' }
 		]
 	},
 	/*
