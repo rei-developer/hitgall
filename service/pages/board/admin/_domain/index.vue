@@ -423,11 +423,7 @@
 				this.$store.commit('setLoading')
 			},
 			numberWithCommas(x) {
-                try {
                     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                } catch {
-                    return x
-                }
             },
 			toast(text, variant = 'default') {
                 this.$bvToast.toast(text, {

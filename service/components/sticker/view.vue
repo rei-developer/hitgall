@@ -96,11 +96,7 @@
                 this.lastDays += ((this.sticker.days * this.buyNum) - 1)
             },
             numberWithCommas(x) {
-                try {
                     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                } catch {
-                    return x
-                }
             },
             toast(text, variant = 'default') {
                 this.$bvToast.toast(text, {

@@ -110,11 +110,7 @@
                 this.counts.count = this.numberWithCommas(data.count)
             },
             numberWithCommas(x) {
-                try {
                     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                } catch {
-                    return x
-                }
             },
         }
     }
