@@ -1,4 +1,7 @@
 const pool = require('..')
+// const uuidv5 = require('uuid/v5')
+
+// const MY_NAMESPACE = '7d849d8b-7294-46ab-87a0-8851fb3c9256'
 
 module.exports = async id => {
 	const result = await pool.query(
@@ -44,7 +47,7 @@ module.exports.countByMe = async userId => {
 }
 
 module.exports.posts = async (topicId, page, limit) => {
-	const result = await pool.query(
+	let result = await pool.query(
 		`SELECT
 			p.id,
 			p.userId,
@@ -58,7 +61,6 @@ module.exports.posts = async (topicId, page, limit) => {
 			p.created,
 			p.updated,
 			tp.author tagAuthor,
-			tp.userId tagUserId,
 			pc.likes,
 			pc.hates,
 			u.profileImageUrl profile,
@@ -81,6 +83,10 @@ module.exports.posts = async (topicId, page, limit) => {
 	)
 	if (result.length < 1)
 		return false
+	// result = result.map(item => {
+	// 	item.tagUserId = uuidv5(item.ip, MY_NAMESPACE)
+	// 	return item
+	// })
 	return result
 }
 

@@ -1,223 +1,244 @@
 <template>
-	<b-overlay
-		:show='loading'
-		rounded='sm'>
-		<article class='writeBox'>
-			<span v-if='$store.state.user.isAdmin > 0'>
+	<div>
+		<b-modal
+            id='bv-back-modal'
+            @ok='$router.push({ path: `/board/${domain}` })'
+            title='알림'
+            title-tag='h6'
+            cancel-title='취소'
+            ok-title='확인'
+            size='sm'
+            auto-focus-button='ok'
+            centered>
+			정말로 취소하시겠습니까?
+        </b-modal>
+		<b-overlay
+			:show='loading'
+			rounded='sm'>
+			<article class='writeBox'>
+				<span v-if='$store.state.user.isAdmin > 0'>
+					<b-form-group>
+						<b-form-checkbox v-model='form.isNotice' switch>
+							공지사항
+						</b-form-checkbox>
+					</b-form-group>
+					<b-form-group label='색상'>
+						<b-form-input type='color' v-model='form.color' style='width: 120px'/>
+					</b-form-group>
+				</span>
+				<b-form-group v-if='categories.length > 0'>
+					<b-form-radio-group
+						size='sm'
+						v-model='form.category'
+						:options='categories'
+						button-variant='primary'
+						buttons
+						name='radios-btn-default'/>
+				</b-form-group>
 				<b-form-group>
-					<b-form-checkbox v-model='form.isNotice' switch>
-						공지사항
-					</b-form-checkbox>
+					<b-form inline>
+						<b-input-group class='mb-2 mr-sm-2 mb-sm-0'>
+							<b-input placeholder='닉네임' v-model='form.writer' trim/>
+						</b-input-group>
+						<b-input-group class='mb-2 mr-sm-2 mb-sm-0' v-if='!$store.state.user.isLogged'>
+							<b-input type='password' placeholder='비밀번호' v-model='form.password' trim/>
+						</b-input-group>
+					</b-form>
 				</b-form-group>
-				<b-form-group label='색상'>
-					<b-form-input type='color' v-model='form.color' style='width: 120px'/>
+				<b-form-group>
+					<b-form-input placeholder='제목' v-model='form.title' trim autofocus/>
 				</b-form-group>
-			</span>
-			<b-form-group v-if='categories.length > 0'>
-				<b-form-radio-group
-					size='sm'
-					v-model='form.category'
-					:options='categories'
-					button-variant='primary'
-					buttons
-					name='radios-btn-default'/>
-			</b-form-group>
-			<b-form-group v-if='!$store.state.user.isLogged'>
-				<b-form inline>
-					<b-input-group class='mb-2 mr-sm-2 mb-sm-0'>
-						<b-input placeholder='닉네임' v-model='form.writer' trim/>
-					</b-input-group>
-					<b-input-group class='mb-2 mr-sm-2 mb-sm-0'>
-						<b-input type='password' placeholder='비밀번호' v-model='form.password' trim/>
-					</b-input-group>
-				</b-form>
-			</b-form-group>
-			<b-form-group>
-				<b-form-input placeholder='제목' v-model='form.title' trim autofocus/>
-			</b-form-group>
-			<div v-if='!poll.hide'>
-				<b-form-group label='설문조사 질문'>
-					<b-form-input
-						placeholder='200글자 제한'
-						v-model='poll.question'/>
-				</b-form-group>
-				<b-form-group label='설문조사 항목'>
-					<b-form-textarea
-						placeholder='항목은 개행(Enter Key)으로 구분하세요.'
-						v-model='poll.texts'
-						rows='3'
-						max-rows='6'/>
-				</b-form-group>
-				<b-form-group label='설문조사 종료 일자'>
-					<b-form-datepicker
-						placeholder='종료 일자를 선택하세요.'
-						v-model='poll.regdate'
-						:min='new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())'/>
-				</b-form-group>
-				<b-alert show dismissible variant='danger' v-if='id > 0'>
-					게시물 수정시 이전 설문조사 데이터는 모두 삭제됩니다.
-				</b-alert>
-			</div>
-			<client-only>
-				<div class='editor'>
-					<editor-menu-bar :editor='editor' v-slot='{ commands, isActive }'>
-						<div>
-							<b-button-group vertical>
-								<b-button-group size='sm'>
-									<b-dropdown variant='primary' size='sm'>
-										<template v-slot:button-content>
-											<font-awesome-icon icon='heading'/>
-											Header
-										</template>
-										<b-dropdown-item @click='commands.heading({ level: 1 })'>H1</b-dropdown-item>
-										<b-dropdown-item @click='commands.heading({ level: 2 })'>H2</b-dropdown-item>
-										<b-dropdown-item @click='commands.heading({ level: 3 })'>H3</b-dropdown-item>
-										<b-dropdown-item @click='commands.heading({ level: 4 })'>H4</b-dropdown-item>
-										<b-dropdown-item @click='commands.heading({ level: 5 })'>H5</b-dropdown-item>
-										<b-dropdown-item @click='commands.heading({ level: 6 })'>H6</b-dropdown-item>
-									</b-dropdown>
-									<b-button
-										variant='primary'
-										:pressed.sync='isActive.bold()'
-										@click='commands.bold'>
-										<font-awesome-icon icon='bold'/>
-									</b-button>
-									<b-button
-										variant='primary'
-										:pressed.sync='isActive.italic()'
-										@click='commands.italic'>
-										<font-awesome-icon icon='italic'/>
-									</b-button>
-									<b-button
-										variant='primary'
-										:pressed.sync='isActive.strike()'
-										@click='commands.strike'>
-										<font-awesome-icon icon='strikethrough'/>
-									</b-button>
-									<b-button
-										variant='primary'
-										:pressed.sync='isActive.underline()'
-										@click='commands.underline'>
-										<font-awesome-icon icon='underline'/>
-									</b-button>
-									<b-button
-										variant='primary'
-										:pressed.sync='isActive.code()'
-										@click='commands.code'>
-										<font-awesome-icon icon='code'/>
-									</b-button>
-								</b-button-group>
-								<b-button-group size='sm'>
-									<b-button
-										variant='primary'
-										:pressed.sync='isActive.paragraph()'
-										@click='commands.paragraph'>
-										<font-awesome-icon icon='paragraph'/>
-									</b-button>
-									<b-button
-										variant='primary'
-										:pressed.sync='isActive.bullet_list()'
-										@click='commands.bullet_list'>
-										<font-awesome-icon icon='list-ul'/>
-									</b-button>
+				<div v-if='!poll.hide'>
+					<b-form-group label='설문조사 질문'>
+						<b-form-input
+							placeholder='200글자 제한'
+							v-model='poll.question'/>
+					</b-form-group>
+					<b-form-group label='설문조사 항목'>
+						<b-form-textarea
+							placeholder='항목은 개행(Enter Key)으로 구분하세요.'
+							v-model='poll.texts'
+							rows='3'
+							max-rows='6'/>
+					</b-form-group>
+					<b-form-group label='설문조사 종료 일자'>
+						<b-form-datepicker
+							placeholder='종료 일자를 선택하세요.'
+							v-model='poll.regdate'
+							:min='new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())'/>
+					</b-form-group>
+					<b-alert show dismissible variant='danger' v-if='id > 0'>
+						게시물 수정시 이전 설문조사 데이터는 모두 삭제됩니다.
+					</b-alert>
+				</div>
+				<client-only>
+					<div class='editor'>
+						<editor-menu-bar :editor='editor' v-slot='{ commands, isActive }'>
+							<div>
+								<b-button-group vertical>
+									<b-button-group size='sm'>
+										<b-dropdown variant='primary' size='sm'>
+											<template v-slot:button-content>
+												<font-awesome-icon icon='heading'/>
+												Header
+											</template>
+											<b-dropdown-item @click='commands.heading({ level: 1 })'>H1</b-dropdown-item>
+											<b-dropdown-item @click='commands.heading({ level: 2 })'>H2</b-dropdown-item>
+											<b-dropdown-item @click='commands.heading({ level: 3 })'>H3</b-dropdown-item>
+											<b-dropdown-item @click='commands.heading({ level: 4 })'>H4</b-dropdown-item>
+											<b-dropdown-item @click='commands.heading({ level: 5 })'>H5</b-dropdown-item>
+											<b-dropdown-item @click='commands.heading({ level: 6 })'>H6</b-dropdown-item>
+										</b-dropdown>
 										<b-button
-										variant='primary'
-										:pressed.sync='isActive.ordered_list()'
-										@click='commands.ordered_list'>
-										<font-awesome-icon icon='list-ol'/>
-									</b-button>
-									<b-button
-										variant='primary'
-										:pressed.sync='isActive.blockquote()'
-										@click='commands.blockquote'>
-										<font-awesome-icon icon='quote-right'/>
-									</b-button>
-									<b-button
-										variant='primary'
-										:pressed.sync='isActive.code_block()'
-										@click='commands.code_block'>
-										<font-awesome-icon icon='code'/>
-									</b-button>
-									<b-button
-										variant='primary'
-										@click='commands.horizontal_rule'>
-										<font-awesome-icon icon='ruler-horizontal'/>
-									</b-button>
-									<b-button
-										variant='primary'
-										@click='commands.undo'>
-										<font-awesome-icon icon='undo'/>
-									</b-button>
-									<b-button
-										variant='primary'
-										@click='commands.redo'>
-										<font-awesome-icon icon='redo'/>
-									</b-button>
-									<!-- <b-button
-										variant='primary'
-										@click='insertHTML(editor, `<img src='https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png'>`)'>
-										<font-awesome-icon icon='image'/>
-									</b-button> -->
+											variant='primary'
+											:pressed.sync='isActive.bold()'
+											@click='commands.bold'>
+											<font-awesome-icon icon='bold'/>
+										</b-button>
+										<b-button
+											variant='primary'
+											:pressed.sync='isActive.italic()'
+											@click='commands.italic'>
+											<font-awesome-icon icon='italic'/>
+										</b-button>
+										<b-button
+											variant='primary'
+											:pressed.sync='isActive.strike()'
+											@click='commands.strike'>
+											<font-awesome-icon icon='strikethrough'/>
+										</b-button>
+										<b-button
+											variant='primary'
+											:pressed.sync='isActive.underline()'
+											@click='commands.underline'>
+											<font-awesome-icon icon='underline'/>
+										</b-button>
+										<b-button
+											variant='primary'
+											:pressed.sync='isActive.code()'
+											@click='commands.code'>
+											<font-awesome-icon icon='code'/>
+										</b-button>
+									</b-button-group>
+									<b-button-group size='sm'>
+										<b-button
+											variant='primary'
+											:pressed.sync='isActive.paragraph()'
+											@click='commands.paragraph'>
+											<font-awesome-icon icon='paragraph'/>
+										</b-button>
+										<b-button
+											variant='primary'
+											:pressed.sync='isActive.bullet_list()'
+											@click='commands.bullet_list'>
+											<font-awesome-icon icon='list-ul'/>
+										</b-button>
+											<b-button
+											variant='primary'
+											:pressed.sync='isActive.ordered_list()'
+											@click='commands.ordered_list'>
+											<font-awesome-icon icon='list-ol'/>
+										</b-button>
+										<b-button
+											variant='primary'
+											:pressed.sync='isActive.blockquote()'
+											@click='commands.blockquote'>
+											<font-awesome-icon icon='quote-right'/>
+										</b-button>
+										<b-button
+											variant='primary'
+											:pressed.sync='isActive.code_block()'
+											@click='commands.code_block'>
+											<font-awesome-icon icon='code'/>
+										</b-button>
+										<b-button
+											variant='primary'
+											@click='commands.horizontal_rule'>
+											<font-awesome-icon icon='ruler-horizontal'/>
+										</b-button>
+										<b-button
+											variant='primary'
+											@click='commands.undo'>
+											<font-awesome-icon icon='undo'/>
+										</b-button>
+										<b-button
+											variant='primary'
+											@click='commands.redo'>
+											<font-awesome-icon icon='redo'/>
+										</b-button>
+										<!-- <b-button
+											variant='primary'
+											@click='insertHTML(editor, `<img src='https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png'>`)'>
+											<font-awesome-icon icon='image'/>
+										</b-button> -->
+									</b-button-group>
 								</b-button-group>
-							</b-button-group>
-							<b-button-group vertical>
-								<b-button-group size='sm'>
-									<b-button @click='poll.hide = !poll.hide'>
-										<font-awesome-icon icon='poll'/>
-										설문조사
-									</b-button>
+								<b-button-group vertical>
+									<b-button-group size='sm'>
+										<b-button @click='poll.hide = !poll.hide'>
+											<font-awesome-icon icon='poll'/>
+											설문조사
+										</b-button>
+									</b-button-group>
+									<b-button-group size='sm'>
+										<b-button variant='warning' @click='htmlMode = !htmlMode'>
+											<font-awesome-icon icon='edit'/>
+											{{ htmlMode ? 'HTML' : '에디터' }}
+										</b-button>
+									</b-button-group>
 								</b-button-group>
-								<b-button-group size='sm'>
-									<b-button variant='warning' @click='htmlMode = !htmlMode'>
-										<font-awesome-icon icon='edit'/>
-										{{ htmlMode ? 'HTML' : '에디터' }}
-									</b-button>
-								</b-button-group>
-							</b-button-group>
+							</div>
+						</editor-menu-bar>
+						<div v-if='htmlMode'>
+							<textarea
+								class='textBox'
+								placeholder='이곳에 내용을 입력하세요.'
+								@change='changeContent'
+								v-model='html'/>
 						</div>
-					</editor-menu-bar>
-					<div v-if='htmlMode'>
-						<textarea
-							class='textBox'
-							placeholder='이곳에 내용을 입력하세요.'
-							@change='changeContent'
-							v-model='html'/>
+						<div v-else>
+							<editor-content class='textBox' :editor='editor'/>
+						</div>
 					</div>
-					<div v-else>
-						<editor-content class='textBox' :editor='editor'/>
+					<div class='editor' slot='placeholder'>
+						<b-spinner variant='primary' style='width: 3rem; height: 3rem' label='Large Spinner' type='grow'/>
 					</div>
+				</client-only>
+				<div class='savedTime' v-if='savedTime'>
+					{{ savedTime }} 자동 저장되었습니다.
 				</div>
-				<div class='editor' slot='placeholder'>
-					<b-spinner variant='primary' style='width: 3rem; height: 3rem' label='Large Spinner' type='grow'/>
-				</div>
-			</client-only>
-			<div class='savedTime' v-if='savedTime'>
-				{{ savedTime }} 자동 저장되었습니다.
-			</div>
-			<dropzone
-				id='dropzone'
-				ref='dropzone'
-				:options='options'
-				:include-styling='true'
-				v-on:vdropzone-thumbnail='thumbnail'
-				:destroyDropzone='true'
-				:useCustomSlot='true'>
-				<div class='dropzone-custom-content'>
-					<h3 class='dropzone-custom-title'>
-						<font-awesome-icon icon='image'/>
-						이미지 첨부
-					</h3>
-					<p class='subtitle'>이곳에 이미지를 드롭하세요... (짤당 10MB)</p>
-				</div>
-			</dropzone>
-			<b-button-group class='submit'>
-				<b-button variant='primary' @click='submit'>
-					<font-awesome-icon icon='pen'/>
-					작성 완료
-				</b-button>
-			</b-button-group>
-		</article>
-	</b-overlay>
+				<dropzone
+					id='dropzone'
+					ref='dropzone'
+					:options='options'
+					:include-styling='true'
+					v-on:vdropzone-thumbnail='thumbnail'
+					:destroyDropzone='true'
+					:useCustomSlot='true'>
+					<div class='dropzone-custom-content'>
+						<h3 class='dropzone-custom-title'>
+							<font-awesome-icon icon='image'/>
+							이미지 첨부
+						</h3>
+						<p class='subtitle'>이곳에 이미지를 드롭하세요... (짤당 10MB)</p>
+					</div>
+				</dropzone>
+				<b-button-group class='submit'>
+					<b-button
+						variant='danger'
+						@click='backHandler'>
+						취소
+					</b-button>
+				</b-button-group>
+				<b-button-group class='submit float-right'>
+					<b-button variant='primary' @click='submit'>
+						<font-awesome-icon icon='pen'/>
+						작성 완료
+					</b-button>
+				</b-button-group>
+			</article>
+		</b-overlay>
+	</div>
 </template>
 
 <script>
@@ -376,7 +397,7 @@
                 content: this.form.content,
                 onUpdate: ({ getHTML }) => this.html = getHTML()
 			})
-			this.form.writer = localStorage.notUserID || 'ㅇㅇ'
+			this.form.writer = this.$store.state.user.isLogged ? (localStorage.notUserID || this.$store.state.user.nickname) : (localStorage.notUserID || 'ㅇㅇ')
             this.form.password = localStorage.notUserPW || ''
 			const instance = this.$refs.dropzone.dropzone
 			const editor = this.editor
@@ -464,9 +485,6 @@
 					poll: this.poll,
 					images: this.images
 				}
-
-				console.log(this.domain)
-
 				const headers = { 'x-access-token': token }
 				const data = this.id > 0
 					? await this.$axios.$patch(url, form, { headers })
@@ -566,6 +584,9 @@
 					})(this)), 1)
 				}
 			},
+			backHandler() {
+                this.$bvModal.show('bv-back-modal')
+            },
 			realtimeUpdate() {
 				const update = setTimeout(async () => {
 					if (this.$nuxt.$route.name !== 'board-domain-write')
