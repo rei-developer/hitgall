@@ -449,7 +449,7 @@
                 // const p = `?page=${this.page}`
                 // const b = this.best > 0
                 //     ? `&`
-                return `/${item.id}?page=${this.page}${this.best > 0 ? "&best=" + this.best : ""}${category && category !== "" ? "&category=" + category : ""}`
+                return `/${item.id}?page=${this.page}${this.best > 0 ? "&best=" + this.best : ""}${this.category && this.category !== "" ? "&category=" + this.category : ""}`
             },
             linkGen(page) {
                 return `/board/${this.domain}?page=${page}${this.best > 0 ? '&best=' + this.best : ''}${this.category !== '' ? '&category=' + this.category : ''}`
