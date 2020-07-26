@@ -95,7 +95,17 @@ module.exports.getAdminBoardRemoveLogs = async ctx => {
             message: '권한이 없습니다.',
             status: 'fail'
         }
-    const removes = await readBoard.adminBoardRemoveLogs(domain)
+    let removes = await readBoard.adminBoardRemoveLogs(domain)
+    if (removes) {
+        removes = removes.map(item => {
+            const ip = item.ip.split('.')
+            if (ip && ip.length >= 3)
+                item.ip = `${ip[0]}.${ip[1]}`
+            else
+                item.ip = ''
+            return item
+        })
+    }
     ctx.body = {
         removes
     }

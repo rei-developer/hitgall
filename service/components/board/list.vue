@@ -64,7 +64,7 @@
                     <li
                         :class='id == item.id ? "view" : ""'
                         v-for='item in notices' :key='item.id'>
-                        <nuxt-link :to='`/${item.id}?page=${page}${best > 0 ? "&best=" + best : ""}${category !== "" ? "&category=" + category : ""}`'>
+                        <nuxt-link :to='getMoveLink(item)'>
                             <div>
                                 <span v-if='id == item.id'>
                                     <font-awesome-icon icon='angle-right'/>
@@ -107,7 +107,7 @@
                     <li
                         :class='id == item.id ? "view" : ""'
                         v-for='(item, index) in topics' :key='index'>
-                        <nuxt-link :to='`/${item.id}?page=${page}${best > 0 ? "&best=" + best : ""}${category !== "" ? "&category=" + category : ""}`'>
+                        <nuxt-link :to='`/${item.id}?page=${page}${best > 0 ? "&best=" + best : ""}${category && category !== "" ? "&category=" + category : ""}`'>
                             <div>
                                 <span v-if='id == item.id'>
                                     <font-awesome-icon icon='angle-right'/>
@@ -153,7 +153,7 @@
                     <li
                         :class='id == item.id ? "view" : ""'
                         v-for='item in notices' :key='item.id'>
-                        <nuxt-link :to='`/${item.id}?page=${page}${best > 0 ? "&best=" + best : ""}${category !== "" ? "&category=" + category : ""}`'>
+                        <nuxt-link :to='`/${item.id}?page=${page}${best > 0 ? "&best=" + best : ""}${category && category !== "" ? "&category=" + category : ""}`'>
                             <div class='content'>
                                 <div class='subject'>
                                     <span class='notice'>공지</span>
@@ -199,7 +199,7 @@
                     <li
                         :class='id == item.id ? "view" : ""'
                         v-for='item in topics' :key='item.id'>
-                        <nuxt-link :to='`/${item.id}?page=${page}${best > 0 ? "&best=" + best : ""}${category !== "" ? "&category=" + category : ""}`'>
+                        <nuxt-link :to='`/${item.id}?page=${page}${best > 0 ? "&best=" + best : ""}${category && category !== "" ? "&category=" + category : ""}`'>
                             <div class='content'>
                                 <div class='subject'>
                                     <span class='category' v-if='item.category'>{{ item.category }}</span>
@@ -354,7 +354,7 @@
         },
         mounted() {
             this.best = this.$route.query.best || 0
-            this.category = this.$route.query.category || ''
+            this.category = this.$route.query.category !== null ? this.$route.query.category : ''
             this.getData()
 			this.getCount()
             this.realtimeUpdate()
@@ -444,6 +444,12 @@
                         behavior: 'smooth'
                     })
                 })
+            },
+            getMoveLink(item) {
+                // const p = `?page=${this.page}`
+                // const b = this.best > 0
+                //     ? `&`
+                return `/${item.id}?page=${this.page}${this.best > 0 ? "&best=" + this.best : ""}${category && category !== "" ? "&category=" + category : ""}`
             },
             linkGen(page) {
                 return `/board/${this.domain}?page=${page}${this.best > 0 ? '&best=' + this.best : ''}${this.category !== '' ? '&category=' + this.category : ''}`
