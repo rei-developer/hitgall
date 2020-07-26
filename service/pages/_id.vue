@@ -249,9 +249,9 @@
             votes: async function(flag = true) {
                 if (this.id < 1)
                     return
-                if (!this.$store.state.user.isLogged)
-                    return this.toast('로그인하세요.', 'warning')
-                const token = this.$store.state.user.token
+                // if (!this.$store.state.user.isLogged)
+                //     return this.toast('로그인하세요.', 'warning')
+                const token = this.$store.state.user.token || ''
                 this.$store.commit('setLoading', true)
                 const data = await this.$axios.$post(
                     '/api/topic/vote',
@@ -508,10 +508,16 @@
                     > span { margin-left: 4px }
                 }
             }
-            > .likes > div:nth-child(2) > span { color: #2D99E1 }
+            > .likes > div:nth-child(2) > span {
+                color: #D83722;
+                font-size: 14px;
+            }
             > .hates {
                 background: #AAA;
-                > div:nth-child(2) > span { color: #D83722 }
+                > div:nth-child(2) > span {
+                    color: #D83722;
+                    font-size: 14px;
+                }
             }
             > .qrcode {
                 height: 80px;

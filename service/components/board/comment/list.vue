@@ -22,12 +22,12 @@
                     :ref='`post${item.id}`'
                     v-for='(item, index) in posts' :key='index'>
                     <div>
-                        <div class='re' v-if='item.tagUserId'/>
+                        <div class='re' v-if='item.tagAuthor'/>
                         <!-- <div class='image' v-if='item.profile'>
                             <img :src='`/profile/${item.profile}`' @error='imageUrlAlt'>
                         </div> -->
                         <div class='content'>
-                            <div>
+                            <div @click='handleCommand(["reply", item.id])'>
                                 <!-- <img :src='`/level/${item.level}.png`'> -->
                                 <img class='icon' :src='`/${item.admin ? "admin" : "user" + (item.userId > 0 ? 1 : 0) + (item.boardLevel || 0)}.png`'>
                                 <span class='author'>
@@ -36,8 +36,8 @@
                                 </span>
                                 <span class='regdate'>{{ $moment(item.updated).format("YY/MM/DD HH:mm:ss") }}</span>
                             </div>
-                            <div :class='item.userId === topic.userId ? "writer" : ""'>
-                                <div class='tagUser' v-if='item.tagUserId'>
+                            <div :class='item.userId === topic.userId ? "writer" : ""' @click='handleCommand(["reply", item.id])'>
+                                <div class='tagUser' v-if='item.tagAuthor'>
                                     <font-awesome-icon icon='at'/>
                                     {{ item.tagAuthor }}
                                 </div>
@@ -46,14 +46,25 @@
                                 </div>
                                 <span v-html='item.content'/>
                             </div>
+                            <div>
+                                <div class='likes' @click='handleCommand(["votes", item.id, true])'>
+                                    <font-awesome-icon icon='star'/>
+                                    추천 {{ item.likes }}
+                                </div>
+                                <div class='likes' @click='handleCommand(["votes", item.id, false])'>
+                                    <font-awesome-icon icon='arrow-down'/>
+                                    비추 {{ item.hates }}
+                                </div>
+                                <div class='both-clear' @click='handleCommand(["reply", item.id])'/>
+                            </div>
                         </div>
                         <div class='more'>
                             <b-dropdown size='sm' right no-caret>
                                 <b-dropdown-item @click='handleCommand(["reply", item.id])'>대댓글</b-dropdown-item>
-                                <b-dropdown-item @click='handleCommand(["votes", item.id, true])' v-if='item.userId !== $store.state.user.id'>추천</b-dropdown-item>
-                                <b-dropdown-item @click='handleCommand(["votes", item.id, false])' v-if='item.userId !== $store.state.user.id'>비추천</b-dropdown-item>
-                                <b-dropdown-item @click='handleCommand(["update", item])' v-if='$store.state.user.isAdmin > 0 || item.userId === $store.state.user.id'>수정</b-dropdown-item>
-                                <b-dropdown-item @click='handleCommand(["remove", item.id])' v-if='$store.state.user.isAdmin > 0 || item.userId === $store.state.user.id'>삭제</b-dropdown-item>
+                                <b-dropdown-item @click='handleCommand(["votes", item.id, true])'>추천</b-dropdown-item>
+                                <b-dropdown-item @click='handleCommand(["votes", item.id, false])'>비추천</b-dropdown-item>
+                                <b-dropdown-item @click='handleCommand(["update", item])'>수정</b-dropdown-item>
+                                <b-dropdown-item @click='handleCommand(["remove", item.id])'>삭제</b-dropdown-item>
                             </b-dropdown>
                             <div>
                                 <font-awesome-icon icon='ellipsis-h'/>
@@ -347,10 +358,11 @@
                     > .content {
                         flex: 1;
                         > div {
-                            margin: 8px;
                             font-size: 13px;
                             word-break: break-all;
                             &:nth-child(1) {
+                                padding: 8px;
+                                padding-bottom: 0;
                                 > img:nth-child(1) { margin-top: -3px }
                                 > img:nth-child(2) {
                                     width: 16px;
@@ -374,7 +386,8 @@
                                 }
                             }
                             &:nth-child(2) {
-                                >.tagUser {
+                                padding: 8px;
+                                > .tagUser {
                                     display: inline-block;
                                     margin-right: .25rem;
                                     padding: 2px 6px 1px 6px;
@@ -392,6 +405,21 @@
                                     line-height: 1.5;
                                     color: #000;
                                     overflow-wrap: break-word;
+                                }
+                            }
+                            &:nth-child(3) {
+                                display: flex;
+                                margin: 0 8px 8px 8px;
+                                > .likes {
+                                    margin-right: 5px;
+                                    padding: 4px 8px;
+                                    color: @primary;
+                                    font-size: 12px;
+                                    background: #efefef;
+                                    cursor: pointer;
+                                }
+                                > .both-clear {
+                                    flex: 1;
                                 }
                             }
                             &.writer > span { color: #2d99e1 }

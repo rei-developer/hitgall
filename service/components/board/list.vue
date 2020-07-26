@@ -699,6 +699,7 @@
                                     > span.writer {
                                         margin: 5px 10px 0 0;
                                         color: @primary;
+                                        font-size: 13px;
                                         font-weight: bold;
                                         > img:nth-child(1) { margin-top: -3px }
                                         > img:nth-child(2) {
