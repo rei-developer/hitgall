@@ -446,13 +446,12 @@
                 })
             },
             getMoveLink(item) {
-                // const p = `?page=${this.page}`
-                // const b = this.best > 0
-                //     ? `&`
-                return `/${item.id}?page=${this.page}${this.best > 0 ? "&best=" + this.best : ""}${this.category && this.category !== "" ? "&category=" + this.category : ""}`
+                const c = this.category || ''
+                return `/${item.id}?page=${this.page}${this.best > 0 ? "&best=" + this.best : ""}${c !== "" ? "&category=" + this.category : ""}`
             },
             linkGen(page) {
-                return `/board/${this.domain}?page=${page}${this.best > 0 ? '&best=' + this.best : ''}${this.category !== '' ? '&category=' + this.category : ''}`
+                const c = this.category || ''
+                return `/board/${this.domain}?page=${page}${this.best > 0 ? '&best=' + this.best : ''}${c !== '' ? '&category=' + c : ''}`
             },
             forceUpdate({ best }) {
                 this.best = best ? 1 : 0
