@@ -318,10 +318,10 @@
                     return
 				this.$store.commit('user/signOut')
 				this.$router.push({ path: '/' })
-            },
-			numberWithCommas(x) {
-				return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 			},
+			numberWithCommas(x) {
+                    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+            },
 			toast(text, variant = 'default') {
                 this.$bvToast.toast(text, {
                     title: '알림',

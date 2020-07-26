@@ -423,8 +423,8 @@
 				this.$store.commit('setLoading')
 			},
 			numberWithCommas(x) {
-				return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-			},
+                    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+            },
 			toast(text, variant = 'default') {
                 this.$bvToast.toast(text, {
                     title: '알림',
