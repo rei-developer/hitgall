@@ -80,7 +80,7 @@ module.exports.adminBoardBlind = async (domain, ip) => {
 
 module.exports.adminBoardBlinds = async domain => {
     const result = await pool.query(
-        `SELECT * FROM Blinds WHERE domain = ?`,
+        `SELECT * FROM Blinds WHERE domain = ? ORDER BY id DESC LIMIT 50`,
         [domain]
     )
     if (result.length < 1)
@@ -90,7 +90,14 @@ module.exports.adminBoardBlinds = async domain => {
 
 module.exports.adminBoardRemoveLogs = async domain => {
     const result = await pool.query(
-        `SELECT * FROM RemoveLogs WHERE domain = ?`,
+        `SELECT
+            *,
+            u.nickname remover
+        FROM RemoveLogs rl
+        LEFT JOIN Users u ON u.id = rl.userId
+        WHERE rl.domain = ?
+        ORDER BY rl.id DESC
+        LIMIT 50`,
         [domain]
     )
     if (result.length < 1)
