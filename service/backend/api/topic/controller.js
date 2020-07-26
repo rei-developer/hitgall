@@ -9,7 +9,7 @@ const storage = new Storage({ keyFilename: 'key.json' })
 
 const deleteFile = async filename => {
     await storage.bucket(BUCKET_NAME).file(filename).delete()
-    console.log(`gs://${BUCKET_NAME}/${filename} deleted.`)
+    console.log(`gs://${bucketName}/${filename} deleted.`)
 }
 
 const fs = require('fs')
@@ -273,7 +273,6 @@ module.exports.createTopic = async ctx => {
     if (title === '' || content === '<p></p>')
         return
     writer = Filter.disable(writer)
-    writer = !writer || writer === '' ? 'ㅇㅇ' : writer
     password = Filter.disable(password)
     title = Filter.disable(title)
     content = Filter.topic(content)
@@ -318,7 +317,7 @@ module.exports.createTopic = async ctx => {
         boardDomain: domain,
         category,
         color,
-        author: user ? user.nickname : writer,
+        author: writer,
         password,
         title,
         content,
@@ -408,7 +407,6 @@ module.exports.createPost = async ctx => {
     if (postUserId)
         postUserId = Number(postUserId)
     writer = Filter.post(writer)
-    writer = !writer || writer === '' ? 'ㅇㅇ' : writer
     password = Filter.post(password)
     content = Filter.post(content)
     const ip = ctx.get('x-real-ip')
@@ -419,7 +417,7 @@ module.exports.createPost = async ctx => {
         postRootId,
         postParentId,
         boardDomain: domain,
-        author: user ? user.nickname : writer,
+        author: writer,
         password,
         content,
         stickerId: sticker.id,
