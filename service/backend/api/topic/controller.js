@@ -84,7 +84,7 @@ module.exports.getTopics = async ctx => {
     const count = await readTopic.count(obj)
     const categories = await readBoard.categories(domain)
     let notices = await readTopic.notices(domain)
-    if (notices) {
+    if (notices.length > 0) {
         notices = notices.map(item => {
             const ip = item.ip.split('.')
             if (ip && ip.length >= 3)
@@ -95,7 +95,7 @@ module.exports.getTopics = async ctx => {
         })
     }
     let topics = await readTopic.topics(obj, searches, page, limit)
-    if (topics) {
+    if (topics.length > 0) {
         topics = topics.map(item => {
             const ip = item.ip.split('.')
             if (ip && ip.length >= 3)
