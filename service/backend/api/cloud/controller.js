@@ -28,7 +28,7 @@ module.exports.createImage = type => async ctx => {
     // ex).webp.mp4 형식 수정
     try {
         if (checker) {
-            fs.readFile(`img/${filename}`, (err, data) => {
+            fs.readFile(`img/${filename}`, async (err, data) => {
                 if (err)
                     return ctx.body = {
                         message: err,
