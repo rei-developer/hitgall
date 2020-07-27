@@ -6,11 +6,12 @@
     header {
         background-color: #5B6882 !important;
         nav > ul {
-            > li {
+            > li:not(.sidebar) {
                 display: none;
                 &.logo {
                     display: inline-block;
-                    margin-left: 10px;
+                    position: absolute;
+                    left: calc(50vw - 20px);
                 }
             }
             &.right > li { display: inline-block }

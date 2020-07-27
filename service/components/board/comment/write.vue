@@ -49,10 +49,10 @@
             <div class='footer'>
                 <div class='sticker'
                     @click='clear'
-                    v-if='stickers.sticker && $store.state.user.isLogged'>
+                    v-if='stickers.sticker'>
                     <div class='item'>
                         <div class='image'>
-                            <img :src='`/sticker/${stickers.sticker.id}/${stickers.select}.${stickers.sticker.ext}`' @error='imageUrlAlt'>
+                            <img :src='`https://storage.googleapis.com/hitgall/sticker/${stickers.sticker.id}/${stickers.select}.${stickers.sticker.ext}`' @error='imageUrlAlt'>
                         </div>
                         {{ stickers.sticker.name }}
                         <div class='remove'>
@@ -100,8 +100,8 @@
             submit: async function() {
                 if (this.loading)
                     return
-                if (!this.stickers.sticker && this.content === '')
-                    return this.toast('내용을 입력하세요.', 'danger')
+                if (!this.stickers.sticker && this.content.trim() === '')
+                    return
                 // if (!this.$store.state.user.isLogged)
                     // return this.toast('로그인하세요.', 'warning')
                 const token = this.$store.state.user.token || ''

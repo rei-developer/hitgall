@@ -18,7 +18,8 @@ module.exports = {
 			{ rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Nunito&display=swap' }
 		],
 		script: [
-			{ src: 'https://www.google.com/recaptcha/api.js?render=6LfO7_0UAAAAAGPyu2MULjvStvaMMpzGADpWZOku' }
+			{ src: 'https://www.google.com/recaptcha/api.js?render=6LfO7_0UAAAAAGPyu2MULjvStvaMMpzGADpWZOku' },
+			{ src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js' }
 		]
 	},
 	/*
@@ -71,14 +72,12 @@ module.exports = {
 			siteKey: '6LfO7_0UAAAAAGPyu2MULjvStvaMMpzGADpWZOku',
 			version: 3
 		}],
-		//['@nuxtjs/google-analytics',{
-		// id: 'UA-127341158-2'}],
-		// ['@nuxtjs/google-adsense'],
+		['@nuxtjs/google-adsense'],
 		['@nuxtjs/moment', ['ko']],
 	],
-	// 'google-adsense': {
-	//   id: 'ca-pub-5633529273423665'
-	// },
+	'google-adsense': {
+		id: 'ca-pub-4618344904272976'
+	},
 	fontawesome: {
 		imports: [
 			{

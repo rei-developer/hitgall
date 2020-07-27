@@ -133,7 +133,7 @@
 					<div class='desktop-only-test'>
 						<h6>
 							<div>#</div>
-							<div>닉네임(ID)</div>
+							<div>닉네임</div>
 							<div>IP</div>
 							<div class='subject'>사유</div>
 							<div>차단 기간</div>
@@ -153,7 +153,7 @@
 											</span>
 										</div>
 									</div>
-									<div>{{ $moment(item.blockDate).format("YY/MM/DD HH:mm:ss") }}</div>
+									<div>{{ $moment(item.blockDate).format("YY/MM/DD") }}</div>
 									<div>{{ $moment(item.created).format("YY/MM/DD HH:mm:ss") }}</div>
 									<div>
 										<b-button
@@ -183,27 +183,27 @@
 					<div class='desktop-only-test'>
 						<h6>
 							<div>#</div>
-							<div>닉네임(ID)</div>
+							<div>닉네임</div>
 							<div>IP</div>
-							<div class='subject'>사유</div>
+							<div class='subject'>제목</div>
 							<div>처리일</div>
 							<div>처리자</div>
 						</h6>
 						<ul v-if='removes.length > 0'>
 							<li v-for='(item, index) in removes' :key='index'>
 								<div>
-									<div>{{ item.id }}</div>
+									<div>{{ index + 1 }}</div>
 									<div>{{ item.author }}</div>
 									<div>{{ item.ip }}</div>
 									<div class='subject'>
 										<div>
 											<span>
-												{{ item.description }}
+												{{ item.title }}
 											</span>
 										</div>
 									</div>
 									<div>{{ $moment(item.created).format("YY/MM/DD HH:mm:ss") }}</div>
-									<div>임시</div>
+									<div>{{ item.remover }}</div>
 								</div>
 							</li>
 						</ul>
@@ -423,8 +423,8 @@
 				this.$store.commit('setLoading')
 			},
 			numberWithCommas(x) {
-				return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-			},
+                    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+            },
 			toast(text, variant = 'default') {
                 this.$bvToast.toast(text, {
                     title: '알림',

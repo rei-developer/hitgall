@@ -29,7 +29,13 @@ module.exports.adminBoardInfo = async (userId, isAdmin, domain) => {
 
 module.exports.adminBoards = async (userId, isAdmin) => {
     const result = await pool.query(
-        `SELECT * FROM Boards WHERE masterId = ? OR ? > 0`,
+        `SELECT
+            bm.level boardLevel,
+            b.domain,
+            b.name
+        FROM BoardManagers bm
+        LEFT JOIN Boards b ON b.domain = bm.boardDomain
+        WHERE bm.userId = ? OR ? > 0`,
         [userId, isAdmin]
     )
     if (result.length < 1)
@@ -62,9 +68,19 @@ module.exports.adminBoardManagerLevel = async (userId, domain) => {
     return result[0].level
 }
 
+module.exports.adminBoardBlind = async (domain, ip) => {
+    const result = await pool.query(
+        `SELECT blockDate FROM Blinds WHERE domain = ? AND ip = ?`,
+        [domain, ip]
+    )
+    if (result.length < 1)
+        return false
+    return result[0]
+}
+
 module.exports.adminBoardBlinds = async domain => {
     const result = await pool.query(
-        `SELECT * FROM Blinds WHERE domain = ?`,
+        `SELECT * FROM Blinds WHERE domain = ? ORDER BY id DESC LIMIT 50`,
         [domain]
     )
     if (result.length < 1)
@@ -74,7 +90,14 @@ module.exports.adminBoardBlinds = async domain => {
 
 module.exports.adminBoardRemoveLogs = async domain => {
     const result = await pool.query(
-        `SELECT * FROM RemoveLogs WHERE domain = ?`,
+        `SELECT
+            *,
+            u.nickname remover
+        FROM RemoveLogs rl
+        LEFT JOIN Users u ON u.id = rl.userId
+        WHERE rl.domain = ?
+        ORDER BY rl.id DESC
+        LIMIT 50`,
         [domain]
     )
     if (result.length < 1)

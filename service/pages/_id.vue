@@ -15,12 +15,35 @@
             auto-focus-button='ok'
             centered>
             <div>정말로 글을 삭제하시겠습니까?</div>
-            <b-form-group class='mt-1' v-if='!$store.state.user.isLogged'>
+            <b-form-group class='mt-1' v-if='topic.userId < 1'>
                 <b-form-input
                     type='password'
                     placeholder='비밀번호'
                     v-model='removePassword'
                     required/>
+            </b-form-group>
+        </b-modal>
+        <b-modal
+            id='bv-blind-modal'
+            @ok='ban'
+            title='알림'
+            title-tag='h6'
+            cancel-title='취소'
+            ok-title='확인'
+            size='sm'
+            auto-focus-button='ok'
+            centered>
+            <div>
+                <strong>{{ topic.author }}</strong> 차단
+            </div>
+            <b-form-group class='mt-1'>
+                <b-form-input
+                    placeholder='차단 사유'
+                    v-model='blindDescription'
+                    required/>
+            </b-form-group>
+            <b-form-group>
+                <b-form-datepicker v-model='blindBlockDate'/>
             </b-form-group>
         </b-modal>
         <b-form-group class='mb-3'>
@@ -138,11 +161,17 @@
                 삭제
             </b-button>
             <b-button-group class='float-right'>
+                <b-button size='sm' @click='scrollToTop'>
+                    <font-awesome-icon icon='arrow-up'/>
+                </b-button>
                 <b-button size='sm' @click='scrollToBoardList'>
                     <font-awesome-icon icon='arrow-down'/>
                 </b-button>
-                <b-button size='sm' @click='scrollToTop'>
-                    <font-awesome-icon icon='arrow-up'/>
+            </b-button-group>
+            <b-button-group class='float-right mr-1' v-if='boardLevel > 0'>
+                <b-button size='sm' variant='danger' @click='$bvModal.show("bv-blind-modal")'>
+                    <font-awesome-icon icon='ban'/>
+                    차단
                 </b-button>
             </b-button-group>
         </b-form-group>
@@ -195,7 +224,10 @@
                     admin: 0,
                     boardLevel: 0
                 },
+                boardLevel: 0,
                 removePassword: '',
+                blindDescription: '',
+                blindBlockDate: null,
                 images: [],
                 error: false,
                 loading: true
@@ -225,7 +257,8 @@
             return {
                 id,
                 topic: data.topic,
-                images: data.images
+                images: data.images,
+                boardLevel: data.boardLevel
             }
         },
         beforeMount() {
@@ -239,6 +272,9 @@
             // this.$socket.emit('leave', this.id)
             // this.$socket.removeAllListeners()
         },
+        mounted() {
+            this.blindBlockDate = this.$moment().add(1, 'year').format('YYYY-MM-DD')
+        },
         methods: {
             // handleClick(e) {
             //     if (e.target.matches('img')) {
@@ -249,9 +285,9 @@
             votes: async function(flag = true) {
                 if (this.id < 1)
                     return
-                if (!this.$store.state.user.isLogged)
-                    return this.toast('로그인하세요.', 'warning')
-                const token = this.$store.state.user.token
+                // if (!this.$store.state.user.isLogged)
+                //     return this.toast('로그인하세요.', 'warning')
+                const token = this.$store.state.user.token || ''
                 this.$store.commit('setLoading', true)
                 const data = await this.$axios.$post(
                     '/api/topic/vote',
@@ -317,6 +353,19 @@
                 }
                 this.toast('글을 삭제했습니다.', 'success')
             },
+            ban: async function() {
+                const token = this.$store.state.user.isLogged ? this.$store.state.user.token : ''
+                this.$store.commit('setLoading', true)
+                const data = await this.$axios.$post(
+                    `/api/board/admin/${this.topic.boardDomain}/blind/add`,
+                    { topicId: this.id, description: this.blindDescription, blockDate: this.blindBlockDate },
+                    { headers: { 'x-access-token': token } }
+                )
+                if (data.status === 'fail')
+                    return this.toast(data.message || '오류가 발생했습니다.', 'danger')
+                this.toast('차단 성공!', 'success')
+                this.$store.commit('setLoading')
+            },
             scrollToTop() {
                 this.$nextTick(() => {
                     window.scrollTo({
@@ -334,7 +383,7 @@
                 })
             },
             numberWithCommas(x) {
-                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
             },
             imageUrlAlt(event) {
                 event.target.src = '/default.png'
@@ -508,10 +557,16 @@
                     > span { margin-left: 4px }
                 }
             }
-            > .likes > div:nth-child(2) > span { color: #2D99E1 }
+            > .likes > div:nth-child(2) > span {
+                color: #D83722;
+                font-size: 14px;
+            }
             > .hates {
                 background: #AAA;
-                > div:nth-child(2) > span { color: #D83722 }
+                > div:nth-child(2) > span {
+                    color: #D83722;
+                    font-size: 14px;
+                }
             }
             > .qrcode {
                 height: 80px;

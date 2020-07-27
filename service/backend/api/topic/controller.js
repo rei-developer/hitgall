@@ -9,7 +9,7 @@ const storage = new Storage({ keyFilename: 'key.json' })
 
 const deleteFile = async filename => {
     await storage.bucket(BUCKET_NAME).file(filename).delete()
-    console.log(`gs://${bucketName}/${filename} deleted.`)
+    console.log(`gs://${BUCKET_NAME}/${filename} deleted.`)
 }
 
 const fs = require('fs')
@@ -209,7 +209,7 @@ module.exports.getContent = async ctx => {
     const { id } = ctx.params
     const user = await User.getUser(ctx.get('x-access-token'))
     let topic = await readTopic(id)
-    if (!topic || topic.isAllowed < 1 || (topic.boardDomain === 'feedback' && (!user || (user.isAdmin < 1 && topic.userId !== user.id))))
+    if (!topic || topic.isAllowed < 1)
         return ctx.body = {
             message: '접근할 수 없거나 삭제된 페이지입니다.',
             status: 'fail'
@@ -223,6 +223,9 @@ module.exports.getContent = async ctx => {
     const images = topic.isImage > 0
         ? await readTopic.topicImages(id)
         : []
+    const boardLevel = user
+        ? (user.isAdmin < 1 ? await readBoard.adminBoardManagerLevel(user.id, topic.boardDomain) : 3)
+        : 0
     await updateTopic.updateTopicCountsByHits(id)
     let count = 0
     if (user) {
@@ -232,6 +235,7 @@ module.exports.getContent = async ctx => {
     ctx.body = {
         topic,
         images,
+        boardLevel,
         count
     }
 }
@@ -281,6 +285,17 @@ module.exports.createTopic = async ctx => {
     const isAdminOnly = await readBoard.isAdminOnly(domain)
     if (isAdminOnly < 0)
         return
+    const ip = ctx.get('x-real-ip')
+    const header = ctx.header['user-agent']
+    const isExist = await readBoard.adminBoardBlind(domain, ip)
+    if (isExist) {
+        const days = moment().diff(moment(isExist.blockDate), 'days')
+        if (days <= 0)
+            return ctx.body = {
+                message: `현재 해당 갤러리에서 차단된 상태입니다. (${moment(isExist.blockDate).format('YYYY-MM-DD')} 까지)`,
+                status: 'fail'
+            }
+    }
     if (user) {
         if (user.isAdmin < isAdminOnly)
             return ctx.body = {
@@ -306,8 +321,6 @@ module.exports.createTopic = async ctx => {
         if (isNotice > 0)
             isNotice = 0
     }
-    const ip = ctx.get('x-real-ip')
-    const header = ctx.header['user-agent']
     const isPoll = !poll.hide
     const isImage = images.length > 0
         ? true
@@ -411,6 +424,15 @@ module.exports.createPost = async ctx => {
     content = Filter.post(content)
     const ip = ctx.get('x-real-ip')
     const header = ctx.header['user-agent']
+    const isExist = await readBoard.adminBoardBlind(domain, ip)
+    if (isExist) {
+        const days = moment().diff(moment(isExist.blockDate), 'days')
+        if (days <= 0)
+            return ctx.body = {
+                message: `현재 해당 갤러리에서 차단된 상태입니다. (${moment(isExist.blockDate).format('YYYY-MM-DD')} 까지)`,
+                status: 'fail'
+            }
+    }
     const postId = await createPost({
         userId: user ? user.id : 0,
         topicId,
@@ -464,14 +486,14 @@ module.exports.createTopicVotes = async ctx => {
         return ctx.body = {
             status: 'fail'
         }
-    if (topic.userId < 1)
-        return ctx.body = {
-            message: '현재 유동닉이 쓴 글은 추천할 수 없습니다. 조만간 구현됩니다.',
-            status: 'fail'
-        }
-    const targetUser = await readUser(topic.userId)
+    // if (topic.userId < 1)
+    //     return ctx.body = {
+    //         message: '현재 유동닉이 쓴 글은 추천할 수 없습니다. 조만간 구현됩니다.',
+    //         status: 'fail'
+    //     }
+    const targetUser = await readUser(topic.userId) || 0
     const ip = ctx.get('x-real-ip')
-    if (topic.userId === user.id || topic.ip === ip)
+    if (topic.ip === ip) // topic.userId === user.id || 
         return ctx.body = {
             message: '본인에게 투표할 수 없습니다.',
             status: 'fail'
@@ -497,23 +519,27 @@ module.exports.createTopicVotes = async ctx => {
         if (topic.isBest === 0 && topic.likes - topic.hates >= BEST_LIMIT) {
             move = 'BEST'
             await updateTopic.updateTopicByIsBest(id, 1)
-            await User.setUpExpAndPoint(targetUser, 100, 100)
+            if (targetUser > 0)
+                await User.setUpExpAndPoint(targetUser, 100, 100)
             // await socket.newBest(global.io, id, topic.boardDomain, topic.title)
         } else {
-            await User.setUpExpAndPoint(targetUser, 5, 5)
+            if (targetUser > 0)
+                await User.setUpExpAndPoint(targetUser, 5, 5)
         }
         await updateTopic.updateTopicCountsByLikes(id)
     } else {
         if (topic.isBest === 1 && topic.hates - topic.likes >= BEST_LIMIT) {
             move = 'DEFAULT'
             await updateTopic.updateTopicByIsBest(id)
-            await User.setUpExpAndPoint(targetUser, -20, -20)
+            if (targetUser > 0)
+                await User.setUpExpAndPoint(targetUser, -20, -20)
             // } else if (topic.hates - topic.likes >= DELETE_LIMIT) {
             //     move = 'DELETE'
             //     await updateTopic.updateTopicByIsAllowed(id)
             //     await User.setUpExpAndPoint(targetUser, -10, -10)
         } else {
-            await User.setUpExpAndPoint(targetUser, -5, -5)
+            if (targetUser > 0)
+                await User.setUpExpAndPoint(targetUser, -5, -5)
         }
         await updateTopic.updateTopicCountsByHates(id)
     }
@@ -545,14 +571,14 @@ module.exports.createPostVotes = async ctx => {
         return ctx.body = {
             status: 'fail'
         }
-    if (post.userId < 1)
-        return ctx.body = {
-            message: '현재 유동닉이 쓴 댓글은 추천할 수 없습니다. 조만간 구현됩니다.',
-            status: 'fail'
-        }
+    // if (post.userId < 1)
+    //     return ctx.body = {
+    //         message: '현재 유동닉이 쓴 댓글은 추천할 수 없습니다. 조만간 구현됩니다.',
+    //         status: 'fail'
+    //     }
     //const targetUser = await readUser(post.userId)
     const ip = ctx.get('x-real-ip')
-    if (post.userId === user.id || post.ip === ip)
+    if (post.ip === ip) // post.userId === user.id ||
         return ctx.body = {
             message: '본인에게 투표할 수 없습니다.',
             status: 'fail'
@@ -736,7 +762,7 @@ module.exports.updatePost = async ctx => {
         return ctx.body = {
             status: 'fail'
         }
-    if (user.isAdmin < 1 && userId !== user.id)
+    if (user && user.isAdmin < 1 && userId !== user.id)
         return
     await updatePost(id, Filter.post(content), sticker.id, sticker.select)
     ctx.body = {
@@ -753,17 +779,21 @@ module.exports.deleteTopic = async ctx => {
     const token = ctx.get('x-access-token')
     const user = token !== '' ? await User.getUser(token) : null
     const topic = await readTopic.edit(id)
-    if (!user && password !== topic.password)
-        return ctx.body = {
-            message: '비밀번호가 일치하지 않습니다.',
-            status: 'fail'
-        }
-    const level = await readBoard.adminBoardManagerLevel(user.id, topic.boardDomain)
-    if (user && user.isAdmin < 1 && !level && topic.userId !== user.id)
-        return ctx.body = {
-            message: '삭제 권한이 없습니다.',
-            status: 'fail'
-        }
+    let level = 0
+    if (!user) {
+        if (password !== topic.password)
+            return ctx.body = {
+                message: '비밀번호가 일치하지 않습니다.',
+                status: 'fail'
+            }
+    } else {
+        level = await readBoard.adminBoardManagerLevel(user.id, topic.boardDomain)
+        if (user && user.isAdmin < 1 && !level && topic.userId !== user.id)
+            return ctx.body = {
+                message: '삭제 권한이 없습니다.',
+                status: 'fail'
+            }
+    }
     if (topic.isPoll) {
         await deletePoll(id)
         await deletePoll.pollVotes(id)
@@ -796,7 +826,7 @@ module.exports.deleteTopic = async ctx => {
         await deleteTopic(id)
     else
         await updateTopic.updateTopicByIsAllowed(id)
-    if (user && (level || user.isAdmin > 0))
+    if (user && (level > 0 || user.isAdmin > 0))
         await createRemoveLog(user.id, topic.boardDomain, topic.author, topic.title, topic.ip)
     // if (topic.userId > 0)
     //     await User.setUpPoint(topic.userId, -20)

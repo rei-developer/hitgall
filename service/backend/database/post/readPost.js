@@ -58,7 +58,6 @@ module.exports.posts = async (topicId, page, limit) => {
 			p.created,
 			p.updated,
 			tp.author tagAuthor,
-			tp.userId tagUserId,
 			pc.likes,
 			pc.hates,
 			u.profileImageUrl profile,

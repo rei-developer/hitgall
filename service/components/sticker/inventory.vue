@@ -35,9 +35,7 @@
         },
         methods: {
             getData: async function() {
-                if (!this.$store.state.user.isLogged)
-                    return
-                const token = this.$store.state.user.token
+                const token = this.$store.state.user.token || ''
                 const data = await this.$axios.$get(
                     `/api/sticker/list`,
                     { headers: { 'x-access-token': token } }
@@ -54,8 +52,8 @@
                 this.$emit('use', item, index)
             },
             numberWithCommas(x) {
-                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-            }
+                    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+            },
         }
     }
 </script>

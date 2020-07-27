@@ -64,7 +64,7 @@
                     <li
                         :class='id == item.id ? "view" : ""'
                         v-for='item in notices' :key='item.id'>
-                        <nuxt-link :to='`/${item.id}?page=${page}${category !== "" ? "&category=" + category : ""}`'>
+                        <nuxt-link :to='getMoveLink(item)'>
                             <div>
                                 <span v-if='id == item.id'>
                                     <font-awesome-icon icon='angle-right'/>
@@ -107,7 +107,7 @@
                     <li
                         :class='id == item.id ? "view" : ""'
                         v-for='(item, index) in topics' :key='index'>
-                        <nuxt-link :to='`/${item.id}?page=${page}${category !== "" ? "&category=" + category : ""}`'>
+                        <nuxt-link :to='`/${item.id}?page=${page}${best > 0 ? "&best=" + best : ""}${category && category !== "" ? "&category=" + category : ""}`'>
                             <div>
                                 <span v-if='id == item.id'>
                                     <font-awesome-icon icon='angle-right'/>
@@ -153,7 +153,7 @@
                     <li
                         :class='id == item.id ? "view" : ""'
                         v-for='item in notices' :key='item.id'>
-                        <nuxt-link :to='`/${item.id}?page=${page}${category !== "" ? "&category=" + category : ""}`'>
+                        <nuxt-link :to='`/${item.id}?page=${page}${best > 0 ? "&best=" + best : ""}${category && category !== "" ? "&category=" + category : ""}`'>
                             <div class='content'>
                                 <div class='subject'>
                                     <span class='notice'>공지</span>
@@ -199,7 +199,7 @@
                     <li
                         :class='id == item.id ? "view" : ""'
                         v-for='item in topics' :key='item.id'>
-                        <nuxt-link :to='`/${item.id}?page=${page}${category !== "" ? "&category=" + category : ""}`'>
+                        <nuxt-link :to='`/${item.id}?page=${page}${best > 0 ? "&best=" + best : ""}${category && category !== "" ? "&category=" + category : ""}`'>
                             <div class='content'>
                                 <div class='subject'>
                                     <span class='category' v-if='item.category'>{{ item.category }}</span>
@@ -243,28 +243,28 @@
                         </nuxt-link>
                     </li>
                 </ul>
-                <div class='load-more' @click='getLoadMore'>
-                    <span v-if='loading'>
-                        <font-awesome-icon class='fa-spin' icon='circle-notch'/>
-                    </span>
-                    <span v-else>
-                        <font-awesome-icon icon='chevron-down'/>
-                    </span>
-                </div>
+            </div>
+            <div class='load-more' @click='getLoadMore'>
+                <span v-if='loading'>
+                    <font-awesome-icon class='fa-spin' icon='circle-notch'/>
+                </span>
+                <span v-else>
+                    <font-awesome-icon icon='chevron-down'/>
+                </span>
             </div>
             <div class='bottom'>
-                <b-pagination-nav
-                    :link-gen='linkGen'
-                    :limit='10'
-                    :number-of-pages='100'
-                    v-model='page'
-                    size='sm'/>
                 <nuxt-link :to='`/board/${domain}?best=1`'>
                     <b-button size='sm' variant='primary' @click='forceUpdate({ best: true })'>
                         <font-awesome-icon icon='arrow-up'/>
                         개념글
                     </b-button>
                 </nuxt-link>
+                <b-pagination-nav
+                    :link-gen='linkGen'
+                    :limit='10'
+                    :number-of-pages='100'
+                    v-model='page'
+                    size='sm'/>
                 <div v-if='domain !== "all"'>
                     <nuxt-link :to='`/board/${domain}/write`'>
                         <b-button
@@ -347,14 +347,14 @@
 				this.getCount()
             },
             category: function() {
-                this.page = 1
-                this.getData(true, true)
+                this.page = this.$route.query.page || 1
+                this.getData(true)
                 this.getCount()
             }
         },
         mounted() {
             this.best = this.$route.query.best || 0
-            this.category = this.$route.query.category || ''
+            this.category = this.$route.query.category !== null ? this.$route.query.category : ''
             this.getData()
 			this.getCount()
             this.realtimeUpdate()
@@ -368,8 +368,15 @@
                     return
 				this.loading = true
                 this.$store.commit('setLoading', true)
-                if (forceUpdate)
+                if (forceUpdate) {
+                    this.category = ''
+                    this.searches = {
+                        text: '',
+                        select: 0,
+                        state: false
+                    }
                     this.page = 1
+                }
                 const data = await this.$axios.$post(
                     '/api/topic/list',
                     {
@@ -438,8 +445,13 @@
                     })
                 })
             },
+            getMoveLink(item) {
+                const c = this.category || ''
+                return `/${item.id}?page=${this.page}${this.best > 0 ? "&best=" + this.best : ""}${c !== "" ? "&category=" + this.category : ""}`
+            },
             linkGen(page) {
-                return `/board/${this.domain}?page=${page}${this.best > 0 ? '&best=' + this.best : ''}${this.category !== '' ? '&category=' + this.category : ''}`
+                const c = this.category || ''
+                return `/board/${this.domain}?page=${page}${this.best > 0 ? '&best=' + this.best : ''}${c !== '' ? '&category=' + c : ''}`
             },
             forceUpdate({ best }) {
                 this.best = best ? 1 : 0
@@ -456,7 +468,8 @@
                 }, 60000)
             },
             numberWithCommas(x) {
-                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                return x
+                    // return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
             },
             imageUrlAlt(event) {
                 event.target.src = '/default.png'
@@ -517,8 +530,8 @@
             > h6 {
                 display: flex;
                 margin: 0;
-                border-top: 1px solid #e9ecef;
-                border-bottom: 2px solid #e9ecef;
+                border: 1px solid #ddd;
+                border-bottom: 2px solid #ddd;
                 > div {
                     padding: .5rem;
                     font-size: 13px;
@@ -539,12 +552,14 @@
                 list-style: none;
                 &.notice > li {
                     font-weight: 700;
-                    border-bottom: 1px solid #e9ecef;
+                    border: 1px solid #ddd;
+                    border-top: 0;
                     background-color: #f7f8fa;
                     &:hover { background-color: #f1f2f6 }
                 }
                 > li {
-                    border-bottom: 1px solid #e9ecef;
+                    border: 1px solid #ddd;
+                    border-top: 0;
                     background-color: #fff;
                     cursor: pointer;
                     &.view > {
@@ -604,7 +619,7 @@
                                             font-size: 11px;
                                             font-weight: 700;
                                             border-radius: 2px;
-                                            background-color: #e9ecef;
+                                            background-color: #ddd;
                                         }
                                         > span.newest {
                                             margin-left: 2px;
@@ -648,7 +663,7 @@
                 &.notice > li { background-color: #f7f8fa }
                 > li {
                     min-height: 58px;
-                    border-bottom: 1px solid #e9ecef;
+                    border-bottom: 1px solid #ddd;
                     &.view {
                         // min-height: 66px;
                         border-top: 2px solid @primary;
@@ -683,7 +698,7 @@
                                     font-size: 11px;
                                     font-weight: 700;
                                     border-radius: 2px;
-                                    background-color: #e9ecef;
+                                    background-color: #ddd;
                                 }
                                 > span.notice {
                                     color: #fff;
@@ -698,6 +713,7 @@
                                     > span.writer {
                                         margin: 5px 10px 0 0;
                                         color: @primary;
+                                        font-size: 13px;
                                         font-weight: bold;
                                         > img:nth-child(1) { margin-top: -3px }
                                         > img:nth-child(2) {
@@ -739,7 +755,7 @@
                                     font-size: 12px;
                                     font-weight: 700;
                                     text-align: center;
-                                    border: 1px solid #e9ecef;
+                                    border: 1px solid #ddd;
                                     border-radius: 5px;
                                     background-color: #fff;
                                     > span.hot { color: #cc0000 }
@@ -749,15 +765,15 @@
                     }
                 }
             }
-            > .load-more {
-                padding: .5rem;
-                color: #fff;
-                font-size: 13px;
-                font-weight: 700;
-                text-align: center;
-                background-color: @primary;
-                cursor: pointer;
-            }
+        }
+        > .load-more {
+            padding: .5rem;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 700;
+            text-align: center;
+            background-color: @primary;
+            cursor: pointer;
         }
         > .bottom {
             margin: 1rem 0;
