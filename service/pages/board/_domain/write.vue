@@ -207,6 +207,7 @@
 				<div class='savedTime' v-if='savedTime'>
 					{{ savedTime }} 자동 저장되었습니다.
 				</div>
+				{{ options }}
 				<dropzone
 					id='dropzone'
 					ref='dropzone'
@@ -303,6 +304,9 @@
                 editor: null,
                 options: {
 					url: 'https://httpbin.org/anything',
+					uploadMultiple: true,
+					resizeWidth: 1,
+					resizeQuality: 0.2,
 					previewTemplate: this.template()
 				},
                 html: '<p></p>',

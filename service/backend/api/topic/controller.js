@@ -9,7 +9,7 @@ const storage = new Storage({ keyFilename: 'key.json' })
 
 const deleteFile = async filename => {
     await storage.bucket(BUCKET_NAME).file(filename).delete()
-    console.log(`gs://${bucketName}/${filename} deleted.`)
+    console.log(`gs://${BUCKET_NAME}/${filename} deleted.`)
 }
 
 const fs = require('fs')
@@ -762,7 +762,7 @@ module.exports.updatePost = async ctx => {
         return ctx.body = {
             status: 'fail'
         }
-    if (user.isAdmin < 1 && userId !== user.id)
+    if (user && user.isAdmin < 1 && userId !== user.id)
         return
     await updatePost(id, Filter.post(content), sticker.id, sticker.select)
     ctx.body = {

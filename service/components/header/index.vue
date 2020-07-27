@@ -71,34 +71,33 @@
         <b-sidebar
             id='sidebar-backdrop'
             v-model='visible'
-            right
             backdrop
             shadow>
             <ul>
                 <!-- <li @click='forceUpdate'><nuxt-link to='/hit'>HIT</nuxt-link></li> -->
                 <!-- <li @click='forceUpdate'><nuxt-link to='/gallery'>짤수집</nuxt-link></li> -->
-                <li @click='forceUpdate'><nuxt-link to='/board/girl'>연예 갤러리</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/anime'>애니메이션 갤러리</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/lastorigin'>라스트 오리진 갤러리</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/gfl'>소녀전선 갤러리</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/koikatsu'>코이카츠 갤러리</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/skyrim'>베데스다 갤러리</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/honkai3'>붕괴3 갤러리</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/ar_knights'>명일방주 갤러리</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/epic7'>에픽세븐 갤러리</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/pmmm'>마법소녀 마도카 마기카 갤러리</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/counterside'>카운터사이드 갤러리</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/monmusu'>몬무스 갤러리</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/bang_dream'>BanG Dream 갤러리</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/stwitch'>스트라이크 위치스 갤러리</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/azur_lane'>벽람항로 갤러리</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/manjuu'>Manjuu 갤러리</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/tsukuru'>쯔꾸르 갤러리</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/yandere'>얀데레 갤러리</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/girlcafe'>걸 카페 건 갤러리</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/mmd'>MMD 갤러리</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/ai_girl'>AI 소녀 갤러리</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/langrisser'>랑그릿사 갤러리</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/girl'>연예</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/anime'>애니메이션</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/lastorigin'>라스트 오리진</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/gfl'>소녀전선</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/koikatsu'>코이카츠</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/skyrim'>베데스다</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/honkai3'>붕괴3</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/ar_knights'>명일방주</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/epic7'>에픽세븐</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/pmmm'>마법소녀 마도카 마기카</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/counterside'>카운터사이드</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/monmusu'>몬무스</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/bang_dream'>BanG Dream</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/stwitch'>스트라이크 위치스</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/azur_lane'>벽람항로</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/manjuu'>Manjuu</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/tsukuru'>쯔꾸르</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/yandere'>얀데레</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/girlcafe'>걸 카페 건</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/mmd'>MMD</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/ai_girl'>AI 소녀</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/langrisser'>랑그릿사</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/request'>갤러리 신청</nuxt-link></li>
                 <!-- <li @click='forceUpdate'><nuxt-link to='/board/notice'>공지사항</nuxt-link></li> -->
                 <li @click='forceUpdate'><nuxt-link to='/board/feedback'>건의사항</nuxt-link></li>
@@ -243,7 +242,7 @@
 
     .openSidebar {
         position: fixed;
-        right: 1rem;
+        left: 1rem;
         bottom: 1rem;
         z-index: 10;
     }

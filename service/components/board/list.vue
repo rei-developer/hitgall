@@ -243,14 +243,14 @@
                         </nuxt-link>
                     </li>
                 </ul>
-                <div class='load-more' @click='getLoadMore'>
-                    <span v-if='loading'>
-                        <font-awesome-icon class='fa-spin' icon='circle-notch'/>
-                    </span>
-                    <span v-else>
-                        <font-awesome-icon icon='chevron-down'/>
-                    </span>
-                </div>
+            </div>
+            <div class='load-more' @click='getLoadMore'>
+                <span v-if='loading'>
+                    <font-awesome-icon class='fa-spin' icon='circle-notch'/>
+                </span>
+                <span v-else>
+                    <font-awesome-icon icon='chevron-down'/>
+                </span>
             </div>
             <div class='bottom'>
                 <nuxt-link :to='`/board/${domain}?best=1`'>
@@ -530,8 +530,8 @@
             > h6 {
                 display: flex;
                 margin: 0;
-                border-top: 1px solid #e9ecef;
-                border-bottom: 2px solid #e9ecef;
+                border: 1px solid #ddd;
+                border-bottom: 2px solid #ddd;
                 > div {
                     padding: .5rem;
                     font-size: 13px;
@@ -552,12 +552,14 @@
                 list-style: none;
                 &.notice > li {
                     font-weight: 700;
-                    border-bottom: 1px solid #e9ecef;
+                    border: 1px solid #ddd;
+                    border-top: 0;
                     background-color: #f7f8fa;
                     &:hover { background-color: #f1f2f6 }
                 }
                 > li {
-                    border-bottom: 1px solid #e9ecef;
+                    border: 1px solid #ddd;
+                    border-top: 0;
                     background-color: #fff;
                     cursor: pointer;
                     &.view > {
@@ -617,7 +619,7 @@
                                             font-size: 11px;
                                             font-weight: 700;
                                             border-radius: 2px;
-                                            background-color: #e9ecef;
+                                            background-color: #ddd;
                                         }
                                         > span.newest {
                                             margin-left: 2px;
@@ -661,7 +663,7 @@
                 &.notice > li { background-color: #f7f8fa }
                 > li {
                     min-height: 58px;
-                    border-bottom: 1px solid #e9ecef;
+                    border-bottom: 1px solid #ddd;
                     &.view {
                         // min-height: 66px;
                         border-top: 2px solid @primary;
@@ -696,7 +698,7 @@
                                     font-size: 11px;
                                     font-weight: 700;
                                     border-radius: 2px;
-                                    background-color: #e9ecef;
+                                    background-color: #ddd;
                                 }
                                 > span.notice {
                                     color: #fff;
@@ -753,7 +755,7 @@
                                     font-size: 12px;
                                     font-weight: 700;
                                     text-align: center;
-                                    border: 1px solid #e9ecef;
+                                    border: 1px solid #ddd;
                                     border-radius: 5px;
                                     background-color: #fff;
                                     > span.hot { color: #cc0000 }
@@ -763,15 +765,15 @@
                     }
                 }
             }
-            > .load-more {
-                padding: .5rem;
-                color: #fff;
-                font-size: 13px;
-                font-weight: 700;
-                text-align: center;
-                background-color: @primary;
-                cursor: pointer;
-            }
+        }
+        > .load-more {
+            padding: .5rem;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 700;
+            text-align: center;
+            background-color: @primary;
+            cursor: pointer;
         }
         > .bottom {
             margin: 1rem 0;
