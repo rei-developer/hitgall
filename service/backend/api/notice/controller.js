@@ -8,7 +8,7 @@ module.exports.getCount = async ctx => {
         const user = await User.getUser(ctx.get('x-access-token'))
         if (!user)
             return
-        const count = await readNotice.count(user.id)
+        const count = 0//await readNotice.count(user.id)
         ctx.body = {
             count,
             status: 'ok'
