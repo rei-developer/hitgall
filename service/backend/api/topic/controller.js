@@ -83,7 +83,7 @@ module.exports.getTopics = async ctx => {
     obj.isAllowed = 1
     const count = await readTopic.count(obj)
     const categories = await readBoard.categories(domain)
-    let notices = await readTopic.notices(domain)
+    let notices = await readTopic.notices(domain) || []
     if (notices.length > 0) {
         notices = notices.map(item => {
             const ip = item.ip.split('.')
@@ -94,7 +94,7 @@ module.exports.getTopics = async ctx => {
             return item
         })
     }
-    let topics = await readTopic.topics(obj, searches, page, limit)
+    let topics = await readTopic.topics(obj, searches, page, limit) || []
     if (topics.length > 0) {
         topics = topics.map(item => {
             const ip = item.ip.split('.')
