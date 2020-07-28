@@ -78,6 +78,7 @@
                 <!-- <li @click='forceUpdate'><nuxt-link to='/gallery'>짤수집</nuxt-link></li> -->
                 <li @click='forceUpdate'><nuxt-link to='/board/girl'>연예</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/anime'>애니메이션</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/solo'>모태솔로</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/lastorigin'>라스트 오리진</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/gfl'>소녀전선</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/koikatsu'>코이카츠</nuxt-link></li>
