@@ -10,7 +10,7 @@ const sticker = require('./sticker')
 const topic = require('./topic')
 const save = require('./save')
 
-const VERSION = 343
+const VERSION = 344
 
 const app = new Router()
 

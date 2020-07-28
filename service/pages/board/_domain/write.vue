@@ -207,7 +207,6 @@
 				<div class='savedTime' v-if='savedTime'>
 					{{ savedTime }} 자동 저장되었습니다.
 				</div>
-				{{ options }}
 				<dropzone
 					id='dropzone'
 					ref='dropzone'
