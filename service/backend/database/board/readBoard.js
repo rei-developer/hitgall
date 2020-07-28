@@ -4,7 +4,8 @@ const _ = require('lodash')
 module.exports.info = async domain => {
     const result = await pool.query(
         `SELECT
-            *,
+            b.name,
+            b.description,
             u.username masterId,
             u.nickname masterName
         FROM Boards b
@@ -43,20 +44,20 @@ module.exports.adminBoards = async (userId, isAdmin) => {
     return result
 }
 
-module.exports.adminBoardManagers = async domain => {
-    const result = await pool.query(
-        `SELECT
-            *,
-            u.nickname
-        FROM BoardManagers bm
-        LEFT JOIN Users u ON u.userId = bm.userId
-        WHERE bm.boardId = (SELECT id FROM Boards WHERE domain = ?)`,
-        [domain]
-    )
-    if (result.length < 1)
-        return false
-    return result
-}
+// module.exports.adminBoardManagers = async domain => {
+//     const result = await pool.query(
+//         `SELECT
+//             *,
+//             u.nickname
+//         FROM BoardManagers bm
+//         LEFT JOIN Users u ON u.userId = bm.userId
+//         WHERE bm.boardId = (SELECT id FROM Boards WHERE domain = ?)`,
+//         [domain]
+//     )
+//     if (result.length < 1)
+//         return false
+//     return result
+// }
 
 module.exports.adminBoardManagerLevel = async (userId, domain) => {
     const result = await pool.query(
@@ -91,7 +92,10 @@ module.exports.adminBoardBlinds = async domain => {
 module.exports.adminBoardRemoveLogs = async domain => {
     const result = await pool.query(
         `SELECT
-            *,
+            rl.author,
+            rl.ip,
+            rl.title,
+            rl.created,
             u.nickname remover
         FROM RemoveLogs rl
         LEFT JOIN Users u ON u.id = rl.userId
