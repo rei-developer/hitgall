@@ -269,7 +269,7 @@
                 const nowFormat = this.$moment(new Date()).add(9, "hours").format('YYYY.MM.DD') 
                 const createdFormat = this.$moment(created).add(9, "hours").format('YYYY.MM.DD')
                 return nowFormat === createdFormat
-                    ? this.$moment(created).add(9, "hours").format('HH:mm:ss')
+                    ? this.$moment(created).format('HH:mm:ss')
                     : createdFormat
             },
             getSearchLabel() {
