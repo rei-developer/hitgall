@@ -130,7 +130,7 @@
 								계정 생성일
 							</b-input-group-prepend>
 							<b-form-input
-								:value='`${$moment($store.state.user.registerDate).format("YYYY/MM/DD HH:mm:ss")} (${numberWithCommas($moment().diff($moment($store.state.user.registerDate), "days"))}일)`'
+								:value='`${$moment($store.state.user.registerDate).add(9, "hours").format("YYYY/MM/DD HH:mm:ss")} (${numberWithCommas($moment().add(9, "hours").diff($moment($store.state.user.registerDate), "days"))}일)`'
 								readonly/>
 						</b-input-group>
 					</b-form-group>
@@ -140,7 +140,7 @@
 								이용 제한일
 							</b-input-group-prepend>
 							<b-form-input
-								:value='$moment($store.state.user.blockDate).format("YYYY/MM/DD")'
+								:value='$moment($store.state.user.blockDate).add(9, "hours").format("YYYY/MM/DD")'
 								readonly/>
 						</b-input-group>
 					</b-form-group>

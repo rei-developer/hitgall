@@ -35,11 +35,11 @@
                                 <span :style='item.color !== "" ? `color: #${item.color}` : ""'>
                                     {{ item.title }}
                                 </span>
-                                <span class='newest' v-if='$moment().diff($moment(item.created), "days") <= 1'>N</span>
+                                <span class='newest' v-if='$moment().add(9, "hours").diff($moment(item.created).add(9, "hours"), "days") <= 1'>N</span>
                                 <div class='info'>
                                     <span>
                                         <font-awesome-icon icon='history'/>
-                                        {{ $moment(item.created).fromNow() }}
+                                        {{ $moment(item.created).add(9, "hours").fromNow() }}
                                     </span>
                                 </div>
                             </div>

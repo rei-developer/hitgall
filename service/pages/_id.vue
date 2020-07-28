@@ -72,7 +72,7 @@
         <article class='topic-view'>
             <h6>
                 <div class='regdate'>
-                    <span>{{ $moment(topic.created).format("YY/MM/DD HH:mm:ss") }}</span>
+                    <span>{{ $moment(topic.created).add(9, 'hours').format("YY/MM/DD HH:mm:ss") }}</span>
                 </div>
                 <div class='category' v-if='topic.category'>{{ topic.category }}</div>
                 <div class='subject' :style='topic.color !== "" ? `color: #${topic.color}` : ""'>{{ topic.title }}</div>

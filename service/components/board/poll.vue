@@ -1,6 +1,6 @@
 <template>
     <div>
-        <span>{{ $moment(regdate).format('YYYY년 MM월 DD일') }}까지</span>
+        <span>{{ $moment(regdate).add(9, "hours").format('YYYY년 MM월 DD일') }}까지</span>
         <client-only>
             <vue-poll v-bind='options' @addvote='addVote'/>
         </client-only>
@@ -48,7 +48,7 @@
                 })
                 this.options.question = data.poll.question
                 this.regdate = data.poll.regdate
-                const diff = this.$moment(new Date()).diff(this.$moment(this.regdate), 'days')
+                const diff = this.$moment(new Date()).add(9, "hours").diff(this.$moment(this.regdate).add(9, "hours"), 'days')
                 if (diff > 0 || !data.possible)
                     this.options.finalResults = true
             },
