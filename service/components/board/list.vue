@@ -171,7 +171,7 @@
                                         </span>
                                         <span class='info'>
                                             <font-awesome-icon icon='history'/>
-                                            {{ $moment(item.created).add(9, "hours").fromNow() }}
+                                            {{ $moment(item.created).fromNow() }}
                                         </span>
                                         <span class='info'>
                                             <font-awesome-icon icon='eye'/>
@@ -217,7 +217,7 @@
                                         </span>
                                         <span class='info'>
                                             <font-awesome-icon icon='history'/>
-                                            {{ $moment(item.created).add(9, "hours").fromNow() }}
+                                            {{ $moment(item.created).fromNow() }}
                                         </span>
                                         <span class='info'>
                                             <font-awesome-icon icon='eye'/>
@@ -415,8 +415,8 @@
                 this.counts.today = this.numberWithCommas(data.today)
             },
             getCreated(created) {
-                const nowFormat = this.$moment(new Date()).add(9, "hours").format('YYYY.MM.DD') 
-                const createdFormat = this.$moment(created).add(9, "hours").format('YYYY.MM.DD')
+                const nowFormat = this.$moment(new Date()).format('YYYY.MM.DD') 
+                const createdFormat = this.$moment(created).format('YYYY.MM.DD')
 
     console.log(nowFormat)
     console.log(createdFormat)

@@ -16,7 +16,7 @@
                             {{ item.author }}
                         </div>
                         <div class='regdate'>
-                            {{ $moment(item.updated).add(9, "hours").format('YYYY/MM/DD HH:mm:ss') }}
+                            {{ $moment(item.updated).format('YYYY/MM/DD HH:mm:ss') }}
                         </div>
                         <div class='text'>
                             <div class='tagUser' v-if='item.tagAuthor'>

@@ -91,6 +91,9 @@ module.exports.getBoardName = domain => {
         case 'illusionconnect':
             name = '일루전 커넥트 갤러리'
             break
+        case 'adult_broadcast':
+            name = '성인 인터넷 방송 갤러리'
+            break
         default:
             name = domain + ' 갤러리'
             break

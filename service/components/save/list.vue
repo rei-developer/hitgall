@@ -62,7 +62,7 @@
                                     <span :style='item.color !== "" ? `color: #${item.color}` : ""'>
                                         <span class='category' v-if='item.category'>{{ item.category }}</span>
                                         {{ item.title }}
-                                        <span class='newest' v-if='$moment().add(9, "hours").diff($moment(item.created).add(9, "hours"), "days") <= 1'>N</span>
+                                        <span class='newest' v-if='$moment().diff($moment(item.created), "days") <= 1'>N</span>
                                     </span>
                                     <span v-if='item.postsCount > 0'>
                                         [{{ item.postsCount }}]
@@ -99,11 +99,11 @@
                                     <span :style='item.color !== "" ? `color: #${item.color}` : ""'>
                                         {{ item.title }}
                                     </span>
-                                    <span class='newest' v-if='$moment().add(9, "hours").diff($moment(item.created).add(9, "hours"), "days") <= 1'>N</span>
+                                    <span class='newest' v-if='$moment().diff($moment(item.created), "days") <= 1'>N</span>
                                     <div class='info'>
                                         <span>
                                             <font-awesome-icon icon='history'/>
-                                            {{ $moment(item.created).add(9, "hours").fromNow() }}
+                                            {{ $moment(item.created).fromNow() }}
                                         </span>
                                         <span>
                                             <font-awesome-icon icon='eye'/>
@@ -266,8 +266,8 @@
                 // this.counts.today = this.numberWithCommas(data.today)
             },
             getCreated(created) {
-                const nowFormat = this.$moment(new Date()).add(9, "hours").format('YYYY.MM.DD') 
-                const createdFormat = this.$moment(created).add(9, "hours").format('YYYY.MM.DD')
+                const nowFormat = this.$moment(new Date()).format('YYYY.MM.DD') 
+                const createdFormat = this.$moment(created).format('YYYY.MM.DD')
                 return nowFormat === createdFormat
                     ? this.$moment(created).format('HH:mm:ss')
                     : createdFormat

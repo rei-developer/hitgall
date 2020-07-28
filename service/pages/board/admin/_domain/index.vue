@@ -107,7 +107,7 @@
 								갤러리 생성일
 							</b-input-group-prepend>
 							<b-form-input
-								:value='`${$moment(board.created).add(9, "hours").format("YYYY/MM/DD HH:mm:ss")} (${numberWithCommas($moment().add(9, "hours").diff($moment(board.created), "days"))}일)`'
+								:value='`${$moment(board.created).format("YYYY/MM/DD HH:mm:ss")} (${numberWithCommas($moment().diff($moment(board.created), "days"))}일)`'
 								readonly/>
 						</b-input-group>
 					</b-form-group>
@@ -153,8 +153,8 @@
 											</span>
 										</div>
 									</div>
-									<div>{{ $moment(item.blockDate).add(9, "hours").format("YY/MM/DD") }}</div>
-									<div>{{ $moment(item.created).add(9, "hours").format("YY/MM/DD HH:mm:ss") }}</div>
+									<div>{{ $moment(item.blockDate).format("YY/MM/DD") }}</div>
+									<div>{{ $moment(item.created).format("YY/MM/DD HH:mm:ss") }}</div>
 									<div>
 										<b-button
 											size='sm'
@@ -202,7 +202,7 @@
 											</span>
 										</div>
 									</div>
-									<div>{{ $moment(item.created).add(9, "hours").format("YY/MM/DD HH:mm:ss") }}</div>
+									<div>{{ $moment(item.created).format("YY/MM/DD HH:mm:ss") }}</div>
 									<div>{{ item.remover }}</div>
 								</div>
 							</li>

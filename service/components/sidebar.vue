@@ -32,6 +32,7 @@
             <ul>
                 <li @click='forceUpdate'><nuxt-link to='/board/girl'>연예</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/anime'>애니메이션</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/adult_broadcast'>성인 인터넷 방송</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/lastorigin'>라스트 오리진</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/monmusu'>몬무스</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/theaterdays'>밀리시타</nuxt-link></li>

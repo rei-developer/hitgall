@@ -39,7 +39,7 @@
                                     {{ item.author }}
                                     <span class='ip' v-if='item.userId < 1 && item.ip !== ""'>({{ item.ip }})</span>
                                 </span>
-                                <span class='regdate'>{{ $moment(item.updated).add(9, "hours").format("YY/MM/DD HH:mm:ss") }}</span>
+                                <span class='regdate'>{{ $moment(item.updated).format("YY/MM/DD HH:mm:ss") }}</span>
                             </div>
                             <div :class='item.userId === topic.userId ? "writer" : ""' @click='handleCommand(["reply", item.id])'>
                                 <div class='tagUser' v-if='item.tagAuthor'>
