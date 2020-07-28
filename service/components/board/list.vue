@@ -417,6 +417,10 @@
             getCreated(created) {
                 const nowFormat = this.$moment(new Date()).add(9, "hours").format('YYYY.MM.DD') 
                 const createdFormat = this.$moment(created).add(9, "hours").format('YYYY.MM.DD')
+
+    console.log(nowFormat)
+    console.log(createdFormat)
+
                 return nowFormat === createdFormat
                     ? this.$moment(created).format('HH:mm:ss')
                     : createdFormat
