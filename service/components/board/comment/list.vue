@@ -54,23 +54,10 @@
                                 </div>
                                 <span v-html='item.content'/>
                             </div>
-                            <div>
-                                <div class='likes' @click='handleCommand(["votes", item.id, true])'>
-                                    <font-awesome-icon icon='star'/>
-                                    추천 {{ item.likes }}
-                                </div>
-                                <div class='likes' @click='handleCommand(["votes", item.id, false])'>
-                                    <font-awesome-icon icon='arrow-down'/>
-                                    비추 {{ item.hates }}
-                                </div>
-                                <div class='both-clear' @click='handleCommand(["reply", item.id])'/>
-                            </div>
                         </div>
                         <div class='more'>
                             <b-dropdown size='sm' right no-caret>
                                 <b-dropdown-item @click='handleCommand(["reply", item.id])'>대댓글</b-dropdown-item>
-                                <b-dropdown-item @click='handleCommand(["votes", item.id, true])'>추천</b-dropdown-item>
-                                <b-dropdown-item @click='handleCommand(["votes", item.id, false])'>비추천</b-dropdown-item>
                                 <b-dropdown-item @click='handleCommand(["update", item])'>수정</b-dropdown-item>
                                 <b-dropdown-item @click='handleCommand(["remove", item.id])'>삭제</b-dropdown-item>
                             </b-dropdown>
@@ -153,15 +140,6 @@
             //     // this.playSound('https://soundbible.com/mp3/Blop-Mark_DiAngelo-79054334.mp3')
             //     this.newPostsCount++
             // })
-            // this.$socket.on('votePost', data => {
-            //     this.posts = this.posts.map(post => {
-            //         if (post.id === data.postId) {
-            //             post.likes = data.likes
-            //             post.hates = data.hates
-            //         }
-            //         return post
-            //     })
-            // })
         },
         mounted() {
             this.viewPostId = this.$route.query.postId
@@ -209,9 +187,6 @@
                 case 'reply':
                     this.reply(command[1])
                     break
-                case 'votes':
-                    this.votes(command[1], command[2])
-                    break
                 case 'update':
                     this.update(command[1])
                     break
@@ -223,25 +198,6 @@
             reply(id) {
                 this.tempPostReplyId = id
                 this.tempPostUpdateId = 0
-            },
-            votes: async function(id, flag) {
-                if (id < 1)
-                    return
-                if (!this.$store.state.user.isLogged)
-                    return this.toast('로그인하세요.', 'warning')
-                const token = this.$store.state.user.token
-                this.$store.commit('setLoading', true)
-                const data = await this.$axios.$post(
-                    '/api/topic/vote/post',
-                    { id, likes: flag },
-                    { headers: { 'x-access-token': token } }
-                )
-                if (data.status === 'fail') {
-                    this.$store.commit('setLoading')
-                    return this.toast(data.message || '오류가 발생했습니다.', 'danger')
-                }
-                this.toast('투표했습니다.', 'success')
-                this.$store.commit('setLoading')
             },
             update(item) {
                 if (item.id < 1)

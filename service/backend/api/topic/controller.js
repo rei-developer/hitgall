@@ -449,7 +449,6 @@ module.exports.createPost = async ctx => {
     })
     const postsCount = await readPost.count(topicId)
     const posts = await readPost.posts(topicId, 0, 100)
-    await createPost.createPostCounts(postId)
     if (user) {
         await User.setUpPoint(user, 5)
         const items = []
@@ -473,11 +472,8 @@ module.exports.createPost = async ctx => {
 }
 
 module.exports.createTopicVotes = async ctx => {
-    const user = await User.getUser(ctx.get('x-access-token'))
-    if (!user)
-        return ctx.body = {
-            status: 'fail'
-        }
+    const token = ctx.get('x-access-token')
+    const user = token !== '' ? await User.getUser(token) : null
     let { id, likes } = ctx.request.body
     if (id < 1)
         return
@@ -486,11 +482,6 @@ module.exports.createTopicVotes = async ctx => {
         return ctx.body = {
             status: 'fail'
         }
-    // if (topic.userId < 1)
-    //     return ctx.body = {
-    //         message: '현재 유동닉이 쓴 글은 추천할 수 없습니다. 조만간 구현됩니다.',
-    //         status: 'fail'
-    //     }
     const targetUser = await readUser(topic.userId) || 0
     const ip = ctx.get('x-real-ip')
     if (topic.ip === ip) // topic.userId === user.id || 
@@ -505,7 +496,7 @@ module.exports.createTopicVotes = async ctx => {
             message: '3일이 지난 게시물은 투표할 수 없습니다.',
             status: 'fail'
         }
-    const date = await readTopic.topicVotes(user.id, id, ip)
+    const date = await readTopic.topicVotes(user ? user.id : 0, id, likes, ip)
     if (date) {
         const created = moment(date).format('YYYY/MM/DD HH:mm:ss')
         return ctx.body = {
@@ -513,7 +504,7 @@ module.exports.createTopicVotes = async ctx => {
             status: 'fail'
         }
     }
-    await createTopic.createTopicVotes(user.id, id, ip)
+    await createTopic.createTopicVotes(user ? user.id : 0, id, likes, ip)
     let move = ''
     if (likes) {
         if (topic.isBest === 0 && topic.likes - topic.hates >= BEST_LIMIT) {
@@ -521,7 +512,6 @@ module.exports.createTopicVotes = async ctx => {
             await updateTopic.updateTopicByIsBest(id, 1)
             if (targetUser > 0)
                 await User.setUpExpAndPoint(targetUser, 100, 100)
-            // await socket.newBest(global.io, id, topic.boardDomain, topic.title)
         } else {
             if (targetUser > 0)
                 await User.setUpExpAndPoint(targetUser, 5, 5)
@@ -533,88 +523,16 @@ module.exports.createTopicVotes = async ctx => {
             await updateTopic.updateTopicByIsBest(id)
             if (targetUser > 0)
                 await User.setUpExpAndPoint(targetUser, -20, -20)
-            // } else if (topic.hates - topic.likes >= DELETE_LIMIT) {
-            //     move = 'DELETE'
-            //     await updateTopic.updateTopicByIsAllowed(id)
-            //     await User.setUpExpAndPoint(targetUser, -10, -10)
         } else {
             if (targetUser > 0)
                 await User.setUpExpAndPoint(targetUser, -5, -5)
         }
         await updateTopic.updateTopicCountsByHates(id)
     }
-    // await socket.vote(
-    //     global.io,
-    //     id,
-    //     likes
-    //         ? ++topic.likes
-    //         : topic.likes,
-    //     likes
-    //         ? topic.hates
-    //         : ++topic.hates
-    // )
     ctx.body = {
-        move: '',
-        status: 'ok'
-    }
-}
-
-module.exports.createPostVotes = async ctx => {
-    const user = await User.getUser(ctx.get('x-access-token'))
-    if (!user)
-        return
-    let { id, likes } = ctx.request.body
-    if (id < 1)
-        return
-    const post = await readPost(id)
-    if (!post)
-        return ctx.body = {
-            status: 'fail'
-        }
-    // if (post.userId < 1)
-    //     return ctx.body = {
-    //         message: '현재 유동닉이 쓴 댓글은 추천할 수 없습니다. 조만간 구현됩니다.',
-    //         status: 'fail'
-    //     }
-    //const targetUser = await readUser(post.userId)
-    const ip = ctx.get('x-real-ip')
-    if (post.ip === ip) // post.userId === user.id ||
-        return ctx.body = {
-            message: '본인에게 투표할 수 없습니다.',
-            status: 'fail'
-        }
-    const duration = moment.duration(moment().diff(post.created))
-    const hours = duration.asHours()
-    if (hours > 72)
-        return ctx.body = {
-            message: '3일이 지난 게시물은 투표할 수 없습니다.',
-            status: 'fail'
-        }
-    const date = await readPost.postVotes(user.id, id, ip)
-    if (date) {
-        const created = moment(date).format('YYYY/MM/DD HH:mm:ss')
-        return ctx.body = {
-            message: `이미 투표한 게시물입니다. (${created})`,
-            status: 'fail'
-        }
-    }
-    await createPost.createPostVotes(user.id, id, ip)
-    if (likes)
-        await updatePost.updatePostCountsByLikes(id)
-    else
-        await updatePost.updatePostCountsByHates(id)
-    // await socket.votePost(
-    //     global.io,
-    //     post.topicId,
-    //     id,
-    //     likes
-    //         ? ++post.likes
-    //         : post.likes,
-    //     likes
-    //         ? post.hates
-    //         : ++post.hates
-    // )
-    ctx.body = {
+        move,
+        likes: topic.likes,
+        hates: topic.hates,
         status: 'ok'
     }
 }

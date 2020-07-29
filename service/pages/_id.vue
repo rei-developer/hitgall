@@ -95,7 +95,7 @@
                         <span>비추 <strong>{{ numberWithCommas(topic.hates) }}</strong></span>
                     </div>
                     <div>
-                        <span @click='copyLink(`https://www.hitgall.com/{{ id }}`)'>https://www.hitgall.com/{{ id }}</span>
+                        <span @click='copyLink(`https://www.hitgall.com/${ id }`)'>https://www.hitgall.com/{{ id }}</span>
                     </div>
                 </div>
             </div>
@@ -299,6 +299,8 @@
                     return this.toast(data.message || '오류가 발생했습니다.', 'danger')
                 }
                 data.move === 'BEST' ? this.toast('HIT 게시판으로 이전되었습니다!', 'primary') : this.toast('투표했습니다.', 'success')
+                this.topic.likes = data.likes + (flag ? 1 : 0)
+                this.topic.hates = data.hates + (flag ? 0 : 1)
                 this.$store.commit('setLoading')
             },
             copyLink: async function(link) {

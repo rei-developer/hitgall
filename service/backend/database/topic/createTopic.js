@@ -40,7 +40,7 @@ module.exports.createTopicSaves = async (userId, color, title, content, isNotice
     [userId, color, title, content, isNotice]
 )
 
-module.exports.createTopicVotes = async (userId, topicId, ip) => await pool.query(
-    'INSERT INTO TopicVotes (userId, topicId, ip) VALUES (?, ?, ?)',
-    [userId, topicId, ip]
+module.exports.createTopicVotes = async (userId, topicId, flag, ip) => await pool.query(
+    'INSERT INTO TopicVotes (userId, topicId, flag, ip) VALUES (?, ?, ?, ?)',
+    [userId, topicId, flag, ip]
 )

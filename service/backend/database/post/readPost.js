@@ -7,11 +7,8 @@ module.exports = async id => {
 			p.topicId,
 			p.ip,
 			p.created,
-			p.updated,
-			pc.likes,
-			pc.hates
+			p.updated
 		FROM Posts p
-		LEFT JOIN PostCounts pc ON pc.postId = p.id
 		WHERE p.id = ?`,
 		[id]
 	)
@@ -58,8 +55,6 @@ module.exports.posts = async (topicId, page, limit) => {
 			p.created,
 			p.updated,
 			tp.author tagAuthor,
-			pc.likes,
-			pc.hates,
 			u.profileImageUrl profile,
 			u.level,
 			u.icon,
@@ -67,7 +62,6 @@ module.exports.posts = async (topicId, page, limit) => {
 			bm.level boardLevel
 		FROM Posts p
 		LEFT JOIN Posts tp ON tp.id = p.postParentId
-		LEFT JOIN PostCounts pc ON pc.postId = p.id
 		LEFT JOIN Users u ON u.id = p.userId
 		LEFT JOIN BoardManagers bm ON (bm.userId = p.userId AND bm.boardDomain = p.boardDomain)
 		WHERE p.topicId = ?
@@ -93,12 +87,9 @@ module.exports.postsByMe = async (userId, page, limit) => {
 			p.created,
 			p.updated,
 			tp.author tagAuthor,
-			pc.likes,
-			pc.hates,
 			u.profileImageUrl profile
 		FROM Posts p
 		LEFT JOIN Posts tp ON tp.id = p.postParentId
-		LEFT JOIN PostCounts pc ON pc.postId = p.id
 		LEFT JOIN Users u ON u.id = p.userId
 		WHERE p.userId = ?
 		ORDER BY id DESC

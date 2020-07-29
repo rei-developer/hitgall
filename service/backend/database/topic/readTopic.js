@@ -294,10 +294,10 @@ module.exports.topicSaves = async userId => {
     return result[0]
 }
 
-module.exports.topicVotes = async (userId, topicId, ip) => {
+module.exports.topicVotes = async (userId, topicId, flag, ip) => {
     const result = await pool.query(
-        'SELECT created FROM TopicVotes WHERE topicId = ? AND (userId = ? OR ip = ?)',
-        [topicId, userId, ip]
+        'SELECT created FROM TopicVotes WHERE topicId = ? AND flag = ? AND (userId = ? OR ip = ?)',
+        [topicId, flag, userId, ip]
     )
     if (result.length < 1)
         return false

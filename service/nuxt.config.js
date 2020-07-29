@@ -119,4 +119,5 @@ module.exports = {
 	env: {
 		SOCKET_HOST_URL: 'https://www.hitgall.com'
 	},
+	telemetry: false
 }
