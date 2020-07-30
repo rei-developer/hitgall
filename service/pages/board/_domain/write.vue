@@ -459,7 +459,7 @@
 						return this.toast('설문조사 종료 기간을 입력하세요.', 'danger')
 				}
 				this.loading = true
-				await this.imageUploadToServer(this.$refs.dropzone.getAcceptedFiles())
+				await this.imageUploadToServer(this.$refs.dropzone.getAcceptedFiles().reverse())
 			},
 			async write() {
 				const token = this.$store.state.user.token || ''
