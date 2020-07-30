@@ -23,7 +23,8 @@ router
 app
     .use(async (ctx, next) => {
         const hostIp = ip.address()
-        if (hostIp === ctx.hostname)
+        console.log(hostIp, ctx.hostname ,  "ㅇㅇㅇㅇㅇ")
+        if (hostIp == ctx.hostname)
             ctx.throw(451, 'Unavailable For Legal Reasons')
         await next()
     })
