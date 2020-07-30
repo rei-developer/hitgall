@@ -3,6 +3,7 @@ const Logger = require('koa-logger')
 const bodyParser = require('koa-bodyparser')
 const Router = require('koa-router')
 const helmet = require('koa-helmet')
+const ip = require('ip')
 const api = require('./api')
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
@@ -13,15 +14,21 @@ const router = new Router()
 const config = require('../nuxt.config.js')
 config.dev = app.env !== 'production'
 
+app
+    .use((ctx, next) => {
+        const hostIp = ip.address()
+        if (hostIp === ctx.hostname)
+            ctx.throw(451, 'Unavailable For Legal Reasons')
+        next()
+    })
+    .use(router.routes())
+    .use(router.allowedMethods())
+
 router
     .use(helmet())
     .use(Logger())
     .use(bodyParser())
     .use('/api', api.routes())
-
-app
-    .use(router.routes())
-    .use(router.allowedMethods())
 
 const server = require('http').createServer(app.callback())
 // const socket = require('./lib/socket.io')
