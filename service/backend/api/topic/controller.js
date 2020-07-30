@@ -228,6 +228,7 @@ module.exports.getSavedContent = async ctx => {
 
 module.exports.createTopic = async ctx => {
   const token = ctx.get("x-access-token");
+  console.log(token);
   const user = token !== "" ? await User.getUser(token) : null;
   let {
     domain,
