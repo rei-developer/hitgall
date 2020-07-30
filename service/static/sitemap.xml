@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd'>
+<url><loc>https://www.hitgall.com/</loc><changefreq>always</changefreq><priority>1.00</priority></url>
+<url><loc>https://www.hitgall.com/hit</loc><changefreq>always</changefreq><priority>0.85</priority></url>
+<url><loc>https://www.hitgall.com/gallery</loc><changefreq>always</changefreq><priority>0.85</priority></url>
+<url><loc>https://www.hitgall.com/anime</loc><changefreq>always</changefreq><priority>0.85</priority></url>
+<url><loc>https://www.hitgall.com/game</loc><changefreq>always</changefreq><priority>0.85</priority></url>
+<url><loc>https://www.hitgall.com/nendo</loc><changefreq>always</changefreq><priority>0.85</priority></url>
+<url><loc>https://www.hitgall.com/draw</loc><changefreq>always</changefreq><priority>0.85</priority></url>
+<url><loc>https://www.hitgall.com/news</loc><changefreq>always</changefreq><priority>0.85</priority></url>
+<url><loc>https://www.hitgall.com/review</loc><changefreq>always</changefreq><priority>0.85</priority></url>
+<url><loc>https://www.hitgall.com/notice</loc><changefreq>always</changefreq><priority>0.85</priority></url>
+<url><loc>https://www.hitgall.com/feedback</loc><changefreq>always</changefreq><priority>0.85</priority></url>
+</urlset>
