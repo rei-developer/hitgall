@@ -17,7 +17,9 @@
             <section class='panel'>
                 <!-- inner -->
                 <article class='inner'>
+                    <div class='inner-box'>
                     <nuxt/>
+                    </div>
                 </article>
                 <!-- sidebar -->
                 <article class='sidebar'>
@@ -142,8 +144,8 @@
     body { background-color: #F9F9F9 }
 
     section {
-        max-width: 1640px;
-        margin: 0 auto;
+        // max-width: 1640px;
+        // margin: 0 auto;
     }
 
     header.header {
@@ -165,25 +167,37 @@
     main {
         flex: 1;
         > section.panel {
-            display: flex;
+            max-width: 1640px;
+            margin: 0 auto;
+            position: relative;
             > article.sidebar {
-                flex-basis: 250px;
-                flex-shrink: 0;
+                width: 220px;
+                position: fixed;
+                top: 78px;
+                font-size: 14px;
+                direction: ltr;
+                margin-right: 10px;
+                animation-name: fade;
+                animation-duration: 1s;
             }
             > article.inner {
-                flex: 1;
-                margin: 8px;
-                border-radius: 6px;
-                padding: 15px;
-                box-sizing: border-box;
-                position: relative;
-                animation-name: item;
-                animation-duration: .4s;
-                display: inline-block;
-                text-align: left;
-                animation-fill-mode: backwards;
-                box-shadow: 0 10px 40px -10px rgba(0,64,128,.2);
-                transition: box-shadow .3s;
+                margin-right: 240px;
+                direction: ltr;
+                > .inner-box {
+                    // flex: 1;
+                    margin: 8px;
+                    border-radius: 6px;
+                    padding: 15px;
+                    box-sizing: border-box;
+                    position: relative;
+                    animation-name: item;
+                    animation-duration: .4s;
+                    display: inline-block;
+                    text-align: left;
+                    animation-fill-mode: backwards;
+                    box-shadow: 0 10px 40px -10px rgba(0,64,128,.2);
+                    transition: box-shadow .3s;
+                }
             }
         }
         &.single {
@@ -201,7 +215,7 @@
     footer {
         padding: 15px 0;
         color: #fff;
-        background-color: #57617B;
+        background-color: rgb(0, 64, 128);
     }
 
     // container

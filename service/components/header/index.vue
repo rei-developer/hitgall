@@ -6,7 +6,7 @@
                 <!-- logo -->
                 <li class='logo' v-shortkey.once='["m"]' @shortkey='move("/")' @click='forceUpdate'>
                     <nuxt-link to='/'>
-                        <img src='/icon.png'>
+                        HitGall.com
                     </nuxt-link>
                 </li>
                 <!-- sidebar -->
@@ -202,12 +202,9 @@
                 }
                 &.logo {
                     > a {
-                        margin-top: -2px;
-                        img {
-                            width: 40px;
-                            height: 40px;
-                        }
-                        &:hover img { opacity: .5 }
+                        font-family: 'rubik';
+                        font-size: 18px;
+                        font-weight: bold;
                     }
                 }
             }
