@@ -1,0 +1,660 @@
+[33mcommit 9f7d5d243d35fb902db22930777465ea60686830[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31mnako/master[m[33m)[m
+Merge: ea273fa 27c7bbc
+Author: DarrenKwonDev <anatomy1545@gmail.com>
+Date:   Fri Jul 31 00:24:41 2020 +0900
+
+    fetch
+
+[33mcommit 27c7bbc114168c2b2ee623f17c421427977de278[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Thu Jul 30 23:39:44 2020 +0900
+
+    update
+
+[33mcommit ea273faf84c697f8d96c7a6b4bd3a65c7d750347[m
+Author: DarrenKwonDev <anatomy1545@gmail.com>
+Date:   Thu Jul 30 23:36:24 2020 +0900
+
+    asdf
+    ;
+
+[33mcommit c6143b3f2241b6e38df9debe0656e02189ab6bfe[m
+Author: DarrenKwonDev <anatomy1545@gmail.com>
+Date:   Thu Jul 30 23:33:23 2020 +0900
+
+    initial
+
+[33mcommit 3b7605f58a78eb19a84cc00f1c88102e3611eb03[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Thu Jul 30 23:20:26 2020 +0900
+
+    update design
+
+[33mcommit 1c5b6cb648df94fca7165259df1a7df93e227a3c[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Thu Jul 30 17:55:42 2020 +0900
+
+    update
+
+[33mcommit 870d1ec0973da2301d08a1abe0f8369bcaa58614[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Thu Jul 30 17:54:47 2020 +0900
+
+    update
+
+[33mcommit 8adf550b9dec6027ee206384e9604155b34088a6[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Thu Jul 30 17:51:33 2020 +0900
+
+    update
+
+[33mcommit 7a5f110b4e05f1a3b14ac409167365dcf1d4fb9c[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Thu Jul 30 17:51:11 2020 +0900
+
+    update
+
+[33mcommit 0e0e1deca333d0b78726203317b622add6003a3e[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Thu Jul 30 17:49:08 2020 +0900
+
+    update
+
+[33mcommit 45398881a673f16a2b3c4bd641f6ce47088c5cbb[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Thu Jul 30 17:44:12 2020 +0900
+
+    update
+
+[33mcommit 7843dbe6f31c6e802f4cebd2b33918b158417be5[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Thu Jul 30 17:21:40 2020 +0900
+
+    update
+
+[33mcommit fb4c73de15875cf8db9290a00d078a2b333bbf5a[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Thu Jul 30 17:20:10 2020 +0900
+
+    update
+
+[33mcommit 4552d0456ecd710db3bfa493daa04322ebb05eb9[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Thu Jul 30 12:15:50 2020 +0900
+
+    update
+
+[33mcommit 78afa41164a4160c86153a53be3aebae53cf4642[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Thu Jul 30 12:05:52 2020 +0900
+
+    update
+
+[33mcommit 56ebc2f556e5b6ee57fc1fccc7e7a1e399041482[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Thu Jul 30 12:03:08 2020 +0900
+
+    update
+
+[33mcommit 94c0b6caeaf6bdb3016a47d909eab38b2a96c25f[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Thu Jul 30 12:02:54 2020 +0900
+
+    update
+
+[33mcommit 4f2343395f55f12a019036ff592057a6f4ac8036[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Thu Jul 30 12:02:39 2020 +0900
+
+    update
+
+[33mcommit e4ba70de5714b186ba4f46732072b1eeef63a4b9[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Thu Jul 30 12:02:21 2020 +0900
+
+    update
+
+[33mcommit 0cdbe2376be2428ba13efd91a313cd85145f86ca[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Thu Jul 30 11:15:03 2020 +0900
+
+    update
+
+[33mcommit 1308da62f9dd8a837e5997a8bcd96d98af8cdc90[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Thu Jul 30 10:46:01 2020 +0900
+
+    update
+
+[33mcommit 4dd042be1d5d7515d4998268ae10b14faf19e79f[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Thu Jul 30 00:12:37 2020 +0900
+
+    update
+
+[33mcommit 6545df3603ff0faba1a165ee1c7fc8ce6755bf2d[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Tue Jul 28 22:23:24 2020 +0900
+
+    update 346
+
+[33mcommit 8ea0749d0dffce4ea49f666b2570bd163286eacc[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Tue Jul 28 16:59:42 2020 +0900
+
+    update
+
+[33mcommit 19ea29cfa2fa4bc2f82a23b4c8892b6671d9058f[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Tue Jul 28 16:12:33 2020 +0900
+
+    update
+
+[33mcommit 3b974139ebd9e7ad63bd309b2767be3479b74bd9[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Tue Jul 28 15:34:32 2020 +0900
+
+    update
+
+[33mcommit 9e9849f1648d9df32db00aa8ce306fb7a788df26[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Tue Jul 28 15:28:40 2020 +0900
+
+    update
+
+[33mcommit ba5fdf5c7e40bd4273cd4b01dbbec51d25f08342[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Tue Jul 28 13:27:36 2020 +0900
+
+    update
+
+[33mcommit d7906ccdf57dfe74b2dc50719dee368697cf551b[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Tue Jul 28 11:23:03 2020 +0900
+
+    update
+
+[33mcommit 0ef5d137f7a10680ff8e5fb250a1c3d1a28a5aa7[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Tue Jul 28 11:17:24 2020 +0900
+
+    update
+
+[33mcommit 6cc07b7af433ab02d99fd1354a0572eb6d3a9aa4[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Tue Jul 28 11:15:42 2020 +0900
+
+    update
+
+[33mcommit dd138e49b6ea34cd6fc03a7c3ddf786ef154e867[m
+Merge: 05b5e03 bcf987b
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Tue Jul 28 11:13:40 2020 +0900
+
+    Merge branch 'master' of https://github.com/nakochan/hitgall
+
+[33mcommit bcf987bd580bbe397b9453666b83b22310088f62[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Mon Jul 27 19:24:23 2020 +0900
+
+    update
+
+[33mcommit ebf666e2e7d5b7f8a56b5cc218bd06f9a2cac867[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Mon Jul 27 19:22:05 2020 +0900
+
+    update
+
+[33mcommit cb4df3c7aa5607fffc1cea83bcaa3d4807ffac79[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Mon Jul 27 19:19:38 2020 +0900
+
+    update
+
+[33mcommit d4ccdb836fc1c47273626825c20225d99fd0a55d[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Mon Jul 27 19:18:19 2020 +0900
+
+    update
+
+[33mcommit 37fd84ed23cb142f99f41f1c19b1795be6a9f3bf[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Mon Jul 27 19:16:16 2020 +0900
+
+    update
+
+[33mcommit 6587df78aaad6d11a37ff4cec7d32244a902644e[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Mon Jul 27 19:09:00 2020 +0900
+
+    update
+
+[33mcommit 05b5e03ea9edaca1e97a652a17722cceac1de6fb[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Mon Jul 27 17:38:48 2020 +0900
+
+    update
+
+[33mcommit 87bfc1eca5d6bc0791a854a459288c0d198157a5[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Mon Jul 27 17:21:38 2020 +0900
+
+    update
+
+[33mcommit a16c6673b652f5b55b0d93171239d34b9b49e0f0[m
+Merge: 42e484a 26a5bae
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Mon Jul 27 17:16:48 2020 +0900
+
+    test
+
+[33mcommit 42e484ae44c5140c665d53ed8a785ff05986f8b2[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Mon Jul 27 17:15:27 2020 +0900
+
+    update
+
+[33mcommit 26a5bae40fc6ad1edb48ceb37246281dedefed07[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Mon Jul 27 16:56:11 2020 +0900
+
+    update
+
+[33mcommit cda107f118a299d1655455a2147800f741b55107[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Mon Jul 27 16:45:50 2020 +0900
+
+    update
+
+[33mcommit 2e939144a37b19cd9375c0bdad75450b44f6e451[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Mon Jul 27 16:42:24 2020 +0900
+
+    update
+
+[33mcommit f095c21c37bcc21a7f87c60cf09759cc6f2c2b76[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Mon Jul 27 16:31:45 2020 +0900
+
+    update
+
+[33mcommit 647827ac9c638d1a415caf89df461c8ce361520b[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Mon Jul 27 16:27:54 2020 +0900
+
+    update
+
+[33mcommit ea8ce3ef7aeccbd2628fc3c1e2f4ff7ab26a6585[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Mon Jul 27 09:08:05 2020 +0900
+
+    update
+
+[33mcommit 6b6ed7122c1103e8753c5b8fc56701b1d1761abf[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Mon Jul 27 09:07:19 2020 +0900
+
+    update
+
+[33mcommit 3418a0187ca8b889439df469de817e1308faea26[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Mon Jul 27 02:49:57 2020 +0900
+
+    update
+
+[33mcommit 4ddedbceab5e3d297bcd1fb861c11a6fe13c6648[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Mon Jul 27 02:34:38 2020 +0900
+
+    update
+
+[33mcommit 2d53ef628d31d553a300ce84819ecd89b2bbf00f[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Mon Jul 27 02:18:45 2020 +0900
+
+    update
+
+[33mcommit 2dde966d0a3f3262894ad9e7319e4ea4eed2da38[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Mon Jul 27 02:14:22 2020 +0900
+
+    update
+
+[33mcommit 5bd05f241a830c19b62962853d47d444858f7181[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sun Jul 26 23:23:50 2020 +0900
+
+    update
+
+[33mcommit 2708d7eadc4ef78097734fc8280c8efc5a6b03c3[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sun Jul 26 22:39:45 2020 +0900
+
+    update
+
+[33mcommit e43d52d32e61d3915aa93ea0879b28935dd80905[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sun Jul 26 22:01:08 2020 +0900
+
+    update
+
+[33mcommit 17f201954fa7fb14e8330b3313af755c39c3cf16[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sun Jul 26 20:06:31 2020 +0900
+
+    update
+
+[33mcommit 200670f7ee2487bacc0092100beb65ca328465c1[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sun Jul 26 18:22:52 2020 +0900
+
+    update
+
+[33mcommit 79129f7ebd09089497f99bee95813d992e3d192b[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sun Jul 26 18:15:18 2020 +0900
+
+    update
+
+[33mcommit 52ba6ba4da0afb8f86b37ead89ecbb0eba98291f[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sun Jul 26 17:22:09 2020 +0900
+
+    update
+
+[33mcommit 93200b67b08833ba37d285d1eac8ddaa6f855e17[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sun Jul 26 16:13:30 2020 +0900
+
+    update
+
+[33mcommit fa5597724e4203b4218325aff782f17eba741c10[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sun Jul 26 15:34:14 2020 +0900
+
+    update
+
+[33mcommit 5863db11c58357d65a5dc5e4915fd9e58c3d1fb0[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sun Jul 26 15:26:32 2020 +0900
+
+    fix 2
+
+[33mcommit 8a6ea8c2b3112f9c07428150e7da43ceaeec5990[m
+Merge: bb6eeb1 c76aab4
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sun Jul 26 15:24:26 2020 +0900
+
+    fix
+
+[33mcommit bb6eeb19d97d094ddda076e176e1495f9b8a20aa[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sun Jul 26 15:23:43 2020 +0900
+
+    Revert "update"
+    
+    This reverts commit 53ed6c0201929f90755c6f6d8695d2b8ead851df.
+
+[33mcommit c76aab47c01b66169471340782aa7ac340a5932c[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sun Jul 26 15:15:16 2020 +0900
+
+    update
+
+[33mcommit 8a9c299c2628ad8903998e65f12a6380775270d3[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sun Jul 26 15:12:47 2020 +0900
+
+    update
+
+[33mcommit 4d1d0e0ad7e05428dab9e6210b03a5d2250c62d1[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sun Jul 26 15:10:34 2020 +0900
+
+    update
+
+[33mcommit 9c8579d44d0814a6f241c6e010cba3c396d6621e[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sun Jul 26 15:06:55 2020 +0900
+
+    update
+
+[33mcommit 4b247f3ed9759a81561540823079bd712e6c5249[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sun Jul 26 14:41:47 2020 +0900
+
+    update
+
+[33mcommit 53ed6c0201929f90755c6f6d8695d2b8ead851df[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sun Jul 26 14:34:58 2020 +0900
+
+    update
+
+[33mcommit 87306e134299c90cb4ded443e93e43dbec1ca727[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sun Jul 26 12:06:49 2020 +0900
+
+    update
+
+[33mcommit 782404ead7797d03e95d468b3667550f2d500703[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sun Jul 26 04:55:24 2020 +0900
+
+    update
+
+[33mcommit c0a1822399152bb1962afb1da9fda59728326884[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sun Jul 26 04:02:03 2020 +0900
+
+    update
+
+[33mcommit a2c430f50949a3a2a9c3ac613cef318141e2b9e5[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sun Jul 26 03:50:54 2020 +0900
+
+    update
+
+[33mcommit b3862f4c9d67b735d7d90e5f6ed898d10b6fc08a[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sun Jul 26 03:08:46 2020 +0900
+
+    update
+
+[33mcommit 6a77fb26195c6bd91c22803db60567111a11d2c3[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sun Jul 26 03:01:18 2020 +0900
+
+    update
+
+[33mcommit d0c721e8e2734d3a42d45eedfda1a973b9ec1d07[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sun Jul 26 01:54:35 2020 +0900
+
+    update
+
+[33mcommit 563f92514689515fe09dfb882b1591a2a0d6783c[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sun Jul 26 01:23:35 2020 +0900
+
+    update
+
+[33mcommit 5f2764d5fcd15746680a02234de20e18af285d83[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sun Jul 26 00:39:11 2020 +0900
+
+    update
+
+[33mcommit 0d943b5dd55b5915199213f27f798803478ee62b[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sat Jul 25 22:46:02 2020 +0900
+
+    update
+
+[33mcommit 311fef2cc56a7aa780a417f6ac869698ec101b6b[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sat Jul 25 22:22:41 2020 +0900
+
+    update
+
+[33mcommit a3a0add35d99fadfc4358677efd6ea0607cdda4a[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sat Jul 25 20:22:39 2020 +0900
+
+    update
+
+[33mcommit 205f17ce2fdef4117051eeac07730463418d3137[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sat Jul 25 20:12:03 2020 +0900
+
+    update
+
+[33mcommit 166259928e803012f836d5eff723a409bfea6a46[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sat Jul 25 19:52:52 2020 +0900
+
+    update
+
+[33mcommit 031d95e2acdbd53ad293e5b6cc1a2935b7f850a2[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sat Jul 25 17:25:13 2020 +0900
+
+    update
+
+[33mcommit 6d8f7f12f5207636dde5f1d7ea65b9646fb8006c[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sat Jul 25 15:20:39 2020 +0900
+
+    update
+
+[33mcommit f53f2d039a5d46a2276aef8f3d2a11420b7bc86e[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sat Jul 25 15:17:09 2020 +0900
+
+    update
+
+[33mcommit a3c0d10aaf783a18ee310dced2460be71d867049[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sat Jul 25 15:11:47 2020 +0900
+
+    update
+
+[33mcommit 28eca802f078162d3a6a66592d7df6fdf53b9c49[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sat Jul 25 15:07:46 2020 +0900
+
+    update
+
+[33mcommit 1ec962bc420687324c782178957c5a863a3846b0[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sat Jul 25 13:41:14 2020 +0900
+
+    update
+
+[33mcommit 4cab72eede7e1fcb5966a8cce4782e1f3e73840c[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sat Jul 25 13:03:18 2020 +0900
+
+    update
+
+[33mcommit bd598078fd3d034a04e4b14917fd14cd7c1328dc[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sat Jul 25 11:28:21 2020 +0900
+
+    update
+
+[33mcommit 72dae8393f36feb616bde270ff8e8be8e5cb1786[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sat Jul 25 10:52:44 2020 +0900
+
+    update
+
+[33mcommit 8ed0f4bad7dbeebcbab5914cf60a4098860be0b1[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sat Jul 25 03:42:30 2020 +0900
+
+    update
+
+[33mcommit 301a6974c92c0e8d30bc83c89fd30e2a1aea7678[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sat Jul 25 02:20:35 2020 +0900
+
+    update
+
+[33mcommit ae8f27c1d5a05939783d65af5b9d354b3c45cb5e[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sat Jul 25 01:16:11 2020 +0900
+
+    update
+
+[33mcommit 7b2145165e4bfbe9ef4ee894f962bca067132cde[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Sat Jul 25 00:36:34 2020 +0900
+
+    update
+
+[33mcommit 1d6993ec6661044b8377157a1a3e0bbcdf51cb38[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Fri Jul 24 23:10:52 2020 +0900
+
+    update
+
+[33mcommit 358a08c5ae9433b671d77b406f9e902f34464ab1[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Fri Jul 24 23:10:07 2020 +0900
+
+    update
+
+[33mcommit 435a17e749079f9a32df5e0f0431a7e2656c2baa[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Fri Jul 24 22:24:07 2020 +0900
+
+    update
+
+[33mcommit 5ea7ae44a8777de4609de2860765359d38df947a[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Fri Jul 24 22:23:45 2020 +0900
+
+    update
+
+[33mcommit f6b4282860ddc8156828b79d907c98dc8cc02112[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Fri Jul 24 22:14:57 2020 +0900
+
+    update
+
+[33mcommit b5d58d28e27b69a46de6ddbfc2bded37dae1eb32[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Fri Jul 24 21:41:30 2020 +0900
+
+    update
+
+[33mcommit 4aa68e8ec88a9c27fc6f75b000250dbbb7aa65fb[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Fri Jul 24 21:41:09 2020 +0900
+
+    update
+
+[33mcommit 0c380c2ce7da6b909f444e2b301f74f4fe289705[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Fri Jul 24 20:27:52 2020 +0900
+
+    update
+
+[33mcommit 778c1360c45e82e0b90220bd3325e4f555e54fa9[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Fri Jul 24 20:22:23 2020 +0900
+
+    update
+
+[33mcommit e391bd7534b8517bd2e45c179bb89f6fcc6b8ab9[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Fri Jul 24 20:18:24 2020 +0900
+
+    update
+
+[33mcommit 65a2d23b3477be1d16a627db608b2ff66b5bcbef[m
+Author: nakochan <eunnamu094@gmail.com>
+Date:   Fri Jul 24 15:46:36 2020 +0900
+
+    update
