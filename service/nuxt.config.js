@@ -15,7 +15,11 @@ module.exports = {
 		],
 		link: [
 			{ rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
+<<<<<<< HEAD
 			{ rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Nunito&display=swap' }
+=======
+			{ rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Rubik:400' }
+>>>>>>> 27c7bbc114168c2b2ee623f17c421427977de278
 		],
 		script: [
 			{ src: 'https://www.google.com/recaptcha/api.js?render=6LfO7_0UAAAAAGPyu2MULjvStvaMMpzGADpWZOku' },
