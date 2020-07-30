@@ -23,8 +23,10 @@ module.exports.getBoardInfo = async ctx => {
     if (!domain)
         return
     const board = await readBoard.info(domain)
+    const managers = await readBoard.adminBoardManagers(domain)
     ctx.body = {
-        board
+        board,
+        managers
     }
 }
 

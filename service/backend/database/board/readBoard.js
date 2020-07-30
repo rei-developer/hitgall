@@ -44,20 +44,20 @@ module.exports.adminBoards = async (userId, isAdmin) => {
     return result
 }
 
-// module.exports.adminBoardManagers = async domain => {
-//     const result = await pool.query(
-//         `SELECT
-//             *,
-//             u.nickname
-//         FROM BoardManagers bm
-//         LEFT JOIN Users u ON u.userId = bm.userId
-//         WHERE bm.boardId = (SELECT id FROM Boards WHERE domain = ?)`,
-//         [domain]
-//     )
-//     if (result.length < 1)
-//         return false
-//     return result
-// }
+module.exports.adminBoardManagers = async domain => {
+    const result = await pool.query(
+        `SELECT
+            bm.level,
+            u.nickname
+        FROM BoardManagers bm
+        LEFT JOIN Users u ON u.id = bm.userId
+        WHERE bm.boardDomain = ?`,
+        [domain]
+    )
+    if (result.length < 1)
+        return false
+    return result
+}
 
 module.exports.adminBoardManagerLevel = async (userId, domain) => {
     const result = await pool.query(

@@ -5,9 +5,24 @@
             <div class='image'>
                 <img src='/default.png'>
             </div>
-            <div class='description'>{{ board.description }}</div>
+            <div class='description'>
+                {{ board.description }}
+            </div>
             <div class='manager'>
-                <span><strong>매니저</strong> : {{ board.masterName }} ({{ board.masterId }})</span>
+                <strong>매니저</strong> :
+                <div>
+                    <img class='icon' :src='`/user11.png`'>
+                    {{ board.masterName }}
+                </div>
+                <div class='sub-manager'>
+                    <div><strong>부매니저</strong> :</div>
+                    <ul v-if='managers.length > 0'>
+                        <li v-for='(item, index) in managers' :key='index'>
+                            <img class='icon' :src='`/user1${item.level || 0}.png`'>
+                            {{ item.nickname }}
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -23,7 +38,8 @@
                     description: '',
                     masterId: '',
                     masterName: ''
-                }
+                },
+                managers: []
             }
         },
         mounted() {
@@ -32,7 +48,13 @@
         methods: {
             getData: async function() {
                 const data = await this.$axios.$get(`/api/board/${this.domain}`)
-                this.board = data.board
+                if (data.board) {
+                    this.board = data.board
+                    if (this.board.description === '')
+                        this.board.description = '갤러리 설명이 비어있습니다. 관리자 설정에서 갤러리 설명을 기입해주세요.'
+                }
+                if (data.managers)
+                    this.managers = data.managers.filter(item => item.level > 1)
             },
             numberWithCommas(x) {
                     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
@@ -65,7 +87,7 @@
         > .image {
             margin-right: .5rem;
             > img {
-                width: 150px;
+                width: 120px;
                 height: 100px;
                 padding: 2px;
                 border: 1px solid #000;
@@ -78,8 +100,14 @@
             color: #000;
             font-size: 13px;
         }
-        > .manager {
-
+        > .manager > .sub-manager {
+            height: 61px;
+            overflow-y: auto;
+            > ul {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
         }
     }
 </style>

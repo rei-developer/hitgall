@@ -328,7 +328,6 @@
                 notices: [],
                 topics: [],
                 counts: {
-					// yesterday: 0,
                     today: 0,
                     count: 0
                 },
@@ -411,16 +410,11 @@
                 const data = await this.$axios.$get(`/api/topic/count/${this.domain}`)
                 if (data.status === 'fail')
 					return
-				// this.counts.yesterday = this.numberWithCommas(data.yesterday - data.today)
                 this.counts.today = this.numberWithCommas(data.today)
             },
             getCreated(created) {
                 const nowFormat = this.$moment(new Date()).format('YYYY.MM.DD') 
                 const createdFormat = this.$moment(created).format('YYYY.MM.DD')
-
-    console.log(nowFormat)
-    console.log(createdFormat)
-
                 return nowFormat === createdFormat
                     ? this.$moment(created).format('HH:mm:ss')
                     : createdFormat
@@ -472,8 +466,7 @@
                 }, 60000)
             },
             numberWithCommas(x) {
-                return x
-                    // return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
             },
             imageUrlAlt(event) {
                 event.target.src = '/default.png'
