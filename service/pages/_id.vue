@@ -168,6 +168,12 @@
                     <font-awesome-icon icon='arrow-down'/>
                 </b-button>
             </b-button-group>
+               <b-button-group class='float-right mr-1' v-if='boardLevel > 0'>
+                <b-button size='sm' @click='notice'>
+                    <font-awesome-icon icon='newspaper'/>
+                    공지
+                </b-button>
+            </b-button-group>
             <b-button-group class='float-right mr-1' v-if='boardLevel > 0'>
                 <b-button size='sm' variant='danger' @click='$bvModal.show("bv-blind-modal")'>
                     <font-awesome-icon icon='ban'/>
@@ -249,7 +255,7 @@
                     error: true
                 }
             if (store.state.user.isLogged)
-                store.commit('user/setNoticeCount', data.count)
+                store.commit('user/noticeCount', data.count)
             const regex = /<p><\/p>/gim
             data.topic.content = data.topic.content.replace(regex, '<p><br></p>')
             // const regex = /<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>/mig
@@ -356,7 +362,7 @@
                 this.toast('글을 삭제했습니다.', 'success')
             },
             ban: async function() {
-                const token = this.$store.state.user.isLogged ? this.$store.state.user.token : ''
+                const token = this.$store.state.user.token || ''
                 this.$store.commit('setLoading', true)
                 const data = await this.$axios.$post(
                     `/api/board/admin/${this.topic.boardDomain}/blind/add`,
@@ -366,6 +372,26 @@
                 if (data.status === 'fail')
                     return this.toast(data.message || '오류가 발생했습니다.', 'danger')
                 this.toast('차단 성공!', 'success')
+                this.$store.commit('setLoading')
+            },
+            notice: async function() {
+                if (this.id < 1)
+                    return
+                const token = this.$store.state.user.token || ''
+                this.$store.commit('setLoading', true)
+                const data = await this.$axios.$patch(
+                    '/api/topic/edit/notice',
+                    { id: this.id, domain: this.topic.boardDomain },
+                    { headers: { 'x-access-token': token } }
+                )
+                if (data.status === 'fail') {
+                    this.$store.commit('setLoading')
+                    return this.toast(data.message || '오류가 발생했습니다.', 'danger')
+                }
+                this.topic.isNotice = !this.topic.isNotice
+                this.topic.isNotice
+                    ? this.toast('공지로 적용했습니다.', 'primary')
+                    : this.toast('공지를 해제했습니다.', 'success')
                 this.$store.commit('setLoading')
             },
             scrollToTop() {

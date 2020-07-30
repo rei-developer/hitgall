@@ -4,6 +4,7 @@ const Controller = require('./controller')
 const app = new Router()
 
 app.get('/count/:domain', Controller.getTopicCounts)
+app.get('/boardLevel/:domain', Controller.getBoardLevel)
 app.get('/categories/:domain', Controller.getCategories)
 app.get('/read/:id', Controller.getContent)
 app.get('/save', Controller.getSavedContent)

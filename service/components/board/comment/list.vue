@@ -41,7 +41,7 @@
                                 </span>
                                 <span class='regdate'>{{ $moment(item.updated).format("YY/MM/DD HH:mm:ss") }}</span>
                             </div>
-                            <div :class='item.userId === topic.userId ? "writer" : ""' @click='handleCommand(["reply", item.id])'>
+                            <div :class='item.sameUser || item.userId === topic.userId ? "writer" : ""' @click='handleCommand(["reply", item.id])'>
                                 <div class='tagUser' v-if='item.tagAuthor'>
                                     <font-awesome-icon icon='at'/>
                                     {{ item.tagAuthor }}

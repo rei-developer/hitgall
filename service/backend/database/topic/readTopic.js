@@ -47,6 +47,13 @@ module.exports.userId = async id => {
     return result[0].userId
 }
 
+module.exports.ip = async id => {
+    const result = await pool.query('SELECT ip FROM Topics WHERE id = ?', [id])
+    if (result.length < 1)
+        return false
+    return result[0].ip
+}
+
 module.exports.edit = async id => {
     const result = await pool.query(
         'SELECT userId, boardDomain, author, password, title, ip, isPoll, isImage FROM Topics WHERE id = ?',

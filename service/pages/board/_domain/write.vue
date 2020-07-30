@@ -16,7 +16,7 @@
 			:show='loading'
 			rounded='sm'>
 			<article class='writeBox'>
-				<span v-if='$store.state.user.isAdmin > 0'>
+				<span v-if='boardLevel > 0'>
 					<b-form-group>
 						<b-form-checkbox v-model='form.isNotice' switch>
 							공지사항
@@ -282,6 +282,7 @@
             return {
 				id: 0,
 				domain: '',
+				boardLevel: 0,
 				categories: [],
 				images: [],
 				savedTime: null,
@@ -319,28 +320,14 @@
 			const categories = await $axios.$get(`/api/topic/categories/${domain}`)
 			if (categories.status === 'fail')
 				return console.log(categories.message)
-			if (id > 0) {
-				const data = await $axios.$get(`/api/topic/read/${id}`)
-				if (data.status === 'fail')
-					return console.log(data.message)
-				return {
-					id,
-					domain,
-					categories,
-					form: {
-						category: data.topic.category,
-						color: data.topic.color
-							? '#' + data.topic.color
-							: '',
-						title: data.topic.title,
-						content: data.topic.content,
-						isNotice: data.topic.isNotice > 0
-					},
-					html: data.topic.content
-				}
-			}
 			if (store.state.user.isLogged) {
 				const token = store.state.user.token
+				const boardLevel = await $axios.$get(
+					`/api/topic/boardLevel/${domain}`,
+					{ headers: { 'x-access-token': token } }
+				)
+				if (boardLevel.status === 'fail')
+					return console.log(boardLevel.message)
 				const data = await $axios.$get(
 					`/api/topic/save`,
 					{ headers: { 'x-access-token': token } }
@@ -349,6 +336,7 @@
 					return console.log(data.message)
 				return {
 					domain,
+					boardLevel,
 					categories,
 					form: {
 						color: data.topic.color
@@ -490,9 +478,6 @@
 					poll: this.poll,
 					images: this.images
 				}
-
-				console.log(this.domain)
-
 				const headers = { 'x-access-token': token }
 				const data = this.id > 0
 					? await this.$axios.$patch(url, form, { headers })

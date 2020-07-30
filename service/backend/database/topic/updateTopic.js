@@ -10,9 +10,9 @@ module.exports.updateTopicByIsBest = async (topicId, isBest = 0) => await pool.q
     [isBest, topicId]
 )
 
-module.exports.updateTopicByIsNotice = async (topicId, isNotice = 0) => await pool.query(
-    'UPDATE Topics SET isNotice = ? WHERE id = ?',
-    [isNotice, topicId]
+module.exports.updateTopicByIsNotice = async topicId => await pool.query(
+    'UPDATE Topics SET isNotice = NOT(isNotice) WHERE id = ?',
+    [topicId]
 )
 
 module.exports.updateTopicByIsAllowed = async (topicId, isAllowed = 0) => await pool.query(

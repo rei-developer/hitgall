@@ -145,10 +145,12 @@ module.exports.getPosts = async ctx => {
         return
     if (limit < 10 || limit > 50)
         return
+    const topicIp = await readTopic.ip(topicId)
     const count = await readPost.count(topicId)
     let posts = await readPost.posts(topicId, page, count) //limit -> count 임시
     if (posts) {
         posts = posts.map(item => {
+            item.sameUser = item.userId < 1 ? topicIp === item.ip : null
             const ip = item.ip.split('.')
             if (ip && ip.length >= 3)
                 item.ip = `${ip[0]}.${ip[1]}`
@@ -197,6 +199,16 @@ module.exports.getImages = async ctx => {
         items,
         status: 'ok'
     }
+}
+
+module.exports.getBoardLevel = async ctx => {
+    const token = ctx.get('x-access-token')
+    const user = token !== '' ? await User.getUser(token) : null
+    const { domain } = ctx.params
+    const boardLevel = user
+        ? (user.isAdmin < 1 ? await readBoard.adminBoardManagerLevel(user.id, domain) : 3)
+        : 0
+    ctx.body = boardLevel
 }
 
 module.exports.getCategories = async ctx => {
@@ -302,7 +314,8 @@ module.exports.createTopic = async ctx => {
                 message: '권한이 없습니다.',
                 status: 'fail'
             }
-        if (user.isAdmin < 1) {
+        const level = await readBoard.adminBoardManagerLevel(user.id, domain)
+        if (!level && user.isAdmin < 1) {
             // TODO: 관리자 전용 커스텀
             if (color !== '')
                 color = ''
@@ -569,7 +582,8 @@ module.exports.updateTopic = async ctx => {
     content = Filter.topic(content)
     if (color !== '')
         color = color.replace('#', '')
-    if (user.isAdmin < 1) {
+    const level = await readBoard.adminBoardManagerLevel(user.id, domain)
+    if (!level && user.isAdmin < 1) {
         // TODO: 관리자 전용 커스텀
         if (color !== '')
             color = ''
@@ -645,12 +659,19 @@ module.exports.updateTopic = async ctx => {
 }
 
 module.exports.updateTopicByIsNotice = async ctx => {
-    const user = await User.getUser(ctx.get('x-access-token'))
-    if (!user)
-        return
-    const { id } = ctx.request.body
+    const { id, domain } = ctx.request.body
     if (id < 1)
         return ctx.body = {
+            status: 'fail'
+        }
+    const token = ctx.get('x-access-token')
+    const user = token !== '' ? await User.getUser(token) : null
+    const boardLevel = user
+        ? (user.isAdmin < 1 ? await readBoard.adminBoardManagerLevel(user.id, domain) : 3)
+        : 0
+    if (boardLevel < 1)
+        return ctx.body = {
+            message: '권한이 없습니다.',
             status: 'fail'
         }
     const topic = await readTopic(id)
@@ -658,8 +679,6 @@ module.exports.updateTopicByIsNotice = async ctx => {
         return ctx.body = {
             status: 'fail'
         }
-    if (user.isAdmin < 1)
-        return
     await updateTopic.updateTopicByIsNotice(id)
     ctx.body = {
         status: 'ok'
