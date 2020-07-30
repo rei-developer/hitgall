@@ -62,11 +62,16 @@
 					<hr>
 					<label>
 						<font-awesome-icon icon='image'/>
-						이미지 정보
+						대문 이미지
 					</label>
-					<div>
-						곧 오픈 예정
-					</div>
+					<b-form-group class='mb-sm-2'>
+                        <div class='background'>
+                            <img :src='`https://storage.googleapis.com/hitgall/img/thumb/${board.imageUrl}`' @error='imageUrlAlt'>
+                        </div>
+                        <div class='upload' v-b-tooltip.hover title='대문 사진을 변경합니다.'>
+                            <input type='file' @change='backgroundImageUpload'/>
+                        </div>
+					</b-form-group>
 					<hr>
                     <label>
 						<font-awesome-icon icon='image'/>
@@ -80,8 +85,7 @@
 							<b-form-input
                                 type='number'
 								:placeholder='board.bestLimit'
-								v-model='board.bestLimit'
-								autofocus/>
+								v-model='board.bestLimit'/>
 						</b-input-group>
                     </b-form-group>
                     <b-form-group class='mb-sm-2'>
@@ -92,10 +96,20 @@
 							<b-form-input
                                 type='number'
 								:placeholder='board.noticeLimit'
-								v-model='board.noticeLimit'
-								autofocus/>
+								v-model='board.noticeLimit'/>
 						</b-input-group>
 					</b-form-group>
+                    <!-- <b-form-group class='mb-sm-2'>
+                        <b-input-group size='sm'>
+							<b-input-group-prepend is-text>
+								유동 스팸 필터링 카운트
+							</b-input-group-prepend>
+							<b-form-input
+                                type='number'
+								:placeholder='board.spamLimit || 10'
+								v-model='board.spamLimit'/>
+						</b-input-group>
+					</b-form-group> -->
 					<hr>
 					<label>
 						<font-awesome-icon icon='calendar-check'/>
@@ -389,16 +403,21 @@
 			},
 			editByBackgroundImage: async function(token, url) {
 				const data = await this.$axios.$patch(
-					'/api/auth/edit/background',
-					{ url },
+					`/api/board/admin/${this.domain}/edit`,
+					{ imageUrl: url },
 					{ headers: { 'x-access-token': token } }
-				)
+                )
+			    if (data.status === 'fail') {
+					this.$store.commit('setLoading')
+					return this.toast(data.message || '오류가 발생했습니다.', 'danger')
+				}
 				this.loading = false
 				this.$store.commit('setLoading')
 				if (data.status === 'fail')
 					return this.toast(data.message || '오류가 발생했습니다.', 'danger')
-				this.toast('대문 사진을 업로드했습니다.', 'success')
-				this.$store.commit('user/setBackgroundImageUrl', url)
+                this.toast('대문 사진을 업로드했습니다.', 'success')
+                this.board.imageUrl = url
+                this.$store.commit('setLoading')
 			},
 			onSubmit: async function(evt) {
 				evt.preventDefault()
@@ -424,6 +443,9 @@
 			},
 			numberWithCommas(x) {
                     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+            },
+            imageUrlAlt(event) {
+                event.target.src = '/default.png'
             },
 			toast(text, variant = 'default') {
                 this.$bvToast.toast(text, {
@@ -541,9 +563,18 @@
   .board-admin-page .article hr {
 	  margin-top: 0;
   }
-
+            .background > img {
+                width: 120px;
+                height: 100px;
+                border: 1px solid #ccc;
+                margin-bottom: .5rem;
+                padding: 2px;
+            }
 
         .desktop-only-test {
+
+
+
             margin-bottom: .5rem;
             > h6 {
                 display: flex;

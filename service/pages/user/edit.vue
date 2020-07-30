@@ -200,90 +200,48 @@
 				this.maxExp = Math.pow(this.$store.state.user.level, 2) * 90
 				this.per = (this.exp / this.maxExp * 100).toFixed(2)
 			},
-			profileImageUpload: async function(e) {
-				if (this.loading || e.target.files.length < 1)
-					return
-				if (!this.$store.state.user.isLogged)
-					return this.toast('로그인하세요.', 'danger')
-				const token = this.$store.state.user.token
-				const LIMITS = 10485760
-				const file = e.target.files[0]
-				const formData = new FormData()
-				formData.append('type', 'file')
-				formData.append('image', file, file.name)
-				if (!/(.png|.jpg|.jpeg)/i.test(file.name))
-					return this.toast('이미지 업로드 실패... (png, jpg, jpeg만 가능)', 'danger')
-				if (file.size > LIMITS)
-					return this.toast('이미지 업로드 실패... (10MB 이하만 업로드 가능)', 'danger')
-				this.loading = true
-				this.$store.commit('setLoading', true)
-				const data = await this.$axios.$post(
-					'/api/cloud/profile',
-					formData,
-					{ headers: { 'content-type': 'multipart/form-data' } }
-				)
-				if (data.status === 'fail') {
-					this.loading = false
-					this.$store.commit('setLoading')
-					return this.toast(data.message || '오류가 발생했습니다.', 'danger')
-				}
-				this.editByProfileImage(token, data.filename)
-			},
-			backgroundImageUpload: async function(e) {
-				if (this.loading || e.target.files.length < 1)
-					return
-				if (!this.$store.state.user.isLogged)
-					return this.toast('로그인하세요.', 'danger')
-				const token = this.$store.state.user.token
-				const LIMITS = 10485760
-				const file = e.target.files[0]
-				const formData = new FormData()
-				formData.append('type', 'file')
-				formData.append('image', file, file.name)
-				if (!/(.png|.jpg|.jpeg)/i.test(file.name))
-					return this.toast('이미지 업로드 실패... (png, jpg, jpeg만 가능)', 'danger')
-				if (file.size > LIMITS)
-					return this.toast('이미지 업로드 실패... (10MB 이하만 업로드 가능)', 'danger')
-				this.loading = true
-				this.$store.commit('setLoading', true)
-				const data = await this.$axios.$post(
-					'/api/cloud/background',
-					formData,
-					{ headers: { 'content-type': 'multipart/form-data' } }
-				)
-				if (data.status === 'fail') {
-					this.loading = false
-					this.$store.commit('setLoading')
-					return this.toast(data.message || '오류가 발생했습니다.', 'danger')
-				}
-				this.editByBackgroundImage(token, data.filename)
-			},
-			editByProfileImage: async function(token, url) {
-				const data = await this.$axios.$patch(
-					'/api/auth/edit/profile',
-					{ url },
-					{ headers: { 'x-access-token': token } }
-				)
-				this.loading = false
-				this.$store.commit('setLoading')
-				if (data.status === 'fail')
-					return this.toast(data.message || '오류가 발생했습니다.', 'danger')
-				this.toast('프로필 사진을 업로드했습니다.', 'success')
-				this.$store.commit('user/setProfileImageUrl', url)
-			},
-			editByBackgroundImage: async function(token, url) {
-				const data = await this.$axios.$patch(
-					'/api/auth/edit/background',
-					{ url },
-					{ headers: { 'x-access-token': token } }
-				)
-				this.loading = false
-				this.$store.commit('setLoading')
-				if (data.status === 'fail')
-					return this.toast(data.message || '오류가 발생했습니다.', 'danger')
-				this.toast('배경사진을 업로드했습니다.', 'success')
-				this.$store.commit('user/setBackgroundImageUrl', url)
-			},
+			// profileImageUpload: async function(e) {
+			// 	if (this.loading || e.target.files.length < 1)
+			// 		return
+			// 	if (!this.$store.state.user.isLogged)
+			// 		return this.toast('로그인하세요.', 'danger')
+			// 	const token = this.$store.state.user.token
+			// 	const LIMITS = 10485760
+			// 	const file = e.target.files[0]
+			// 	const formData = new FormData()
+			// 	formData.append('type', 'file')
+			// 	formData.append('image', file, file.name)
+			// 	if (!/(.png|.jpg|.jpeg)/i.test(file.name))
+			// 		return this.toast('이미지 업로드 실패... (png, jpg, jpeg만 가능)', 'danger')
+			// 	if (file.size > LIMITS)
+			// 		return this.toast('이미지 업로드 실패... (10MB 이하만 업로드 가능)', 'danger')
+			// 	this.loading = true
+			// 	this.$store.commit('setLoading', true)
+			// 	const data = await this.$axios.$post(
+			// 		'/api/cloud/profile',
+			// 		formData,
+			// 		{ headers: { 'content-type': 'multipart/form-data' } }
+			// 	)
+			// 	if (data.status === 'fail') {
+			// 		this.loading = false
+			// 		this.$store.commit('setLoading')
+			// 		return this.toast(data.message || '오류가 발생했습니다.', 'danger')
+			// 	}
+			// 	this.editByProfileImage(token, data.filename)
+			// },
+			// editByProfileImage: async function(token, url) {
+			// 	const data = await this.$axios.$patch(
+			// 		'/api/auth/edit/profile',
+			// 		{ url },
+			// 		{ headers: { 'x-access-token': token } }
+			// 	)
+			// 	this.loading = false
+			// 	this.$store.commit('setLoading')
+			// 	if (data.status === 'fail')
+			// 		return this.toast(data.message || '오류가 발생했습니다.', 'danger')
+			// 	this.toast('프로필 사진을 업로드했습니다.', 'success')
+			// 	this.$store.commit('user/setProfileImageUrl', url)
+			// },
 			onSubmit: async function(evt) {
 				evt.preventDefault()
 				if (this.newPassword !== this.newPassword2)

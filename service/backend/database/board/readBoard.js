@@ -6,7 +6,7 @@ module.exports.info = async domain => {
         `SELECT
             b.name,
             b.description,
-            u.username masterId,
+            b.imageUrl,
             u.nickname masterName
         FROM Boards b
         LEFT JOIN Users u ON u.id = b.masterId
@@ -16,6 +16,16 @@ module.exports.info = async domain => {
     if (result.length < 1)
         return false
     return result[0]
+}
+
+module.exports.imageUrl = async domain => {
+    const result = await pool.query(
+        'SELECT imageUrl FROM Boards WHERE domain = ?',
+        [domain]
+    )
+    if (result.length < 1)
+        return false
+    return result[0].imageUrl
 }
 
 module.exports.adminBoardInfo = async (userId, isAdmin, domain) => {

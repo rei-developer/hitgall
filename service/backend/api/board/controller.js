@@ -1,3 +1,17 @@
+const { Storage } = require('@google-cloud/storage')
+
+const dotenv = require('dotenv')
+
+dotenv.config()
+
+const { BUCKET_NAME } = process.env
+const storage = new Storage({ keyFilename: 'key.json' })
+
+const deleteFile = async filename => {
+    await storage.bucket(BUCKET_NAME).file(filename).delete()
+    console.log(`gs://${BUCKET_NAME}/${filename} deleted.`)
+}
+
 const fs = require('fs')
 const redis = require('redis')
 const moment = require('moment')
@@ -152,11 +166,25 @@ module.exports.updateAdminBoardInfo = async ctx => {
             status: 'fail'
         }
     let {
-        description
+        description,
+        imageUrl
     } = ctx.request.body
-    if (description === null)
+    if (!description)
         description = ''
     description = Filter.disable(description)
+    if (imageUrl) {
+        const getBoardImageUrl = await readBoard.imageUrl(domain)
+        if (getBoardImageUrl && getBoardImageUrl !== '')
+            fs.unlink(`img/${getBoardImageUrl}`, () => {
+                fs.unlink(`img/thumb/${getBoardImageUrl}`, async () => {
+                    await deleteFile(`img/${getBoardImageUrl}`)
+                    await deleteFile(`img/thumb/${getBoardImageUrl}`)
+                })
+            })
+        await updateBoard({
+            imageUrl
+        }, domain)
+    }
     await updateBoard({
         description
     }, domain)

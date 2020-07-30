@@ -35,7 +35,7 @@ module.exports.createImage = type => async ctx => {
                         status: 'fail'
                     }
                 await uploadFile(`img/${filename}`)
-                if (type === 'topic') {
+                if (type === 'topic' || type === 'background') {
                     const thumbnail = sharp(data)
                     thumbnail
                         .metadata()
