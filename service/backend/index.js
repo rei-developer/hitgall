@@ -21,7 +21,7 @@ router
 
 app
     .use(async (ctx, next) => {
-        if (ctx.hostname == '54.150.28.97')
+        if (ctx.hostname == '54.150.28.97' || ctx.hostname == '172.26.0.200')
             ctx.throw(451, 'Unavailable For Legal Reasons')
         await next()
     })
