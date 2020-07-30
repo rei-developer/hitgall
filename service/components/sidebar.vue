@@ -1,6 +1,26 @@
 <template>
     <div>
-        <article class='best'>
+        <article class='side'>
+            <ul>
+                <li @click='forceUpdate'><nuxt-link to='/board/notice'>공지사항</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/feedback'>문의/건의</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/request'>갤러리 신청</nuxt-link></li>
+            </ul>
+        </article>
+        <article class='side'>
+            <ul>
+                <li @click='forceUpdate'><nuxt-link to='/board/girl'>연예인</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/anime'>애니메이션</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/lastorigin'>라스트 오리진</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/epic7'>에픽세븐</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/gfl'>소녀전선</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/ar_knights'>명일방주</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/theaterdays'>밀리시타</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/monmusu'>몬무스</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/yandere'>얀데레</nuxt-link></li>
+            </ul>
+        </article>
+        <!-- <article class='best'>
             <h2>
                 <span>HIT</span>
                 <nuxt-link to='/hit'>
@@ -15,61 +35,12 @@
                 </ul>
             </div>
         </article>
-        <!-- <article class='counter'>
-            <span>
-                <font-awesome-icon icon='file-alt'/>
-                {{ counts.count }} (<span>+{{counts.today}}</span>)
-            </span>
-        </article> -->
-        <article class='side'>
-            <ul>
-                <li @click='forceUpdate'><nuxt-link to='/board/notice'>공지사항</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/feedback'>문의/건의</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/request'>갤러리 신청</nuxt-link></li>
-            </ul>
-        </article>
-        <article class='side'>
-            <ul>
-                <li @click='forceUpdate'><nuxt-link to='/board/girl'>연예</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/anime'>애니메이션</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/adult_broadcast'>성인 인터넷 방송</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/lastorigin'>라스트 오리진</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/monmusu'>몬무스</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/theaterdays'>밀리시타</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/illusionconnect'>일루전 커넥트</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/ar_knights'>명일방주</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/epic7'>에픽세븐</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/gfl'>소녀전선</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/azur_lane'>벽람항로</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/koikatsu'>코이카츠</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/skyrim'>베데스다</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/langrisser'>랑그릿사</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/counterside'>카운터사이드</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/honkai3'>붕괴3</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/pmmm'>마법소녀 마도카 마기카</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/stwitch'>스트라이크 위치스</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/girlcafe'>걸 카페 건</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/tsukuru'>쯔꾸르</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/yandere'>얀데레</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/bang_dream'>BanG Dream</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/manjuu'>Manjuu</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/mmd'>MMD</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/ai_girl'>AI 소녀</nuxt-link></li>
-
-            </ul>
-        </article>
-        <!-- <article class='service'>
-            <nuxt-link to='/'>
-                <font-awesome-icon icon='music'/>
-                RADIO
-            </nuxt-link>
-        </article> -->
         <article class='shortcut'>
             <nuxt-link to='/1'>
                 <font-awesome-icon icon='check-square'/>
                 힛갤 단축키 안내
             </nuxt-link>
-        </article>
+        </article> -->
     </div>
 </template>
 
@@ -126,6 +97,8 @@
 </script>
 
 <style lang='less' scoped>
+    @primary: #004080;
+
     article.best {
         border: 1px solid #ddd;
         background-color: #fff;
@@ -165,19 +138,28 @@
     }
 
     article.side {
-        margin-top: 10px;
-        border: 1px solid #ddd;
-        border-radius: 2px;
-        background-color: #fff;
+        width: 100%;
+        margin: 8px;
+        border-radius: 6px;
+        padding: 8px;
+        box-sizing: border-box;
+        position: relative;
+        animation-name: item;
+        animation-duration: .4s;
+        display: inline-block;
+        text-align: left;
+        animation-fill-mode: backwards;
+        box-shadow: 0 10px 40px -10px rgba(0,64,128,.2);
+        transition: box-shadow .3s;
+
         > ul {
             margin: 0;
             padding: 0;
             list-style: none;
             > li {
-                padding: 6px 12px;
-                border-bottom: 1px solid #eee;
-                &:last-child { border: 0 }
-                &:hover { background-color: #fafafa }
+                padding: 6px;
+                border-radius: 2px;
+                &:hover { background-color: rgba(0,64,128,.05) }
                 &.active {
                     background-color: #7F859A;
                     > a { color: #fff }
@@ -185,7 +167,7 @@
                 > a {
                     display: block;
                     line-height: 20px;
-                    color: rgb(119, 119, 119);
+                    color: @primary;
                     font-size: 13px;
                     text-decoration: none;
                 }

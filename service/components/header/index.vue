@@ -186,13 +186,13 @@
                 position: relative;
                 outline: none;
                 > a, span {
-                    font-size: 14px;
-                    color: #fff;
+                    font-size: 15px;
+                    color: #004080;
                     text-decoration: none;
                     display: block;
-                    padding: 14px 14px 15px;
+                    padding: 0 1rem;
                     &:hover {
-                        color: #fff;
+                        color: #004080;
                         text-decoration: none;
                     }
                 }
@@ -202,7 +202,7 @@
                 }
                 &.logo {
                     > a {
-                        padding: 5px 14px 0 0;
+                        margin-top: -2px;
                         img {
                             width: 40px;
                             height: 40px;
@@ -215,7 +215,7 @@
     }
     .b-sidebar-header {
         > .close { color: #fff !important }
-        background-color: #30425f;
+        background-color: #004080;
     }
     .b-sidebar-body {
         > ul {

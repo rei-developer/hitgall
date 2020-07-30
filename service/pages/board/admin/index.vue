@@ -106,7 +106,7 @@
 </script>
 
 <style lang='less' scoped>
-    @primary: #30425f;
+    @primary: #004080;
     
     article.topic-list {
         > .loading-bar {

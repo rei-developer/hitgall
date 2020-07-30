@@ -122,7 +122,7 @@
                 <div class='qrcode'>
                     <client-only>
                         <qriously
-                            foreground='#30425f'
+                            foreground='#004080'
                             :padding='0'
                             :value='`https://www.hitgall.com/${id}`'
                             :size='80'/>
@@ -309,7 +309,8 @@
                     this.$store.commit('setLoading')
                     return this.toast(data.message || '오류가 발생했습니다.', 'danger')
                 }
-                data.move === 'BEST' ? this.toast('HIT 게시판으로 이전되었습니다!', 'primary') : this.toast('투표했습니다.', 'success')
+                if (data.move === 'BEST')
+                    this.toast('HIT 갤러리로 이전됐습니다.', 'primary')
                 this.topic.likes = data.likes + (flag ? 1 : 0)
                 this.topic.hates = data.hates + (flag ? 0 : 1)
                 this.$store.commit('setLoading')
@@ -455,7 +456,7 @@
 </script>
 
 <style lang='less' scoped>
-    @primary: #30425f;
+    @primary: #004080;
     @primary-focus: #29313E;
 
     // desktop

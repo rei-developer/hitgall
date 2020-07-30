@@ -186,7 +186,7 @@
 </script>
 
 <style lang='less' scope>
-    @primary: #30425f;
+    @primary: #004080;
     @primary-focus: #29313E;
 
     article.comment-write {

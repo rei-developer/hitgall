@@ -104,7 +104,7 @@
 </script>
 
 <style lang='less' scoped>
-    @primary: #30425f;
+    @primary: #004080;
     
     h5 {
         height: 32px;

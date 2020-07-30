@@ -67,7 +67,7 @@
 </script>
 
 <style lang='less' scoped>
-    @primary: #30425f;
+    @primary: #004080;
 
     .board-title {
         color: @primary;
@@ -81,17 +81,14 @@
         padding: .5rem;
         color: #000;
         font-size: 13px;
-        border: 1px solid #ccc;
-        border-top: 2px solid @primary;
-        background: #fff;
+        border: 1px solid rgba(0, 64, 128, .1);
+        border-radius: .5rem;
         > .image {
             margin-right: .5rem;
             > img {
                 width: 120px;
                 height: 100px;
-                padding: 2px;
-                border: 1px solid #000;
-                background: #fff;
+                border-radius: .25rem;
             }
         }
         > .description {

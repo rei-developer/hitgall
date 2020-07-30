@@ -12,7 +12,7 @@
             <aside/>
         </header>
         <!-- main -->
-        <main>
+        <main class='single'>
             <aside/>
             <section class='panel'>
                 <!-- inner -->
@@ -142,15 +142,24 @@
     body { background-color: #F9F9F9 }
 
     section {
-        max-width: 1160px;
+        max-width: 1640px;
         margin: 0 auto;
     }
 
     header.header {
-        margin-bottom: 1rem;
-        background-color: #30425f;
-        // background-image: url(/navbg.jpg);
-        box-shadow: 1px 1px 8px rgba(0, 0, 0, .25);
+        // margin-bottom: 1rem;
+        // background-color: #dbe2ef;
+        // // background-image: url(/navbg.jpg);
+        // box-shadow: 1px 1px 8px rgba(0, 0, 0, .25);
+
+        width: 100%;
+        height: 50px;
+        line-height: 50px;
+        position: fixed;
+        z-index: 2;
+        top: 0;
+        background-color: #fff;
+        box-shadow: 0 5px 10px 0 rgba(0,64,128,.05);
     }
 
     main {
@@ -158,11 +167,34 @@
         > section.panel {
             display: flex;
             > article.sidebar {
-                flex-basis: 210px;
+                flex-basis: 250px;
                 flex-shrink: 0;
-                margin-left: 10px;
             }
-            > article.inner { flex: 1 }
+            > article.inner {
+                flex: 1;
+                margin: 8px;
+                border-radius: 6px;
+                padding: 15px;
+                box-sizing: border-box;
+                position: relative;
+                animation-name: item;
+                animation-duration: .4s;
+                display: inline-block;
+                text-align: left;
+                animation-fill-mode: backwards;
+                box-shadow: 0 10px 40px -10px rgba(0,64,128,.2);
+                transition: box-shadow .3s;
+            }
+        }
+        &.single {
+            background-color: #fdfdfd;
+            margin: 0;
+            color: #263646;
+            font-family: rubik,arial;
+            font-size: 14px;
+            padding: 60px 0 100px;
+            animation-name: fade;
+            animation-duration: .5s;
         }
     }
 

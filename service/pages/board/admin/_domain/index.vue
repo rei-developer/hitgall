@@ -461,7 +461,7 @@
 </script>
 
 <style lang='less' scope>
-    @primary: #30425f;
+    @primary: #004080;
     
   .board-admin-page {
     width: 100%;
