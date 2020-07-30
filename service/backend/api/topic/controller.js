@@ -235,6 +235,9 @@ module.exports.getContent = async ctx => {
     const images = topic.isImage > 0
         ? await readTopic.topicImages(id)
         : []
+    const boardImageUrl = topic.isImage < 1
+        ? await readBoard.imageUrl(topic.boardDomain)
+        : null
     const boardLevel = user
         ? (user.isAdmin < 1 ? await readBoard.adminBoardManagerLevel(user.id, topic.boardDomain) : 3)
         : 0
@@ -247,6 +250,7 @@ module.exports.getContent = async ctx => {
     ctx.body = {
         topic,
         images,
+        boardImageUrl,
         boardLevel,
         count
     }

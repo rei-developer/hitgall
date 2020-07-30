@@ -101,6 +101,9 @@
             </div>
             <div class='content' v-viewer='{ title: false }'>
                 <Poll :id='id' v-if='topic.isPoll'/>
+                <div v-if='boardImageUrl'>
+                    <img :src='`https://storage.googleapis.com/hitgall/img/${boardImageUrl}`' @error='imageUrlAlt'>
+                </div>
                 <span v-html='topic.content'/>
             </div>
             <div class='bottom-box'>
@@ -230,6 +233,7 @@
                     admin: 0,
                     boardLevel: 0
                 },
+                boardImageUrl: null,
                 boardLevel: 0,
                 removePassword: '',
                 blindDescription: '',
@@ -264,6 +268,7 @@
                 id,
                 topic: data.topic,
                 images: data.images,
+                boardImageUrl: data.boardImageUrl,
                 boardLevel: data.boardLevel
             }
         },
