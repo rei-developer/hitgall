@@ -137,7 +137,7 @@ module.exports.notices = async domain => {
 		LEFT JOIN TopicCounts tc ON tc.topicId = t.id
         LEFT JOIN Users u ON u.id = t.userId
         LEFT JOIN BoardManagers bm ON (bm.userId = t.userId AND bm.boardDomain = t.boardDomain)
-		WHERE t.boardDomain = ? AND t.isNotice = 1
+		WHERE t.boardDomain = ? AND t.isNotice = 1 AND t.isAllowed = 1
 		ORDER BY t.id DESC`,
         [domain]
     )
