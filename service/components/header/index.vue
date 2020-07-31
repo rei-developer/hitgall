@@ -185,7 +185,7 @@
                 }
                 > span {
                     font-size: 24px;
-                    padding: 7px 14px;
+                    // padding: 7px 14px;
                 }
                 &.logo {
                     > a {

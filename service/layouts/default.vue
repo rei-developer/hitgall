@@ -172,6 +172,18 @@
             }
             > article.inner {
                 flex: 1;
+                margin: 8px;
+                border-radius: 6px;
+                padding: 15px;
+                box-sizing: border-box;
+                position: relative;
+                animation-name: item;
+                animation-duration: .4s;
+                display: inline-block;
+                text-align: left;
+                animation-fill-mode: backwards;
+                box-shadow: 0 10px 40px -10px rgba(0,64,128,.2);
+                transition: box-shadow .3s;
             }
         }
         &.single {
@@ -183,6 +195,17 @@
             padding: 60px 0 100px;
             animation-name: fade;
             animation-duration: .5s;
+        }
+    }
+
+    @media (max-width: 1159px) {
+        main {
+            > section.panel {
+                > article.inner {
+                    margin: 0;
+                    padding: 15px 0;
+                }
+            }
         }
     }
 
