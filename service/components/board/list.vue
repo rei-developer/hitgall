@@ -429,7 +429,7 @@
                 if (this.searches.text.length < 2)
                     return this.toast('검색어는 2글자 이상 입력하세요.', 'danger')
                 this.page = 1
-                this.getData(true, true)
+                this.getData(true)
                 this.getCount()
             },
             move(item) {
