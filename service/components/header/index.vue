@@ -6,11 +6,7 @@
                 <!-- logo -->
                 <li class='logo' v-shortkey.once='["m"]' @shortkey='move("/")' @click='forceUpdate'>
                     <nuxt-link to='/'>
-<<<<<<< HEAD
-                        <img src='/icon.png'>
-=======
                         HitGall.com
->>>>>>> 27c7bbc114168c2b2ee623f17c421427977de278
                     </nuxt-link>
                 </li>
                 <!-- sidebar -->
@@ -51,9 +47,9 @@
             <ul class='right'>
                 <li v-if='$store.state.user.isLogged'>
                     <nuxt-link to='/user/edit'>
-                        <div class='profile'>
+                        <!-- <div class='profile'>
                             <img :src='$store.state.user.profileImageUrl' @error='imageUrlAlt'>
-                        </div>
+                        </div> -->
                         <!-- <img :src='`/level/${$store.state.user.level}.png`'> -->
                         <img :src='`/icon/${$store.state.user.icon}`' v-if='$store.state.user.icon !== ""'>
                         <strong>{{ $store.state.user.nickname }}</strong>
@@ -206,18 +202,9 @@
                 }
                 &.logo {
                     > a {
-<<<<<<< HEAD
-                        margin-top: -2px;
-                        img {
-                            width: 40px;
-                            height: 40px;
-                        }
-                        &:hover img { opacity: .5 }
-=======
                         font-family: 'rubik';
                         font-size: 18px;
                         font-weight: bold;
->>>>>>> 27c7bbc114168c2b2ee623f17c421427977de278
                     }
                 }
             }

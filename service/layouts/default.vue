@@ -17,13 +17,7 @@
             <section class='panel'>
                 <!-- inner -->
                 <article class='inner'>
-<<<<<<< HEAD
                     <nuxt/>
-=======
-                    <div class='inner-box'>
-                    <nuxt/>
-                    </div>
->>>>>>> 27c7bbc114168c2b2ee623f17c421427977de278
                 </article>
                 <!-- sidebar -->
                 <article class='sidebar'>
@@ -148,13 +142,8 @@
     body { background-color: #F9F9F9 }
 
     section {
-<<<<<<< HEAD
         max-width: 1640px;
         margin: 0 auto;
-=======
-        // max-width: 1640px;
-        // margin: 0 auto;
->>>>>>> 27c7bbc114168c2b2ee623f17c421427977de278
     }
 
     header.header {
@@ -176,7 +165,6 @@
     main {
         flex: 1;
         > section.panel {
-<<<<<<< HEAD
             display: flex;
             > article.sidebar {
                 flex-basis: 250px;
@@ -184,51 +172,6 @@
             }
             > article.inner {
                 flex: 1;
-                margin: 8px;
-                border-radius: 6px;
-                padding: 15px;
-                box-sizing: border-box;
-                position: relative;
-                animation-name: item;
-                animation-duration: .4s;
-                display: inline-block;
-                text-align: left;
-                animation-fill-mode: backwards;
-                box-shadow: 0 10px 40px -10px rgba(0,64,128,.2);
-                transition: box-shadow .3s;
-=======
-            max-width: 1640px;
-            margin: 0 auto;
-            position: relative;
-            > article.sidebar {
-                width: 220px;
-                position: fixed;
-                top: 78px;
-                font-size: 14px;
-                direction: ltr;
-                margin-right: 10px;
-                animation-name: fade;
-                animation-duration: 1s;
-            }
-            > article.inner {
-                margin-right: 240px;
-                direction: ltr;
-                > .inner-box {
-                    // flex: 1;
-                    margin: 8px;
-                    border-radius: 6px;
-                    padding: 15px;
-                    box-sizing: border-box;
-                    position: relative;
-                    animation-name: item;
-                    animation-duration: .4s;
-                    display: inline-block;
-                    text-align: left;
-                    animation-fill-mode: backwards;
-                    box-shadow: 0 10px 40px -10px rgba(0,64,128,.2);
-                    transition: box-shadow .3s;
-                }
->>>>>>> 27c7bbc114168c2b2ee623f17c421427977de278
             }
         }
         &.single {
@@ -246,11 +189,7 @@
     footer {
         padding: 15px 0;
         color: #fff;
-<<<<<<< HEAD
         background-color: #57617B;
-=======
-        background-color: rgb(0, 64, 128);
->>>>>>> 27c7bbc114168c2b2ee623f17c421427977de278
     }
 
     // container

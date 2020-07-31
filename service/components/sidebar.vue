@@ -15,6 +15,8 @@
                 <li @click='forceUpdate'><nuxt-link to='/board/epic7'>에픽세븐</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/gfl'>소녀전선</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/ar_knights'>명일방주</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/koikatsu'>코이카츠</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/skyrim'>베데스다</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/theaterdays'>밀리시타</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/monmusu'>몬무스</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/yandere'>얀데레</nuxt-link></li>
