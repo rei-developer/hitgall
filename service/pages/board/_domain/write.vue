@@ -328,6 +328,27 @@
 				)
 				if (boardLevel.status === 'fail')
 					return console.log(boardLevel.message)
+				if (id > 0) {
+					const data = await $axios.$get(`/api/topic/read/${id}`)
+					if (data.status === 'fail')
+						return console.log(data.message)
+					return {
+						id,
+						domain,
+						boardLevel,
+						categories,
+						form: {
+							category: data.topic.category,
+							color: data.topic.color
+								? '#' + data.topic.color
+								: '',
+							title: data.topic.title,
+							content: data.topic.content,
+							isNotice: data.topic.isNotice > 0
+						},
+						html: data.topic.content
+					}
+				}
 				const data = await $axios.$get(
 					`/api/topic/save`,
 					{ headers: { 'x-access-token': token } }
