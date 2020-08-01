@@ -167,7 +167,9 @@ module.exports.updateAdminBoardInfo = async ctx => {
         }
     let {
         description,
-        imageUrl
+        imageUrl,
+        agencyAllowed,
+        vpnAllowed
     } = ctx.request.body
     if (!description)
         description = ''
@@ -186,7 +188,9 @@ module.exports.updateAdminBoardInfo = async ctx => {
         }, domain)
     }
     await updateBoard({
-        description
+        description,
+        agencyAllowed,
+        vpnAllowed
     }, domain)
     ctx.body = {
         status: 'ok'

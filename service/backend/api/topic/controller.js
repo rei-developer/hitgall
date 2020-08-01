@@ -16,6 +16,7 @@ const fs = require('fs')
 const redis = require('redis')
 const moment = require('moment')
 const Filter = require('../../lib/filter')
+const SpamChecker = require('../../lib/spam')
 // const socket = require('../../lib/socket.io')
 const User = require('../../lib/user')
 const createPoll = require('../../database/poll/createPoll')
@@ -299,7 +300,17 @@ module.exports.createTopic = async ctx => {
     content = content.replace(/storage.googleapis.com\/hitgall/gim, 'cdn.hitgall.com')
     if (color !== '')
         color = color.replace('#', '')
-    const isAdminOnly = await readBoard.isAdminOnly(domain)
+    const { agencyAllowed, vpnAllowed, isAdminOnly } = await readBoard.isAdminOnly(domain)
+    if (agencyAllowed < 1)
+        return ctx.body = {
+            message: '해당 갤러리에서는 통신사 IP를 허용하지 않습니다.',
+            status: 'fail'
+        }
+    if (vpnAllowed < 1)
+        return ctx.body = {
+            message: '해당 갤러리에서는 VPN 사용을 허용하지 않습니다.',
+            status: 'fail'
+        }
     if (isAdminOnly < 0)
         return
     const ip = ctx.get('x-real-ip')
@@ -440,6 +451,17 @@ module.exports.createPost = async ctx => {
     writer = Filter.post(writer)
     password = Filter.post(password)
     content = Filter.post(content)
+    const { agencyAllowed, vpnAllowed } = await readBoard.isAdminOnly(domain)
+    if (agencyAllowed < 1)
+        return ctx.body = {
+            message: '해당 갤러리에서는 통신사 IP를 허용하지 않습니다.',
+            status: 'fail'
+        }
+    if (vpnAllowed < 1)
+        return ctx.body = {
+            message: '해당 갤러리에서는 VPN 사용을 허용하지 않습니다.',
+            status: 'fail'
+        }
     const ip = ctx.get('x-real-ip')
     const header = ctx.header['user-agent']
     const isExist = await readBoard.adminBoardBlind(domain, ip)
@@ -588,6 +610,19 @@ module.exports.updateTopic = async ctx => {
     content = content.replace(/storage.googleapis.com\/hitgall/gim, 'cdn.hitgall.com')
     if (color !== '')
         color = color.replace('#', '')
+    const { agencyAllowed, vpnAllowed, isAdminOnly } = await readBoard.isAdminOnly(domain)
+    if (agencyAllowed < 1)
+        return ctx.body = {
+            message: '해당 갤러리에서는 통신사 IP를 허용하지 않습니다.',
+            status: 'fail'
+        }
+    if (vpnAllowed < 1)
+        return ctx.body = {
+            message: '해당 갤러리에서는 VPN 사용을 허용하지 않습니다.',
+            status: 'fail'
+        }
+    if (isAdminOnly < 0)
+        return
     const level = await readBoard.adminBoardManagerLevel(user.id, domain)
     if (!level && user.isAdmin < 1) {
         // TODO: 관리자 전용 커스텀

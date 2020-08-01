@@ -99,6 +99,21 @@
 								v-model='board.noticeLimit'/>
 						</b-input-group>
 					</b-form-group>
+                    <hr>
+                    <label>
+						<font-awesome-icon icon='ban'/>
+						방화벽 정보
+					</label>
+                    <b-form-group class='mb-sm-2'>
+                        <b-form-checkbox v-model='board.agencyAllowed'>
+                            통신사 IP 허용
+                        </b-form-checkbox>
+                    </b-form-group>
+                    <b-form-group class='mb-sm-2'>
+                        <b-form-checkbox v-model='board.vpnAllowed'>
+                            VPN 허용
+                        </b-form-checkbox>
+                    </b-form-group>
                     <!-- <b-form-group class='mb-sm-2'>
                         <b-input-group size='sm'>
 							<b-input-group-prepend is-text>
@@ -322,6 +337,10 @@
 					}
 				this.domain = domain
                 this.board = data.board
+                if (this.board.agencyAllowed > 0)
+                    this.board.agencyAllowed = true
+                if (this.board.vpnAllowed > 0)
+                    this.board.vpnAllowed = true
 			},
             async getBlinds() {
                 const domain = this.$route.params.domain || ''
@@ -430,7 +449,9 @@
 					{
                         description: this.board.description,
                         bestLimit: this.board.bestLimit,
-                        noticeLimit: this.board.noticeLimit
+                        noticeLimit: this.board.noticeLimit,
+                        agencyAllowed: this.board.agencyAllowed ? 1 : 0,
+                        vpnAllowed: this.board.vpnAllowed ? 1 : 0
 					},
 					{ headers: { 'x-access-token': token } }
 				)
