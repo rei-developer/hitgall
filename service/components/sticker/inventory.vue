@@ -8,13 +8,13 @@
         <div class='content'>
             <div class='item'>
                 <img
-                    :src='`https://storage.googleapis.com/hitgall/sticker/${item.id}/1.${item.ext}`'
+                    :src='`https://cdn.hitgall.com/sticker/${item.id}/1.${item.ext}`'
                     @click='view(item)'
                     v-for='(item, index) in inventory' :key='index'>
             </div>
             <div class='itemList' v-if='sticker'>
                 <img
-                    :src='`https://storage.googleapis.com/hitgall/sticker/${sticker.id}/${index}.${sticker.ext}`'
+                    :src='`https://cdn.hitgall.com/sticker/${sticker.id}/${index}.${sticker.ext}`'
                     @click='use(sticker, index)'
                     v-for='index in sticker.number' :key='index'>
             </div>

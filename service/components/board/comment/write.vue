@@ -52,7 +52,7 @@
                     v-if='stickers.sticker'>
                     <div class='item'>
                         <div class='image'>
-                            <img :src='`https://storage.googleapis.com/hitgall/sticker/${stickers.sticker.id}/${stickers.select}.${stickers.sticker.ext}`' @error='imageUrlAlt'>
+                            <img :src='`https://cdn.hitgall.com/sticker/${stickers.sticker.id}/${stickers.select}.${stickers.sticker.ext}`' @error='imageUrlAlt'>
                         </div>
                         {{ stickers.sticker.name }}
                         <div class='remove'>
