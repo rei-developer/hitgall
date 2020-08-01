@@ -296,6 +296,7 @@ module.exports.createTopic = async ctx => {
     password = Filter.disable(password)
     title = Filter.disable(title)
     content = Filter.topic(content)
+    content = content.replace(/storage.googleapis.com\/hitgall/gim, 'cdn.hitgall.com')
     if (color !== '')
         color = color.replace('#', '')
     const isAdminOnly = await readBoard.isAdminOnly(domain)
@@ -584,6 +585,7 @@ module.exports.updateTopic = async ctx => {
         return
     title = Filter.disable(title)
     content = Filter.topic(content)
+    content = content.replace(/storage.googleapis.com\/hitgall/gim, 'cdn.hitgall.com')
     if (color !== '')
         color = color.replace('#', '')
     const level = await readBoard.adminBoardManagerLevel(user.id, domain)
