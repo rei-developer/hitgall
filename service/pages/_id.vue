@@ -79,7 +79,7 @@
             </h6>
             <div class='profile'>
                 <div class='image'>
-                    <img :src='`https://storage.googleapis.com/hitgall/img/${topic.imageUrl}`' @error='imageUrlAlt'>
+                    <img :src='`https://cdn.hitgall.com/img/${topic.imageUrl}`' @error='imageUrlAlt'>
                 </div>
                 <div class='author'>
                     <!-- <img :src='`/level/${topic.level}.png`'> -->
@@ -102,7 +102,7 @@
             <div class='content' v-viewer='{ title: false }'>
                 <Poll :id='id' v-if='topic.isPoll'/>
                 <div v-if='boardImageUrl'>
-                    <img :src='`https://storage.googleapis.com/hitgall/img/${boardImageUrl}`' @error='imageUrlAlt'>
+                    <img :src='`https://cdn.hitgall.com/img/${boardImageUrl}`' @error='imageUrlAlt'>
                 </div>
                 <span v-html='topic.content'/>
             </div>
@@ -329,7 +329,7 @@
             },
             async downloadWithAxios(url, name) {
                 await fetch(
-                    `https://storage.googleapis.com/hitgall/img/${url}`,
+                    `https://cdn.hitgall.com/img/${url}`,
                     {
                         headers: { 'Accept': 'image/*', },
                         responseType: 'arraybuffer'
@@ -445,7 +445,7 @@
                     { property: 'og:site_name', content: '힛갤' },
                     { property: 'og:title', content: this.topic.title },
                     { property: 'og:description', content: this.topic.content.substr(0, 200) },
-                    { property: 'og:image', content: this.topic.imageUrl ? `https://storage.googleapis.com/hitgall/img/${this.topic.imageUrl}` : '/default.png' },
+                    { property: 'og:image', content: this.topic.imageUrl ? `https://cdn.hitgall.com/img/${this.topic.imageUrl}` : '/default.png' },
                     { property: 'og:type', content: 'website' },
                     { property: 'og:updated_time', content: this.topic.updated },
                     { hid: `${this.id}`, name: `${this.topic.content.substr(0, 100)}`, content: '힛갤' }

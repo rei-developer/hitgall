@@ -3,7 +3,7 @@
         <div class='board-title'>{{ board.name }} 갤러리</div>
         <div class='board-info'>
             <div class='image'>
-                <img :src='`https://storage.googleapis.com/hitgall/img/thumb/${board.imageUrl}`' @error='imageUrlAlt'>
+                <img :src='`https://cdn.hitgall.com/img/thumb/${board.imageUrl}`' @error='imageUrlAlt'>
             </div>
             <div class='description'>
                 {{ board.description }}

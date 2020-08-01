@@ -631,21 +631,13 @@ module.exports.updateTopic = async ctx => {
     const trashImages = imagesByURL.filter(item => !findImages.includes(item))
     if (trashImages) {
         const jobs = trashImages.map(image => new Promise(async resolve => {
-            fs.unlink(`img/${image}`, async err => {
-                if (err)
-                    console.log(err)
-                await deleteFile(`img/${image}`).catch(console.error)
-                resolve(true)
-            })
+            await deleteFile(`img/${image}`).catch(console.error)
+            resolve(true)
         }))
         await Promise.all(jobs)
         const jobsForThumb = trashImages.map(image => new Promise(async resolve => {
-            fs.unlink(`img/thumb/${image}`, async err => {
-                if (err)
-                    console.log(err)
-                await deleteFile(`img/thumb/${image}`).catch(console.error)
-                resolve(true)
-            })
+            await deleteFile(`img/thumb/${image}`).catch(console.error)
+            resolve(true)
         }))
         await Promise.all(jobsForThumb)
         const jobsForDB = trashImages.map(image => new Promise(async resolve => {
@@ -742,21 +734,13 @@ module.exports.deleteTopic = async ctx => {
     const images = await readTopic.topicImages(id)
     if (images) {
         const jobs = images.map(image => new Promise(async resolve => {
-            fs.unlink(`img/${image.imageUrl}`, async err => {
-                if (err)
-                    console.log(err)
-                await deleteFile(`img/${image.imageUrl}`).catch(console.error)
-                resolve(true)
-            })
+            await deleteFile(`img/${image.imageUrl}`).catch(console.error)
+            resolve(true)
         }))
         await Promise.all(jobs)
         const jobsForThumb = images.map(image => new Promise(async resolve => {
-            fs.unlink(`img/thumb/${image.imageUrl}`, async err => {
-                if (err)
-                    console.log(err)
-                await deleteFile(`img/thumb/${image}`).catch(console.error)
-                resolve(true)
-            })
+            await deleteFile(`img/thumb/${image}`).catch(console.error)
+            resolve(true)
         }))
         await Promise.all(jobsForThumb)
         await deleteTopic.topicImages(id)
