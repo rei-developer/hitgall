@@ -289,7 +289,7 @@ module.exports.createTopic = async ctx => {
         console.log(ip, SpamChecker.checkAgency(ip), "입니다=======================")
 
         return ctx.body = {
-            message: '해당 갤러리에서는 통신사 IP를 허용하지 않습니다.',
+            message: 'BBB. ' + SpamChecker.checkAgency(ip),
             status: 'fail'
         }
     }
@@ -444,7 +444,7 @@ module.exports.createPost = async ctx => {
     console.log(ip, SpamChecker.checkAgency(ip), "이라오=======================")
 
         return ctx.body = {
-            message: '해당 갤러리에서는 통신사 IP를 허용하지 않습니다.',
+            message: 'AAA.' + SpamChecker.checkAgency(ip),
             status: 'fail'
         }
     }
@@ -607,7 +607,7 @@ module.exports.updateTopic = async ctx => {
         console.log(ip, SpamChecker.checkAgency(ip), "이랑께======================")
 
         return ctx.body = {
-            message: '해당 갤러리에서는 통신사 IP를 허용하지 않습니다.',
+            message: 'CCC'  + SpamChecker.checkAgency(ip),
             status: 'fail'
         }
     }
