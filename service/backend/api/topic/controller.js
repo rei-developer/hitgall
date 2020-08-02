@@ -284,16 +284,18 @@ module.exports.createTopic = async ctx => {
     const ip = ctx.get('x-real-ip')
     const header = ctx.header['user-agent']
     const { agencyAllowed, vpnAllowed, isAdminOnly } = await readBoard.isAdminOnly(domain)
-    if (agencyAllowed < 1 && SpamChecker.checkAgency(ip))
+    if (agencyAllowed < 1 && SpamChecker.checkAgency(ip)) {
         return ctx.body = {
-            message: '해당 갤러리에서는 통신사 IP를 허용하지 않습니다.',
+            message: '해당 갤러리 매니저가 통신사 IP 이용을 금지하고 있습니다.',
             status: 'fail'
         }
-    if (vpnAllowed < 1 && SpamChecker.checkVPN(ip))
+    }
+    if (vpnAllowed < 1 && SpamChecker.checkVPN(ip)) {
         return ctx.body = {
-            message: '해당 갤러리에서는 VPN 사용을 허용하지 않습니다.',
+            message: '해당 갤러리 매니저가 VPN 이용을 금지하고 있습니다.',
             status: 'fail'
         }
+    }
     if (isAdminOnly < 0)
         return
     const isExist = await readBoard.adminBoardBlind(domain, ip)
@@ -435,16 +437,18 @@ module.exports.createPost = async ctx => {
     const ip = ctx.get('x-real-ip')
     const header = ctx.header['user-agent']
     const { agencyAllowed, vpnAllowed } = await readBoard.isAdminOnly(domain)
-    if (agencyAllowed < 1 && SpamChecker.checkAgency(ip))
+    if (agencyAllowed < 1 && SpamChecker.checkAgency(ip)) {
         return ctx.body = {
-            message: '해당 갤러리에서는 통신사 IP를 허용하지 않습니다.',
+            message: '해당 갤러리 매니저가 통신사 IP 이용을 금지하고 있습니다.',
             status: 'fail'
         }
-    if (vpnAllowed < 1 && SpamChecker.checkVPN(ip))
+    }
+    if (vpnAllowed < 1 && SpamChecker.checkVPN(ip)) {
         return ctx.body = {
-            message: '해당 갤러리에서는 VPN 사용을 허용하지 않습니다.',
+            message: '해당 갤러리 매니저가 VPN 이용을 금지하고 있습니다.',
             status: 'fail'
         }
+    }
     const isExist = await readBoard.adminBoardBlind(domain, ip)
     if (isExist) {
         const days = moment().diff(moment(isExist.blockDate), 'days')
@@ -593,16 +597,18 @@ module.exports.updateTopic = async ctx => {
         color = color.replace('#', '')
     const ip = ctx.get('x-real-ip')
     const { agencyAllowed, vpnAllowed, isAdminOnly } = await readBoard.isAdminOnly(domain)
-    if (agencyAllowed < 1 && SpamChecker.checkAgency(ip))
+    if (agencyAllowed < 1 && SpamChecker.checkAgency(ip)) {
         return ctx.body = {
-            message: '해당 갤러리에서는 통신사 IP를 허용하지 않습니다.',
+            message: '해당 갤러리 매니저가 통신사 IP 이용을 금지하고 있습니다.',
             status: 'fail'
         }
-    if (vpnAllowed < 1 && SpamChecker.checkVPN(ip))
+    }
+    if (vpnAllowed < 1 && SpamChecker.checkVPN(ip)) {
         return ctx.body = {
-            message: '해당 갤러리에서는 VPN 사용을 허용하지 않습니다.',
+            message: '해당 갤러리 매니저가 VPN 이용을 금지하고 있습니다.',
             status: 'fail'
         }
+    }
     if (isAdminOnly < 0)
         return
     const level = await readBoard.adminBoardManagerLevel(user.id, domain)
