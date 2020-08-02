@@ -16,6 +16,7 @@ const fs = require('fs')
 const redis = require('redis')
 const moment = require('moment')
 const Filter = require('../../lib/filter')
+const SpamChecker = require('../../lib/spam')
 // const socket = require('../../lib/socket.io')
 const User = require('../../lib/user')
 
@@ -77,16 +78,11 @@ module.exports.getAdminBoardBlinds = async ctx => {
             status: 'fail'
         }
     let blinds = await readBoard.adminBoardBlinds(domain)
-    if (blinds) {
+    if (blinds)
         blinds = blinds.map(item => {
-            const ip = item.ip.split('.')
-            if (ip && ip.length >= 3)
-                item.ip = `${ip[0]}.${ip[1]}`
-            else
-                item.ip = ''
+            item.ip = SpamChecker.hideIp(item.ip)
             return item
         })
-    }
     ctx.body = {
         blinds
     }
@@ -112,16 +108,11 @@ module.exports.getAdminBoardRemoveLogs = async ctx => {
             status: 'fail'
         }
     let removes = await readBoard.adminBoardRemoveLogs(domain)
-    if (removes) {
+    if (removes)
         removes = removes.map(item => {
-            const ip = item.ip.split('.')
-            if (ip && ip.length >= 3)
-                item.ip = `${ip[0]}.${ip[1]}`
-            else
-                item.ip = ''
+            item.ip = SpamChecker.hideIp(item.ip)
             return item
         })
-    }
     ctx.body = {
         removes
     }

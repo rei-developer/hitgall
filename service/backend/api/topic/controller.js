@@ -85,27 +85,17 @@ module.exports.getTopics = async ctx => {
     const count = await readTopic.count(obj)
     const categories = await readBoard.categories(domain)
     let notices = await readTopic.notices(domain) || []
-    if (notices.length > 0) {
+    if (notices.length > 0)
         notices = notices.map(item => {
-            const ip = item.ip.split('.')
-            if (ip && ip.length >= 3)
-                item.ip = `${ip[0]}.${ip[1]}`
-            else
-                item.ip = ''
+            item.ip = SpamChecker.hideIp(item.ip)
             return item
         })
-    }
     let topics = await readTopic.topics(obj, searches, page, limit) || []
-    if (topics.length > 0) {
+    if (topics.length > 0)
         topics = topics.map(item => {
-            const ip = item.ip.split('.')
-            if (ip && ip.length >= 3)
-                item.ip = `${ip[0]}.${ip[1]}`
-            else
-                item.ip = ''
+            item.ip = SpamChecker.hideIp(item.ip)
             return item
         })
-    }
     ctx.body = {
         count,
         categories,
@@ -149,17 +139,12 @@ module.exports.getPosts = async ctx => {
     const topicIp = await readTopic.ip(topicId)
     const count = await readPost.count(topicId)
     let posts = await readPost.posts(topicId, page, count) //limit -> count 임시
-    if (posts) {
+    if (posts)
         posts = posts.map(item => {
             item.sameUser = item.userId < 1 ? topicIp === item.ip : null
-            const ip = item.ip.split('.')
-            if (ip && ip.length >= 3)
-                item.ip = `${ip[0]}.${ip[1]}`
-            else
-                item.ip = ''
+            item.ip = SpamChecker.hideIp(item.ip)
             return item
         })
-    }
     ctx.body = {
         count,
         posts
@@ -227,11 +212,7 @@ module.exports.getContent = async ctx => {
             message: '접근할 수 없거나 삭제된 페이지입니다.',
             status: 'fail'
         }
-    const ip = topic.ip.split('.')
-    if (ip && ip.length >= 3)
-        topic.ip = `${ip[0]}.${ip[1]}`
-    else
-        topic.ip = ''
+    topic.ip = SpamChecker.hideIp(topic.ip)
     topic.header = ''
     const images = topic.isImage > 0
         ? await readTopic.topicImages(id)
