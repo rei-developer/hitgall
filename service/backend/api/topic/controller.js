@@ -281,21 +281,21 @@ module.exports.createTopic = async ctx => {
     content = content.replace(/storage.googleapis.com\/hitgall/gim, 'cdn.hitgall.com')
     if (color !== '')
         color = color.replace('#', '')
+    const ip = ctx.get('x-real-ip')
+    const header = ctx.header['user-agent']
     const { agencyAllowed, vpnAllowed, isAdminOnly } = await readBoard.isAdminOnly(domain)
-    if (agencyAllowed < 1)
+    if (agencyAllowed < 1 && SpamChecker.checkAgency(ip))
         return ctx.body = {
             message: '해당 갤러리에서는 통신사 IP를 허용하지 않습니다.',
             status: 'fail'
         }
-    if (vpnAllowed < 1)
+    if (vpnAllowed < 1 && SpamChecker.checkVPN(ip))
         return ctx.body = {
             message: '해당 갤러리에서는 VPN 사용을 허용하지 않습니다.',
             status: 'fail'
         }
     if (isAdminOnly < 0)
         return
-    const ip = ctx.get('x-real-ip')
-    const header = ctx.header['user-agent']
     const isExist = await readBoard.adminBoardBlind(domain, ip)
     if (isExist) {
         const days = moment().diff(moment(isExist.blockDate), 'days')
@@ -432,19 +432,19 @@ module.exports.createPost = async ctx => {
     writer = Filter.post(writer)
     password = Filter.post(password)
     content = Filter.post(content)
+    const ip = ctx.get('x-real-ip')
+    const header = ctx.header['user-agent']
     const { agencyAllowed, vpnAllowed } = await readBoard.isAdminOnly(domain)
-    if (agencyAllowed < 1)
+    if (agencyAllowed < 1 && SpamChecker.checkAgency(ip))
         return ctx.body = {
             message: '해당 갤러리에서는 통신사 IP를 허용하지 않습니다.',
             status: 'fail'
         }
-    if (vpnAllowed < 1)
+    if (vpnAllowed < 1 && SpamChecker.checkVPN(ip))
         return ctx.body = {
             message: '해당 갤러리에서는 VPN 사용을 허용하지 않습니다.',
             status: 'fail'
         }
-    const ip = ctx.get('x-real-ip')
-    const header = ctx.header['user-agent']
     const isExist = await readBoard.adminBoardBlind(domain, ip)
     if (isExist) {
         const days = moment().diff(moment(isExist.blockDate), 'days')
@@ -591,13 +591,14 @@ module.exports.updateTopic = async ctx => {
     content = content.replace(/storage.googleapis.com\/hitgall/gim, 'cdn.hitgall.com')
     if (color !== '')
         color = color.replace('#', '')
+    const ip = ctx.get('x-real-ip')
     const { agencyAllowed, vpnAllowed, isAdminOnly } = await readBoard.isAdminOnly(domain)
-    if (agencyAllowed < 1)
+    if (agencyAllowed < 1 && SpamChecker.checkAgency(ip))
         return ctx.body = {
             message: '해당 갤러리에서는 통신사 IP를 허용하지 않습니다.',
             status: 'fail'
         }
-    if (vpnAllowed < 1)
+    if (vpnAllowed < 1 && SpamChecker.checkVPN(ip))
         return ctx.body = {
             message: '해당 갤러리에서는 VPN 사용을 허용하지 않습니다.',
             status: 'fail'
