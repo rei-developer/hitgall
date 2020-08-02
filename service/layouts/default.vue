@@ -147,17 +147,17 @@
     }
 
     header.header {
-        // margin-bottom: 1rem;
+        margin-bottom: 1rem;
         // background-color: #dbe2ef;
         // // background-image: url(/navbg.jpg);
-        // box-shadow: 1px 1px 8px rgba(0, 0, 0, .25);
+        box-shadow: 1px 1px 8px rgba(0, 0, 0, .25);
 
         width: 100%;
         height: 50px;
         line-height: 50px;
-        position: fixed;
-        z-index: 2;
-        top: 0;
+        // position: fixed;
+        // z-index: 2;
+        // top: 0;
         background-color: #fff;
         box-shadow: 0 5px 10px 0 rgba(0,64,128,.05);
     }
@@ -192,7 +192,7 @@
             color: #263646;
             font-family: rubik,arial;
             font-size: 14px;
-            padding: 60px 0 100px;
+            // padding: 60px 0 100px;
             animation-name: fade;
             animation-duration: .5s;
         }
