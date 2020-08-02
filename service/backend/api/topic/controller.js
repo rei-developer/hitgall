@@ -284,15 +284,11 @@ module.exports.createTopic = async ctx => {
     const ip = ctx.get('x-real-ip')
     const header = ctx.header['user-agent']
     const { agencyAllowed, vpnAllowed, isAdminOnly } = await readBoard.isAdminOnly(domain)
-    if (agencyAllowed < 1 && SpamChecker.checkAgency(ip)) {
-
-        console.log(ip, SpamChecker.checkAgency(ip), "입니다=======================")
-
+    if (agencyAllowed < 1 && SpamChecker.checkAgency(ip))
         return ctx.body = {
-            message: 'BBB. ' + SpamChecker.checkAgency(ip),
+            message: '해당 갤러리에서는 통신사 IP를 허용하지 않습니다.',
             status: 'fail'
         }
-    }
     if (vpnAllowed < 1 && SpamChecker.checkVPN(ip))
         return ctx.body = {
             message: '해당 갤러리에서는 VPN 사용을 허용하지 않습니다.',
@@ -439,15 +435,11 @@ module.exports.createPost = async ctx => {
     const ip = ctx.get('x-real-ip')
     const header = ctx.header['user-agent']
     const { agencyAllowed, vpnAllowed } = await readBoard.isAdminOnly(domain)
-    if (agencyAllowed < 1 && SpamChecker.checkAgency(ip)){
-    
-    console.log(ip, SpamChecker.checkAgency(ip), "이라오=======================")
-
+    if (agencyAllowed < 1 && SpamChecker.checkAgency(ip))
         return ctx.body = {
-            message: 'AAA.' + SpamChecker.checkAgency(ip),
+            message: '해당 갤러리에서는 통신사 IP를 허용하지 않습니다.',
             status: 'fail'
         }
-    }
     if (vpnAllowed < 1 && SpamChecker.checkVPN(ip))
         return ctx.body = {
             message: '해당 갤러리에서는 VPN 사용을 허용하지 않습니다.',
@@ -601,16 +593,11 @@ module.exports.updateTopic = async ctx => {
         color = color.replace('#', '')
     const ip = ctx.get('x-real-ip')
     const { agencyAllowed, vpnAllowed, isAdminOnly } = await readBoard.isAdminOnly(domain)
-    if (agencyAllowed < 1 && SpamChecker.checkAgency(ip)) 
-    {
-        
-        console.log(ip, SpamChecker.checkAgency(ip), "이랑께======================")
-
+    if (agencyAllowed < 1 && SpamChecker.checkAgency(ip))
         return ctx.body = {
-            message: 'CCC'  + SpamChecker.checkAgency(ip),
+            message: '해당 갤러리에서는 통신사 IP를 허용하지 않습니다.',
             status: 'fail'
         }
-    }
     if (vpnAllowed < 1 && SpamChecker.checkVPN(ip))
         return ctx.body = {
             message: '해당 갤러리에서는 VPN 사용을 허용하지 않습니다.',
