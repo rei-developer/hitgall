@@ -11,6 +11,8 @@
             <ul>
                 <li @click='forceUpdate'><nuxt-link to='/board/girl'>연예인</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/anime'>애니메이션</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/python'>Python</nuxt-link></li>
+                <li @click='forceUpdate'><nuxt-link to='/board/programming'>프로그래밍</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/lastorigin'>라스트 오리진</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/lydia'>리디아</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/epic7'>에픽세븐</nuxt-link></li>

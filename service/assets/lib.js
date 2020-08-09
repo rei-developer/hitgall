@@ -94,6 +94,12 @@ module.exports.getBoardName = domain => {
         case 'adult_broadcast':
             name = '성인 인터넷 방송 갤러리'
             break
+        case 'python':
+            name = 'Python 갤러리'
+            break
+        case 'programming':
+            name = '프로그래밍 갤러리'
+            break
         default:
             name = domain + ' 갤러리'
             break
