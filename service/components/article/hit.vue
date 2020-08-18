@@ -192,8 +192,10 @@
                 padding: .5rem 0 0 5px;
                 font-size: 14px;
                 border-bottom: 1px solid rgba(0, 0, 0, .2);
-                border-top-left-radius: 10px;
-                border-top-right-radius: 10px;
+                border-top-left-radius: 8px;
+                border-top-right-radius: 8px;
+                border-bottom-left-radius: 5px;
+                border-bottom-right-radius: 5px;
                 background-color: @primary;
                 > a {
                     color: #fff;

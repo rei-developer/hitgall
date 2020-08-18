@@ -304,8 +304,10 @@
             color: #fff;
             font-size: 14px;
             border-bottom: 1px solid rgba(0, 0, 0, .2);
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            border-bottom-left-radius: 7px;
+            border-bottom-right-radius: 7px;
             background-color: @primary;
             > span { font-size: 12px }
         }

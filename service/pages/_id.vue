@@ -72,15 +72,15 @@
         <article class='topic-view'>
             <h6>
                 <div class='regdate'>
-                    <span>{{ $moment(topic.created).format("YY/MM/DD HH:mm:ss") }}</span>
-                </div>
+                     <span class='desktop-only'><span>{{ $moment(topic.created).format("YY/MM/DD HH:mm:ss") }}</span>
+                </span></div>
                 <div class='category' v-if='topic.category'>{{ topic.category }}</div>
                 <div class='subject' :style='topic.color !== "" ? `color: #${topic.color}` : ""'>{{ topic.title }}</div>
             </h6>
             <div class='profile'>
-                <div class='image'>
+                 <!-- <div class='image'>
                     <img :src='`https://cdn.hitgall.com/img/${topic.imageUrl}`' @error='imageUrlAlt'>
-                </div>
+                </div>  -->
                 <div class='author'>
                     <!-- <img :src='`/level/${topic.level}.png`'> -->
                     <img class='icon' :src='`/${topic.admin ? "admin" : "user" + (topic.userId > 0 ? 1 : 0) + (topic.boardLevel || 0)}.png`'>
@@ -97,6 +97,9 @@
                     <div>
                         <span @click='copyLink(`https://www.hitgall.com/${ id }`)'>https://www.hitgall.com/{{ id }}</span>
                     </div>
+                    <div class='regdate'>
+                     <span class='mobile-only'><span>{{ $moment(topic.created).format("YY/MM/DD HH:mm:ss") }}</span>
+                   </span></div>
                 </div>
             </div>
             <div class='content' v-viewer='{ title: false }'>
@@ -464,26 +467,26 @@
         border-bottom: 1px solid #eee;
         background-color: #fff;
         > h6 {
-            height: 32px;
+            height: 33px;
             margin: 0;
-            padding: .5rem;
+            padding: .3rem;
             color: #fff;
             border-bottom: 1px solid rgba(0, 0, 0, .2);
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
+            border-radius: 7px;
             background-color: @primary;
             > .category {
                 display: inline-block;
-                margin-bottom: 2px;
+                margin-bottom: 1px;
                 padding: 4px 8px;
                 color: @primary;
                 font-size: 12px;
                 font-weight: 700;
-                border-radius: 4px;
+                border-radius: 5px;
                 background-color: #f5f5f5;
             }
             > .subject {
-                display: inline-block;
+                display: inline;
+                //margin-top: 2px;
                 max-width: calc(100vw - 80px);
                 font-size: 14px;
                 white-space: nowrap;
@@ -491,7 +494,7 @@
                 overflow: hidden;
             }
             > .regdate {
-                margin-top: -4px;
+                //margin-top: -4px;
                 float: right;
                 > span { font-size: 11px }
             }
@@ -552,6 +555,12 @@
                     font-size: 12px;
                     cursor: pointer;
                 }
+                > .regdate {
+                //margin-top: -4px;
+                //float: right;
+                color: #888;
+                > span { font-size: 12px }
+            }
             }
         }
         > .content {

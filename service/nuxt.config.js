@@ -30,7 +30,7 @@ module.exports = {
     script: [
       {
         src:
-          "https://www.google.com/recaptcha/api.js?render=6LfO7_0UAAAAAGPyu2MULjvStvaMMpzGADpWZOku"
+          "https://www.google.com/recaptcha/api.js?render=6LdGdsAZAAAAAHs2tez4PI-6H0kwQ-AnQeIzW6Lw"
       },
       { src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" }
     ]
@@ -87,7 +87,7 @@ module.exports = {
       "@nuxtjs/recaptcha",
       {
         hideBadge: true,
-        siteKey: "6LfO7_0UAAAAAGPyu2MULjvStvaMMpzGADpWZOku",
+        siteKey: "6LdGdsAZAAAAAHs2tez4PI-6H0kwQ-AnQeIzW6Lw",
         version: 3
       }
     ],

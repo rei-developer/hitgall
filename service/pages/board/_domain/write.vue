@@ -608,7 +608,7 @@
 					if (this.$store.state.user.isLogged)
                     	this.autoWrite()
 					this.realtimeUpdate()
-                }, 30000)
+                }, 60000)
             },
 			numberWithCommas(x) {
                     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')

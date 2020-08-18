@@ -144,7 +144,7 @@
 
     article.side {
         width: 100%;
-        margin: 8px;
+        //margin: 8px;
         border-radius: 6px;
         padding: 8px;
         box-sizing: border-box;

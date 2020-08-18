@@ -490,23 +490,24 @@
     article.topic-list {
         > a {
             > .loading-bar {
-                height: 32px;
+                height: 36px;
                 border-bottom: 1px solid rgba(0, 0, 0, .2);
-                border-radius: 10px 10px 0 0;
+                border-radius: 10px 10px 3px 3px;
                 background-color: @primary;
                 position: relative;
                 > .subject {
                     position: absolute;
-                    top: 0;
+                    top: 2px;
                     left: 5px;
                     color: #fff;
                     font-size: 21px;
                     font-weight: 700;
                     text-shadow: #666 1px 1px;
+                    word-break:break-all;
                 }
                 > .counter {
                     position: absolute;
-                    top: 6px;
+                    top: 8px;
                     right: 6px;
                     padding: 0 10px 1px;
                     color: @primary;
@@ -611,11 +612,11 @@
                                         }
                                         > span.category, > span.newest {
                                             margin-right: 2px;
-                                            padding: 2px 4px;
+                                            padding: 3px 5px;
                                             color: @primary;
                                             font-size: 11px;
                                             font-weight: 700;
-                                            border-radius: 2px;
+                                            border-radius: 3px;
                                             background-color: #ddd;
                                         }
                                         > span.newest {
@@ -681,6 +682,7 @@
                                 // position: relative;
                                 flex: 1;
                                 // max-width: calc(100vw - 40px);
+                                word-break:break-all;
                                 padding: .5rem 0 .5rem .5rem;
                                 color: #212529;
                                 font-size: 14px;
@@ -771,6 +773,7 @@
             text-align: center;
             background-color: @primary;
             cursor: pointer;
+            border-radius: 5px;
         }
         > .bottom {
             margin: 1rem 0;
