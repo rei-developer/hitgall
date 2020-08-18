@@ -71,9 +71,9 @@
         </b-form-group>
         <article class='topic-view'>
             <h6>
-                <div class='regdate'>
+                <!-- <div class='regdate'>
                      <span class='desktop-only'><span>{{ $moment(topic.created).format("YY/MM/DD HH:mm:ss") }}</span>
-                </span></div>
+                </span></div> -->
                 <div class='category' v-if='topic.category'>{{ topic.category }}</div>
                 <div class='subject' :style='topic.color !== "" ? `color: #${topic.color}` : ""'>{{ topic.title }}</div>
             </h6>
@@ -98,8 +98,8 @@
                         <span @click='copyLink(`https://www.hitgall.com/${ id }`)'>https://www.hitgall.com/{{ id }}</span>
                     </div>
                     <div class='regdate'>
-                     <span class='mobile-only'><span>{{ $moment(topic.created).format("YY/MM/DD HH:mm:ss") }}</span>
-                   </span></div>
+                     <span>{{ $moment(topic.created).format("YY/MM/DD HH:mm:ss") }}</span>
+                   </div>
                 </div>
             </div>
             <div class='content' v-viewer='{ title: false }'>
@@ -492,12 +492,14 @@
                 white-space: nowrap;
                 text-overflow: ellipsis;
                 overflow: hidden;
+                word-break:break-all;
             }
-            > .regdate {
-                //margin-top: -4px;
-                float: right;
-                > span { font-size: 11px }
-            }
+            // > .regdate {
+            //     //margin-top: -4px;
+            //     display: inline;
+            //     float: right;
+            //     > span { font-size: 11px }
+            // }
         }
         > .profile {
             min-height: 91px;
