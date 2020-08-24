@@ -60,7 +60,8 @@ module.exports = {
     { src: "@/plugins/vue-shortkey.js", mode: "client" },
     { src: "@/plugins/vue-spinners.js", mode: "client" },
     { src: "@/plugins/vue-toastification.js", mode: "client" },
-    { src: "@/plugins/vue-waterfall.js", mode: "client" }
+    { src: "@/plugins/vue-waterfall.js", mode: "client" },
+    { src: "@/plugins/service-worker.js", ssr: false }
   ],
   /*
    ** Nuxt.js dev-modules
@@ -82,6 +83,9 @@ module.exports = {
     "nuxt-fontawesome",
     "nuxt-clipboard2",
     "@nuxtjs/proxy",
+    "@nuxtjs/onesignal", 
+    "@nuxtjs/pwa",
+    "@nuxtjs/sentry",
     ["@nuxtjs/axios", { proxy: true }],
     [
       "@nuxtjs/recaptcha",
@@ -137,5 +141,69 @@ module.exports = {
   env: {
     SOCKET_HOST_URL: "https://www.hitgall.com"
   },
-  telemetry: false
+  telemetry: false,
+
+  sentry: {
+    dsn: 'https://c656f3b5d1614676b82103417f4a94ea@o438188.ingest.sentry.io/5402459',
+    config: {}
+  },
+
+  pwa: {
+  manifest: {
+    name: 'hitgall',
+    short_name: 'hitgall',
+    start_url: "/?pwa=true",
+    scope: '/',
+    display: 'standalone',
+    orientation: 'portrait',
+    background_color: '#FFFFFF',
+    theme_color: '#00C7AE',
+    crossorigin: 'use-credentials'
+  },
+
+  icon: {
+    source:'/service/component/static/favicon.png',
+    fileName:'favicon.png'
+  },
+
+  workbox: {
+    cachingExtensions: '@/plugins/workbox-range-request.js',
+    offline: true,
+    enabled: true,
+    runtimeCaching: [
+      {
+        handler: 'NetworkFirst',
+        urlPattern: "https://hitgall.com/*",
+        method: "GET",
+        strategyOptions: {
+          cacheName: `v1`,
+          cacheExpiration: {
+            maxAgeSeconds: 30 * 60
+          }
+        }
+      }
+    ]
+  },
+
+  meta: {
+    viewport:'width=device-width, initial-scale=1, user-scalable=no, shrink-to-fit=no',
+    name:'힛갤',
+    theme_color:'#29313D',
+    lang:'ko',
+    description:'힛갤',
+    mobileApp:'mobile-web-app-capable'
+  }
+ },
+
+ oneSignal: {
+  init: {
+    appId: 'd5668334-5f3b-4e69-8938-ef84bcef4f1f',
+    allowLocalhostAsSecureOrigin: true,
+    welcomeNotification: {
+        disable: true
+    }
+  },
+  cdn: true,
+  OneSignalSDK: 'https://cdn.onesignal.com/sdks/OneSignalSDK.js'
+ }
 };
