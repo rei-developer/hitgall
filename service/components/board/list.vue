@@ -13,7 +13,7 @@
                     개념글
                 </b-button>
             </nuxt-link>
-            <div class='onesignal-customlink-container'></div>
+            <!-- <div class='onesignal-customlink-container'></div> -->
 			<span v-if='domain !== "all"'>
 				<nuxt-link :to='`/board/${domain}/write`'>
 					<b-button

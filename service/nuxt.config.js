@@ -154,6 +154,7 @@ module.exports = {
     short_name: 'hitgall',
     start_url: "/",
     scope: '/',
+    lang:'ko',
     display: 'standalone',
     orientation: 'portrait',
     background_color: '#FFFFFF',
@@ -192,18 +193,29 @@ module.exports = {
     lang:'ko',
     description:'힛갤',
     mobileApp:'mobile-web-app-capable'
-  }
- },
-
- oneSignal: {
-  init: {
-    appId: 'd5668334-5f3b-4e69-8938-ef84bcef4f1f',
-    allowLocalhostAsSecureOrigin: true,
-    welcomeNotification: {
-        disable: false
-    }
   },
-  cdn: true,
-  OneSignalSDK: 'https://cdn.onesignal.com/sdks/OneSignalSDK.js'
+  oneSignal: {
+    init: {
+      appId: 'd5668334-5f3b-4e69-8938-ef84bcef4f1f',
+      allowLocalhostAsSecureOrigin: true,
+      welcomeNotification: {
+          disable: false
+      }
+    },
+    // cdn: true,
+    // OneSignalSDK: 'https://cdn.onesignal.com/sdks/OneSignalSDK.js'
+   }
  }
+
+//  oneSignal: {
+//   init: {
+//     appId: 'd5668334-5f3b-4e69-8938-ef84bcef4f1f',
+//     allowLocalhostAsSecureOrigin: true,
+//     welcomeNotification: {
+//         disable: false
+//     }
+//   },
+//   cdn: true,
+//   OneSignalSDK: 'https://cdn.onesignal.com/sdks/OneSignalSDK.js'
+//  }
 };
