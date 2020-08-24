@@ -152,7 +152,7 @@ module.exports = {
   manifest: {
     name: 'hitgall',
     short_name: 'hitgall',
-    start_url: "/?pwa=true",
+    start_url: "/",
     scope: '/',
     display: 'standalone',
     orientation: 'portrait',
@@ -200,7 +200,7 @@ module.exports = {
     appId: 'd5668334-5f3b-4e69-8938-ef84bcef4f1f',
     allowLocalhostAsSecureOrigin: true,
     welcomeNotification: {
-        disable: true
+        disable: false
     }
   },
   cdn: true,
