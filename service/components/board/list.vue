@@ -13,7 +13,10 @@
                     개념글
                 </b-button>
             </nuxt-link>
-            <!-- <div class='onesignal-customlink-container'></div> -->
+            <b-button size='sm' variant='primary' @click='noticePermission()'>
+                    <font-awesome-icon icon='arrow-up'/>
+                    알림 허용
+                </b-button>
 			<span v-if='domain !== "all"'>
 				<nuxt-link :to='`/board/${domain}/write`'>
 					<b-button
@@ -338,7 +341,7 @@
                     state: false
                 },
 				page: Number(this.purePage),
-				loading: false
+                loading: false
             }
         },
         watch: { 
@@ -480,6 +483,20 @@
                     solid: true,
                     appendToast: true
                 })
+            },
+            noticePermission() {
+               Notification.requestPermission( function(result) { 
+                   
+               if(result == 'denied'){
+                 return alert('알림을 차단하셨거나 차단되어있습니다. 사이트 설정란에서 직접 허용해주세요. 데스크탑은 주소창 옆 i 아이콘, 모바일은 자물쇠 아이콘 클릭 시 설정 가능합니다.');
+               } else if (result == 'granted') {
+                  return alert('알림이 허용되었습니다.');
+               } else if ( result == 'default') {
+                   return alert('해줘라 좀')
+               } else {
+                   return alert('다시 시도해주세요.')
+               }
+              })
             }
         }
     }

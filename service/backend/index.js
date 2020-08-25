@@ -6,6 +6,7 @@ const helmet = require('koa-helmet')
 const api = require('./api')
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
+const Sentry = require('@sentry/node');
 
 const app = new Koa()
 const router = new Router()
@@ -37,6 +38,17 @@ const server = require('http').createServer(app.callback())
 // global.io = io
 
 // socket.start(io)
+
+Sentry.init({ dsn: "https://dd520f812ed847cc9fce68511bdcea4d@o438188.ingest.sentry.io/5404652" });
+
+app.on("error", (err, ctx) => {
+    Sentry.withScope(function(scope) {
+      scope.addEventProcessor(function(event) {
+        return Sentry.Handlers.parseRequest(event, ctx.request);
+      });
+      Sentry.captureException(err);
+    });
+  });
 
 async function start() {
     const nuxt = new Nuxt(config)
