@@ -264,18 +264,18 @@ exports.updateUser = async ctx => {
     }
 }
 
-module.exports.showRecaptcha = async ctx => {
-    let { token } = await ctx.request.body
-    const ip = await ctx.get('x-real-ip')
-    if (!token)
-        return
-    const res = await Recaptcha.authRecaptcha(token, ip)
-    if (!res)
-        return ctx.body = {
-            status: 'fail'
-        }
-    else
-        ctx.body = {
-            status: 'ok'
-        }
-}
+// module.exports.showRecaptcha = async ctx => {
+//     let { token } = await ctx.request.body
+//     const ip = await ctx.get('x-real-ip')
+//     if (!token)
+//         return
+//     const res = await Recaptcha.authRecaptcha(token, ip)
+//     if (!res)
+//         return ctx.body = {
+//             status: 'fail'
+//         }
+//     else
+//         ctx.body = {
+//             status: 'ok'
+//         }
+// }

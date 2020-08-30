@@ -28,10 +28,10 @@ module.exports = {
       }
     ],
     script: [
-      {
-        src:
-          "https://www.google.com/recaptcha/api.js?render=6LdGdsAZAAAAAHs2tez4PI-6H0kwQ-AnQeIzW6Lw"
-      },
+      // {
+      //   src:
+      //     "https://www.google.com/recaptcha/api.js?render=6LdGdsAZAAAAAHs2tez4PI-6H0kwQ-AnQeIzW6Lw"
+      // },
       { src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" }
     ]
   },
