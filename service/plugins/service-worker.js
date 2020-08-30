@@ -1,14 +1,14 @@
 //import firebase from 'firebase'
 
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.getRegistrations().then((registrations) => {
-      for (const worker of registrations) {
-        console.log('Service worker:', worker)
-      }
-    });
+// if ('serviceWorker' in navigator) {
+//     navigator.serviceWorker.getRegistrations().then((registrations) => {
+//       for (const worker of registrations) {
+//         console.log('Service worker:', worker)
+//       }
+//     });
 
     if (process.client) {
-      const cacheName = `v1`
+      const cacheName = `${process.env.packageVersionNumber}`
       caches.keys().then((keyList) => {
         return Promise.all(
           keyList.map((key) => {
@@ -48,6 +48,6 @@ if ('serviceWorker' in navigator) {
     //     });
     // }
     }
-   }
+  //  }
    //export default firebase
  

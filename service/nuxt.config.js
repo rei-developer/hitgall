@@ -51,6 +51,9 @@ module.exports = {
    ** Plugins to load before mounting the App
    */
   plugins: [
+    { src: "@/plugins/service-worker.js" },
+    //{ src: "@/plugins/workbox-range-request.js" },
+    //{ src: "@/plugins/firebase-sw.js" },
     // { src: '@/plugins/socket.io.js' },
     { src: "@/plugins/v-viewer.js", mode: "client" },
     { src: "@/plugins/vue-aplayer.js", mode: "client" },
@@ -138,7 +141,8 @@ module.exports = {
     "/api": "http://localhost:3000"
   },
   env: {
-    SOCKET_HOST_URL: "https://www.hitgall.com"
+    SOCKET_HOST_URL: "https://www.hitgall.com",
+    packageVersionNumber: process.env.npm_package_version_number
   },
   telemetry: false,
 
@@ -168,21 +172,55 @@ module.exports = {
   },
 
   workbox: {
-    cachingExtensions: '@/plugins/workbox-range-request.js',
-    offline: true,
+    //cachingExtensions: '@/plugins/workbox-range-request.js',
+    offline: false,
     enabled: true,
+    cacheAssets: false,
     runtimeCaching: [
       {
-        handler: 'NetworkFirst',
-        urlPattern: "https://hitgall.com/**",
+        handler: 'cacheFirst',
+        urlPattern: "/_nuxt/*",
         method: "GET",
         strategyOptions: {
-          cacheName: `v1`,
+          cacheName: process.env.npm_package_version_number,
           cacheExpiration: {
             maxAgeSeconds: 30 * 60
           }
         }
-      }
+      },
+      {
+        handler: 'StaleWhileRevalidate',
+        urlPattern: "https://pagead2.googlesyndication.com/js/*",
+        method: "GET",
+        strategyOptions: {
+          cacheName: process.env.npm_package_version_number,
+          cacheExpiration: {
+            maxAgeSeconds: 30 * 60
+          }
+        }
+      },
+      {
+        handler: 'StaleWhileRevalidate',
+        urlPattern: "https://fonts.googleapis.com/*",
+        method: "GET",
+        strategyOptions: {
+          cacheName: process.env.npm_package_version_number,
+          cacheExpiration: {
+            maxAgeSeconds: 30 * 60
+          }
+        }
+      },
+      {
+        handler: 'cacheFirst',
+        urlPattern: "/board/*",
+        method: "GET",
+        strategyOptions: {
+          cacheName: process.env.npm_package_version_number,
+          cacheExpiration: {
+            maxAgeSeconds: 30 * 60
+          }
+        }
+      },
     ]
   },
 
@@ -194,19 +232,7 @@ module.exports = {
     description:'힛갤',
     mobileApp:'mobile-web-app-capable'
   }
-  // oneSignal: {
-  //   init: {
-  //     appId: 'd5668334-5f3b-4e69-8938-ef84bcef4f1f',
-  //     allowLocalhostAsSecureOrigin: true,
-  //     welcomeNotification: {
-  //         disable: false
-  //     }
-  //   },
-  //   cdn: true,
-  //   OneSignalSDK: 'https://cdn.onesignal.com/sdks/OneSignalSDK.js'
-  //  }
  },
-
   // firebase:  {
   //   config: {
   //     apiKey: 'AIzaSyDLM1hRPZUx6386HL6SFDoiNcIa93ITP9U',
