@@ -1,7 +1,7 @@
 {
     "name": "hitgall",
     "version": "1.0.0",
-    "version_number": "1",
+    "version_number": "2",
     "description": "hitgall 1.0 project",
     "author": "nakochan",
     "private": true,
@@ -10,7 +10,8 @@
         "build": "nuxt build",
         "start": "cross-env NODE_ENV=production pm2 start backend --name 'BAEKEND' -i max --node-args='--max-old-space-size=4096 --prof'",
         "generate": "nuxt generate",
-        "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
+        "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+        "analyze": "nuxt build --analyze"
     },
     "dependencies": {
         "@fortawesome/free-solid-svg-icons": "^5.13.0",

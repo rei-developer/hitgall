@@ -51,8 +51,7 @@ module.exports = {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    { src: "@/plugins/service-worker.js" },
-    //{ src: "@/plugins/workbox-range-request.js" },
+    { src: "@/plugins/service-worker.js", ssr: false },
     //{ src: "@/plugins/firebase-sw.js" },
     // { src: '@/plugins/socket.io.js' },
     { src: "@/plugins/v-viewer.js", mode: "client" },
@@ -63,8 +62,7 @@ module.exports = {
     { src: "@/plugins/vue-shortkey.js", mode: "client" },
     { src: "@/plugins/vue-spinners.js", mode: "client" },
     { src: "@/plugins/vue-toastification.js", mode: "client" },
-    { src: "@/plugins/vue-waterfall.js", mode: "client" },
-    { src: "@/plugins/service-worker.js", ssr: false }
+    { src: "@/plugins/vue-waterfall.js", mode: "client" }
   ],
   /*
    ** Nuxt.js dev-modules
@@ -134,7 +132,7 @@ module.exports = {
         ];
       }
     },
-    vendor: ["vuex"]
+     vendor: ["vuex"]
     // vendor: ['vuex', 'socket.io-client'],
   },
   proxy: {
@@ -174,6 +172,7 @@ module.exports = {
   workbox: {
     //cachingExtensions: '@/plugins/workbox-range-request.js',
     offline: false,
+    //offlinePage:'/offline.html',
     enabled: true,
     cacheAssets: false,
     runtimeCaching: [
@@ -221,7 +220,7 @@ module.exports = {
     description:'힛갤',
     mobileApp:'mobile-web-app-capable'
   }
- },
+ }
   // firebase:  {
   //   config: {
   //     apiKey: 'AIzaSyDLM1hRPZUx6386HL6SFDoiNcIa93ITP9U',
