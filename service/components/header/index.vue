@@ -13,7 +13,7 @@
                 <li class='sidebar mobile-only' v-b-toggle.sidebar-backdrop>
                     <span>
                         <font-awesome-icon icon='bars'/>
-                    </span>
+                     </span>
                 </li>
                 <!-- menu -->
                 <!-- <li v-shortkey.once='["h"]' @shortkey='move("/hit")' @click='forceUpdate'>
@@ -51,7 +51,7 @@
                             <img :src='$store.state.user.profileImageUrl' @error='imageUrlAlt'>
                         </div> -->
                         <!-- <img :src='`/level/${$store.state.user.level}.png`'> -->
-                        <img :src='`/icon/${$store.state.user.icon}`' v-if='$store.state.user.icon !== ""'>
+                        <img alt="icon" :src='`/icon/${$store.state.user.icon}`' v-if='$store.state.user.icon !== ""'>
                         <strong>{{ $store.state.user.nickname }}</strong>
                     </nuxt-link>
                 </li>
@@ -65,8 +65,9 @@
         </nav>
         <div class='openSidebar desktop-only'>
             <b-button pill size='lg' variant='primary' v-b-toggle.sidebar-backdrop>
-                <font-awesome-icon icon='bars'/>
-            </b-button>
+                <!-- <font-awesome-icon icon='bars'/>   -->
+                #
+             </b-button>
         </div>
         <b-sidebar
             id='sidebar-backdrop'

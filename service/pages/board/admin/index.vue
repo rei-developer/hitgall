@@ -27,7 +27,7 @@
                                 </div> -->
                                 <div>
                                     <span>
-                                        <img class='icon' :src='`/user1${item.boardLevel || 0}.png`'>
+                                        <img class='icon' alt="" :src='`/user1${item.boardLevel || 0}.png`'>
                                         {{ item.name }}
                                     </span>
                                 </div>

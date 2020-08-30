@@ -3,7 +3,7 @@
         <div class='board-title'>{{ board.name }} 갤러리</div>
         <div class='board-info'>
             <div class='image'>
-                <img :src='`https://cdn.hitgall.com/img/thumb/${board.imageUrl}`' @error='imageUrlAlt'>
+                <img alt="thumb" :src='`https://cdn.hitgall.com/img/thumb/${board.imageUrl}`' @error='imageUrlAlt'>
             </div>
             <div class='description'>
                 {{ board.description }}
@@ -11,14 +11,14 @@
             <div class='manager'>
                 <strong>매니저</strong> :
                 <div>
-                    <img class='icon' :src='`/user11.png`'>
+                    <img class='icon' alt="icon" :src='`/user11.png`'>
                     {{ board.masterName }}
                 </div>
                 <div class='sub-manager' v-if='managers.length > 0'>
                     <div><strong>부매니저</strong> :</div>
                     <ul>
                         <li v-for='(item, index) in managers' :key='index'>
-                            <img class='icon' :src='`/user1${item.level || 0}.png`'>
+                            <img class='icon' alt="" :src='`/user1${item.level || 0}.png`'>
                             {{ item.nickname }}
                         </li>
                     </ul>

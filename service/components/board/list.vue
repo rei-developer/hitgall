@@ -79,7 +79,7 @@
                             </div>
                             <div class='subject'>
                                 <div class='thumb' v-if='item.imageUrl'>
-                                    <img :src='`https://cdn.hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
+                                    <img alt="thumb" :src='`https://cdn.hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
                                 </div>
                                 <div>
                                     <span :style='item.color !== "" ? `color: #${item.color}` : ""'>
@@ -97,7 +97,7 @@
                             </div>
                             <div class='author'>
                                 <!-- <img :src='`/level/${item.level}.png`'> -->
-                                <img class='icon' :src='`/${item.admin ? "admin" : "user" + (item.userId > 0 ? 1 : 0) + (item.boardLevel || 0)}.png`'>
+                                <img class='icon' alt="icon" :src='`/${item.admin ? "admin" : "user" + (item.userId > 0 ? 1 : 0) + (item.boardLevel || 0)}.png`'>
                                 {{ item.author }}
                                 <span class='ip' v-if='item.userId < 1 && item.ip !== ""'>({{ item.ip }})</span>
                             </div>
@@ -122,12 +122,12 @@
                             </div>
                             <div class='subject'>
                                 <div class='thumb' v-if='item.imageUrl'>
-                                    <img :src='`https://cdn.hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
+                                    <img alt="thumb" :src='`https://cdn.hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
                                 </div>
                                 <div>
                                     <span :style='item.color !== "" ? `color: #${item.color}` : ""'>
                                         <span class='category' v-if='item.category'>{{ item.category }}</span>
-                                        <img class='icon' src='/star.gif' v-if='item.isBest > 0'>
+                                        <img class='icon' alt="icon" src='/star.gif' v-if='item.isBest > 0'>
                                         {{ item.title }}
                                         <!-- <span class='newest' v-if='$moment().diff($moment(item.created), "days") <= 1'>N</span> -->
                                     </span>
@@ -141,7 +141,7 @@
                             </div>
                             <div class='author'>
                                 <!-- <img :src='`/level/${item.level}.png`'> -->
-                                <img class='icon' :src='`/${item.admin ? "admin" : "user" + (item.userId > 0 ? 1 : 0) + (item.boardLevel || 0)}.png`'>
+                                <img class='icon' alt="icon" :src='`/${item.admin ? "admin" : "user" + (item.userId > 0 ? 1 : 0) + (item.boardLevel || 0)}.png`'>
                                 {{ item.author }}
                                 <span class='ip' v-if='item.userId < 1 && item.ip !== ""'>({{ item.ip }})</span>
                             </div>
@@ -169,7 +169,7 @@
                                     <div class='author'>
                                         <span class='writer'>
                                             <!-- <img :src='`/level/${item.level}.png`'> -->
-                                            <img class='icon' :src='`/${item.admin ? "admin" : "user" + (item.userId > 0 ? 1 : 0) + (item.boardLevel || 0)}.png`'>
+                                            <img class='icon' alt="icon" :src='`/${item.admin ? "admin" : "user" + (item.userId > 0 ? 1 : 0) + (item.boardLevel || 0)}.png`'>
                                             {{ item.author }}
                                             <span class='ip' v-if='item.userId < 1 && item.ip !== ""'>({{ item.ip }})</span>
                                         </span>
@@ -188,7 +188,7 @@
                                     </div>
                                 </div>
                                 <div class='image' v-if='item.imageUrl'>
-                                    <img :src='`https://cdn.hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
+                                    <img alt="thumb" :src='`https://cdn.hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
                                 </div>
                                 <div class='comment'>
                                     <span :class='item.postsCount >= 10 ? "hot" : ""'>
@@ -207,7 +207,7 @@
                             <div class='content'>
                                 <div class='subject'>
                                     <span class='category' v-if='item.category'>{{ item.category }}</span>
-                                    <img class='icon' src='/star.gif' v-if='item.isBest > 0'>
+                                    <img class='icon' alt="icon" src='/star.gif' v-if='item.isBest > 0'>
                                     <span :style='item.color !== "" ? `color: #${item.color}` : ""'>
                                         {{ item.title }}
                                     </span>
@@ -215,7 +215,7 @@
                                     <div class='author'>
                                         <span class='writer'>
                                             <!-- <img :src='`/level/${item.level}.png`'> -->
-                                            <img class='icon' :src='`/${item.admin ? "admin" : "user" + (item.userId > 0 ? 1 : 0) + (item.boardLevel || 0)}.png`'>
+                                            <img class='icon' alt="" :src='`/${item.admin ? "admin" : "user" + (item.userId > 0 ? 1 : 0) + (item.boardLevel || 0)}.png`'>
                                             {{ item.author }}
                                             <span class='ip' v-if='item.userId < 1 && item.ip !== ""'>({{ item.ip }})</span>
                                         </span>
@@ -234,7 +234,7 @@
                                     </div>
                                 </div>
                                 <div class='image' v-if='item.imageUrl'>
-                                    <img :src='`https://cdn.hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
+                                    <img alt="thumb" :src='`https://cdn.hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
                                 </div>
                                 <div class='comment'>
                                     <div v-if='item.postsCount > 0'>

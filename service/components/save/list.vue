@@ -56,7 +56,7 @@
                             </div>
                             <div class='subject'>
                                 <div class='thumb' v-if='item.imageUrl'>
-                                    <img :src='`/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
+                                    <img alt="thumb" :src='`/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
                                 </div>
                                 <div>
                                     <span :style='item.color !== "" ? `color: #${item.color}` : ""'>
@@ -73,8 +73,8 @@
                                 </div>
                             </div>
                             <div class='author'>
-                                <img :src='`/level/${item.level}.png`'>
-                                <img class='icon' :src='`/icon/${item.icon}`' v-if='item.icon !== ""'>
+                                <img alt="level" :src='`/level/${item.level}.png`'>
+                                <img class='icon' alt="icon" :src='`/icon/${item.icon}`' v-if='item.icon !== ""'>
                                 {{ item.author }}
                             </div>
                             <div>{{ getCreated(item.created) }}</div>
@@ -92,7 +92,7 @@
                         <nuxt-link :to='`/${item.id}?page=${page}${category !== "" ? "&category=" + category : ""}`'>
                             <div class='content'>
                                 <div class='image'>
-                                    <img :src='item.imageUrl ? `/img/thumb/${item.imageUrl}` : "/default.png"' @error='imageUrlAlt'>
+                                    <img alt="thumb" :src='item.imageUrl ? `/img/thumb/${item.imageUrl}` : "/default.png"' @error='imageUrlAlt'>
                                 </div>
                                 <div class='subject'>
                                     <span class='category' v-if='item.category'>{{ item.category }}</span>
@@ -115,8 +115,8 @@
                                         </span>
                                     </div>
                                     <div class='author'>
-                                        <img :src='`/level/${item.level}.png`'>
-                                        <img class='icon' :src='`/icon/${item.icon}`' v-if='item.icon !== ""'>
+                                        <img alt="level" :src='`/level/${item.level}.png`'>
+                                        <img class='icon' alt="icon" :src='`/icon/${item.icon}`' v-if='item.icon !== ""'>
                                         {{ item.author }}
                                     </div>
                                 </div>

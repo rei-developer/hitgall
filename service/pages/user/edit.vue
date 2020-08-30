@@ -6,7 +6,7 @@
 			<div class='profile' :style='$store.state.user.backgroundImageUrl ? `background-image: url(${$store.state.user.backgroundImageUrl})` : ""'>
 				<div class='background'/>
 				<div class='nickname'>
-					<img :src='`/level/${$store.state.user.level}.png`'>
+					<img alt="levelImage" :src='`/level/${$store.state.user.level}.png`'>
 					{{ $store.state.user.nickname }}
 				</div>
 				<!-- <div class='upload' v-b-tooltip.hover title='배경 사진을 변경합니다.'>
@@ -14,7 +14,7 @@
 					<input type='file' @change='backgroundImageUpload' />
 				</div> -->
 				<div class='image'>
-					<img :src='$store.state.user.profileImageUrl || "/profile.png"'>
+					<img alt="profile" :src='$store.state.user.profileImageUrl || "/profile.png"'>
 					<!-- <input type='file' @change='profileImageUpload' v-b-tooltip.hover title='프로필 사진을 변경합니다.'/> -->
 				</div>
 			</div>

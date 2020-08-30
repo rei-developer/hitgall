@@ -83,7 +83,7 @@
                 </div>  -->
                 <div class='author'>
                     <!-- <img :src='`/level/${topic.level}.png`'> -->
-                    <img class='icon' :src='`/${topic.admin ? "admin" : "user" + (topic.userId > 0 ? 1 : 0) + (topic.boardLevel || 0)}.png`'>
+                    <img class='icon' alt="icon" :src='`/${topic.admin ? "admin" : "user" + (topic.userId > 0 ? 1 : 0) + (topic.boardLevel || 0)}.png`'>
                     {{ topic.author }}
                     <span class='ip' v-if='topic.userId < 1 && topic.ip !== ""'>({{ topic.ip }})</span>
                 </div>
@@ -105,7 +105,7 @@
             <div class='content' v-viewer='{ title: false }'>
                 <Poll :id='id' v-if='topic.isPoll'/>
                 <div v-if='boardImageUrl'>
-                    <img :src='`https://cdn.hitgall.com/img/${boardImageUrl}`' @error='imageUrlAlt'>
+                    <img alt="topicimage" :src='`https://cdn.hitgall.com/img/${boardImageUrl}`' @error='imageUrlAlt'>
                 </div>
                 <span v-html='topic.content'/>
             </div>

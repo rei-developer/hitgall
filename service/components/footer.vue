@@ -2,8 +2,8 @@
     <div>
         <article class='footer'>
             <div>
-                <nuxt-link to='/'>
-                    <img src='/icon.png'>
+                <nuxt-link to='/'>  
+                    <img alt="icon" src='/icon.png'>
                 </nuxt-link>
             </div>
             <div>

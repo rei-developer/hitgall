@@ -29,7 +29,7 @@
                     <nuxt-link :to='`/${item.id}`'>
                         <div class='content'>
                             <div class='image'>
-                                <img :src='item.imageUrl ? `https://cdn.hitgall.com/img/thumb/${item.imageUrl}` : "/default.png"' @error='imageUrlAlt'>
+                                <img alt="thumb" :src='item.imageUrl ? `https://cdn.hitgall.com/img/thumb/${item.imageUrl}` : "/default.png"' @error='imageUrlAlt'>
                             </div>
                             <div class='subject'>
                                 <span :style='item.color !== "" ? `color: #${item.color}` : ""'>

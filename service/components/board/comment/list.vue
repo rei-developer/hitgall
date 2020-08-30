@@ -34,7 +34,7 @@
                         <div class='content'>
                             <div @click='handleCommand(["reply", item.id])'>
                                 <!-- <img :src='`/level/${item.level}.png`'> -->
-                                <img class='icon' :src='`/${item.admin ? "admin" : "user" + (item.userId > 0 ? 1 : 0) + (item.boardLevel || 0)}.png`'>
+                                <img class='icon' alt="" :src='`/${item.admin ? "admin" : "user" + (item.userId > 0 ? 1 : 0) + (item.boardLevel || 0)}.png`'>
                                 <span class='author'>
                                     {{ item.author }}
                                     <span class='ip' v-if='item.userId < 1 && item.ip !== ""'>({{ item.ip }})</span>
@@ -50,7 +50,7 @@
                                     class='sticker'
                                     @click='viewSticker(item.stickerId)'
                                     v-if='item.stickerId > 0'>
-                                    <img :src='`https://cdn.hitgall.com/sticker/${item.stickerId}/${item.stickerSelect}`'>
+                                    <img alt="" :src='`https://cdn.hitgall.com/sticker/${item.stickerId}/${item.stickerSelect}`'>
                                 </div>
                                 <span v-html='item.content'/>
                             </div>

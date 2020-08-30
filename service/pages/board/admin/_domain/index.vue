@@ -66,7 +66,7 @@
 					</label>
 					<b-form-group class='mb-sm-2'>
                         <div class='background'>
-                            <img :src='`https://cdn.hitgall.com/img/thumb/${board.imageUrl}`' @error='imageUrlAlt'>
+                            <img alt="thumb" :src='`https://cdn.hitgall.com/img/thumb/${board.imageUrl}`' @error='imageUrlAlt'>
                         </div>
                         <div class='upload' v-b-tooltip.hover title='대문 사진을 변경합니다.'>
                             <input type='file' @change='backgroundImageUpload'/>

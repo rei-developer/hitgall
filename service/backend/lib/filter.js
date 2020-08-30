@@ -25,15 +25,15 @@ module.exports.topic = text => {
     )
     text = text.replace(
         /(http(s)?:\/\/)?(www.)?youtube.com\/watch\?v=([a-zA-Z0-9\-_]+)(\&amp;feature=youtu.be)?(\&amp;list=[a-zA-Z0-9\-_]+)?(\&amp;index=(\d+))?(\&amp;t=(\d+))?/gi,
-        `<p class='embed-youtube'><iframe src='//www.youtube.com/embed/$4$9' allowfullscreen='allowfullscreen'></iframe></p>`
+        `<p class='embed-youtube'><iframe title='youtube' src='//www.youtube.com/embed/$4$9' allowfullscreen='allowfullscreen'></iframe></p>`
     )
     text = text.replace(
         /(http(s)?:\/\/)?(www.)?youtu.be\/([a-zA-Z0-9\-_]+)(\?list=[a-zA-Z0-9\-_]+)?(\?t=(\d+))?/gi,
-        `<p class='embed-youtube'><iframe src='//www.youtube.com/embed/$4$5$6' allowfullscreen='allowfullscreen'></iframe></p>`
+        `<p class='embed-youtube'><iframe title='youtube' src='//www.youtube.com/embed/$4$5$6' allowfullscreen='allowfullscreen'></iframe></p>`
     )
     text = text.replace(
         /<iframe width="(\d+)" height="(\d+)" src="https:\/\/www.youtube.com\/embed\/([a-zA-Z0-9\-_]+)(\?list=[a-zA-Z0-9\-_]+)?(\?start=(\d+))?" (frameborder="(\d+)")? (allow="accelerometer;)? (autoplay;)? (encrypted-media;)? (gyroscope;)? (picture-in-picture")? (allowfullscreen(="")?)?><\/iframe>/gi,
-        `<p class='embed-youtube'><iframe src='//www.youtube.com/embed/$3$4$5' allowfullscreen='allowfullscreen'></iframe></p>`
+        `<p class='embed-youtube'><iframe title='youtube' src='//www.youtube.com/embed/$3$4$5' allowfullscreen='allowfullscreen'></iframe></p>`
     )
     text = text.replace(
         /((http(s)?:\/\/)?(www.)?twitter(\.[^(\n|\t|\s,)]+)+)+$/gi,
@@ -56,7 +56,7 @@ module.exports.topic = text => {
     // )
     text = text.replace(
         /(http(s)?:\/\/)?(thumbs.)?gfycat.com\/(ko\/)?([a-zA-Z0-9\_]+)(-mobile.mp4)?/gi,
-        `<iframe src='https://gfycat.com/ifr/$5' frameborder='0' scrolling='no' allowfullscreen width='560' height='400'></iframe>`
+        `<iframe title='gyfcat' src='https://gfycat.com/ifr/$5' frameborder='0' scrolling='no' allowfullscreen width='560' height='400'></iframe>`
     )
     text = text.replace(
         /\[\[\s*hy(\d+)\]\]/gi,

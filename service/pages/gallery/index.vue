@@ -20,6 +20,7 @@
                         :key='index'
                         move-class='item-move'>
                         <img
+                            alt="picture"
                             :src='`/img/${item.imageUrl}`'
                             @error='imageUrlAlt'
                             @click='playSound("/se3.mp3")'>
