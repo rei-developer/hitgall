@@ -58,7 +58,7 @@
             return {
                 ver: {
                     backend: 0,
-                    frontend: 348
+                    frontend: 349
                 }
             }
         },

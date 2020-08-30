@@ -209,18 +209,7 @@ module.exports = {
             maxAgeSeconds: 30 * 60
           }
         }
-      },
-      {
-        handler: 'cacheFirst',
-        urlPattern: "/board/*",
-        method: "GET",
-        strategyOptions: {
-          cacheName: process.env.npm_package_version_number,
-          cacheExpiration: {
-            maxAgeSeconds: 30 * 60
-          }
-        }
-      },
+      }
     ]
   },
 
