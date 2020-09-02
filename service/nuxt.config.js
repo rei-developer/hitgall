@@ -208,7 +208,18 @@ module.exports = {
             maxAgeSeconds: 30 * 60
           }
         }
-      }
+      },
+      {
+        handler: 'cacheFirst',
+        urlPattern: "https://www.google-analytics.com/analytics.js",
+        method: "GET",
+        strategyOptions: {
+          cacheName: process.env.npm_package_version_number,
+          cacheExpiration: {
+            maxAgeSeconds: 30 * 60
+          }
+        }
+      },
     ]
   },
 

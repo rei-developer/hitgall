@@ -114,6 +114,11 @@
                             VPN 허용
                         </b-form-checkbox>
                     </b-form-group>
+                    <b-form-group class='mb-sm-2'>
+                        <b-form-checkbox v-model='board.notuserAllowed'>
+                            유동 허용
+                        </b-form-checkbox>
+                    </b-form-group>
                     <!-- <b-form-group class='mb-sm-2'>
                         <b-input-group size='sm'>
 							<b-input-group-prepend is-text>
@@ -341,6 +346,8 @@
                     this.board.agencyAllowed = true
                 if (this.board.vpnAllowed > 0)
                     this.board.vpnAllowed = true
+                if (this.board.notuserAllowed > 0)
+                    this.board.notuserAllowed = true
 			},
             async getBlinds() {
                 const domain = this.$route.params.domain || ''
@@ -451,7 +458,8 @@
                         bestLimit: this.board.bestLimit,
                         noticeLimit: this.board.noticeLimit,
                         agencyAllowed: this.board.agencyAllowed ? 1 : 0,
-                        vpnAllowed: this.board.vpnAllowed ? 1 : 0
+                        vpnAllowed: this.board.vpnAllowed ? 1 : 0,
+                        notuserAllowed: this.board.notuserAllowed ? 1 : 0
 					},
 					{ headers: { 'x-access-token': token } }
 				)

@@ -121,7 +121,7 @@ module.exports.adminBoardRemoveLogs = async domain => {
 
 module.exports.isAdminOnly = async domain => {
     const result = await pool.query(
-        'SELECT agencyAllowed, vpnAllowed, isAdminOnly FROM Boards WHERE domain = ?',
+        'SELECT agencyAllowed, vpnAllowed, notuserAllowed, isAdminOnly FROM Boards WHERE domain = ?',
         [domain]
     )
     if (result.length < 1)

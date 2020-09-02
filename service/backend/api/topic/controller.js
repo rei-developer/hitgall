@@ -283,7 +283,7 @@ module.exports.createTopic = async ctx => {
         color = color.replace('#', '')
     const ip = ctx.get('x-real-ip')
     const header = ctx.header['user-agent']
-    const { agencyAllowed, vpnAllowed, isAdminOnly } = await readBoard.isAdminOnly(domain)
+    const { agencyAllowed, vpnAllowed, notuserAllowed, isAdminOnly } = await readBoard.isAdminOnly(domain)
     if (agencyAllowed < 1 && SpamChecker.checkAgency(ip)) {
         return ctx.body = {
             message: '해당 갤러리 매니저가 통신사 IP 이용을 금지하고 있습니다.',
@@ -296,8 +296,17 @@ module.exports.createTopic = async ctx => {
             status: 'fail'
         }
     }
+    if (notuserAllowed < 1) {
+        return ctx.body = {
+            message: '해당 갤러리 매니저가 유동 계정을 금지하고 있습니다.',
+            status: 'fail'
+        }
+    }
     if (isAdminOnly < 0)
-        return
+        return ctx.body = {
+            message: '해당 갤러리 매니저가 유동 계정을 금지하고 있습니다.',
+            status: 'fail'
+        }
     const isExist = await readBoard.adminBoardBlind(domain, ip)
     if (isExist) {
         const days = moment().diff(moment(isExist.blockDate), 'days')
@@ -436,7 +445,7 @@ module.exports.createPost = async ctx => {
     content = Filter.post(content)
     const ip = ctx.get('x-real-ip')
     const header = ctx.header['user-agent']
-    const { agencyAllowed, vpnAllowed } = await readBoard.isAdminOnly(domain)
+    const { agencyAllowed, vpnAllowed, notuserAllowed } = await readBoard.isAdminOnly(domain)
     if (agencyAllowed < 1 && SpamChecker.checkAgency(ip)) {
         return ctx.body = {
             message: '해당 갤러리 매니저가 통신사 IP 이용을 금지하고 있습니다.',
@@ -446,6 +455,12 @@ module.exports.createPost = async ctx => {
     if (vpnAllowed < 1 && SpamChecker.checkVPN(ip)) {
         return ctx.body = {
             message: '해당 갤러리 매니저가 VPN 이용을 금지하고 있습니다.',
+            status: 'fail'
+        }
+    }
+    if (notuserAllowed < 1) {
+        return ctx.body = {
+            message: '해당 갤러리 매니저가 유동 계정을 금지하고 있습니다.',
             status: 'fail'
         }
     }
@@ -596,7 +611,7 @@ module.exports.updateTopic = async ctx => {
     if (color !== '')
         color = color.replace('#', '')
     const ip = ctx.get('x-real-ip')
-    const { agencyAllowed, vpnAllowed, isAdminOnly } = await readBoard.isAdminOnly(domain)
+    const { agencyAllowed, vpnAllowed, notuserAllowed, isAdminOnly } = await readBoard.isAdminOnly(domain)
     if (agencyAllowed < 1 && SpamChecker.checkAgency(ip)) {
         return ctx.body = {
             message: '해당 갤러리 매니저가 통신사 IP 이용을 금지하고 있습니다.',
@@ -609,8 +624,17 @@ module.exports.updateTopic = async ctx => {
             status: 'fail'
         }
     }
+    if (notuserAllowed < 1) {
+        return ctx.body = {
+            message: '해당 갤러리 매니저가 유동 계정을 금지하고 있습니다.',
+            status: 'fail'
+        }
+    }
     if (isAdminOnly < 0)
-        return
+        return ctx.body = {
+            message: '권한이 없습니다.',
+            status: 'fail'
+        }
     const level = await readBoard.adminBoardManagerLevel(user.id, domain)
     if (!level && user.isAdmin < 1) {
         // TODO: 관리자 전용 커스텀
