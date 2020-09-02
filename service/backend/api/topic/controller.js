@@ -296,7 +296,7 @@ module.exports.createTopic = async ctx => {
             status: 'fail'
         }
     }
-    if (notuserAllowed < 1) {
+    if (notuserAllowed < 1 && !user) {
         return ctx.body = {
             message: '해당 갤러리 매니저가 유동 계정을 금지하고 있습니다.',
             status: 'fail'
@@ -458,7 +458,7 @@ module.exports.createPost = async ctx => {
             status: 'fail'
         }
     }
-    if (notuserAllowed < 1) {
+    if (notuserAllowed < 1 && !user) {
         return ctx.body = {
             message: '해당 갤러리 매니저가 유동 계정을 금지하고 있습니다.',
             status: 'fail'
@@ -624,7 +624,7 @@ module.exports.updateTopic = async ctx => {
             status: 'fail'
         }
     }
-    if (notuserAllowed < 1) {
+    if (notuserAllowed < 1 && !user) {
         return ctx.body = {
             message: '해당 갤러리 매니저가 유동 계정을 금지하고 있습니다.',
             status: 'fail'
