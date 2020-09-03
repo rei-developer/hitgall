@@ -1,14 +1,124 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd'>
-<url><loc>https://www.hitgall.com/</loc><changefreq>always</changefreq><priority>1.00</priority></url>
-<url><loc>https://www.hitgall.com/hit</loc><changefreq>always</changefreq><priority>0.85</priority></url>
-<url><loc>https://www.hitgall.com/gallery</loc><changefreq>always</changefreq><priority>0.85</priority></url>
-<url><loc>https://www.hitgall.com/anime</loc><changefreq>always</changefreq><priority>0.85</priority></url>
-<url><loc>https://www.hitgall.com/game</loc><changefreq>always</changefreq><priority>0.85</priority></url>
-<url><loc>https://www.hitgall.com/nendo</loc><changefreq>always</changefreq><priority>0.85</priority></url>
-<url><loc>https://www.hitgall.com/draw</loc><changefreq>always</changefreq><priority>0.85</priority></url>
-<url><loc>https://www.hitgall.com/news</loc><changefreq>always</changefreq><priority>0.85</priority></url>
-<url><loc>https://www.hitgall.com/review</loc><changefreq>always</changefreq><priority>0.85</priority></url>
-<url><loc>https://www.hitgall.com/notice</loc><changefreq>always</changefreq><priority>0.85</priority></url>
-<url><loc>https://www.hitgall.com/feedback</loc><changefreq>always</changefreq><priority>0.85</priority></url>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://hitgall.com/</loc>
+  <lastmod>2020-09-03T09:40:50+00:00</lastmod>
+  <changefreq>always</changefreq>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://hitgall.com/sticker</loc>
+  <lastmod>2020-09-03T09:40:50+00:00</lastmod>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://hitgall.com/signin</loc>
+  <lastmod>2020-09-03T09:40:50+00:00</lastmod>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://hitgall.com/board/girl</loc>
+  <lastmod>2020-09-03T09:40:50+00:00</lastmod>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://hitgall.com/board/anime</loc>
+  <lastmod>2020-09-03T09:40:50+00:00</lastmod>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://hitgall.com/board/python</loc>
+  <lastmod>2020-09-03T09:40:50+00:00</lastmod>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://hitgall.com/board/programming</loc>
+  <lastmod>2020-09-03T09:40:50+00:00</lastmod>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://hitgall.com/board/lastorigin</loc>
+  <lastmod>2020-09-03T09:40:50+00:00</lastmod>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://hitgall.com/board/lydia</loc>
+  <lastmod>2020-09-03T09:40:50+00:00</lastmod>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://hitgall.com/board/epic7</loc>
+  <lastmod>2020-09-03T09:40:50+00:00</lastmod>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://hitgall.com/board/gfl</loc>
+  <lastmod>2020-09-03T09:40:50+00:00</lastmod>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://hitgall.com/board/ar_knights</loc>
+  <lastmod>2020-09-03T09:40:50+00:00</lastmod>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://hitgall.com/board/koikatsu</loc>
+  <lastmod>2020-09-03T09:40:50+00:00</lastmod>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://hitgall.com/board/skyrim</loc>
+  <lastmod>2020-09-03T09:40:50+00:00</lastmod>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://hitgall.com/board/monmusu</loc>
+  <lastmod>2020-09-03T09:40:50+00:00</lastmod>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://hitgall.com/board/yandere</loc>
+  <lastmod>2020-09-03T09:40:50+00:00</lastmod>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://hitgall.com/board/notice</loc>
+  <lastmod>2020-09-03T09:40:50+00:00</lastmod>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://hitgall.com/board/feedback</loc>
+  <lastmod>2020-09-03T09:40:50+00:00</lastmod>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://hitgall.com/signup</loc>
+  <lastmod>2020-09-03T09:40:50+00:00</lastmod>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
 </urlset>
