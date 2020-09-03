@@ -1,3 +1,4 @@
+const webpack = require('webpack')
 module.exports = {
   mode: "universal",
   /*
@@ -134,6 +135,19 @@ module.exports = {
     },
      //vendor: ["vuex"]
     // vendor: ['vuex', 'socket.io-client'],
+    filenames: {
+      app: ({ isDev }) => isDev ? '[name].js' : '[contenthash].js',
+      chunk: ({ isDev }) => isDev ? '[name].js' : '[contenthash].js',
+      css: ({ isDev }) => isDev ? '[name].css' : '[contenthash].css',
+      img: ({ isDev }) => isDev ? '[path][name].[ext]' : 'img/[contenthash:7].[ext]',
+      font: ({ isDev }) => isDev ? '[path][name].[ext]' : 'fonts/[contenthash:7].[ext]',
+      video: ({ isDev }) => isDev ? '[path][name].[ext]' : 'videos/[contenthash:7].[ext]'
+    },
+    plugins: [
+    new webpack.optimize.MinChunkSizePlugin({
+      minChunkSize: 512000 // 50kb
+    })
+  ]
   },
   proxy: {
     "/api": "http://localhost:3000"
@@ -173,6 +187,7 @@ module.exports = {
     //cachingExtensions: '@/plugins/workbox-range-request.js',
     offline: false,
     //offlinePage:'/offline.html',
+    //offlineAssets: ['/offline.html'],
     enabled: true,
     cacheAssets: false,
     runtimeCaching: [
