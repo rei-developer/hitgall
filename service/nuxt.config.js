@@ -132,7 +132,7 @@ module.exports = {
         ];
       }
     },
-     vendor: ["vuex"]
+     //vendor: ["vuex"]
     // vendor: ['vuex', 'socket.io-client'],
   },
   proxy: {
@@ -173,7 +173,7 @@ module.exports = {
     //cachingExtensions: '@/plugins/workbox-range-request.js',
     offline: false,
     //offlinePage:'/offline.html',
-    enabled: true,
+    enabled: false,
     cacheAssets: false,
     runtimeCaching: [
       {

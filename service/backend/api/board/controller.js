@@ -230,12 +230,12 @@ module.exports.createAdminBoardBlind = async ctx => {
             message: '존재하지 않는 게시물입니다.',
             status: 'fail'
         }
-    const isExist = await readBoard.adminBoardBlind(topic.boardDomain, topic.ip)
+    const isExist = await readBoard.adminBoardBlind(topic.boardDomain, topic.ip, topic.userId)
     if (isExist)
         return ctx.body = {
             message: `이미 차단된 유저입니다. (${moment(isExist.blockDate).format('YYYY-MM-DD')} 까지)`,
             status: 'fail'
-        }
+        }               
     await createBoard.blind(
         user.id,
         topic.userId,
@@ -270,9 +270,9 @@ module.exports.deleteAdminBoardBlind = async ctx => {
             status: 'fail'
         }
     let {
-        ip
+        id
     } = ctx.request.body
-    await deleteBoard.blind(domain, ip)
+    await deleteBoard.blind(domain, id)
     ctx.body = {
         status: 'ok'
     }

@@ -79,10 +79,10 @@ module.exports.adminBoardManagerLevel = async (userId, domain) => {
     return result[0].level
 }
 
-module.exports.adminBoardBlind = async (domain, ip) => {
+module.exports.adminBoardBlind = async (domain, ip, targetUserId) => {
     const result = await pool.query(
-        `SELECT blockDate FROM Blinds WHERE domain = ? AND ip = ?`,
-        [domain, ip]
+        `SELECT blockDate FROM Blinds WHERE domain = ? AND (ip = ? OR targetUserId = ?)`,
+        [domain, ip, targetUserId]
     )
     if (result.length < 1)
         return false

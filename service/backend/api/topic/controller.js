@@ -304,10 +304,10 @@ module.exports.createTopic = async ctx => {
     }
     if (isAdminOnly < 0)
         return ctx.body = {
-            message: '해당 갤러리 매니저가 유동 계정을 금지하고 있습니다.',
+            message: '권한이 없습니다.',
             status: 'fail'
         }
-    const isExist = await readBoard.adminBoardBlind(domain, ip)
+    const isExist = await readBoard.adminBoardBlind(domain, ip, user.id)
     if (isExist) {
         const days = moment().diff(moment(isExist.blockDate), 'days')
         if (days <= 0)
@@ -465,7 +465,16 @@ module.exports.createPost = async ctx => {
         }
     }
     const isExist = await readBoard.adminBoardBlind(domain, ip)
-    if (isExist) {
+    const isExist2 = await readBoard.adminBoardBlind(domain, user.id)
+    if (isExist2) {
+        const days = moment().diff(moment(isExist.blockDate), 'days')
+        if (days <= 0)
+            return ctx.body = {
+                message: `현재 해당 갤러리에서 차단된 상태입니다. (${moment(isExist.blockDate).format('YYYY-MM-DD')} 까지)`,
+                status: 'fail'
+            }
+    }
+    else if (isExist) {
         const days = moment().diff(moment(isExist.blockDate), 'days')
         if (days <= 0)
             return ctx.body = {

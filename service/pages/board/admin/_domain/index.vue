@@ -193,7 +193,7 @@
 										<b-button
 											size='sm'
 											variant='danger'
-											@click='unblock(item.ip)'>
+											@click='unblock(item.id)'>
 											해제
 										</b-button>
 									</div>
@@ -381,20 +381,21 @@
                 if(data.removes)
                     this.removes = data.removes
             },
-            unblock: async function(ip) {
+            unblock: async function(id) {
    				const domain = this.$route.params.domain || ''
                 const token = this.$store.state.user.isLogged ? this.$store.state.user.token : ''
+                console.log(id)
                 this.$store.commit('setLoading', true)
                 const data = await this.$axios.$delete(
                     `/api/board/admin/${domain}/blind/remove`,
                     {
-                        data: { ip },
+                        data: { id },
                         headers: { 'x-access-token': token }
                     }
                 )
                 if (data.status === 'fail')
                     return this.toast(data.message || '오류가 발생했습니다.', 'danger')
-                this.blinds = this.blinds.filter(blind => blind.ip !== ip)
+                this.blinds = this.blinds.filter(blind => blind.id !== id)
                 this.toast('차단 해제 성공!', 'success')
                 this.$store.commit('setLoading')
             },
