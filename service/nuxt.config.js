@@ -173,7 +173,7 @@ module.exports = {
     //cachingExtensions: '@/plugins/workbox-range-request.js',
     offline: false,
     //offlinePage:'/offline.html',
-    enabled: false,
+    enabled: true,
     cacheAssets: false,
     runtimeCaching: [
       {
