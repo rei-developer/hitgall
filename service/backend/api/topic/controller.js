@@ -307,7 +307,7 @@ module.exports.createTopic = async ctx => {
             message: '권한이 없습니다.',
             status: 'fail'
         }
-    //const userId = user ? user.id : 0
+    const userId = user ? user.id : 0
     const isExist = await readBoard.adminBoardBlind(domain, ip, userId)
     if (isExist) {
         const days = moment().diff(moment(isExist.blockDate), 'days')
