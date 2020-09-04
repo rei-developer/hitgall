@@ -765,7 +765,7 @@ module.exports.deleteTopic = async ctx => {
     const topic = await readTopic.edit(id)
     let level = 0
     if (!user) {
-        if (password !== topic.password)
+        if (password !== topic.password || topic.userId !== user.id)
             return ctx.body = {
                 message: '비밀번호가 일치하지 않습니다.',
                 status: 'fail'
