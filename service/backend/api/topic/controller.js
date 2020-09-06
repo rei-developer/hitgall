@@ -274,6 +274,11 @@ module.exports.createTopic = async ctx => {
         domain = 'anime'
     if (title === '' || content === '<p></p>')
         return
+    if (title.length > 60) 
+        return  ctx.body = {
+            message: '제목은 60자 제한입니다.',
+            status: 'fail'
+        }
     writer = Filter.disable(writer)
     password = Filter.disable(password)
     title = Filter.disable(title)
@@ -765,9 +770,9 @@ module.exports.deleteTopic = async ctx => {
     const topic = await readTopic.edit(id)
     let level = 0
     if (!user) {
-        if (password !== topic.password || topic.userId !== user.id)
+        if (password !== topic.password || topic.userId > 0)
             return ctx.body = {
-                message: '비밀번호가 일치하지 않습니다.',
+                message: '비밀번호가 일치하지 않거나 삭제할 수 없는 게시물입니다.',
                 status: 'fail'
             }
     } else {
