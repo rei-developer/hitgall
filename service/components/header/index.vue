@@ -70,7 +70,7 @@
              </b-button>
         </div>
         <div class='appInstall desktop-only'>
-            <b-button pill size='lg' variant='info' @click='install()'>
+            <b-button pill size='lg' v-if='installed' variant='info' @click='install()'>
                 <!-- <font-awesome-icon icon='bars'/>   -->
                 install
              </b-button>
@@ -102,7 +102,7 @@
                 <li @click='forceUpdate'><nuxt-link to='/board/request'>갤러리 신청</nuxt-link></li>
                 <li><nuxt-link to='/board/admin'>갤러리 관리</nuxt-link></li>
                 <li><nuxt-link to='/sticker'>힛갤콘</nuxt-link></li>
-                <li class='appInstall' v-if='installed' @click='install()'><font-awesome-icon icon='cloud-download-alt'/> 앱 설치</li>
+                <li class='install' v-if='installed' @click='install()'><font-awesome-icon icon='cloud-download-alt'/> 앱 설치</li>
             </ul>
         </b-sidebar>
     </div>
@@ -143,6 +143,7 @@
               window.addEventListener('beforeinstallprompt', (e) => {
                   e.preventDefault()
                   this.installPromptEvent = e
+                  console.log(e)
                   this.installed = true
               })
             },
