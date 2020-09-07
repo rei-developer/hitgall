@@ -157,12 +157,12 @@
                 </b-button>
             </nuxt-link>
             <nuxt-link :to='`/board/${topic.boardDomain}/write?id=${id}`'>
-                <b-button size='sm'>
+                <b-button v-if='!$store.state.user.isLogged || this.topic.userId == $store.state.user.id || $store.state.user.isAdmin' size='sm'>
                     <font-awesome-icon icon='edit'/>
                     수정
                 </b-button>
             </nuxt-link>
-            <b-button size='sm' @click='removeHandler'>
+            <b-button v-if='!$store.state.user.isLogged || this.topic.userId == $store.state.user.id || $store.state.user.isAdmin' size='sm' @click='removeHandler'>
                 <font-awesome-icon icon='trash'/>
                 삭제
             </b-button>
@@ -266,7 +266,7 @@
             const regex = /<p><\/p>/gim
             data.topic.content = data.topic.content.replace(regex, '<p><br></p>')
             // const regex = /<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>/mig
-            // data.topic.content = data.topic.content.replace(regex, `<img src="$1">`)
+            // data.topic.content = data.topic.content.replace(regex, `<img src="$1">`
             return {
                 id,
                 topic: data.topic,
@@ -467,7 +467,8 @@
         border-bottom: 1px solid #eee;
         background-color: #fff;
         > h6 {
-            height: 33px;
+            height: 100%;
+            max-width:1344px;
             margin: 0;
             padding: .3rem;
             color: #fff;
@@ -485,13 +486,14 @@
                 background-color: #f5f5f5;
             }
             > .subject {
-                display: inline;
-                //margin-top: 2px;
-                max-width: calc(100vw - 80px);
+                display: inline-block;
+                margin-top: 3px;
+                //max-width: calc(100vw - 80px);
+                max-width:1344px;
                 font-size: 14px;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-                overflow: hidden;
+                //white-space: nowrap;
+                //text-overflow: ellipsis;
+                //overflow: hidden;
                 word-break:break-all;
             }
             // > .regdate {

@@ -24,7 +24,6 @@ module.exports = {
     link: [
       { rel: "icon", type: "image/x-icon", href: "/favicon.png" },
       {
-        rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Nunito&display=swap"
       }
     ],
@@ -33,7 +32,7 @@ module.exports = {
       //   src:
       //     "https://www.google.com/recaptcha/api.js?render=6LdGdsAZAAAAAHs2tez4PI-6H0kwQ-AnQeIzW6Lw"
       // },
-      { src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" }
+       //{ src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" }
     ]
   },
   /*
@@ -52,7 +51,7 @@ module.exports = {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    { src: "@/plugins/service-worker.js", ssr: false },
+    { src: "@/plugins/service-worker.js", mode: "client" },
     //{ src: "@/plugins/firebase-sw.js" },
     // { src: '@/plugins/socket.io.js' },
     { src: "@/plugins/v-viewer.js", mode: "client" },
@@ -96,12 +95,12 @@ module.exports = {
         version: 3
       }
     ],
-    ["@nuxtjs/google-adsense"],
+    // ["@nuxtjs/google-adsense"],
     ["@nuxtjs/moment", ["ko"]]
   ],
-  "google-adsense": {
-    id: "ca-pub-4618344904272976"
-  },
+  // "google-adsense": {
+  //   id: "ca-pub-4618344904272976"
+  // },
   fontawesome: {
     imports: [
       {

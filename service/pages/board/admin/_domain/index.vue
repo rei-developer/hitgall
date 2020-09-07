@@ -62,7 +62,7 @@
 					<hr>
 					<label>
 						<font-awesome-icon icon='image'/>
-						대문 이미지
+						대문 이미지(120*100)
 					</label>
 					<b-form-group class='mb-sm-2'>
                         <div class='background'>

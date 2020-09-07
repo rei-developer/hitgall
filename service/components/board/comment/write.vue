@@ -31,7 +31,7 @@
                         rows='3'
                         placeholder='이곳에 내용을 입력하세요.'
                         v-model='content'
-                        v-on:keyup.enter='submit'/>
+                        v-on:keyup.ctrl.enter='submit'/>
                 </div>
                 <div class='commit'>
                     <div class='sticker' @click='stickers.hide = false'>스티커</div>

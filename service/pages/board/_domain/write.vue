@@ -639,16 +639,26 @@
 		font-size: 1.2rem;
 		text-align: center;
 	}
-
+@media (max-width: 730px) {
     .textBox {
 		width: 100%;
-		min-height: 300px;
+		min-height: 400px;
 		margin: .5rem 0 0;
         padding: .5rem;
 		border: 2px solid #e5e5e5;
 		background-color: #fff;
 	}
-
+}
+@media (min-width: 731px) {
+    .textBox {
+		width: 100%;
+		min-height: 620px;
+		margin: .5rem 0 0;
+        padding: .5rem;
+		border: 2px solid #e5e5e5;
+		background-color: #fff;
+	}
+}
 	textarea { resize: both }
 	textarea.textBox { margin-bottom: 2px }
 

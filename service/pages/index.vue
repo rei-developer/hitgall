@@ -1,6 +1,6 @@
 <template>
     <div>
-        <adsbygoogle/>
+        <!-- <adsbygoogle/> -->
         <!-- <div class='articles desktop-only'>
             <div class='article-box'>
                 <HitArticle :limit='5'/>
@@ -29,7 +29,7 @@
                     name='radios-btn-default'/>
             </b-form-group>
             <HitArticle :limit='3'/>
-            <Article domain='all' :limit='20'/>
+            <Article domain='all' :limit='10'/>
         </div>
     </div>
 </template>

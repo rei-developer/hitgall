@@ -14,7 +14,8 @@ export const state = () => ({
     icon: '',
     isAdmin: false,
     noticeCount: 0,
-    isLogged: false
+    isLogged: false,
+    viewImage: 0 
 })
 
 export const mutations = {
@@ -34,6 +35,7 @@ export const mutations = {
         state.icon = data.user.icon
         state.isAdmin = data.user.isAdmin
         state.isLogged = true
+        state.viewImage = data.user.viewImage
     },
     setUsername: (state, username) => state.username = username,
     setNickname: (state, nickname) => state.nickname = nickname,

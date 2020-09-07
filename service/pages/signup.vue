@@ -142,6 +142,12 @@ o 로그 기록
                     <font-awesome-icon icon='check'/>
                     동의합니다
                 </b-button>
+                <b-button variant='light'>
+                    <font-awesome-icon icon='frown'/>
+                    <nuxt-link to='/'>
+                    거부합니다
+                    </nuxt-link>
+                </b-button>
             </b-form>
         </div>
         <div v-else>

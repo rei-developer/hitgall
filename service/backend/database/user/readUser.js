@@ -13,7 +13,8 @@ module.exports = async id => {
 			blockDate,
 			level,
 			exp,
-			point,
+            point,
+            viewImage,
 			icon,
 			isAdmin
 		FROM Users
@@ -90,4 +91,14 @@ module.exports.backgroundImageUrl = async id => {
     if (result.length < 1)
         return false
     return result[0].backgroundImageUrl
+}
+
+module.exports.viewImage = async id => {
+    const result = await pool.query(
+        `SELECT viewImage FROM Users WHERE id = ?`,
+        [id]
+    )
+    if (result.length < 1)
+        return false
+    return result[0]
 }

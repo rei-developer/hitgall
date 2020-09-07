@@ -66,7 +66,13 @@
         <div class='openSidebar desktop-only'>
             <b-button pill size='lg' variant='primary' v-b-toggle.sidebar-backdrop>
                 <!-- <font-awesome-icon icon='bars'/>   -->
-                #
+                Menu
+             </b-button>
+        </div>
+        <div class='appInstall desktop-only'>
+            <b-button pill size='lg' variant='info' @click='install()'>
+                <!-- <font-awesome-icon icon='bars'/>   -->
+                install
              </b-button>
         </div>
         <b-sidebar
@@ -96,6 +102,7 @@
                 <li @click='forceUpdate'><nuxt-link to='/board/request'>갤러리 신청</nuxt-link></li>
                 <li><nuxt-link to='/board/admin'>갤러리 관리</nuxt-link></li>
                 <li><nuxt-link to='/sticker'>힛갤콘</nuxt-link></li>
+                <li class='install' v-if='installed' @click='install()'><font-awesome-icon icon='cloud-download-alt'/> 앱 설치</li>
             </ul>
         </b-sidebar>
     </div>
@@ -105,8 +112,13 @@
     export default {
         data() {
             return {
-                visible: false
+                visible: false,
+                installPromptEvent: '',
+                installed: false
             }
+        },
+        mounted() {
+          this.check()
         },
         methods: {
             forceUpdate() {
@@ -126,9 +138,30 @@
                 if (!this.$store.state.user.isLogged)
                     return
                 this.$store.commit('user/signOut')
+            },
+            check(){
+              window.addEventListener('beforeinstallprompt', (e) => {
+                  e.preventDefault()
+                  this.installPromptEvent = e
+                  this.installed = true
+              })
+            },
+           install() {
+               console.log(this.installPromptEvent)
+               this.installPromptEvent.prompt()
+               this.installPromptEvent.userChoice.then((choice) => {
+                   if (choice.outcome === 'accepted') {
+                      console.log('User accepted the A2HS prompt');
+                      this.installed = false
+                      location.reload()
+                    } else {
+                       console.log('User dismissed the A2HS prompt');
+                    }
+               })
+               this.installPromptEvent = null
             }
-        }
     }
+}
 </script>
 
 <style lang='less'>
@@ -211,7 +244,7 @@
             background-color: #fff;
             list-style: none;
             > li {
-                padding: 10px 20px;
+                padding: 0px;
                 border-bottom: 1px solid #eee;
                 &.active {
                     background-color: #7F859A;
@@ -221,19 +254,33 @@
                 }
                 > a {
                     display: block;
+                    padding: 10px 20px;
                     line-height: 20px;
                     color: rgb(119, 119, 119);
                     font-size: 14px;
                     text-decoration: none;
                 }
             }
+            > li.install {
+                display: block;
+                padding: 10px 20px;
+                line-height: 20px;
+                color: rgb(119, 119, 119);
+                font-size: 17px;
+                text-decoration: none;
+            }
         }
     }
-
     .openSidebar {
         position: fixed;
-        left: 1rem;
-        bottom: 1rem;
+        right: 3rem;
+        bottom: 3rem;
+        z-index: 10;
+    }
+    .appInstall{
+        position: fixed;
+        right: 3rem;
+        bottom: 7rem;
         z-index: 10;
     }
 </style>

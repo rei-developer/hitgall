@@ -16,7 +16,7 @@
             <b-button size='sm' variant='primary' @click='noticePermission()'>
                     <font-awesome-icon icon='arrow-up'/>
                     알림 허용
-                </b-button>
+                </b-button> 
 			<span v-if='domain !== "all"'>
 				<nuxt-link :to='`/board/${domain}/write`'>
 					<b-button
@@ -359,7 +359,7 @@
             this.best = this.$route.query.best || 0
             this.category = this.$route.query.category !== null ? this.$route.query.category : ''
             this.getData()
-			this.getCount()
+            this.getCount()
             this.realtimeUpdate()
         },
         methods: {
@@ -492,7 +492,7 @@
                } else if (result == 'granted') {
                   return alert('알림이 허용되었습니다.');
                } else if ( result == 'default') {
-                   return alert('해줘라 좀')
+                   return
                } else {
                    return alert('다시 시도해주세요.')
                }

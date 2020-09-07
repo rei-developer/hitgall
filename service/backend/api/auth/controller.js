@@ -211,7 +211,7 @@ exports.updateUserByBackgroundImage = async ctx => {
 }
 
 exports.updateUser = async ctx => {
-    let { username, nickname, newPassword, newPassword2 } = ctx.request.body
+    let { username, nickname, newPassword, newPassword2, viewImage } = ctx.request.body
     const user = await User.getUser(ctx.get('x-access-token'))
     if (!user)
         return
@@ -219,6 +219,8 @@ exports.updateUser = async ctx => {
         username = user.username
     if (nickname === '')
         nickname = user.nickname
+    if (viewImage === '')
+        viewImage = 0
     if (username !== user.username) {
         const getUsername = await readUser.username(username)
         if (getUsername)
@@ -257,7 +259,8 @@ exports.updateUser = async ctx => {
     }
     await updateUser({
         username,
-        nickname
+        nickname,
+        viewImage
     }, user.id)
     ctx.body = {
         status: 'ok'

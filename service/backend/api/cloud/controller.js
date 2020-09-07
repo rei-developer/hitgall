@@ -35,11 +35,20 @@ module.exports.createImage = type => async ctx => {
                         status: 'fail'
                     }
                 await uploadFile(`img/${filename}`)
-                if (type === 'topic' || type === 'background') {
+                if (type === 'topic') {
                     const thumbnail = sharp(data)
                     thumbnail
                         .metadata()
                         .then(() => thumbnail.resize(100, 100).withMetadata().rotate().toBuffer())
+                        .then(result => fs.writeFile(`img/thumb/${filename}`, result, async () => {
+                            await uploadFile(`img/thumb/${filename}`)
+                        }))
+                }
+                if (type === 'background') {
+                    const thumbnail = sharp(data)
+                    thumbnail
+                        .metadata()
+                        .then(() => thumbnail.resize(120, 100).withMetadata().rotate().toBuffer())
                         .then(result => fs.writeFile(`img/thumb/${filename}`, result, async () => {
                             await uploadFile(`img/thumb/${filename}`)
                         }))

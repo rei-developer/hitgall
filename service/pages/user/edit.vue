@@ -122,6 +122,17 @@
 					<hr>
 					<label>
 						<font-awesome-icon icon='calendar-check'/>
+						설정
+					</label>
+	　				<div>
+	             	 <b-button v-b-toggle.collapse-1 size="sm" variant="primary">이미지 설정</b-button>
+		             <b-collapse id="collapse-1" class="mt-2">
+    　　　　　　　　　 <b-form-select size="sm" v-model="selected" :options="options"></b-form-select>
+	                 </b-collapse>
+  　　　　　　　　　　</div>
+					<hr>
+					<label>
+						<font-awesome-icon icon='calendar-check'/>
 						날짜 정보
 					</label>
 					<b-form-group class='mb-sm-2'>
@@ -180,7 +191,14 @@
 				exp: 0,
 				maxExp: 0,
 				per: 0,
-				loading: false
+				loading: false,
+				selected: null,
+                options: [
+					{value: 0, text: '모두 보이기'},
+					{value: 1, text: '이미지 안보기'},
+					{value: 2, text: '노짤 안보기'},
+					{value: 3, text: '노짤, 이미지 안보기'}
+				]
 			}
 		},
 		watch: {
@@ -199,6 +217,7 @@
 				this.exp = this.$store.state.user.exp
 				this.maxExp = Math.pow(this.$store.state.user.level, 2) * 90
 				this.per = (this.exp / this.maxExp * 100).toFixed(2)
+				this.selected = this.$store.state.user.viewImage
 			},
 			// profileImageUpload: async function(e) {
 			// 	if (this.loading || e.target.files.length < 1)
@@ -256,7 +275,8 @@
 						username: this.username,
 						nickname: this.nickname,
 						newPassword: this.newPassword,
-						newPassword2: this.newPassword2
+						newPassword2: this.newPassword2,
+						viewImage: this.selected
 					},
 					{ headers: { 'x-access-token': token } }
 				)
@@ -269,6 +289,8 @@
 					this.$store.commit('user/setUsername', this.username)
 				if (this.nickname !== '')
 					this.$store.commit('user/setNickname', this.nickname)
+				if (this.viewImage !== '') 
+				    this.$store.commit('user/setuser', this.selected)
 				this.$store.commit('setLoading')
 			},
 			signOut() {

@@ -214,10 +214,11 @@ module.exports.getContent = async ctx => {
         }
     topic.ip = SpamChecker.hideIp(topic.ip)
     topic.header = ''
-    const images = topic.isImage > 0
+    const viewData = await readUser.viewImage(user.id)
+    var images = topic.isImage > 0
         ? await readTopic.topicImages(id)
         : []
-    const boardImageUrl = topic.isImage < 1
+    var boardImageUrl = topic.isImage < 1
         ? await readBoard.imageUrl(topic.boardDomain)
         : null
     const boardLevel = user
@@ -228,6 +229,25 @@ module.exports.getContent = async ctx => {
     if (user) {
         await updateNotice.updateNoticeByConfirm(user.id, id)
         count = await readNotice.count(user.id)
+    }
+    var regex = /<p><img\ssrc="([a-zA-Z0-9\-_:/.]+)"\salt="([a-zA-Z0-9\-_:/.]+)"><\/p>/gi
+    switch(viewData.viewImage) {
+        case 0 ://일반
+            break;
+        case 1 ://이미지만 안보기
+            var images = []
+            topic.content = topic.content.replace(regex,'')
+            break;
+        case 2 ://노짤만 안보기
+            var boardImageUrl = false
+            break;
+        case 3 ://다 안보기
+            var images = []
+            topic.content = topic.content.replace(regex,'')
+            var boardImageUrl = false
+            break;
+        default : 
+           break;
     }
     ctx.body = {
         topic,
@@ -612,6 +632,11 @@ module.exports.updateTopic = async ctx => {
     } = ctx.request.body
     if (title === '' || content === '<p></p>')
         return
+    if (title.length > 60) 
+        return  ctx.body = {
+            message: '제목은 60자 제한입니다.',
+            status: 'fail'
+        }
     title = Filter.disable(title)
     content = Filter.topic(content)
     content = content.replace(/storage.googleapis.com\/hitgall/gim, 'cdn.hitgall.com')
@@ -760,7 +785,7 @@ module.exports.updatePost = async ctx => {
 }
 
 module.exports.deleteTopic = async ctx => {
-    const { id, password } = ctx.request.body
+    let { id, password } = ctx.request.body
     if (id < 1)
         return ctx.body = {
             status: 'fail'

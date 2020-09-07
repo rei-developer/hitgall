@@ -162,7 +162,7 @@
             padding: 0;
             list-style: none;
             > li {
-                padding: 6px;
+                //padding: 6px;
                 border-radius: 2px;
                 &:hover { background-color: rgba(0,64,128,.05) }
                 &.active {
@@ -171,6 +171,7 @@
                 }
                 > a {
                     display: block;
+                    padding: 6px;
                     line-height: 20px;
                     color: @primary;
                     font-size: 13px;
