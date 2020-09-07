@@ -102,7 +102,7 @@
                 <li @click='forceUpdate'><nuxt-link to='/board/request'>갤러리 신청</nuxt-link></li>
                 <li><nuxt-link to='/board/admin'>갤러리 관리</nuxt-link></li>
                 <li><nuxt-link to='/sticker'>힛갤콘</nuxt-link></li>
-                <li class='install' v-if='installed' @click='install()'><font-awesome-icon icon='cloud-download-alt'/> 앱 설치</li>
+                <li class='appInstall' v-if='installed' @click='install()'><font-awesome-icon icon='cloud-download-alt'/> 앱 설치</li>
             </ul>
         </b-sidebar>
     </div>
