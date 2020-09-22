@@ -220,7 +220,7 @@
 							<font-awesome-icon icon='image'/>
 							이미지 첨부
 						</h3>
-						<p class='subtitle'>이곳에 이미지를 드롭하세요... (짤당 10MB)</p>
+						<p class='subtitle'>이곳에 이미지를 드롭하세요... <strong>(개당 20MB)</strong></p>
 					</div>
 				</dropzone>
 				<b-button-group class='submit'>
@@ -531,14 +531,14 @@
 				if (index >= files.length)
 					return await this.write()
 				const file = files[index]
-				const LIMITS = 15360000
+				const LIMITS = 21504000
 				const formData = new FormData()
 				formData.append('type', 'file')
 				formData.append('image', file, file.name)
 				if (!/(.gif|.png|.jpg|.jpeg|.webp)/i.test(file.name))
 					this.toast(`${index + 1}번째 이미지 업로드 실패... (gif, png, jpg, jpeg, webp만 가능)`, 'danger')
 				else if (file.size > LIMITS)
-					this.toast(`${index + 1}번째 이미지 업로드 실패... (10MB 이하만 업로드 가능)`, 'danger')
+					this.toast(`${index + 1}번째 이미지 업로드 실패... (20MB 이하만 업로드 가능)`, 'danger')
 				else {
 					const data = await this.$axios.$post(
 						'/api/cloud/topic',

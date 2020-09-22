@@ -1,5 +1,14 @@
 <template>
     <div>
+         <b-alert show variant="primary">
+            <h4 class="alert-heading">힛갤 서버 운영비 후원 안내 (2020. 09. 22)</h4>
+            <p>카카오뱅크 (예금주 : 백○○)</p>
+            <h5>3333-05-8635798</h5>
+            <hr>
+            <p class="mb-0">
+                목표금액 : 500,000원 (오십만원)
+            </p>
+        </b-alert>
         <!-- <adsbygoogle/> -->
         <!-- <div class='articles desktop-only'>
             <div class='article-box'>
