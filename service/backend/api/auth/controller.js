@@ -67,6 +67,13 @@ exports.createUser = async ctx => {
             message: '이미 존재하는 이메일입니다.',
             status: 'fail'
         }
+    const regex = /^.*(?=.{8,10})(?=.*[a-zA-Z])(?=.*?[A-Z])(?=.*\d)(?=.+?[\W|_])[a-zA-Z0-9!@#$%^&*()-_+={}\|\\\/]+$/gm;
+    if(!regex.test(password)) {
+        return ctx.body = {
+            message: '알파벳 대/소문자,숫자,특수문자 포함하여 8글자 이상',
+            status: 'fail'
+        }
+    }
     /*try {
     if (email !== Crypto.decrypt(authCode)) return ctx.body = { message: '인증코드가 올바르지 않습니다.', status: 'fail' }
   } catch (e) {

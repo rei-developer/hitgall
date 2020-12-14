@@ -25,20 +25,20 @@ module.exports.topic = text => {
     )
     text = text.replace(
         /(http(s)?:\/\/)?(www.)?youtube.com\/watch\?v=([a-zA-Z0-9\-_]+)(\&amp;feature=youtu.be)?(\&amp;list=[a-zA-Z0-9\-_]+)?(\&amp;index=(\d+))?(\&amp;t=(\d+))?/gi,
-        `<p class='embed-youtube'><iframe title='youtube' src='//www.youtube.com/embed/$4$9' allowfullscreen='allowfullscreen'></iframe></p>`
+        `<p class='embed-youtube'><iframe title='youtube' src='//www.youtube.com/embed/$4\?start\=$10' allowfullscreen='allowfullscreen'></iframe></p>`
     )
     text = text.replace(
         /(http(s)?:\/\/)?(www.)?youtu.be\/([a-zA-Z0-9\-_]+)(\?list=[a-zA-Z0-9\-_]+)?(\?t=(\d+))?/gi,
-        `<p class='embed-youtube'><iframe title='youtube' src='//www.youtube.com/embed/$4$5$6' allowfullscreen='allowfullscreen'></iframe></p>`
+        `<p class='embed-youtube'><iframe title='youtube' src='//www.youtube.com/embed/$4$5\?start\=$7' allowfullscreen='allowfullscreen'></iframe></p>`
     )
     text = text.replace(
         /<iframe width="(\d+)" height="(\d+)" src="https:\/\/www.youtube.com\/embed\/([a-zA-Z0-9\-_]+)(\?list=[a-zA-Z0-9\-_]+)?(\?start=(\d+))?" (frameborder="(\d+)")? (allow="accelerometer;)? (autoplay;)? (encrypted-media;)? (gyroscope;)? (picture-in-picture")? (allowfullscreen(="")?)?><\/iframe>/gi,
         `<p class='embed-youtube'><iframe title='youtube' src='//www.youtube.com/embed/$3$4$5' allowfullscreen='allowfullscreen'></iframe></p>`
     )
-    text = text.replace(
-        /((http(s)?:\/\/)?(www.)?twitter(\.[^(\n|\t|\s,)]+)+)+$/gi,
-        `<p><a href="$&" target='_blank'>$&</a></p><p><blockquote class='twitter-tweet' data-lang='ko'><a href="$&"></a></blockquote><script async src='https://platform.twitter.com/widgets.js' charset='utf-8'></script></p><br><br>`
-    )
+    // text = text.replace(
+    //     /(http(s)?:\/\/)?(www.)?twitter.com\/([a-zA-Z0-9\-_]+)\/status\/[a-zA-Z0-9\-_=?]+(\?s=[a-zA-Z0-9\-_=?]+)/gi,
+    //     `<p><a href="$1$4$5$6$7" target='_blank'>$&</a></p><p><blockquote class='twitter-tweet' data-lang='ko'><a href="$&"></a></blockquote></p><br><br>`
+    // )
     // text = text.replace(
     //     /((http(s)?:\/\/)?(www.)?instagram(\.[^(\n|\t|\s,)]+)+)+$/gi,
     //     `<p><a href="$&" target='_blank'>$&</a></p><p><blockquote
@@ -59,18 +59,25 @@ module.exports.topic = text => {
         `<iframe title='gyfcat' src='https://gfycat.com/ifr/$5' frameborder='0' scrolling='no' allowfullscreen width='560' height='400'></iframe>`
     )
     text = text.replace(
-        /\[\[\s*hy(\d+)\]\]/gi,
+        /\(\(\s*hy(\d+)\)\)/gi,
         `<a href="https://hiyobi.me/reader/$1" target='_blank' class='hitomiReader'>hiyobi:$1</a>`
     )
     text = text.replace(
-        /\[\[\s*ht(\d+)\]\]/gi,
+        /\(\(\s*ht(\d+)\)\)/gi,
         `<a href="https://hitomi.la/reader/$1.html" target='_blank' class='hitomiReader'>hitomi:$1</a>`
     )
     text = text.replace(
-        /\[\[\s*av([a-zA-Z0-9\_-]+(\d+))\]\]/gi,
+        /\(\(\s*av([a-zA-Z0-9\_-]+(\d+))\)\)/gi,
         `<a href="https://www.avdbs.com/menu/dvd_list.php?_kwd=$1" target='_blank' class='hitomiReader'>av:$1</a>`
     )
     text = text.replace(/^\s+|\s+$/g, ``)
+
+    // text = text.replace(
+    //     /(http(s)?:\/\/)?(www.)?instagram.com\/([a-zA-Z0-9\-_]+)\/([a-zA-Z0-9\-_]+)(\/\?[a-zA-Z0-9\-_=]+)?/gi,
+    //     `<blockquote class="instagram-media" data-instgrm-version="12" >
+    //     <a href="https://www.instagram.com/p/$5/"></a> 
+    //     </blockquote>`  
+    // )
     return text
 }
 

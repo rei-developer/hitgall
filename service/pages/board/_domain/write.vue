@@ -419,7 +419,7 @@
 			const setContent = this.setContent
 			const insertHTML = this.insertHTML
 			this.$refs.dropzone.dropzone.on('addedfile', function(file) {
-				insertHTML(editor, `<p><img src='${URL.createObjectURL(file)}' alt='${file.upload.uuid}'></p>`)
+				insertHTML(editor, `<p><img src='${URL.createObjectURL(file)}' alt='${file.upload.uuid}'></p><p></p>`)
 			})
 			this.$refs.dropzone.dropzone.on('removedfile', function(file) {
 				const regex = new RegExp(`<img\\s+[^>]*alt=('|")${file.upload.uuid}('|")[^>]*>`, 'gi')
@@ -460,7 +460,8 @@
                 const transaction = state
                     .tr
                     .insert(selection.anchor, slice.content)
-                view.dispatch(transaction)
+				view.dispatch(transaction)
+				this.editor.focus('end')
 			},
 			async submit() {
 				if (this.loading)
@@ -510,7 +511,7 @@
 				this.$router.push({ path: `/${data.topicId}` })
 			},
 			async autoWrite() {
-				if (this.loading || !this.$store.state.user.isLogged || (this.form.title === '' && (this.html === '' || this.html === '<p></p>')))
+				if (this.loading || !this.$store.state.user.isLogged || (this.form.title === '' & (this.html === '' || this.html === '<p></p>')))
 					return
 				const token = this.$store.state.user.token || ''
 				const data = await this.$axios.$post(
