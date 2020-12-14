@@ -39,7 +39,7 @@ const deleteTopic = require('../../database/topic/deleteTopic')
 
 // const client = redis.createClient()
 
-const BEST_LIMIT = 7
+const BEST_LIMIT = 3
 // const DELETE_LIMIT = 10
 
 module.exports.getTopicCounts = async ctx => {
