@@ -160,9 +160,9 @@
                 this.tempPostReplyId = 0
                 this.tempPostUpdateId = 0
                 const regex1 = /([--:\w?@%&+~#=]*\.[a-z]{2,4}\/{0,2})((?:[?&](?:\w+)=(?:\w+))+|[--:\w?@%&+~#=]+)?/g
-                const regex2 = /\[\[\s*hy(\d+)\]\]/gi
-                const regex3 = /\[\[\s*ht(\d+)\]\]/gi
-                const regex4 = /\[\[\s*av([a-zA-Z0-9\_-]+(\d+))\]\]/gi
+                const regex2 = /\(\(\s*hy(\d+)\)\_/gi
+                const regex3 = /\(\(\s*ht(\d+)\)\)/gi
+                const regex4 = /\(\(\s*av([a-zA-Z0-9\_-]+(\d+))\)\)/gi
                 if (data.posts) {
                     this.posts = data.posts.map(item => {
                         if(item.content.search(/((\.\.\.))/g) == -1) {
