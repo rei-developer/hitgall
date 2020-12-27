@@ -1,13 +1,13 @@
 <template>
-    <div>
-        <StickerList/>
-    </div>
+  <div>
+    <StickerList/>
+  </div>
 </template>
 
 <script>
-    import StickerList from '~/components/sticker/list.vue'
+import StickerList from '~/components/sticker/list.vue'
 
-    export default {
-        components: { StickerList }
-    }
+export default {
+  components: {StickerList}
+}
 </script>

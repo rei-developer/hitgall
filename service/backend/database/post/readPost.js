@@ -1,8 +1,8 @@
 const pool = require('..')
 
 module.exports = async id => {
-	const result = await pool.query(
-		`SELECT
+  const result = await pool.query(
+    `SELECT
 			p.userId,
 			p.topicId,
 			p.ip,
@@ -10,39 +10,39 @@ module.exports = async id => {
 			p.updated
 		FROM Posts p
 		WHERE p.id = ?`,
-		[id]
-	)
-	if (result.length < 1)
-		return false
-	return result[0]
+    [id]
+  )
+  if (result.length < 1)
+    return false
+  return result[0]
 }
 
 module.exports.userId = async id => {
-	const result = await pool.query('SELECT userId FROM Posts WHERE id = ?', [id])
-	if (result.length < 1)
-		return false
-	return result[0].userId
+  const result = await pool.query('SELECT userId FROM Posts WHERE id = ?', [id])
+  if (result.length < 1)
+    return false
+  return result[0].userId
 }
 
 module.exports.count = async topicId => {
-	const result = await pool.query(
-		'SELECT COUNT(*) count FROM Posts WHERE topicId = ?',
-		[topicId]
-	)
-	return result[0].count
+  const result = await pool.query(
+    'SELECT COUNT(*) count FROM Posts WHERE topicId = ?',
+    [topicId]
+  )
+  return result[0].count
 }
 
 module.exports.countByMe = async userId => {
-	const result = await pool.query(
-		'SELECT COUNT(*) count FROM Posts WHERE userId = ?',
-		[userId]
-	)
-	return result[0].count
+  const result = await pool.query(
+    'SELECT COUNT(*) count FROM Posts WHERE userId = ?',
+    [userId]
+  )
+  return result[0].count
 }
 
 module.exports.posts = async (topicId, page, limit) => {
-	const result = await pool.query(
-		`SELECT
+  const result = await pool.query(
+    `SELECT
 			p.id,
 			p.userId,
 			p.postRootId,
@@ -67,19 +67,19 @@ module.exports.posts = async (topicId, page, limit) => {
 		WHERE p.topicId = ?
 		ORDER BY IF(ISNULL(p.postRootId), p.id, p.postRootId), p.id
 		LIMIt ?, ?`,
-		[
-			topicId, page * limit,
-			limit
-		]
-	)
-	if (result.length < 1)
-		return false
-	return result
+    [
+      topicId, page * limit,
+      limit
+    ]
+  )
+  if (result.length < 1)
+    return false
+  return result
 }
 
 module.exports.postsByMe = async (userId, page, limit) => {
-	const result = await pool.query(
-		`SELECT
+  const result = await pool.query(
+    `SELECT
 			p.id,
 			p.content,
 			p.stickerId,
@@ -94,22 +94,22 @@ module.exports.postsByMe = async (userId, page, limit) => {
 		WHERE p.userId = ?
 		ORDER BY id DESC
 		LIMIt ?, ?`,
-		[
-			userId, page * limit,
-			limit
-		]
-	)
-	if (result.length < 1)
-		return false
-	return result
+    [
+      userId, page * limit,
+      limit
+    ]
+  )
+  if (result.length < 1)
+    return false
+  return result
 }
 
 module.exports.postVotes = async (userId, postId, ip) => {
-	const result = await pool.query(
-		'SELECT created FROM PostVotes WHERE postId = ? AND (userId = ? OR ip = ?)',
-		[postId, userId, ip]
-	)
-	if (result.length < 1)
-		return false
-	return result[0].created
+  const result = await pool.query(
+    'SELECT created FROM PostVotes WHERE postId = ? AND (userId = ? OR ip = ?)',
+    [postId, userId, ip]
+  )
+  if (result.length < 1)
+    return false
+  return result[0].created
 }

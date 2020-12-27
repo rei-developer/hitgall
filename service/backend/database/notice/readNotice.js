@@ -1,16 +1,16 @@
 const pool = require('..')
 
 module.exports.count = async userId => {
-	const result = await pool.query(
-		'SELECT COUNT(*) count FROM Notices WHERE userId = ? AND confirm = 0',
-		[userId]
-	)
-	return result[0].count
+  const result = await pool.query(
+    'SELECT COUNT(*) count FROM Notices WHERE userId = ? AND confirm = 0',
+    [userId]
+  )
+  return result[0].count
 }
 
 module.exports.notices = async (userId, page, limit) => {
-	const result = await pool.query(
-		`SELECT
+  const result = await pool.query(
+    `SELECT
 			n.id,
 			n.userId,
 			n.topicId,
@@ -36,12 +36,12 @@ module.exports.notices = async (userId, page, limit) => {
 		WHERE n.userId = ? AND n.confirm = 0
 		ORDER BY n.id DESC
 		LIMIt ?, ?`,
-		[
-			userId, page * limit,
-			limit
-		]
-	)
-	if (result.length < 1)
-		return false
-	return result
+    [
+      userId, page * limit,
+      limit
+    ]
+  )
+  if (result.length < 1)
+    return false
+  return result
 }

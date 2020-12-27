@@ -1,103 +1,107 @@
 <template>
-    <div>
-         <b-alert show variant="primary">
-            <h4 class="alert-heading">힛갤 서버 운영비 후원 안내 (2020. 09. 22)</h4>
-            <p>카카오뱅크 (예금주 : 백○○)</p>
-            <h5>3333-05-8635798</h5>
-            <hr>
-            <p class="mb-0">
-                목표금액 : 500,000원 (오십만원)
-            </p>
-        </b-alert>
-        <!-- <adsbygoogle/> -->
-        <!-- <div class='articles desktop-only'>
-            <div class='article-box'>
-                <HitArticle :limit='5'/>
-            </div>
-            <div class='article-box'>
-                <Article domain='girl' :limit='5'/>
-                <Article domain='anime' :limit='5'/>
-            </div>
-            <div class='article-box'>
-                <Article domain='kawai3' :limit='5'/>
-                <Article domain='lastorigin' :limit='5'/>
-            </div>
-            <div class='article-box'>
-                <PhotoArticle domain='girl' :limit='6'/>
-                <PhotoArticle domain='anime' :limit='6'/>
-            </div>
-        </div> -->
-        <div class='articles'>
-            <b-form-group class='mb-3'>
-                <b-form-radio-group
-                    size='sm'
-                    v-model='domain'
-                    :options='domainList'
-                    button-variant='primary'
-                    buttons
-                    name='radios-btn-default'/>
-            </b-form-group>
-            <HitArticle :limit='3'/>
-            <Article domain='all' :limit='10'/>
+  <div>
+    <b-alert show variant="warning">
+      <h4 class="alert-heading">힛갤 서버 운영비 후원 안내 (2020. 12. 27)</h4>
+      <p>카카오뱅크 (예금주 : 백○○)</p>
+      <h5><b>3333-05-8635798</b></h5>
+      <hr>
+      <p class="mb-0">
+        목표금액 : 300,000원 (삼십만원)
+      </p>
+    </b-alert>
+    <!-- <adsbygoogle/> -->
+    <!-- <div class='articles desktop-only'>
+        <div class='article-box'>
+            <HitArticle :limit='5'/>
         </div>
+        <div class='article-box'>
+            <Article domain='girl' :limit='5'/>
+            <Article domain='anime' :limit='5'/>
+        </div>
+        <div class='article-box'>
+            <Article domain='kawai3' :limit='5'/>
+            <Article domain='lastorigin' :limit='5'/>
+        </div>
+        <div class='article-box'>
+            <PhotoArticle domain='girl' :limit='6'/>
+            <PhotoArticle domain='anime' :limit='6'/>
+        </div>
+    </div> -->
+    <div class='articles'>
+      <b-form-group class='mb-3'>
+        <b-form-radio-group
+          size='sm'
+          v-model='domain'
+          :options='domainList'
+          button-variant='primary'
+          buttons
+          name='radios-btn-default'/>
+      </b-form-group>
+      <HitArticle :limit='3'/>
+      <Article domain='all' :limit='10'/>
     </div>
+  </div>
 </template>
 
 <script>
-    import Article from '~/components/article'
-    import HitArticle from '~/components/article/hit.vue'
-    // import PhotoArticle from '~/components/article/photo.vue'
+import Article from '~/components/article'
+import HitArticle from '~/components/article/hit.vue'
+// import PhotoArticle from '~/components/article/photo.vue'
 
-    export default {
-        components: {
-			Article,
-            HitArticle,
-            // PhotoArticle
+export default {
+  components: {
+    Article,
+    HitArticle,
+    // PhotoArticle
+  },
+  data() {
+    return {
+      domain: 'all',
+      domainList: [
+        {
+          text: '전체',
+          value: 'all'
         },
-        data() {
-            return {
-                domain: 'all',
-                domainList: [
-                    {
-                        text: '전체',
-                        value: 'all'
-                    },
-                    {
-                        text: '공지사항',
-                        value: 'notice'
-                    },
-                    {
-                        text: '건의사항',
-                        value: 'feedback'
-                    },
-                    {
-                        text: '갤러리 신청',
-                        value: 'request'
-                    }
-                ]
-            }
+        {
+          text: '공지사항',
+          value: 'notice'
         },
-        watch: { 
-            domain: function() {
-                this.$router.push({ path: `/board/${this.domain}` })
-            }
+        {
+          text: '건의사항',
+          value: 'feedback'
+        },
+        {
+          text: '갤러리 신청',
+          value: 'request'
         }
+      ]
     }
+  },
+  watch: {
+    domain: function () {
+      this.$router.push({path: `/board/${this.domain}`})
+    }
+  }
+}
 </script>
 
 <style lang='less' scoped>
-    .articles {
-        // padding: 5px;
-        // background-color: #fff;
-        // &.mobile-only {
-        //     padding: 0;
-        //     background-color: #F9F9F9;
-        // }
-    }
-    .article-box {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 10px;
-        &:last-child { margin: 0 }
-    }
+.articles {
+  // padding: 5px;
+  // background-color: #fff;
+  // &.mobile-only {
+  //     padding: 0;
+  //     background-color: #F9F9F9;
+  // }
+}
+
+.article-box {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+
+  &:last-child {
+    margin: 0
+  }
+}
 </style>

@@ -15,8 +15,8 @@ const VERSION = 353
 const app = new Router()
 
 app.get('/version', ctx => ctx.body = {
-    version: VERSION,
-    status: 'ok'
+  version: VERSION,
+  status: 'ok'
 })
 app.use('/auth', auth.routes())
 app.use('/board', board.routes())
