@@ -1,15 +1,15 @@
 <template>
   <article class='notify'>
     <h6 @click='toggle'>
-      <strong>{{ $store.state.user.nickname }}</strong>님, 읽지않은 알림이 <span>{{ $store.state.user.noticeCount }}개</span>
+      <strong>{{ $store.state.user.nickname }}</strong>님, 읽지 않은 알림이 <span>{{ $store.state.user.noticeCount }}개</span>
       있습니다.
     </h6>
     <ul v-if='visible'>
       <li v-for='(item, index) in notices' :key='index' @click='forceUpdate'>
         <nuxt-link :to='`/${item.topicId}?postId=${item.postId}`'>
-<!--          <div class='profile'>-->
-<!--            <img :src='item.profile ? "/profile/" + item.profile : "/profile.png"' @error='imageUrlAlt'>-->
-<!--          </div>-->
+          <!--          <div class='profile'>-->
+          <!--            <img :src='item.profile ? "/profile/" + item.profile : "/profile.png"' @error='imageUrlAlt'>-->
+          <!--          </div>-->
           <div class='content'>
             <div class='author'>
               <img :src='`/level/${item.level}.png`'>
@@ -190,7 +190,6 @@ article.notify {
     padding: 8px 10px;
     color: #fff;
     font-size: 13px;
-    text-align: right;
     background-color: rgba(0, 0, 0, .9);
 
     > span {
@@ -204,7 +203,7 @@ article.notify {
   > ul {
     position: absolute;
     top: 31px;
-    right: 0;
+    left: 0;
     width: 100%;
     margin: 0;
     padding: 0;

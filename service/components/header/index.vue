@@ -72,11 +72,11 @@
         <font-awesome-icon icon='bars'/>
       </b-button>
     </div>
-    <div class='appInstall desktop-only'>
-      <b-button pill size='lg' v-if='installed' variant='info' @click='install()'>
-        <font-awesome-icon icon='cloud-download-alt'/>
-      </b-button>
-    </div>
+<!--    <div class='appInstall desktop-only'>-->
+<!--      <b-button pill size='lg' v-if='installed' variant='info' @click='install()'>-->
+<!--        <font-awesome-icon icon='cloud-download-alt'/>-->
+<!--      </b-button>-->
+<!--    </div>-->
     <b-sidebar
       id='sidebar-backdrop'
       v-model='visible'
