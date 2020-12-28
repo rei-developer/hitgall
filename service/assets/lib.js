@@ -20,7 +20,7 @@ module.exports.getBoardName = domain => {
             name = '연예 갤러리'
             break
         case 'anime':
-            name = '애니메이션 갤러리'
+            name = '노무현 갤러리'
             break
         case 'kawai3':
             name = '키아나 갤러리'

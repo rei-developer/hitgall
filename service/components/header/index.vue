@@ -89,7 +89,7 @@
           <nuxt-link to='/board/girl'>연예인</nuxt-link>
         </li>
         <li @click='forceUpdate'>
-          <nuxt-link to='/board/anime'>애니메이션</nuxt-link>
+          <nuxt-link to='/board/anime'>노무현</nuxt-link>
         </li>
         <li @click='forceUpdate'>
           <nuxt-link to='/board/lastorigin'>라스트 오리진</nuxt-link>
