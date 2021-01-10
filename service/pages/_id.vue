@@ -310,7 +310,7 @@ export default {
       this.$store.commit('setLoading', true)
       const data = await this.$axios.$post(
         '/api/topic/vote',
-        {id: this.id, likes: flag},
+        {domain: this.topic.boardDomain, id: this.id, likes: flag},
         {headers: {'x-access-token': token}}
       )
       if (data.status === 'fail') {

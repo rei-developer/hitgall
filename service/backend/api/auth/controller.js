@@ -246,6 +246,13 @@ exports.updateUser = async ctx => {
         status: 'fail'
       }
   }
+  const regex = /^.*(?=.{8,10})(?=.*[a-zA-Z])(?=.*?[A-Z])(?=.*\d)(?=.+?[\W|_])[a-zA-Z0-9!@#$%^&*()-_+={}\|\\\/]+$/gm;
+  if (!regex.test(newPassword)) {
+    return ctx.body = {
+      message: '알파벳 대/소문자,숫자,특수문자 포함하여 8글자 이상',
+      status: 'fail'
+    }
+  }
   if (newPassword !== '' && newPassword2 !== '' && newPassword === newPassword2) {
     const getSalt = await readUser.salt(user.id)
     console.log(getSalt)

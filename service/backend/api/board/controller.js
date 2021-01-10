@@ -159,6 +159,8 @@ module.exports.updateAdminBoardInfo = async ctx => {
   let {
     description,
     imageUrl,
+    bestLimit,
+    noticeLimit,
     agencyAllowed,
     vpnAllowed,
     notuserAllowed
@@ -181,6 +183,8 @@ module.exports.updateAdminBoardInfo = async ctx => {
   }
   await updateBoard({
     description,
+    bestLimit,
+    noticeLimit,
     agencyAllowed,
     vpnAllowed,
     notuserAllowed

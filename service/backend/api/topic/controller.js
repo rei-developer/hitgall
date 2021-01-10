@@ -39,7 +39,7 @@ const deleteTopic = require('../../database/topic/deleteTopic')
 
 // const client = redis.createClient()
 
-const BEST_LIMIT = 3
+//const BEST_LIMIT = 3
 // const DELETE_LIMIT = 10
 
 module.exports.getTopicCounts = async ctx => {
@@ -541,7 +541,8 @@ module.exports.createPost = async ctx => {
 module.exports.createTopicVotes = async ctx => {
   const token = ctx.get('x-access-token')
   const user = token !== '' ? await User.getUser(token) : null
-  let {id, likes} = ctx.request.body
+  let {domain, id, likes} = ctx.request.body
+  const { bestLimit, isAdminOnly }  = await readBoard.isAdminOnly(domain)
   if (id < 1)
     return
   const topic = await readTopic(id)
@@ -551,7 +552,7 @@ module.exports.createTopicVotes = async ctx => {
     }
   const targetUser = await readUser(topic.userId) || 0
   const ip = ctx.get('x-real-ip')
-  if (topic.ip === ip) // topic.userId === user.id ||
+  if (topic.ip === ip && user.isAdmin < 1) // topic.userId === user.id ||
     return ctx.body = {
       message: '본인에게 투표할 수 없습니다.',
       status: 'fail'
@@ -564,7 +565,7 @@ module.exports.createTopicVotes = async ctx => {
       status: 'fail'
     }
   const date = await readTopic.topicVotes(user ? user.id : 0, id, likes, ip)
-  if (date) {
+  if (date && user.isAdmin < 1) {
     const created = moment(date).format('YYYY/MM/DD HH:mm:ss')
     return ctx.body = {
       message: `이미 투표한 게시물입니다. (${created})`,
@@ -574,7 +575,7 @@ module.exports.createTopicVotes = async ctx => {
   await createTopic.createTopicVotes(user ? user.id : 0, id, likes, ip)
   let move = ''
   if (likes) {
-    if (topic.isBest === 0 && topic.likes - topic.hates >= BEST_LIMIT) {
+    if (topic.isBest === 0 && topic.likes - topic.hates >= (bestLimit-1)) {
       move = 'BEST'
       await updateTopic.updateTopicByIsBest(id, 1)
       if (targetUser > 0)
@@ -585,7 +586,7 @@ module.exports.createTopicVotes = async ctx => {
     }
     await updateTopic.updateTopicCountsByLikes(id)
   } else {
-    if (topic.isBest === 1 && topic.hates - topic.likes >= BEST_LIMIT) {
+    if (topic.isBest === 1 && topic.hates - topic.likes >= (bestLimit-1)) {
       move = 'DEFAULT'
       await updateTopic.updateTopicByIsBest(id)
       if (targetUser > 0)

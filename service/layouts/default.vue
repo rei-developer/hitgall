@@ -58,7 +58,7 @@ export default {
     return {
       ver: {
         backend: 0,
-        frontend: 353
+        frontend: 354
       }
     }
   },
