@@ -247,7 +247,7 @@ exports.updateUser = async ctx => {
       }
   }
   const regex = /^.*(?=.{8,10})(?=.*[a-zA-Z])(?=.*?[A-Z])(?=.*\d)(?=.+?[\W|_])[a-zA-Z0-9!@#$%^&*()-_+={}\|\\\/]+$/gm;
-  if (!regex.test(newPassword)) {
+  if (!regex.test(newPassword) && newPassword !== '') {
     return ctx.body = {
       message: '알파벳 대/소문자,숫자,특수문자 포함하여 8글자 이상',
       status: 'fail'
@@ -278,9 +278,9 @@ exports.updateUser = async ctx => {
     nickname,
     viewImage
   }, user.id)
-  ctx.body = {
+    ctx.body = {
     status: 'ok'
-  }
+  } 
 }
 
 // module.exports.showRecaptcha = async ctx => {
