@@ -16,6 +16,7 @@ export default {
   data() {
     return {
       audio: [
+        // 음악 업로드 : https://www.mailboxdrive.com/home/
         {
           'name': '바람의 나라 - 타이틀',
           'artist': 'be',
@@ -45,36 +46,6 @@ export default {
           'artist': 'be',
           'url': 'https://baram.vod.nexoncdn.co.kr/multimedia/ost/07_The_great_Wall.mp3',
           'cover': 'https://ssl.nx.com/s2/game/Baram/2016/renewal/thum/music_thum07.jpg'
-        },
-        {
-          'name': '마비노기 - 어릴 적 할머니가 들려주신 옛 전설',
-          'artist': 'HanStone',
-          'url': 'http://mabinogi.vod.nexoncdn.co.kr/music/Title_Open_Ver.mp3',
-          'cover': 'http://s.nx.com/s2/game/mabinogi/mabiweb/homepage/images/music/thum/27.jpg'
-        },
-        {
-          'name': '마비노기 - 소원',
-          'artist': 'HanStone',
-          'url': 'http://mabinogi.vod.nexoncdn.co.kr/music/NPC_Guide.mp3',
-          'cover': 'http://s.nx.com/s2/game/mabinogi/mabiweb/homepage/images/music/thum/01.jpg'
-        },
-        {
-          'name': '마비노기 - 장엄한 광경',
-          'artist': 'HanStone',
-          'url': 'http://mabinogi.vod.nexoncdn.co.kr/music/cutscene11.mp3',
-          'cover': 'http://s.nx.com/s2/game/mabinogi/mabiweb/homepage/images/music/thum/01.jpg'
-        },
-        {
-          'name': '마비노기 - 최종무곡(最終舞曲)',
-          'artist': 'HanStone',
-          'url': 'http://mabinogi.vod.nexoncdn.co.kr/music/Boss_FDG.mp3',
-          'cover': 'http://s.nx.com/s2/game/mabinogi/mabiweb/homepage/images/music/thum/01.jpg'
-        },
-        {
-          'name': '마비노기 - 팔리아스의 성좌',
-          'artist': 'HanStone',
-          'url': 'http://mabinogi.vod.nexoncdn.co.kr/music/Boss_Nuadha.mp3',
-          'cover': 'http://s.nx.com/s2/game/mabinogi/mabiweb/homepage/images/music/thum/03.jpg'
         },
         {
           'name': 'エアーマンが倒せない (에어맨이 쓰러지지 않아)',
