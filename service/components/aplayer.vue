@@ -4,9 +4,9 @@
       :audio='audio'
       :fixed='true'
       :mini='true'
-      :volume='0.6'
+      :volume='0.8'
       :mutex='true'
-      :autoplay='true'
+      :autoplay='false'
       :listFolded='true'/>
   </client-only>
 </template>

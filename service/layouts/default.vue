@@ -35,7 +35,7 @@
       <aside/>
     </footer>
     <!-- music player -->
-    <!-- <Aplayer v-if='$store.state.user.isLogged && ( $store.state.user.level > 1 || $store.state.user.point > 300 || $store.state.user.isAdmin > 0 )' /> -->
+    <Aplayer/>
   </div>
 </template>
 
@@ -44,7 +44,7 @@ import Notify from '~/components/header/notify.vue'
 import Header from '~/components/header'
 import Sidebar from '~/components/sidebar.vue'
 import Footer from '~/components/footer.vue'
-// import Aplayer from '~/components/aplayer.vue'
+import Aplayer from '~/components/aplayer.vue'
 
 export default {
   components: {
@@ -52,7 +52,7 @@ export default {
     Header,
     Sidebar,
     Footer,
-    // Aplayer
+    Aplayer
   },
   data() {
     return {
