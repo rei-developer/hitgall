@@ -86,6 +86,9 @@
         <!-- <li @click='forceUpdate'><nuxt-link to='/hit'>HIT</nuxt-link></li> -->
         <!-- <li @click='forceUpdate'><nuxt-link to='/gallery'>짤수집</nuxt-link></li> -->
         <li @click='forceUpdate'>
+          <nuxt-link to='/gallery'>갤러리</nuxt-link>
+        </li>
+        <li @click='forceUpdate'>
           <nuxt-link to='/board/girl'>연예인</nuxt-link>
         </li>
         <li @click='forceUpdate'>
