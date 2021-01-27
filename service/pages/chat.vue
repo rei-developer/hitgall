@@ -180,6 +180,8 @@ export default {
       this.isTargetTyping = false
     },
     textTemplate(target, text) {
+      if (text.indexOf('핑퐁') !== -1)
+        text = '안녕 ㅋㅋ'
       this.chattingList.push({
         target,
         text
