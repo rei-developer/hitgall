@@ -40,6 +40,12 @@
             힛갤콘
           </nuxt-link>
         </li>
+        <li v-shortkey.once='["c"]' @shortkey='move("/chat")' @click='forceUpdate'>
+          <nuxt-link to='/chat'>
+            <font-awesome-icon icon='comments'/>
+            시루와 대화하기
+          </nuxt-link>
+        </li>
         <li @click='forceUpdate'>
           <nuxt-link to='/board/request'>갤러리 신청</nuxt-link>
         </li>
@@ -55,7 +61,7 @@
                 <img :src='$store.state.user.profileImageUrl' @error='imageUrlAlt'>
             </div> -->
             <!-- <img :src='`/level/${$store.state.user.level}.png`'> -->
-            <img alt="icon" :src='`/icon/${$store.state.user.icon}`' v-if='$store.state.user.icon !== ""'>
+            <img alt='icon' :src='`/icon/${$store.state.user.icon}`' v-if='$store.state.user.icon !== ""'>
             <strong>{{ $store.state.user.nickname }}</strong>
           </nuxt-link>
         </li>
@@ -72,11 +78,11 @@
         <font-awesome-icon icon='bars'/>
       </b-button>
     </div>
-<!--    <div class='appInstall desktop-only'>-->
-<!--      <b-button pill size='lg' v-if='installed' variant='info' @click='install()'>-->
-<!--        <font-awesome-icon icon='cloud-download-alt'/>-->
-<!--      </b-button>-->
-<!--    </div>-->
+    <!--    <div class='appInstall desktop-only'>-->
+    <!--      <b-button pill size='lg' v-if='installed' variant='info' @click='install()'>-->
+    <!--        <font-awesome-icon icon='cloud-download-alt'/>-->
+    <!--      </b-button>-->
+    <!--    </div>-->
     <b-sidebar
       id='sidebar-backdrop'
       v-model='visible'
@@ -85,6 +91,12 @@
       <ul>
         <!-- <li @click='forceUpdate'><nuxt-link to='/hit'>HIT</nuxt-link></li> -->
         <!-- <li @click='forceUpdate'><nuxt-link to='/gallery'>짤수집</nuxt-link></li> -->
+        <li @click='forceUpdate'>
+          <nuxt-link to='/chat'>
+            <font-awesome-icon icon='comments'/>
+            시루와 대화하기
+          </nuxt-link>
+        </li>
         <li @click='forceUpdate'>
           <nuxt-link to='/gallery'>갤러리</nuxt-link>
         </li>
@@ -165,11 +177,11 @@ export default {
       this.installPromptEvent.prompt()
       this.installPromptEvent.userChoice.then((choice) => {
         if (choice.outcome === 'accepted') {
-          console.log('User accepted the A2HS prompt');
+          console.log('User accepted the A2HS prompt')
           this.installed = false
           location.reload()
         } else {
-          console.log('User dismissed the A2HS prompt');
+          console.log('User dismissed the A2HS prompt')
         }
       })
       this.installPromptEvent = null

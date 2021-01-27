@@ -245,7 +245,7 @@ module.exports = {
     description:'힛갤',
     mobileApp:'mobile-web-app-capable'
   }
- }
+}
   // firebase:  {
   //   config: {
   //     apiKey: 'AIzaSyDLM1hRPZUx6386HL6SFDoiNcIa93ITP9U',

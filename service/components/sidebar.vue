@@ -16,8 +16,18 @@
     <article class='side'>
       <ul>
         <li @click='forceUpdate'>
+          <nuxt-link to='/chat'>
+            <font-awesome-icon icon='comments'/>
+            시루와 대화하기
+          </nuxt-link>
+        </li>
+        <li @click='forceUpdate'>
           <nuxt-link to='/gallery'>갤러리</nuxt-link>
         </li>
+      </ul>
+    </article>
+    <article class='side'>
+      <ul>
         <li @click='forceUpdate'>
           <nuxt-link to='/board/girl'>연예인</nuxt-link>
         </li>
@@ -100,7 +110,7 @@ export default {
     },
     numberWithCommas(x) {
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-    },
+    }
   }
 }
 </script>

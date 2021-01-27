@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="834b01fe-2b67-436b-9738-6787482c69a0" name="디폴트 변경 목록" comment="노무현 갤러리" />
+    <list default="true" id="834b01fe-2b67-436b-9738-6787482c69a0" name="디폴트 변경 목록" comment="노무현 갤러리">
+      <change afterPath="$PROJECT_DIR$/service/backend/api/chat/controller.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/backend/api/chat/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/pages/chat.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/backend/api/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/service/backend/api/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/components/header/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/components/header/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/components/sidebar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/components/sidebar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/nuxt.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/service/nuxt.config.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,7 +19,13 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="2" />
+  </component>
   <component name="ProjectId" id="1mHoyFdkxzabN57onidYUKOEYvL" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -27,9 +42,27 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="yarn" />
     <property name="settings.editor.selected.configurable" value="net.vektah.codeglance.config.ConfigEntry" />
     <property name="vue.rearranger.settings.migration" value="true" />
     <property name="vuejs.nuxt.types-notification-shown" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/service/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.dev" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -43,6 +76,7 @@
       <workItem from="1609237773026" duration="98000" />
       <workItem from="1609237891485" duration="1375000" />
       <workItem from="1609259356440" duration="143000" />
+      <workItem from="1611745690417" duration="9180000" />
     </task>
     <task id="LOCAL-00001" summary="노무현 갤러리">
       <created>1609160167955</created>
