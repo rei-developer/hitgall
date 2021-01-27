@@ -156,8 +156,8 @@ export default {
         )
         if (data.status === 'fail')
           return this.$toast(data.message || '알 수 없는 오류가 발생했습니다')
-        const startTime = Math.floor(Math.random() * 4000) + 1000
-        const duration = startTime + Math.floor(Math.random() * 10000)
+        const startTime = Math.floor(Math.random() * 1500) + 500
+        const duration = startTime + Math.floor(Math.random() * 5000)
         setTimeout(() => this.isTargetTyping = true, startTime)
         setTimeout(() => this.receiveMessage(data.result), duration)
       } catch (error) {
