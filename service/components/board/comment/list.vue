@@ -56,6 +56,7 @@
                 </div>
                 <div
                   class='sticker'
+                  v-viewer
                   v-if='item.randomImageUrl'
                 >
                   <img :src='item.randomImageUrl'>
