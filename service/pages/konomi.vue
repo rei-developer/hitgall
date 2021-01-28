@@ -4,8 +4,8 @@
       rounded='sm'
       :show='loading'
     >
-      <div class='view' v-if='content'>
-        <img id='img' :src='content' alt='image'/>
+      <div class='view'>
+        <img id='img' :src='content' alt='image' v-if='content'/>
         <div class='bottom'>
           <b-button
             variant='success'
@@ -17,8 +17,10 @@
             variant='primary'
             @click='fetch'
           >
-            새로 불러오기
+            랜덤 불러오기
           </b-button>
+          <span>혹은 이미지 직접 업로드</span>
+          <input id='upload' type='file' accept='image/*' @change='onFileUpload'/>
         </div>
         <div class='result' v-if='predictions.length > 0'>
           <ul class='header'>
@@ -51,6 +53,8 @@
 <style lang='less' scoped>
 .view {
   > img {
+    max-width: 100%;
+    height: auto;
     margin-bottom: 1rem;
     border-radius: .5rem;
   }
@@ -90,9 +94,6 @@ export default {
       loading: false
     }
   },
-  mounted() {
-    this.fetch()
-  },
   methods: {
     async fetch() {
       if (this.loading)
@@ -100,14 +101,33 @@ export default {
       this.loading = true
       const data = await this.$axios.$get('/api/random')
       this.content = data.content
+      this.predictions = []
       this.loading = false
+    },
+    async onFileUpload(event) {
+      if (this.loading)
+        return this.$toast('현재 결과를 불러오는 중입니다')
+      if (event.target.files && event.target.files[0]) {
+        this.loading = true
+        try {
+          const result = await new Promise((resolve, reject) => {
+            let FR = new FileReader()
+            FR.addEventListener('load', e => resolve(e.target.result))
+            FR.readAsDataURL(event.target.files[0])
+          })
+          this.content = result
+        } catch (error) {
+          this.$toast(error)
+        } finally {
+          this.loading = false
+        }
+      }
     },
     async onChoiceClick() {
       if (!this.content)
         return this.$toast('데이터가 없습니다')
       if (this.loading)
         return this.$toast('현재 결과를 불러오는 중입니다')
-      this.predictions = []
       this.loading = true
       const img = document.getElementById('img')
       const model = await mobilenet.load()
