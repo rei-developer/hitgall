@@ -505,7 +505,7 @@ module.exports.createPost = async ctx => {
   let randomImageUrl = null
   if (domain === 'anime') {
     try {
-      const {url} = await nsfw.randomHentaiGif()
+      const {url} = await nsfw.ero()
       randomImageUrl = url
     } finally {
     }
