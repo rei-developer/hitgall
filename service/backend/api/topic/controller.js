@@ -1,3 +1,5 @@
+const client = require('nekos.life')
+const {nsfw} = new client()
 const {Storage} = require('@google-cloud/storage')
 
 const dotenv = require('dotenv')
@@ -233,21 +235,21 @@ module.exports.getContent = async ctx => {
   var regex = /<p><img\ssrc="([a-zA-Z0-9\-_:/.]+)"\salt="([a-zA-Z0-9\-_:/.]+)"><\/p>/gi
   switch (viewData.viewImage) {
     case 0 ://일반
-      break;
+      break
     case 1 ://이미지만 안보기
       var images = []
       topic.content = topic.content.replace(regex, '')
-      break;
+      break
     case 2 ://노짤만 안보기
       var boardImageUrl = false
-      break;
+      break
     case 3 ://다 안보기
       var images = []
       topic.content = topic.content.replace(regex, '')
       var boardImageUrl = false
-      break;
+      break
     default :
-      break;
+      break
   }
   ctx.body = {
     topic,
@@ -500,6 +502,14 @@ module.exports.createPost = async ctx => {
         status: 'fail'
       }
   }
+  let randomImageUrl = null
+  if (domain === 'anime') {
+    try {
+      const {url} = await nsfw.ero()
+      randomImageUrl = url
+    } finally {
+    }
+  }
   const postId = await createPost({
     userId: user ? user.id : 0,
     topicId,
@@ -511,6 +521,7 @@ module.exports.createPost = async ctx => {
     content,
     stickerId: sticker.id,
     stickerSelect: sticker.select,
+    randomImageUrl,
     ip,
     header
   })
@@ -542,7 +553,7 @@ module.exports.createTopicVotes = async ctx => {
   const token = ctx.get('x-access-token')
   const user = token !== '' ? await User.getUser(token) : null
   let {domain, id, likes} = ctx.request.body
-  const { bestLimit, isAdminOnly }  = await readBoard.isAdminOnly(domain)
+  const {bestLimit, isAdminOnly} = await readBoard.isAdminOnly(domain)
   if (id < 1)
     return
   const topic = await readTopic(id)
@@ -575,7 +586,7 @@ module.exports.createTopicVotes = async ctx => {
   await createTopic.createTopicVotes(user ? user.id : 0, id, likes, ip)
   let move = ''
   if (likes) {
-    if (topic.isBest === 0 && topic.likes - topic.hates >= (bestLimit-1)) {
+    if (topic.isBest === 0 && topic.likes - topic.hates >= (bestLimit - 1)) {
       move = 'BEST'
       await updateTopic.updateTopicByIsBest(id, 1)
       if (targetUser > 0)
@@ -586,7 +597,7 @@ module.exports.createTopicVotes = async ctx => {
     }
     await updateTopic.updateTopicCountsByLikes(id)
   } else {
-    if (topic.isBest === 1 && topic.hates - topic.likes >= (bestLimit-1)) {
+    if (topic.isBest === 1 && topic.hates - topic.likes >= (bestLimit - 1)) {
       move = 'DEFAULT'
       await updateTopic.updateTopicByIsBest(id)
       if (targetUser > 0)

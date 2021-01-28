@@ -34,13 +34,13 @@
             <div class='content'>
               <div @click='handleCommand(["reply", item.id])'>
                 <!-- <img :src='`/level/${item.level}.png`'> -->
-                <img class='icon' alt=""
+                <img class='icon' alt=''
                      :src='`/${item.admin ? "admin" : "user" + (item.userId > 0 ? 1 : 0) + (item.boardLevel || 0)}.png`'>
                 <span class='author'>
                                     {{ item.author }}
                                     <span class='ip' v-if='item.userId < 1 && item.ip !== ""'>({{ item.ip }})</span>
                                 </span>
-                <span class='regdate'>{{ $moment(item.updated).format("YY/MM/DD HH:mm:ss") }}</span>
+                <span class='regdate'>{{ $moment(item.updated).format('YY/MM/DD HH:mm:ss') }}</span>
               </div>
               <div :class='item.sameUser || item.userId === topic.userId ? "writer" : ""'
                    @click='handleCommand(["reply", item.id])'>
@@ -52,7 +52,13 @@
                   class='sticker'
                   @click='viewSticker(item.stickerId)'
                   v-if='item.stickerId > 0'>
-                  <img alt="" :src='`https://cdn.hitgall.com/sticker/${item.stickerId}/${item.stickerSelect}`'>
+                  <img :src='`https://cdn.hitgall.com/sticker/${item.stickerId}/${item.stickerSelect}`'>
+                </div>
+                <div
+                  class='sticker'
+                  v-if='item.randomImageUrl'
+                >
+                  <img :src='item.randomImageUrl'>
                 </div>
                 <span v-html='item.content'/>
               </div>

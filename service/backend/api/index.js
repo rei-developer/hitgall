@@ -25,7 +25,7 @@ app.get('/version', ctx => ctx.body = {
 })
 app.get('/random', async ctx => {
   try {
-    const {url} = await nsfw.girlSolo()
+    const {url} = await nsfw.ero()
     const result = await new Promise((resolve, reject) => {
       request.get(url, (error, response, body) => {
         if (error || response.statusCode !== 200)
