@@ -22,6 +22,12 @@
           </nuxt-link>
         </li>
         <li @click='forceUpdate'>
+          <nuxt-link to='/konomi'>
+            <font-awesome-icon icon='image'/>
+            인공지능 2D 분석
+          </nuxt-link>
+        </li>
+        <li @click='forceUpdate'>
           <nuxt-link to='/gallery'>갤러리</nuxt-link>
         </li>
       </ul>

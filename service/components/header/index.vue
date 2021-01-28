@@ -40,10 +40,16 @@
             힛갤콘
           </nuxt-link>
         </li>
-        <li v-shortkey.once='["c"]' @shortkey='move("/chat")' @click='forceUpdate'>
+        <li @click='forceUpdate'>
           <nuxt-link to='/chat'>
             <font-awesome-icon icon='comments'/>
             시루와 대화하기
+          </nuxt-link>
+        </li>
+        <li @click='forceUpdate'>
+          <nuxt-link to='/konomi'>
+            <font-awesome-icon icon='image'/>
+            인공지능 2D 분석
           </nuxt-link>
         </li>
         <li @click='forceUpdate'>
@@ -95,6 +101,12 @@
           <nuxt-link to='/chat'>
             <font-awesome-icon icon='comments'/>
             시루와 대화하기
+          </nuxt-link>
+        </li>
+        <li @click='forceUpdate'>
+          <nuxt-link to='/konomi'>
+            <font-awesome-icon icon='image'/>
+            인공지능 2D 분석
           </nuxt-link>
         </li>
         <li @click='forceUpdate'>

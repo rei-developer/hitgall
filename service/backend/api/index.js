@@ -1,4 +1,7 @@
+const request = require('request').defaults({encoding: null})
+const client = require('nekos.life')
 const Router = require('koa-router')
+
 const auth = require('./auth')
 const board = require('./board')
 const chat = require('./chat')
@@ -14,10 +17,27 @@ const save = require('./save')
 const VERSION = 354
 
 const app = new Router()
+const {nsfw} = new client()
 
 app.get('/version', ctx => ctx.body = {
   version: VERSION,
   status: 'ok'
+})
+app.get('/random', async ctx => {
+  try {
+    const {url} = await nsfw.girlSolo()
+    const result = await new Promise((resolve, reject) => {
+      request.get(url, (error, response, body) => {
+        if (error || response.statusCode !== 200)
+          return reject({message: error || 'unknown error', status: 'fail'})
+        const content = `data:${response.headers['content-type']};base64,${Buffer.from(body).toString('base64')}`
+        resolve({url, content, status: 'ok'})
+      })
+    })
+    return ctx.body = result
+  } catch (e) {
+    return ctx.body = e
+  }
 })
 app.use('/auth', auth.routes())
 app.use('/board', board.routes())
