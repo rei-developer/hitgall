@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class='content-box'>
     <b-modal
       id='bv-back-modal'
       @ok='$router.push({ path: `/board/${domain}` })'
@@ -631,7 +631,15 @@ export default {
 </script>
 
 <style lang='less' scoped>
-@primary: #4F3F7E;
+@primary: #EFA7B0;
+
+.content-box {
+  margin-bottom: 1rem;
+  padding: .5rem;
+  border-radius: 2px;
+  background: #FFF;
+  box-shadow: 1px 0 10px rgba(0, 0, 0, .1);
+}
 
 .client-only-placeholder {
   height: 385px;

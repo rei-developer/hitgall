@@ -1,0 +1,17 @@
+[
+  {
+    "field": "girl",
+    "name": "연예",
+    "visible": true
+  },
+  {
+    "field": "anime",
+    "name": "애니메이션",
+    "visible": true
+  },
+  {
+    "field": "lastorigin",
+    "name": "라스트 오리진",
+    "visible": true
+  }
+]

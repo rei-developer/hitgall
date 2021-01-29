@@ -53,6 +53,7 @@ module.exports = {
    ** Plugins to load before mounting the App
    */
   plugins: [
+    {src: '@/plugins/event-bus'},
     {src: '@/plugins/service-worker.js', mode: 'client'},
     //{ src: "@/plugins/firebase-sw.js" },
     // { src: '@/plugins/socket.io.js' },

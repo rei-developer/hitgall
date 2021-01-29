@@ -113,7 +113,7 @@ export default {
 </script>
 
 <style lang='less' scoped>
-@primary: #4F3F7E;
+@primary: #EFA7B0;
 
 article.widget {
   width: 100%;

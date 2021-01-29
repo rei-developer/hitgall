@@ -310,3 +310,66 @@ module.exports.topicVotes = async (userId, topicId, flag, ip) => {
     return false
   return result[0].created
 }
+
+
+
+const getCommonConditionList = (columns, q, interval, prefix = null) => {
+  const purePrefix = prefix ? `${prefix}.` : ''
+  let commonConditionList = []
+  if (columns)
+    _.forIn(columns, (value, key) => commonConditionList.push(`${key} = '${value}'`))
+  if (q)
+    commonConditionList.push(`title LIKE '%${q}%'`)
+  if (interval)
+    commonConditionList.push(`${purePrefix}created BETWEEN DATE_ADD(NOW(), INTERVAL -${interval} DAY) AND NOW()`)
+  return commonConditionList
+}
+
+module.exports.getTopicWidgetList = async (columns, limit, interval) => {
+  const commonConditionList = getCommonConditionList(columns, interval)
+  try {
+    const result = await pool.query(
+      `
+      SELECT
+        A.id,
+        A.title,
+        B.likes,
+        IF(A.isImage = 1, (SELECT imageUrl FROM TopicImages WHERE topicId = A.id ORDER BY id LIMIT 1), NULL) AS imageUrl
+      FROM Topics AS A
+        INNER JOIN TopicCounts AS B ON (B.topicId = A.id)
+      ${commonConditionList.length > 0 ? `WHERE ${commonConditionList.join(' AND ')}` : ''}
+      ORDER BY A.id DESC
+      LIMIT ?
+      `,
+      [limit]
+    )
+    if (result.length < 1)
+      return false
+    return result
+  } catch (error) {
+    console.error(error.message)
+    return false
+  }
+}
+
+module.exports.getTopicThumbList = async () => {
+  try {
+    const result = await pool.query(
+      `
+      SELECT
+        A.id,
+        (SELECT imageUrl FROM TopicImages WHERE topicId = A.id ORDER BY id LIMIT 1) AS imageUrl
+      FROM Topics AS A
+      WHERE A.isImage = 1
+      ORDER BY A.id DESC
+      LIMIT 9
+      `
+    )
+    if (result.length < 1)
+      return false
+    return result
+  } catch (error) {
+    console.error(error.message)
+    return false
+  }
+}

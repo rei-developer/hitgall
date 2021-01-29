@@ -1,166 +1,320 @@
 <template>
-  <div>
-    <nav>
-      <!-- main part -->
+  <div class='wrapper'>
+    <SidebarMenu v-if='isSidebar'/>
+    <header
+      :class='[
+        "desktop-only",
+        top >= 100 ? "fixed" : undefined
+      ]'
+    >
       <ul>
-        <!-- logo -->
-        <li class='logo' v-shortkey.once='["m"]' @shortkey='move("/")' @click='forceUpdate'>
-          <nuxt-link to='/'>
-            HitGall.com
-          </nuxt-link>
+        <nuxt-link to='/'>
+          <li class='logo'>
+            <div>
+              <img src='/logo.png' alt='힛갤'>
+            </div>
+            <div>
+              <div>HITGALL</div>
+              <div>밤새 갤질 쌉가능?</div>
+            </div>
+          </li>
+        </nuxt-link>
+        <li class='right'>
+          <b-button-group v-if='$store.state.user.isLogged'>
+            <b-button squared size='sm' variant='primary' to='/user/edit'>
+              <font-awesome-icon icon='cog'/>
+              {{ $store.state.user.nickname }}
+            </b-button>
+          </b-button-group>
+          <b-button-group v-else>
+            <b-button squared size='sm' variant='primary' to='/signin'>
+              <font-awesome-icon icon='sign-in-alt'/>
+              로그인
+            </b-button>
+            <b-button squared size='sm' variant='outline-primary' to='/signup'>회원가입</b-button>
+          </b-button-group>
         </li>
-        <!-- sidebar -->
-        <li class='sidebar mobile-only' v-b-toggle.sidebar-backdrop>
-          <span>
-            <font-awesome-icon icon='bars'/>
-          </span>
-        </li>
-        <!-- menu -->
-        <!-- <li v-shortkey.once='["h"]' @shortkey='move("/hit")' @click='forceUpdate'>
-            <nuxt-link to='/hit'>
-                <font-awesome-icon icon='star'/>
-                HIT
-            </nuxt-link>
-        </li>
-        <li @click='forceUpdate'>
-            <nuxt-link to='/all'>
-                <font-awesome-icon icon='folder-open'/>
-                전체글
-            </nuxt-link>
-        </li>
-        <li v-shortkey.once='["y"]' @shortkey='move("/gallery")' @click='forceUpdate'>
-            <nuxt-link to='/gallery'>
-                <font-awesome-icon icon='camera'/>
-                짤수집
-            </nuxt-link>
-        </li> -->
-        <li v-shortkey.once='["t"]' @shortkey='move("/sticker")' @click='forceUpdate'>
-          <nuxt-link to='/sticker'>
+      </ul>
+    </header>
+    <header class='mobile-only'/>
+    <nav
+      :class='[
+        "desktop-only",
+        top >= 100 ? "fixed" : undefined
+      ]'
+    >
+      <ul>
+        <nuxt-link
+          :to='`/board/${item.field}`'
+          v-for='(item, index) in boardList'
+          :key='index'
+        >
+          <li @click='forceUpdate($event, item.field)'>
+            <div class='icon'/>
+            {{ item.name }}
+          </li>
+        </nuxt-link>
+        <nuxt-link to='/sticker'>
+          <li v-shortkey.once='["t"]' @shortkey='move("/sticker")' @click='forceUpdate'>
             <font-awesome-icon icon='smile'/>
             힛갤콘
-          </nuxt-link>
-        </li>
-        <li @click='forceUpdate'>
-          <nuxt-link to='/chat'>
+          </li>
+        </nuxt-link>
+        <nuxt-link to='/chat'>
+          <li @click='forceUpdate'>
             <font-awesome-icon icon='comments'/>
             시루와 대화하기
-          </nuxt-link>
-        </li>
-        <li @click='forceUpdate'>
-          <nuxt-link to='/konomi'>
+          </li>
+        </nuxt-link>
+        <nuxt-link to='/konomi'>
+          <li @click='forceUpdate'>
             <font-awesome-icon icon='image'/>
             인공지능 2D 분석
-          </nuxt-link>
-        </li>
-        <li @click='forceUpdate'>
-          <nuxt-link to='/board/request'>갤러리 신청</nuxt-link>
-        </li>
-        <li v-if='$store.state.user.isLogged'>
-          <nuxt-link to='/board/admin'>갤러리 관리</nuxt-link>
-        </li>
-      </ul>
-      <!-- login part -->
-      <ul class='right'>
-        <li v-if='$store.state.user.isLogged'>
-          <nuxt-link to='/user/edit'>
-            <!-- <div class='profile'>
-                <img :src='$store.state.user.profileImageUrl' @error='imageUrlAlt'>
-            </div> -->
-            <!-- <img :src='`/level/${$store.state.user.level}.png`'> -->
-            <img alt='icon' :src='`/icon/${$store.state.user.icon}`' v-if='$store.state.user.icon !== ""'>
-            <strong>{{ $store.state.user.nickname }}</strong>
-          </nuxt-link>
-        </li>
-        <li v-shortkey.once='["l"]' @shortkey='move("/signin")' v-else>
-          <nuxt-link to='/signin'>
-            로그인
-            <font-awesome-icon icon='sign-in-alt'/>
-          </nuxt-link>
-        </li>
+          </li>
+        </nuxt-link>
+        <nuxt-link to='/gallery'>
+          <li @click='forceUpdate'>
+            <font-awesome-icon icon='camera'/>
+            갤러리
+          </li>
+        </nuxt-link>
+        <nuxt-link to='/board/request'>
+          <li @click='forceUpdate'>
+            갤러리 신청
+          </li>
+        </nuxt-link>
+        <nuxt-link to='/board/admin' v-if='$store.state.user.isLogged'>
+          <li>
+            갤러리 관리
+          </li>
+        </nuxt-link>
       </ul>
     </nav>
-    <div class='openSidebar desktop-only'>
-      <b-button pill size='lg' variant='primary' v-b-toggle.sidebar-backdrop>
-        <font-awesome-icon icon='bars'/>
-      </b-button>
-    </div>
-    <!--    <div class='appInstall desktop-only'>-->
-    <!--      <b-button pill size='lg' v-if='installed' variant='info' @click='install()'>-->
-    <!--        <font-awesome-icon icon='cloud-download-alt'/>-->
-    <!--      </b-button>-->
-    <!--    </div>-->
-    <b-sidebar
-      id='sidebar-backdrop'
-      v-model='visible'
-      backdrop
-      shadow>
+    <nav class='mobile-only fixed'>
       <ul>
-        <!-- <li @click='forceUpdate'><nuxt-link to='/hit'>HIT</nuxt-link></li> -->
-        <!-- <li @click='forceUpdate'><nuxt-link to='/gallery'>짤수집</nuxt-link></li> -->
-        <li @click='forceUpdate'>
-          <nuxt-link to='/chat'>
-            <font-awesome-icon icon='comments'/>
-            시루와 대화하기
-          </nuxt-link>
-        </li>
-        <li @click='forceUpdate'>
-          <nuxt-link to='/konomi'>
-            <font-awesome-icon icon='image'/>
-            인공지능 2D 분석
-          </nuxt-link>
-        </li>
-        <li @click='forceUpdate'>
-          <nuxt-link to='/gallery'>갤러리</nuxt-link>
-        </li>
-        <li @click='forceUpdate'>
-          <nuxt-link to='/board/girl'>연예인</nuxt-link>
-        </li>
-        <li @click='forceUpdate'>
-          <nuxt-link to='/board/anime'>애니메이션</nuxt-link>
-        </li>
-        <li @click='forceUpdate'>
-          <nuxt-link to='/board/lastorigin'>라스트 오리진</nuxt-link>
-        </li>
-        <li @click='forceUpdate'>
-          <nuxt-link to='/board/notice'>공지사항</nuxt-link>
-        </li>
-        <li @click='forceUpdate'>
-          <nuxt-link to='/board/feedback'>건의사항</nuxt-link>
-        </li>
-        <li @click='forceUpdate'>
-          <nuxt-link to='/board/request'>갤러리 신청</nuxt-link>
-        </li>
-        <li>
-          <nuxt-link to='/board/admin'>갤러리 관리</nuxt-link>
-        </li>
-        <li>
-          <nuxt-link to='/sticker'>힛갤콘</nuxt-link>
-        </li>
-        <li class='install' v-if='installed' @click='install()'>
-          <font-awesome-icon icon='cloud-download-alt'/>
-          앱 설치
-        </li>
+        <nuxt-link class='logo' to='/'>
+          <li>
+            <img src='/icon.png' alt='힛갤'>
+          </li>
+        </nuxt-link>
+        <nuxt-link to='/gallery'>
+          <li @click='forceUpdate'>
+            <font-awesome-icon icon='camera'/>
+            갤러리
+          </li>
+        </nuxt-link>
+        <nuxt-link to='/help'>
+          <li>
+            <font-awesome-icon icon='question-circle'/>
+            도움말
+          </li>
+        </nuxt-link>
+        <nuxt-link class='right' :to='$store.state.user.isLogged ? "/user/edit" : "/signin"'>
+          <li v-if='$store.state.user.isLogged'>
+            <font-awesome-icon icon='cog'/>
+          </li>
+          <li v-else>
+            <font-awesome-icon icon='sign-in-alt'/>
+          </li>
+        </nuxt-link>
       </ul>
-    </b-sidebar>
+    </nav>
+    <b-button
+      class='scroll-top'
+      variant='dark'
+      @click='onScrollTopClick'
+      v-if='top >= 100'
+    >
+      <font-awesome-icon icon='chevron-up'/>
+    </b-button>
+    <b-button
+      class='side-menu'
+      variant='dark'
+      @click='onSidebarClick'
+    >
+      <font-awesome-icon icon='bars'/>
+    </b-button>
   </div>
 </template>
 
+<style lang='less' scoped>
+@primary: #061820;
+@primary-hover: #E5DCD1;
+@font-color: #EFA7B0;
+
+.wrapper {
+  background: #fff;
+  > header, nav {
+    > ul {
+      display: flex;
+      align-items: center;
+      width: 1200px;
+      height: 100px;
+      margin: 0 auto;
+      padding: 0;
+      list-style: none;
+      > a {
+        color: @font-color;
+        font-size: 14px;
+        text-decoration: none;
+        > li.logo {
+          display: flex;
+          align-items: center;
+          &:last-child {
+            line-height: 1.2rem;
+            div:first-child {
+              margin-right: 1rem;
+              font-size: 24px;
+              font-weight: bold;
+            }
+          }
+        }
+      }
+      > li {
+        margin-left: 1rem;
+        &.right {
+          display: flex;
+          flex: 1;
+          justify-content: flex-end;
+        }
+      }
+    }
+  }
+  > header.fixed {margin-bottom: calc(1rem + 44px)}
+  > nav {
+    margin-bottom: 1rem;
+    color: #FFF;
+    background: @font-color;
+    box-shadow: 0 5px 10px 0 rgba(0, 64, 128, .2);
+    &.fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 5;
+    }
+    > ul {
+      height: 44px;
+      > a {
+        height: 44px;
+        line-height: 42px;
+        padding: 0 .5rem;
+        color: #FFF;
+        font-size: 13px;
+        font-weight: bold;
+        text-decoration: none;
+        white-space: nowrap;
+        &:hover {
+          color: @primary-hover;
+          background: @primary;
+        }
+      }
+    }
+  }
+  > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    right: 1rem;
+    width: 3rem;
+    height: 3rem;
+    font-size: 2rem;
+    border-radius: 500rem;
+    z-index: 1000;
+    &.scroll-top {
+      bottom: 4.5rem;
+      > svg {margin-bottom: 2px}
+    }
+    &.side-menu {
+      bottom: 1rem;
+      font-size: 1.5rem;
+    }
+  }
+}
+
+.input-group > div:first-child {width: 300px}
+
+@media (max-width: 1199px) {
+  .wrapper > header.mobile-only {height: calc(1rem + 44px)}
+  .wrapper > header,
+  .wrapper > nav > ul {
+    width: 100%;
+    > a {
+      &.logo > li > img { height: 40px; }
+      &.logo:hover,
+      &.right:hover {background: unset}
+      &.right {
+        display: flex;
+        flex: 1;
+        justify-content: flex-end;
+        font-size: 1.5rem;
+      }
+      > li > img {margin-top: -2px}
+    }
+  }
+}
+</style>
+
 <script>
+import SidebarMenu from '@/components/sidebar/menu'
+import BOARD_LIST from '@/data/board-list'
+
 export default {
+  name: 'Header',
+  components: {
+    SidebarMenu
+  },
   data() {
     return {
-      visible: false,
-      installPromptEvent: '',
-      installed: false
+      searchText: '',
+      searchResult: [],
+      boardList: BOARD_LIST
+        .filter(item => item.visible),
+      top: 0,
+      isSidebar: false
+    }
+  },
+  watch: {
+    searchText() {
+      this.search()
+    }
+  },
+  async created() {
+    try {
+      await this.$nextTick()
+      window.addEventListener('scroll', this.handleScroll)
+    } catch (error) {
     }
   },
   mounted() {
-    this.check()
+    this.$eventBus.$on('SetSidebar', () => this.onSidebarClick())
+  },
+  beforeDestroy() {
+    this.$eventBus.$off('SetSidebar')
+  },
+  async destroyed() {
+    try {
+      await this.$nextTick()
+      window.removeEventListener('scroll', this.handleScroll)
+    } catch (error) {
+    }
   },
   methods: {
-    forceUpdate() {
-      this.visible = false
-      this.$store.commit('forceUpdate')
+    forceUpdate(event, field = null) {
+      const board = this.$nuxt.$route.params.board
+      if (board === field)
+        this.$store.commit('forceUpdate')
+    },
+    handleScroll() {
+      this.top = window.top.scrollY
+    },
+    async onScrollTopClick() {
+      await this.$nextTick()
+      window.scrollTo(0, 0)
+    },
+    onSidebarClick() {
+      this.isSidebar = !this.isSidebar
     },
     move(path) {
       if (this.$nuxt.$route.name === 'board-domain-write')
@@ -202,149 +356,112 @@ export default {
 }
 </script>
 
-<style lang='less'>
-nav {
-  display: flex;
-  position: relative;
-  height: 50px;
 
-  ul, li {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
+<!--<template>-->
+<!--  <div>-->
+<!--    <nav>-->
+<!--      &lt;!&ndash; main part &ndash;&gt;-->
+<!--      <ul>-->
+<!--        &lt;!&ndash; logo &ndash;&gt;-->
+<!--        <li class='logo' v-shortkey.once='["m"]' @shortkey='move("/")' @click='forceUpdate'>-->
+<!--          <nuxt-link to='/'>-->
+<!--            HitGall.com-->
+<!--          </nuxt-link>-->
+<!--        </li>-->
+<!--        &lt;!&ndash; sidebar &ndash;&gt;-->
+<!--        <li class='sidebar mobile-only' v-b-toggle.sidebar-backdrop>-->
+<!--          <span>-->
+<!--            <font-awesome-icon icon='bars'/>-->
+<!--          </span>-->
+<!--        </li>-->
+<!--        &lt;!&ndash; menu &ndash;&gt;-->
+<!--        &lt;!&ndash; <li v-shortkey.once='["h"]' @shortkey='move("/hit")' @click='forceUpdate'>-->
+<!--            <nuxt-link to='/hit'>-->
+<!--                <font-awesome-icon icon='star'/>-->
+<!--                HIT-->
+<!--            </nuxt-link>-->
+<!--        </li>-->
+<!--        <li @click='forceUpdate'>-->
+<!--            <nuxt-link to='/all'>-->
+<!--                <font-awesome-icon icon='folder-open'/>-->
+<!--                전체글-->
+<!--            </nuxt-link>-->
+<!--        </li>-->
+<!--        <li v-shortkey.once='["y"]' @shortkey='move("/gallery")' @click='forceUpdate'>-->
+<!--            <nuxt-link to='/gallery'>-->
+<!--                <font-awesome-icon icon='camera'/>-->
+<!--                짤수집-->
+<!--            </nuxt-link>-->
+<!--        </li> &ndash;&gt;-->
 
-  ul {
-    flex: none;
+<!--      </ul>-->
+<!--      &lt;!&ndash; login part &ndash;&gt;-->
+<!--      <ul class='right'>-->
 
-    &.right {
-      margin-left: auto;
-
-      > li > a {
-        > .profile {
-          position: absolute;
-          top: 10px;
-          left: -40px;
-
-          > img {
-            width: 40px;
-            height: 40px;
-            margin: -5px 5px 0;
-            padding: 2px;
-            border: 1px solid #333;
-            border-radius: 500rem;
-            background-color: #fff;
-          }
-        }
-
-        > img:nth-child(2) {
-          margin-bottom: 4px
-        }
-
-        > img:nth-child(3) {
-          width: 16px;
-          height: 16px;
-          margin-bottom: 4px;
-          border-radius: 2px;
-        }
-      }
-    }
-  }
-
-  > ul {
-    > li {
-      float: left;
-      position: relative;
-      outline: none;
-
-      > a, span {
-        font-size: 15px;
-        color: #4F3F7E;
-        text-decoration: none;
-        display: block;
-        padding: 0 1rem;
-
-        &:hover {
-          color: #4F3F7E;
-          text-decoration: none;
-        }
-      }
-
-      > span {
-        font-size: 24px;
-        // padding: 7px 14px;
-      }
-
-      &.logo {
-        > a {
-          font-family: 'rubik';
-          font-size: 18px;
-          font-weight: bold;
-        }
-      }
-    }
-  }
-}
-
-.b-sidebar-header {
-  > .close {
-    color: #fff !important
-  }
-
-  background-color: #4F3F7E;
-}
-
-.b-sidebar-body {
-  > ul {
-    margin: 0;
-    padding: 0;
-    background-color: #fff;
-    list-style: none;
-
-    > li {
-      padding: 0px;
-      border-bottom: 1px solid #eee;
-
-      &.active {
-        background-color: #7F859A;
-
-        > a {
-          color: #fff;
-        }
-      }
-
-      > a {
-        display: block;
-        padding: 10px 20px;
-        line-height: 20px;
-        color: rgb(119, 119, 119);
-        font-size: 14px;
-        text-decoration: none;
-      }
-    }
-
-    > li.install {
-      display: block;
-      padding: 10px 20px;
-      line-height: 20px;
-      color: rgb(119, 119, 119);
-      font-size: 17px;
-      text-decoration: none;
-    }
-  }
-}
-
-.openSidebar {
-  position: fixed;
-  right: 3rem;
-  bottom: 3rem;
-  z-index: 10;
-}
-
-.appInstall {
-  position: fixed;
-  right: 3rem;
-  bottom: 7rem;
-  z-index: 10;
-}
-</style>
+<!--      </ul>-->
+<!--    </nav>-->
+<!--    <div class='openSidebar desktop-only'>-->
+<!--      <b-button pill size='lg' variant='primary' v-b-toggle.sidebar-backdrop>-->
+<!--        <font-awesome-icon icon='bars'/>-->
+<!--      </b-button>-->
+<!--    </div>-->
+<!--    &lt;!&ndash;    <div class='appInstall desktop-only'>&ndash;&gt;-->
+<!--    &lt;!&ndash;      <b-button pill size='lg' v-if='installed' variant='info' @click='install()'>&ndash;&gt;-->
+<!--    &lt;!&ndash;        <font-awesome-icon icon='cloud-download-alt'/>&ndash;&gt;-->
+<!--    &lt;!&ndash;      </b-button>&ndash;&gt;-->
+<!--    &lt;!&ndash;    </div>&ndash;&gt;-->
+<!--    <b-sidebar-->
+<!--      id='sidebar-backdrop'-->
+<!--      v-model='visible'-->
+<!--      backdrop-->
+<!--      shadow>-->
+<!--      <ul>-->
+<!--        &lt;!&ndash; <li @click='forceUpdate'><nuxt-link to='/hit'>HIT</nuxt-link></li> &ndash;&gt;-->
+<!--        &lt;!&ndash; <li @click='forceUpdate'><nuxt-link to='/gallery'>짤수집</nuxt-link></li> &ndash;&gt;-->
+<!--        <li @click='forceUpdate'>-->
+<!--          <nuxt-link to='/chat'>-->
+<!--            <font-awesome-icon icon='comments'/>-->
+<!--            시루와 대화하기-->
+<!--          </nuxt-link>-->
+<!--        </li>-->
+<!--        <li @click='forceUpdate'>-->
+<!--          <nuxt-link to='/konomi'>-->
+<!--            <font-awesome-icon icon='image'/>-->
+<!--            인공지능 2D 분석-->
+<!--          </nuxt-link>-->
+<!--        </li>-->
+<!--        <li @click='forceUpdate'>-->
+<!--          <nuxt-link to='/gallery'>갤러리</nuxt-link>-->
+<!--        </li>-->
+<!--        <li @click='forceUpdate'>-->
+<!--          <nuxt-link to='/board/girl'>연예인</nuxt-link>-->
+<!--        </li>-->
+<!--        <li @click='forceUpdate'>-->
+<!--          <nuxt-link to='/board/anime'>애니메이션</nuxt-link>-->
+<!--        </li>-->
+<!--        <li @click='forceUpdate'>-->
+<!--          <nuxt-link to='/board/lastorigin'>라스트 오리진</nuxt-link>-->
+<!--        </li>-->
+<!--        <li @click='forceUpdate'>-->
+<!--          <nuxt-link to='/board/notice'>공지사항</nuxt-link>-->
+<!--        </li>-->
+<!--        <li @click='forceUpdate'>-->
+<!--          <nuxt-link to='/board/feedback'>건의사항</nuxt-link>-->
+<!--        </li>-->
+<!--        <li @click='forceUpdate'>-->
+<!--          <nuxt-link to='/board/request'>갤러리 신청</nuxt-link>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--          <nuxt-link to='/board/admin'>갤러리 관리</nuxt-link>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--          <nuxt-link to='/sticker'>힛갤콘</nuxt-link>-->
+<!--        </li>-->
+<!--        <li class='install' v-if='installed' @click='install()'>-->
+<!--          <font-awesome-icon icon='cloud-download-alt'/>-->
+<!--          앱 설치-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--    </b-sidebar>-->
+<!--  </div>-->
+<!--</template>-->

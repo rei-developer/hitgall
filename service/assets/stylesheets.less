@@ -1,10 +1,72 @@
 @primary: #CC0000;
 
+@media (max-width: 1199px) {
+  .desktop-only { display: none }
+}
+
+@media (min-width: 1200px) {
+  .mobile-only { display: none }
+}
+
+body {background: #FAFAFA}
+
+span.highlight {
+  padding: 0 2px 2px 2px;
+  color: #000;
+  font-weight: bold;
+  border-radius: 4px;
+  background: #ABF200;
+}
+
+.content {
+  img, video {
+    max-width: 100% !important;
+    height: auto !important;
+    cursor: pointer;
+  }
+  iframe {
+    border: 0 !important;
+    border-radius: 4px !important;
+  }
+}
+
+.vbt-autcomplete-list {
+  width: 300px !important;
+  margin-top: 3px;
+  padding-top: 0 !important;
+  word-break: break-all;
+}
+
+.alert.alert-dismissible.alert-dark > .close {
+  outline: none;
+  &:hover {color: transparent}
+}
+
+@keyframes fadein {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+
+@-moz-keyframes fadein {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+
+@-webkit-keyframes fadein {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+
+@-o-keyframes fadein {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+
 @media (max-width: 1159px) {
     .desktop-only, aside, article.sidebar { display: none }
 
     header {
-        // background-color: #4F3F7E !important;
+        // background-color: #EFA7B0 !important;
         nav > ul {
             > li:not(.sidebar) {
                 display: none;

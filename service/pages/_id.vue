@@ -3,7 +3,7 @@
     <h3>{{ topic.title }}</h3>
     <p>{{ topic.content }}</p>
   </div>
-  <div v-else>
+  <div class='content-box' v-else>
     <b-modal
       id='bv-remove-modal'
       @ok='remove'
@@ -126,7 +126,7 @@
         <div class='qrcode'>
           <client-only>
             <qriously
-              foreground='#4F3F7E'
+              foreground='#EFA7B0'
               :padding='0'
               :value='`https://www.hitgall.com/${id}`'
               :size='80'/>
@@ -467,8 +467,16 @@ export default {
 </script>
 
 <style lang='less' scoped>
-@primary: #4F3F7E;
+@primary: #EFA7B0;
 @primary-focus: #29313E;
+
+.content-box {
+  margin-bottom: 1rem;
+  padding: .5rem;
+  border-radius: 2px;
+  background: #FFF;
+  box-shadow: 1px 0 10px rgba(0, 0, 0, .1);
+}
 
 // desktop
 article.topic-view {

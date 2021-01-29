@@ -303,7 +303,7 @@ export default {
 </script>
 
 <style lang='less' scope>
-@primary: #4F3F7E;
+@primary: #EFA7B0;
 
 article.comment-view {
   > h6 {

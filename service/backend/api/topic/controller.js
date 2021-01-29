@@ -44,6 +44,35 @@ const deleteTopic = require('../../database/topic/deleteTopic')
 //const BEST_LIMIT = 3
 // const DELETE_LIMIT = 10
 
+module.exports.getTopicWidgetList = async ctx => {
+  const sidebar = ctx.request.query.sidebar
+  if (sidebar !== 'Y' && sidebar !== 'N')
+    ctx.throw(400, 'Invalid parameter value')
+  const girlImageList = await readTopic.getTopicWidgetList({boardDomain: 'girl'}, sidebar === 'Y' ? 15 : 10)
+  const animeImageList = await readTopic.getTopicWidgetList({boardDomain: 'anime'}, sidebar === 'Y' ? 15 : 10)
+  const girlList = sidebar === 'N'
+    ? await readTopic.getTopicWidgetList({boardDomain: 'girl'}, 30)
+    : []
+  const otherList = sidebar === 'N'
+    ? await readTopic.getTopicWidgetList(null, 30)
+    : []
+  ctx.body = {
+    status: 'DONE',
+    girlImageList,
+    animeImageList,
+    girlList,
+    otherList
+  }
+}
+
+module.exports.getTopicThumbList = async ctx => {
+  const result = await readTopic.getTopicThumbList()
+  ctx.body = {
+    status: 'DONE',
+    result
+  }
+}
+
 module.exports.getTopicCounts = async ctx => {
   const {domain} = ctx.params
   const counts = await readTopic.counts(domain)

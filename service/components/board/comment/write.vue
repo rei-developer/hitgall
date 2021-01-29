@@ -188,7 +188,7 @@ export default {
 </script>
 
 <style lang='less' scope>
-@primary: #4F3F7E;
+@primary: #EFA7B0;
 @primary-focus: #29313E;
 
 article.comment-write {
