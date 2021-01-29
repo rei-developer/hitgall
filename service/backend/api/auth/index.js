@@ -5,6 +5,7 @@ const { isAuthenticated } = require('../../lib/user')
 const app = new Router()
 
 app.get('/check', isAuthenticated, Controller.getUser)
+app.get('/kakao', Controller.getKakaoUser)
 app.post('/signin', Controller.getAuth)
 app.post('/signup', Controller.createUser)
 app.post('/accept', Controller.sendMail)

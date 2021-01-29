@@ -417,8 +417,7 @@ article.comment-view {
               }
 
               > .sticker {
-                min-width: 100px;
-                max-width: 300px;
+                width: 100px;
                 height: auto;
                 > img {
                   border-radius: 4px

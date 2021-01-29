@@ -502,10 +502,11 @@ module.exports.createPost = async ctx => {
         status: 'fail'
       }
   }
+  const random = Math.floor(Math.random() * 5)
   let randomImageUrl = null
-  if (domain === 'anime') {
+  if (domain === 'anime' && random === 0) {
     try {
-      const {url} = await nsfw.randomHentaiGif()
+      const {url} = await nsfw.eroNeko()
       randomImageUrl = url
     } finally {
     }

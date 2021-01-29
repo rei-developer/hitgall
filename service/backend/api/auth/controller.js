@@ -1,3 +1,4 @@
+const request = require('request')
 const fs = require('fs')
 const jwt = require('jsonwebtoken')
 const bkfd2Password = require('pbkdf2-password')
@@ -67,7 +68,7 @@ exports.createUser = async ctx => {
       message: '이미 존재하는 이메일입니다.',
       status: 'fail'
     }
-  const regex = /^.*(?=.{8,10})(?=.*[a-zA-Z])(?=.*?[A-Z])(?=.*\d)(?=.+?[\W|_])[a-zA-Z0-9!@#$%^&*()-_+={}\|\\\/]+$/gm;
+  const regex = /^.*(?=.{8,10})(?=.*[a-zA-Z])(?=.*?[A-Z])(?=.*\d)(?=.+?[\W|_])[a-zA-Z0-9!@#$%^&*()-_+={}\|\\\/]+$/gm
   if (!regex.test(password)) {
     return ctx.body = {
       message: '알파벳 대/소문자,숫자,특수문자 포함하여 8글자 이상',
@@ -131,6 +132,54 @@ exports.getUser = async ctx => {
   ctx.body = {
     user,
     status: 'ok'
+  }
+}
+
+exports.getKakaoUser = async ctx => {
+  const code = ctx.request.query.code
+  try {
+    const token = await new Promise((resolve, reject) => {
+      const url = 'https://kauth.kakao.com/oauth/token'
+      const options = {
+        grant_type: 'authorization_code',
+        client_id: 'aa7f303969993750f8c188c33e241ab2',
+        client_secret: '4zPFj0jAityJx4ShIzjywC8RK207mfzj',
+        redirect_uri: 'http://localhost:3000/api/auth/kakao',
+        code
+      }
+      request.post(url, {form: options}, (error, response, body) => {
+        if (error)
+          return reject({message: error, status: 'fail'})
+        if (response.statusCode !== 200)
+          return reject({message: '알 수 없는 오류', status: 'fail'})
+        const data = JSON.parse(body)
+        resolve(data.access_token)
+      })
+    })
+    const result = await new Promise((resolve, reject) => {
+      const options = {
+        url: 'https://kapi.kakao.com/v2/user/me',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+        }
+      }
+      request.post(options, (error, response, body) => {
+        if (error)
+          return reject({message: error, status: 'fail'})
+        if (response.statusCode !== 200)
+          return reject({message: '알 수 없는 오류', status: 'fail'})
+        const data = JSON.parse(body)
+        resolve(data)
+      })
+    })
+    ctx.body = {
+      result,
+      status: 'ok'
+    }
+  } catch (error) {
+    console.log(error)
+    ctx.body = error
   }
 }
 
@@ -246,7 +295,7 @@ exports.updateUser = async ctx => {
         status: 'fail'
       }
   }
-  const regex = /^.*(?=.{8,10})(?=.*[a-zA-Z])(?=.*?[A-Z])(?=.*\d)(?=.+?[\W|_])[a-zA-Z0-9!@#$%^&*()-_+={}\|\\\/]+$/gm;
+  const regex = /^.*(?=.{8,10})(?=.*[a-zA-Z])(?=.*?[A-Z])(?=.*\d)(?=.+?[\W|_])[a-zA-Z0-9!@#$%^&*()-_+={}\|\\\/]+$/gm
   if (!regex.test(newPassword) && newPassword !== '') {
     return ctx.body = {
       message: '알파벳 대/소문자,숫자,특수문자 포함하여 8글자 이상',
@@ -278,9 +327,9 @@ exports.updateUser = async ctx => {
     nickname,
     viewImage
   }, user.id)
-    ctx.body = {
+  ctx.body = {
     status: 'ok'
-  } 
+  }
 }
 
 // module.exports.showRecaptcha = async ctx => {

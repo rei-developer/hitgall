@@ -18,10 +18,10 @@ module.exports.getPicks = async ctx => {
     select: 0
   }
   const page = body.page || 0
-  const limit = body.limit || 20
+  const limit = body.limit || 100
   if (page < 0)
     return
-  if (limit < 10 || limit > 50)
+  if (limit < 10 || limit > 100)
     return
   const obj = {}
   if (userId > 0)
@@ -29,6 +29,8 @@ module.exports.getPicks = async ctx => {
   obj.isAllowed = 1
   const count = await readPick.count(obj)
   const picks = await readPick.picks(obj, searches, page, limit)
+  console.log(count)
+  console.log(picks)
   ctx.body = {
     count,
     picks
