@@ -46,7 +46,7 @@
           </b-form>
         </b-form-group>
         <b-form-group>
-          <b-form-input placeholder='제목' v-model='form.title' trim autofocus/>
+          <b-form-input placeholder='제목' v-model='form.title' autofocus/>
         </b-form-group>
         <div v-if='!poll.hide'>
           <b-form-group label='설문조사 질문'>

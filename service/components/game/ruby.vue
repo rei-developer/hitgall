@@ -18,10 +18,21 @@
         </div>
         <div
           class='content'
-          :style='{backgroundImage: `url(/game/ruby/${background})`}'
+          :style='{backgroundImage: `url(${background})`}'
         >
           <div class='actor' v-if='actor'>
-            <img :src='`/game/ruby/${actor}`'/>
+            <img :src='`/game/ruby/actor/${actor}`'/>
+          </div>
+          <div class='select' v-if='selectList.length > 0'>
+            <ul>
+              <li
+                v-for='(item, index) in selectList'
+                :key='index'
+                @click='choice(item.move)'
+              >
+                {{ item.text }}
+              </li>
+            </ul>
           </div>
           <div class='message-box' v-if='text'>
             <div class='name'>{{ name }}</div>
@@ -30,7 +41,7 @@
         </div>
         <div class='footer'>
           <b-button squared variant='primary' size='sm' @click.prevent='next'>
-            <span v-if='loading'>
+            <span v-if='loading || selectList.length > 0'>
               <font-awesome-icon class='fa-spin' icon='circle-notch'/>
             </span>
             <span v-else>
@@ -43,9 +54,6 @@
         </div>
       </div>
     </drag-it-dude>
-    <audio id='audio' autoplay>
-      <source :src='bgm'>
-    </audio>
   </div>
 </template>
 
@@ -94,18 +102,45 @@
       width: 100%;
       min-height: 400px;
       position: relative;
+      background-color: #000;
       background-size: cover;
       word-break: break-all;
+      overflow: hidden;
       > .actor {
         position: absolute;
-        right: .5rem;
-        bottom: 0;
-        width: 75%;
+        right: -12.5rem;
+        bottom: -12.5rem;
+        width: 200%;
         height: auto;
         animation: fadein 2s;
         -moz-animation: fadein 2s;
         -webkit-animation: fadein 2s;
         -o-animation: fadein 2s;
+      }
+      > .select {
+        width: calc(100% - 3rem);
+        position: absolute;
+        left: 1.5rem;
+        top: 11rem;
+        > ul {
+          margin: 0;
+          padding: 0;
+          list-style: none;
+          > li {
+            margin-bottom: .25rem;
+            padding: .2rem .5rem .35rem;
+            color: #FFF;
+            text-align: center;
+            text-shadow: 1px 1px #000;
+            border: 1px solid @font-color;
+            background: rgba(0, 0, 0, .6);
+            &:hover {
+              font-size: 16px;
+              font-weight: bold;
+              cursor: pointer;
+            }
+          }
+        }
       }
       > .message-box {
         width: calc(100% - 1rem);
@@ -115,9 +150,9 @@
         left: .5rem;
         bottom: .5rem;
         color: #FFF;
+        text-shadow: 1px 1px #000;
         border: 1px solid @font-color;
-        border-radius: 1px;
-        background: rgba(237, 167, 178, .5);
+        background: rgba(0, 0, 0, .6);
         > .name {
           color: @font-color;
           font-size: 16px;
@@ -138,20 +173,24 @@
 </style>
 
 <script>
+/*
+http://amachamusic.chagasi.com/mp3/ouun.mp3
+http://amachamusic.chagasi.com/mp3/nagagutsudeodekake.mp3
+ */
 import DragItDude from 'vue-drag-it-dude'
 import Script from '@/data/game/ruby/script'
 
 const init = {
   scriptId: 'hello',
   scriptLine: 0,
-  bgm: 'http://shw.in/sozai/audio120402/akatsuki-japan.mp3',
   actor: null,
   name: null,
   text: null,
-  background: '1.jpg',
+  background: null,
   isEnd: false
 }
 
+let audio = null
 let timer = null
 
 export default {
@@ -166,7 +205,7 @@ export default {
       saveY: 0,
       scriptId: init.scriptId,
       scriptLine: init.scriptLine,
-      bgm: init.bgm,
+      selectList: [],
       actor: init.actor,
       name: init.name,
       text: init.text,
@@ -174,6 +213,9 @@ export default {
       isEnd: init.isEnd,
       loading: false
     }
+  },
+  created() {
+    audio = new Audio()
   },
   mounted() {
     setTimeout(() => this.getText(), 1000)
@@ -191,12 +233,13 @@ export default {
     },
     getText() {
       if (Script[this.scriptId].length <= this.scriptLine) {
-        let scriptId = null
-        if (!!Script[this.scriptId][this.scriptLine - 1].move)
-          scriptId = Script[this.scriptId][this.scriptLine - 1].move
-        if (scriptId)
-          this.scriptId = scriptId
-        this.scriptLine = 0
+        if (!!Script[this.scriptId][this.scriptLine - 1].move) {
+          const move = Script[this.scriptId][this.scriptLine - 1].move
+          console.log(move)
+          this.scriptId = move[0]
+          this.scriptLine = move[1]
+        } else
+          this.scriptLine = 0
       }
       if (!!Script[this.scriptId][this.scriptLine].name) {
         const name = Script[this.scriptId][this.scriptLine].name
@@ -204,8 +247,16 @@ export default {
           ? this.$store.state.user.nickname || '익명'
           : name
       }
-      if (!!Script[this.scriptId][this.scriptLine].bgm)
-        this.bgm = Script[this.scriptId][this.scriptLine].bgm
+      this.selectList = !!Script[this.scriptId][this.scriptLine].select
+        ? Script[this.scriptId][this.scriptLine].select
+        : this.selectList = []
+      if (!!Script[this.scriptId][this.scriptLine].bgm) {
+        audio.src = Script[this.scriptId][this.scriptLine].bgm
+        audio.loop = true
+        audio.play()
+      }
+      if (!!Script[this.scriptId][this.scriptLine].se)
+        this.play(Script[this.scriptId][this.scriptLine].se)
       if (!!Script[this.scriptId][this.scriptLine].actor)
         this.actor = Script[this.scriptId][this.scriptLine].actor
       else
@@ -233,8 +284,13 @@ export default {
             return this.printText(texts, ++line)
         }, i * 20)
     },
+    play(name) {
+      const se = new Audio()
+      se.src = `/game/ruby/se/${name}`
+      se.play()
+    },
     next() {
-      if (this.loading)
+      if (this.loading || this.selectList.length > 0)
         return
       if (this.isEnd) {
         this.getText()
@@ -246,10 +302,18 @@ export default {
         this.getText()
       }
     },
+    choice(move) {
+      clearTimeout(timer)
+      this.text = null
+      this.scriptId = move[0]
+      this.scriptLine = move[1]
+      this.getText()
+    },
     end() {
+      audio.pause()
       this.scriptId = init.scriptId
       this.scriptLine = init.scriptLine
-      this.bgm = init.bgm
+      this.selectList = []
       this.actor = init.actor
       this.name = init.name
       this.text = init.text
@@ -257,6 +321,8 @@ export default {
       this.isEnd = true
     },
     close() {
+      audio.pause()
+      clearTimeout(timer)
       this.$eventBus.$emit('RubyGameClose')
     }
   }
