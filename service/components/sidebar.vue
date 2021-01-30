@@ -122,7 +122,7 @@ export default {
 </script>
 
 <style lang='less' scoped>
-@primary: #EFA7B0;
+@primary: #EDA7B2;
 
 article.best {
   border: 1px solid #ddd;

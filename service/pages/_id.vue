@@ -3,7 +3,7 @@
     <h3>{{ topic.title }}</h3>
     <p>{{ topic.content }}</p>
   </div>
-  <div class='content-box' v-else>
+  <div v-else>
     <b-modal
       id='bv-remove-modal'
       @ok='remove'
@@ -58,18 +58,18 @@
           인기글
       </b-button> -->
       <span v-if='topic.boardDomain !== "all"'>
-                <nuxt-link :to='`/board/${topic.boardDomain}/write`'>
-                    <b-button
-                      class='float-right'
-                      size='sm'
-                      variant='primary'>
-                        <font-awesome-icon icon='pencil-alt'/>
-                        쓰기
-                    </b-button>
-                </nuxt-link>
-            </span>
+        <nuxt-link :to='`/board/${topic.boardDomain}/write`'>
+          <b-button
+            class='float-right'
+            size='sm'
+            variant='primary'>
+              <font-awesome-icon icon='pencil-alt'/>
+              쓰기
+          </b-button>
+        </nuxt-link>
+      </span>
     </b-form-group>
-    <article class='topic-view'>
+    <article class='topic-view content-box'>
       <h6>
         <!-- <div class='regdate'>
              <span class='desktop-only'><span>{{ $moment(topic.created).format("YY/MM/DD HH:mm:ss") }}</span>
@@ -83,7 +83,7 @@
        </div>  -->
         <div class='author'>
           <!-- <img :src='`/level/${topic.level}.png`'> -->
-          <img class='icon' alt="icon"
+          <img class='icon' alt='icon'
                :src='`/${topic.admin ? "admin" : "user" + (topic.userId > 0 ? 1 : 0) + (topic.boardLevel || 0)}.png`'>
           {{ topic.author }}
           <span class='ip' v-if='topic.userId < 1 && topic.ip !== ""'>({{ topic.ip }})</span>
@@ -99,13 +99,13 @@
             <span @click='copyLink(`https://www.hitgall.com/${ id }`)'>https://www.hitgall.com/{{ id }}</span>
           </div>
           <div class='regdate'>
-            <span>{{ $moment(topic.created).format("YY/MM/DD HH:mm:ss") }}</span>
+            <span>{{ $moment(topic.created).format('YY/MM/DD HH:mm:ss') }}</span>
           </div>
         </div>
       </div>
       <div class='content' v-viewer='{ title: false }'>
         <div v-if='boardImageUrl'>
-          <p><img alt="topicimage" :src='`https://cdn.hitgall.com/img/${boardImageUrl}`' @error='imageUrlAlt'></p>
+          <p><img alt='topicimage' :src='`https://cdn.hitgall.com/img/${boardImageUrl}`' @error='imageUrlAlt'></p>
         </div>
         <Poll :id='id' v-if='topic.isPoll'/>
         <span v-html='topic.content'/>
@@ -126,7 +126,7 @@
         <div class='qrcode'>
           <client-only>
             <qriously
-              foreground='#EFA7B0'
+              foreground='#EDA7B2'
               :padding='0'
               :value='`https://www.hitgall.com/${id}`'
               :size='80'/>
@@ -339,7 +339,7 @@ export default {
       await fetch(
         `https://cdn.hitgall.com/img/${url}`,
         {
-          headers: {'Accept': 'image/*',},
+          headers: {'Accept': 'image/*'},
           responseType: 'arraybuffer'
         }
       )
@@ -467,12 +467,11 @@ export default {
 </script>
 
 <style lang='less' scoped>
-@primary: #EFA7B0;
-@primary-focus: #29313E;
+@primary: #EDA7B2;
+@primary-focus: #5F5476;
 
 .content-box {
   margin-bottom: 1rem;
-  padding: .5rem;
   border-radius: 2px;
   background: #FFF;
   box-shadow: 1px 0 10px rgba(0, 0, 0, .1);

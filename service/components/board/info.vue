@@ -1,9 +1,9 @@
 <template>
-  <div class='desktop-only'>
+  <div class='desktop-only content-box'>
     <div class='board-title'>{{ board.name }} 갤러리</div>
     <div class='board-info'>
       <div class='image'>
-        <img alt="thumb" :src='`https://cdn.hitgall.com/img/thumb/${board.imageUrl}`' @error='imageUrlAlt'>
+        <img alt='thumb' :src='`https://cdn.hitgall.com/img/thumb/${board.imageUrl}`' @error='imageUrlAlt'>
       </div>
       <div class='description'>
         {{ board.description }}
@@ -11,14 +11,14 @@
       <div class='manager'>
         <strong>매니저</strong> :
         <div>
-          <img class='icon' alt="icon" :src='`/user11.png`'>
+          <img class='icon' alt='icon' :src='`/user11.png`'>
           {{ board.masterName }}
         </div>
         <div class='sub-manager' v-if='managers.length > 0'>
           <div><strong>부매니저</strong> :</div>
           <ul>
             <li v-for='(item, index) in managers' :key='index'>
-              <img class='icon' alt="" :src='`/user1${item.level || 0}.png`'>
+              <img class='icon' alt='' :src='`/user1${item.level || 0}.png`'>
               {{ item.nickname }}
             </li>
           </ul>
@@ -67,9 +67,18 @@ export default {
 </script>
 
 <style lang='less' scoped>
-@primary: #EFA7B0;
+@primary: #EDA7B2;
+
+.content-box {
+  margin-bottom: 1rem;
+  padding: .5rem;
+  border-radius: 2px;
+  background: #FFF;
+  box-shadow: 1px 0 10px rgba(0, 0, 0, .1);
+}
 
 .board-title {
+  margin-top: -.5rem;
   color: @primary;
   font-size: 20px;
   font-weight: bold;
@@ -77,12 +86,10 @@ export default {
 
 .board-info {
   display: flex;
-  margin: 0 0 1rem;
   padding: .5rem;
   color: #000;
-  font-size: 13px;
-  border: 1px solid rgba(0, 64, 128, .1);
-  border-radius: .5rem;
+  font-size: 14px;
+  border: 1px solid rgba(0, 0, 0, .1);
 
   > .image {
     margin-right: .5rem;

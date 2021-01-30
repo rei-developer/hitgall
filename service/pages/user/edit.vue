@@ -157,20 +157,17 @@
             </b-input-group>
           </b-form-group>
           <b-button
+            size='sm'
             type='submit'
             block>
             프로필 편집
           </b-button>
           <b-button
+            size='sm'
             variant='primary'
             @click='signOut'
             block>
             로그아웃
-          </b-button>
-          <b-button
-            variant='danger'
-            block>
-            회원 탈퇴 (추후 지원)
           </b-button>
         </b-form>
       </div>
@@ -319,6 +316,7 @@ export default {
 .accountForm {
   width: 330px;
   margin: 0 auto;
+  box-shadow: 1px 0 10px rgba(0, 0, 0, .1);
 }
 
 .accountForm .header {
@@ -331,9 +329,8 @@ export default {
 
 .accountForm .profile {
   position: relative;
-  border: 1px solid #EEE;
-  border-top-left-radius: .5rem;
-  border-top-right-radius: .5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
+  background: #FFF;
 }
 
 .accountForm .profile .image img {
@@ -412,7 +409,6 @@ export default {
   width: 100%;
   padding: .5rem;
   margin-bottom: 4rem;
-  border: 1px solid #EEE;
   border-top: 0;
   background: #FFF;
 }
@@ -429,5 +425,6 @@ export default {
 
 .accountForm .article hr {
   margin-top: 0;
+  margin-bottom: .25rem;
 }
 </style>

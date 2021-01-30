@@ -5,8 +5,8 @@
       <Header/>
       <main>
         <div class='content'>
-          <b-alert variant='dark' dismissible>
-            주소 변경 공지사항은 테스트.com 으로 접속해주세요.
+          <b-alert variant='dark' dismissible show>
+            힛갤 서버 운영비 후원 계좌번호 - 카카오뱅크 (예금주: 백O영) 3333-05-8635798
           </b-alert>
           <Nuxt/>
         </div>
@@ -15,14 +15,14 @@
           <SidebarThumb/>
         </div>
       </main>
-<!--      <div class='background' v-if='$store.state.isDesktop'/>-->
+      <div class='background' v-if='$store.state.isDesktop'/>
     </div>
     <Footer/>
   </div>
 </template>
 
 <style lang='less' scoped>
-@font-color: #EFA7B0;
+@font-color: #EDA7B2;
 
 .wrapper-body {
   min-height: calc(100vh - 44px - 1rem);
@@ -54,12 +54,13 @@
   }
 
   > .background {
-    width: 904px;
-    height: 904px;
+    width: 4800px;
+    height: 4148px;
     position: fixed;
-    right: -20rem;
-    bottom: -8rem;
-    background-image: url('/background.png');
+    top: 8rem;
+    left: 0;
+    background-image: url('/background.jpg');
+    background-size: 25%;
     opacity: .1;
     z-index: -1;
   }

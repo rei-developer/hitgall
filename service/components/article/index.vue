@@ -139,7 +139,7 @@ export default {
 </script>
 
 <style lang='less' scoped>
-@primary: #EFA7B0;
+@primary: #EDA7B2;
 
 article.widget {
   // > .desktop-only {
@@ -324,7 +324,6 @@ article.widget {
       text-align: center;
       background-color: @primary;
       cursor: pointer;
-      border-radius: 4px;
     }
   }
 }

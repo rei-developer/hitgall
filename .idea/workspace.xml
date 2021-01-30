@@ -1,21 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="834b01fe-2b67-436b-9738-6787482c69a0" name="디폴트 변경 목록" comment="인공짤 수정">
-      <change afterPath="$PROJECT_DIR$/service/api/topic.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/components/sidebar/menu.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/components/sidebar/thumb.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/components/sidebar/widget.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/components/widget/index.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/data/board-list.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/plugins/event-bus.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+    <list default="true" id="834b01fe-2b67-436b-9738-6787482c69a0" name="디폴트 변경 목록" comment="서비스 수정">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/assets/bootstrap.less" beforeDir="false" afterPath="$PROJECT_DIR$/service/assets/bootstrap.less" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/assets/stylesheets.less" beforeDir="false" afterPath="$PROJECT_DIR$/service/assets/stylesheets.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/backend/api/topic/controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/service/backend/api/topic/controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/backend/api/topic/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/service/backend/api/topic/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/backend/database/topic/readTopic.js" beforeDir="false" afterPath="$PROJECT_DIR$/service/backend/database/topic/readTopic.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/components/article/hit.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/components/article/hit.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/components/article/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/components/article/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/components/board/comment/list.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/components/board/comment/list.vue" afterDir="false" />
@@ -25,16 +14,22 @@
       <change beforePath="$PROJECT_DIR$/service/components/header/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/components/header/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/components/save/list.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/components/save/list.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/components/sidebar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/components/sidebar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/components/sidebar/menu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/components/sidebar/menu.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/components/sidebar/thumb.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/components/sidebar/thumb.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/components/sidebar/widget.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/components/sidebar/widget.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/components/widget/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/components/widget/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/layouts/default.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/layouts/default.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/nuxt.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/service/nuxt.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/pages/_id.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/pages/_id.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/pages/board/_domain/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/pages/board/_domain/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/pages/board/_domain/write.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/pages/board/_domain/write.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/pages/board/admin/_domain/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/pages/board/admin/_domain/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/pages/board/admin/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/pages/board/admin/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/pages/chat.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/pages/chat.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/pages/gallery/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/pages/gallery/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/pages/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/pages/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/service/store/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/pages/user/edit.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/pages/user/edit.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/static/background.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/service/static/background.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/static/background.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/static/logo.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +105,8 @@
       <workItem from="1609259356440" duration="143000" />
       <workItem from="1611745690417" duration="11056000" />
       <workItem from="1611835691594" duration="10340000" />
-      <workItem from="1611927019294" duration="15341000" />
+      <workItem from="1611927019294" duration="15691000" />
+      <workItem from="1611974405586" duration="4037000" />
     </task>
     <task id="LOCAL-00001" summary="노무현 갤러리">
       <created>1609160167955</created>
@@ -196,7 +192,21 @@
       <option name="project" value="LOCAL" />
       <updated>1611935124149</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="서비스 수정">
+      <created>1611945748303</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1611945748303</updated>
+    </task>
+    <task id="LOCAL-00014" summary="서비스 수정">
+      <created>1611945932631</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1611945932631</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -220,6 +230,7 @@
     <MESSAGE value="좀 더 빠르게 하자" />
     <MESSAGE value="인공지능" />
     <MESSAGE value="인공짤 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="인공짤 수정" />
+    <MESSAGE value="서비스 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="서비스 수정" />
   </component>
 </project>

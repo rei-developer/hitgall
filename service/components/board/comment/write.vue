@@ -188,8 +188,8 @@ export default {
 </script>
 
 <style lang='less' scope>
-@primary: #EFA7B0;
-@primary-focus: #29313E;
+@primary: #EDA7B2;
+@primary-focus: #5F5476;
 
 article.comment-write {
   padding: 5px;

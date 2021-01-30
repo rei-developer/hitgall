@@ -491,7 +491,7 @@ export default {
 </script>
 
 <style lang='less' scope>
-@primary: #EFA7B0;
+@primary: #EDA7B2;
 
 .board-admin-page {
   width: 100%;

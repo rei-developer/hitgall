@@ -13,6 +13,44 @@
         </div>
       </div>
       <ul>
+        <nuxt-link
+          :to='`/board/${item.field}`'
+          v-for='(item, index) in boardList'
+          :key='index'
+        >
+          <li @click='forceUpdate($event, item.field)'>
+            <div class='icon'/>
+            {{ item.name }}
+          </li>
+        </nuxt-link>
+        <nuxt-link to='/board/request'>
+          <li @click='forceUpdate'>
+            <div class='icon'/>
+            갤러리 신청
+          </li>
+        </nuxt-link>
+        <nuxt-link to='/board/admin' v-if='$store.state.user.isLogged'>
+          <li>
+            <div class='icon'/>
+            갤러리 관리
+          </li>
+        </nuxt-link>
+        <nuxt-link to='/gallery'>
+          <li @click='forceUpdate'>
+            <div class='icon'>
+              <font-awesome-icon icon='camera'/>
+            </div>
+            갤러리
+          </li>
+        </nuxt-link>
+        <nuxt-link to='/sticker'>
+          <li v-shortkey.once='["t"]' @shortkey='move("/sticker")' @click='forceUpdate'>
+            <div class='icon'>
+              <font-awesome-icon icon='smile'/>
+            </div>
+            힛갤콘
+          </li>
+        </nuxt-link>
         <nuxt-link to='/chat'>
           <li @click='forceUpdate'>
             <div class='icon'>
@@ -29,24 +67,6 @@
             인공지능 2D 분석
           </li>
         </nuxt-link>
-        <nuxt-link to='/gallery'>
-          <li @click='forceUpdate'>
-            <div class='icon'>
-              <font-awesome-icon icon='camera'/>
-            </div>
-            갤러리
-          </li>
-        </nuxt-link>
-        <nuxt-link
-          :to='`/board/${item.field}`'
-          v-for='(item, index) in boardList'
-          :key='index'
-        >
-          <li @click='forceUpdate($event, item.field)'>
-            <div class='icon'/>
-            {{ item.name }}
-          </li>
-        </nuxt-link>
         <nuxt-link to='/help'>
           <li>
             <div class='icon'>
@@ -61,9 +81,9 @@
 </template>
 
 <style lang='less' scoped>
-@primary: #061820;
-@primary-hover: #E5DCD1;
-@font-color: #EFA7B0;
+@primary: #5F5476;
+@primary-hover: #EDE3EB;
+@font-color: #EDA7B2;
 
 .backdrop {
   position: fixed;

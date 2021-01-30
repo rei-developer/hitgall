@@ -28,9 +28,9 @@
 </template>
 
 <style lang='less' scoped>
-@primary: #061820;
-@primary-hover: #E5DCD1;
-@font-color: #EFA7B0;
+@primary: #5F5476;
+@primary-hover: #EDE3EB;
+@font-color: #EDA7B2;
 
 .content-box {
   border-radius: 2px;

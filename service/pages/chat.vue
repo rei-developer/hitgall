@@ -86,6 +86,7 @@
     height: 400px;
     padding: .5rem;
     font-size: 13px;
+    background: #FFF;
     overflow-x: hidden;
     overflow-y: auto;
     > .cpu, > .user {

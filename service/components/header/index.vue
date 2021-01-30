@@ -11,10 +11,10 @@
         <nuxt-link to='/'>
           <li class='logo'>
             <div>
-              <img src='/logo.png' alt='힛갤'>
+              <img :src='`/logo${logo}.png`' alt='힛갤'>
             </div>
             <div>
-              <div>HITGALL</div>
+              <div>HITGALL.com</div>
               <div>밤새 갤질 쌉가능?</div>
             </div>
           </li>
@@ -54,6 +54,22 @@
             {{ item.name }}
           </li>
         </nuxt-link>
+        <nuxt-link to='/board/request'>
+          <li @click='forceUpdate'>
+            갤러리 신청
+          </li>
+        </nuxt-link>
+        <nuxt-link to='/board/admin' v-if='$store.state.user.isLogged'>
+          <li>
+            갤러리 관리
+          </li>
+        </nuxt-link>
+        <nuxt-link to='/gallery'>
+          <li @click='forceUpdate'>
+            <font-awesome-icon icon='camera'/>
+            갤러리
+          </li>
+        </nuxt-link>
         <nuxt-link to='/sticker'>
           <li v-shortkey.once='["t"]' @shortkey='move("/sticker")' @click='forceUpdate'>
             <font-awesome-icon icon='smile'/>
@@ -72,20 +88,10 @@
             인공지능 2D 분석
           </li>
         </nuxt-link>
-        <nuxt-link to='/gallery'>
-          <li @click='forceUpdate'>
-            <font-awesome-icon icon='camera'/>
-            갤러리
-          </li>
-        </nuxt-link>
-        <nuxt-link to='/board/request'>
-          <li @click='forceUpdate'>
-            갤러리 신청
-          </li>
-        </nuxt-link>
-        <nuxt-link to='/board/admin' v-if='$store.state.user.isLogged'>
+        <nuxt-link to='/help'>
           <li>
-            갤러리 관리
+            <font-awesome-icon icon='question-circle'/>
+            도움말
           </li>
         </nuxt-link>
       </ul>
@@ -138,9 +144,9 @@
 </template>
 
 <style lang='less' scoped>
-@primary: #061820;
-@primary-hover: #E5DCD1;
-@font-color: #EFA7B0;
+@primary: #5F5476;
+@primary-hover: #EDE3EB;
+@font-color: #EDA7B2;
 
 .wrapper {
   background: #fff;
@@ -163,7 +169,7 @@
           &:last-child {
             line-height: 1.2rem;
             div:first-child {
-              margin-right: 1rem;
+              margin-right: .5rem;
               font-size: 24px;
               font-weight: bold;
             }
@@ -272,6 +278,7 @@ export default {
       boardList: BOARD_LIST
         .filter(item => item.visible),
       top: 0,
+      logo: Math.floor(Math.random() * 4) + 1,
       isSidebar: false
     }
   },

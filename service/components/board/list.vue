@@ -38,7 +38,7 @@
         buttons
         name='radios-btn-default'/>
     </b-form-group>
-    <article class='topic-list'>
+    <article class='topic-list content-box'>
       <nuxt-link :to='`/board/${domain}`'>
         <div class='loading-bar' @click='forceUpdate'>
           <div class='subject'>{{ getBoardName(domain) }}</div>
@@ -79,7 +79,7 @@
               </div>
               <div class='subject'>
                 <div class='thumb' v-if='item.imageUrl'>
-                  <img alt="thumb" :src='`https://cdn.hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
+                  <img alt='thumb' :src='`https://cdn.hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
                 </div>
                 <div>
                                     <span :style='item.color !== "" ? `color: #${item.color}` : ""'>
@@ -97,7 +97,7 @@
               </div>
               <div class='author'>
                 <!-- <img :src='`/level/${item.level}.png`'> -->
-                <img class='icon' alt="icon"
+                <img class='icon' alt='icon'
                      :src='`/${item.admin ? "admin" : "user" + (item.userId > 0 ? 1 : 0) + (item.boardLevel || 0)}.png`'>
                 {{ item.author }}
                 <span class='ip' v-if='item.userId < 1 && item.ip !== ""'>({{ item.ip }})</span>
@@ -124,14 +124,14 @@
               </div>
               <div class='subject'>
                 <div class='thumb' v-if='item.imageUrl'>
-                  <img alt="thumb" :src='`https://cdn.hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
+                  <img alt='thumb' :src='`https://cdn.hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
                 </div>
                 <div>
                                     <span :style='item.color !== "" ? `color: #${item.color}` : ""'>
                                         <span class='category' v-if='item.category'>{{ item.category }}</span>
-                                        <img class='icon' alt="icon" src='/star.gif' v-if='item.isBest > 0'>
+                                        <img class='icon' alt='icon' src='/star.gif' v-if='item.isBest > 0'>
                                         {{ item.title }}
-                                      <!-- <span class='newest' v-if='$moment().diff($moment(item.created), "days") <= 1'>N</span> -->
+                                        <!-- <span class='newest' v-if='$moment().diff($moment(item.created), "days") <= 1'>N</span> -->
                                     </span>
                   <span v-if='item.postsCount > 0'>
                                         [{{ item.postsCount }}]
@@ -143,7 +143,7 @@
               </div>
               <div class='author'>
                 <!-- <img :src='`/level/${item.level}.png`'> -->
-                <img class='icon' alt="icon"
+                <img class='icon' alt='icon'
                      :src='`/${item.admin ? "admin" : "user" + (item.userId > 0 ? 1 : 0) + (item.boardLevel || 0)}.png`'>
                 {{ item.author }}
                 <span class='ip' v-if='item.userId < 1 && item.ip !== ""'>({{ item.ip }})</span>
@@ -173,12 +173,12 @@
                   <div class='author'>
                                         <span class='writer'>
                                             <!-- <img :src='`/level/${item.level}.png`'> -->
-                                            <img class='icon' alt="icon"
+                                            <img class='icon' alt='icon'
                                                  :src='`/${item.admin ? "admin" : "user" + (item.userId > 0 ? 1 : 0) + (item.boardLevel || 0)}.png`'>
                                             {{ item.author }}
                                             <span class='ip' v-if='item.userId < 1 && item.ip !== ""'>({{
                                                 item.ip
-                                              }})</span>
+                                                                                                      }})</span>
                                         </span>
                     <span class='info'>
                                             <font-awesome-icon icon='history'/>
@@ -195,7 +195,7 @@
                   </div>
                 </div>
                 <div class='image' v-if='item.imageUrl'>
-                  <img alt="thumb" :src='`https://cdn.hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
+                  <img alt='thumb' :src='`https://cdn.hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
                 </div>
                 <div class='comment'>
                                     <span :class='item.postsCount >= 10 ? "hot" : ""'>
@@ -215,7 +215,7 @@
               <div class='content'>
                 <div class='subject'>
                   <span class='category' v-if='item.category'>{{ item.category }}</span>
-                  <img class='icon' alt="icon" src='/star.gif' v-if='item.isBest > 0'>
+                  <img class='icon' alt='icon' src='/star.gif' v-if='item.isBest > 0'>
                   <span :style='item.color !== "" ? `color: #${item.color}` : ""'>
                                         {{ item.title }}
                                     </span>
@@ -223,12 +223,12 @@
                   <div class='author'>
                                         <span class='writer'>
                                             <!-- <img :src='`/level/${item.level}.png`'> -->
-                                            <img class='icon' alt=""
+                                            <img class='icon' alt=''
                                                  :src='`/${item.admin ? "admin" : "user" + (item.userId > 0 ? 1 : 0) + (item.boardLevel || 0)}.png`'>
                                             {{ item.author }}
                                             <span class='ip' v-if='item.userId < 1 && item.ip !== ""'>({{
                                                 item.ip
-                                              }})</span>
+                                                                                                      }})</span>
                                         </span>
                     <span class='info'>
                                             <font-awesome-icon icon='history'/>
@@ -245,7 +245,7 @@
                   </div>
                 </div>
                 <div class='image' v-if='item.imageUrl'>
-                  <img alt="thumb" :src='`https://cdn.hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
+                  <img alt='thumb' :src='`https://cdn.hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
                 </div>
                 <div class='comment'>
                   <div v-if='item.postsCount > 0'>
@@ -267,66 +267,66 @@
           <font-awesome-icon icon='chevron-down'/>
         </span>
       </div>
-      <div class='bottom'>
-        <nuxt-link :to='`/board/${domain}?best=1`'>
-          <b-button size='sm' variant='primary' @click='forceUpdate({ best: true })'>
-            <font-awesome-icon icon='star'/>
-            개념글
+    </article>
+    <div class='bottom'>
+      <nuxt-link :to='`/board/${domain}?best=1`'>
+        <b-button size='sm' variant='primary' @click='forceUpdate({ best: true })'>
+          <font-awesome-icon icon='star'/>
+          개념글
+        </b-button>
+      </nuxt-link>
+      <b-pagination-nav
+        :link-gen='linkGen'
+        :limit='10'
+        :number-of-pages='100'
+        v-model='page'
+        size='sm'/>
+      <div v-if='domain !== "all"'>
+        <nuxt-link :to='`/board/${domain}/write`'>
+          <b-button
+            size='sm'
+            variant='primary'>
+            <font-awesome-icon icon='pencil-alt'/>
+            쓰기
           </b-button>
         </nuxt-link>
-        <b-pagination-nav
-          :link-gen='linkGen'
-          :limit='10'
-          :number-of-pages='100'
-          v-model='page'
-          size='sm'/>
-        <div v-if='domain !== "all"'>
-          <nuxt-link :to='`/board/${domain}/write`'>
-            <b-button
-              size='sm'
-              variant='primary'>
-              <font-awesome-icon icon='pencil-alt'/>
-              쓰기
-            </b-button>
-          </nuxt-link>
-        </div>
-        <div>
-          <b-button size='sm' @click='scrollToTop'>
-            <font-awesome-icon icon='arrow-up'/>
-          </b-button>
-        </div>
       </div>
-      <b-input-group size='sm' class='mb-3 search-box'>
-        <template v-slot:prepend>
-          <b-dropdown
-            :text='getSearchLabel()'
-            variant='primary'
-            size='sm'>
-            <b-dropdown-item @click='searches.select = 0'>제목 + 본문</b-dropdown-item>
-            <b-dropdown-item @click='searches.select = 1'>제목</b-dropdown-item>
-            <b-dropdown-item @click='searches.select = 2'>본문</b-dropdown-item>
-            <b-dropdown-item @click='searches.select = 3'>작성자</b-dropdown-item>
-          </b-dropdown>
-        </template>
-        <!--
-            v-b-tooltip.focus title='잠시 갱신이 중단됩니다.' -->
-        <b-form-input
-          placeholder='2글자 이상'
-          v-on:keyup.enter='search'
-          v-model='searches.text'
-          @focus='searches.state = true'
-          @blur='searches.state = false'/>
-        <template v-slot:append>
-          <b-button
-            variant='primary'
-            size='sm'
-            @click='search'>
-            <font-awesome-icon icon='search'/>
-            검색
-          </b-button>
-        </template>
-      </b-input-group>
-    </article>
+      <div>
+        <b-button size='sm' @click='scrollToTop'>
+          <font-awesome-icon icon='arrow-up'/>
+        </b-button>
+      </div>
+    </div>
+    <b-input-group size='sm' class='mb-3 search-box'>
+      <template v-slot:prepend>
+        <b-dropdown
+          :text='getSearchLabel()'
+          variant='primary'
+          size='sm'>
+          <b-dropdown-item @click='searches.select = 0'>제목 + 본문</b-dropdown-item>
+          <b-dropdown-item @click='searches.select = 1'>제목</b-dropdown-item>
+          <b-dropdown-item @click='searches.select = 2'>본문</b-dropdown-item>
+          <b-dropdown-item @click='searches.select = 3'>작성자</b-dropdown-item>
+        </b-dropdown>
+      </template>
+      <!--
+          v-b-tooltip.focus title='잠시 갱신이 중단됩니다.' -->
+      <b-form-input
+        placeholder='2글자 이상'
+        v-on:keyup.enter='search'
+        v-model='searches.text'
+        @focus='searches.state = true'
+        @blur='searches.state = false'/>
+      <template v-slot:append>
+        <b-button
+          variant='primary'
+          size='sm'
+          @click='search'>
+          <font-awesome-icon icon='search'/>
+          검색
+        </b-button>
+      </template>
+    </b-input-group>
   </div>
 </template>
 
@@ -460,7 +460,7 @@ export default {
     },
     getMoveLink(item) {
       const c = this.category || ''
-      return `/${item.id}?page=${this.page}${this.best > 0 ? "&best=" + this.best : ""}${c !== "" ? "&category=" + this.category : ""}`
+      return `/${item.id}?page=${this.page}${this.best > 0 ? '&best=' + this.best : ''}${c !== '' ? '&category=' + this.category : ''}`
     },
     linkGen(page) {
       const c = this.category || ''
@@ -514,25 +514,31 @@ export default {
 </script>
 
 <style lang='less' scoped>
-@primary: #EFA7B0;
+@primary: #EDA7B2;
+@primary-hover: #EDE3EB;
+
+.content-box {
+  margin-bottom: 1rem;
+  border-radius: 2px;
+  background: #FFF;
+  box-shadow: 1px 0 10px rgba(0, 0, 0, .1);
+}
 
 article.topic-list {
   > a {
     > .loading-bar {
       height: 36px;
-      border-bottom: 1px solid rgba(0, 0, 0, .2);
-      //border-radius: 10px 10px 3px 3px;
+      border-bottom: 1px solid rgba(0, 0, 0, .1);
       background-color: @primary;
       position: relative;
 
       > .subject {
         position: absolute;
-        top: 2px;
-        left: 5px;
+        top: 1px;
+        left: .5rem;
         color: #fff;
-        font-size: 21px;
-        font-weight: 700;
-        text-shadow: #666 1px 1px;
+        font-size: 20px;
+        font-weight: bold;
         word-break: break-all;
       }
 
@@ -560,13 +566,10 @@ article.topic-list {
   }
 
   > .desktop-only {
-    margin-bottom: .5rem;
-
     > h6 {
       display: flex;
       margin: 0;
-      border: 1px solid #ddd;
-      border-bottom: 2px solid #ddd;
+      border-bottom: 1px solid #ddd;
 
       > div {
         padding: .5rem;
@@ -608,8 +611,7 @@ article.topic-list {
 
       &.notice > li {
         font-weight: 700;
-        border: 1px solid #ddd;
-        border-top: 0;
+        border-bottom: 1px solid #ddd;
         background-color: #f7f8fa;
 
         &:hover {
@@ -618,15 +620,12 @@ article.topic-list {
       }
 
       > li {
-        border: 1px solid #ddd;
-        border-top: 0;
+        border-bottom: 1px solid #ddd;
         background-color: #fff;
         cursor: pointer;
 
         &.view > {
-          border: 2px solid @primary;
-          border-left: 0;
-          border-right: 0;
+          background: @primary-hover;
 
           > a > .subject > div > span:nth-child(1) {
             color: #000 !important;
@@ -911,27 +910,26 @@ article.topic-list {
     text-align: center;
     background-color: @primary;
     cursor: pointer;
-    border-radius: 5px;
+  }
+}
+
+.bottom {
+  margin: 1rem 0;
+
+  nav {
+    display: inline-block !important;
+    height: 31px !important;
   }
 
-  > .bottom {
-    margin: 1rem 0;
-
-    nav {
-      display: inline-block !important;
-      height: 31px !important;
-    }
-
-    > div {
-      margin-left: 5px;
-      float: right;
-    }
+  > div {
+    margin-left: 5px;
+    float: right;
   }
+}
 
-  > .search-box {
-    width: 380px;
-    margin: 0 auto;
-  }
+.search-box {
+  width: 380px;
+  margin: 0 auto;
 }
 
 // mobile

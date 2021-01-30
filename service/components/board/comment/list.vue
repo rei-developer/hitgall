@@ -20,7 +20,7 @@
       :sticker='sticker.sticker'
       v-on:close='close'
       v-if='sticker.id > 0'/>
-    <article class='comment-view'>
+    <article class='comment-view content-box'>
       <h6>댓글 <span>[{{ numberWithCommas(postsCount) }}]</span></h6>
       <ul v-if='postsCount > 0'>
         <li
@@ -303,7 +303,14 @@ export default {
 </script>
 
 <style lang='less' scope>
-@primary: #EFA7B0;
+@primary: #EDA7B2;
+
+.content-box {
+  margin-bottom: 1rem;
+  border-radius: 2px;
+  background: #FFF;
+  box-shadow: 1px 0 10px rgba(0, 0, 0, .1);
+}
 
 article.comment-view {
   > h6 {

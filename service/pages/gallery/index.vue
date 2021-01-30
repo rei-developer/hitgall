@@ -105,7 +105,7 @@ export default {
 </script>
 
 <style lang='less' scoped>
-@primary: #EFA7B0;
+@primary: #EDA7B2;
 
 h5 {
   height: 32px;
