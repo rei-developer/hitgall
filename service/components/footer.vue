@@ -1,69 +1,63 @@
 <template>
-  <div>
-    <article class='footer'>
-      <div>
-        <nuxt-link to='/'>
-          <img alt="icon" src='/icon.png'>
-        </nuxt-link>
-      </div>
-      <div>
-        <strong>
-          <nuxt-link to='/about'>
-            Copyright
+  <div class='wrapper'>
+    <nav>
+      <ul>
+        <nuxt-link to='/dmca'>
+          <li>
             <font-awesome-icon icon='copyright'/>
-            2021 HitGall. All Rights Reserved.
-          </nuxt-link>
-        </strong>
-        <div>
-          <nuxt-link to='/board/notice'>공지사항</nuxt-link>
-          <span>|</span>
-          <nuxt-link to='/term'>이용약관</nuxt-link>
-          <span>|</span>
-          <nuxt-link to='/policy'>개인정보 취급방침</nuxt-link>
-          <span>|</span>
-          <nuxt-link to='/contact'>제휴문의</nuxt-link>
-        </div>
-      </div>
-    </article>
+            DMCA
+          </li>
+        </nuxt-link>
+      </ul>
+    </nav>
   </div>
 </template>
 
-<style lang='less' scope>
-article.footer {
-  display: flex;
-  padding: 0 10px;
+<style lang='less' scoped>
+@primary: #5F5476;
+@primary-hover: #EDE3EB;
+@font-color: #EDA7B2;
 
-  > div {
-    padding-top: 4px;
-    width: 64px;
-
-    > a > img {
-      width: 48px;
-      height: auto;
-    }
-
-    &:last-child {
-      flex: 1;
-
-      > strong > a {
-        color: #f7f7f7;
-        font-size: 14px;
+.wrapper {
+  height: 44px;
+  > nav {
+    margin-top: 1rem;
+    color: #FFF;
+    background: @font-color;
+    > ul {
+      display: flex;
+      align-items: center;
+      width: 1200px;
+      height: 44px;
+      margin: 0 auto;
+      padding: 0;
+      list-style: none;
+      > a {
+        height: 44px;
+        line-height: 42px;
+        padding: 0 .5rem;
+        color: #FFF;
+        font-size: 13px;
+        font-weight: bold;
         text-decoration: none;
-        cursor: pointer;
-      }
-
-      > div {
-        margin-top: 10px;
-        color: #f7f7f7;
-        font-size: 11px;
-
-        > a {
-          color: #f7f7f7;
-          text-decoration: none;
-          cursor: pointer;
-        }
+        white-space: nowrap;
+        &:hover {color: @primary-hover}
       }
     }
   }
 }
+
+@media (max-width: 1199px) {
+  .wrapper {
+    > nav {
+      > ul {width: 100%}
+    }
+  }
+}
 </style>
+
+<script>
+export default {
+  name: 'Footer'
+}
+</script>

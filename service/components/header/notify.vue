@@ -209,7 +209,7 @@ article.notify {
     padding: 0;
     background-color: rgba(0, 0, 0, .9);
     list-style: none;
-    z-index: 30;
+    z-index: 300000;
 
     > div {
       padding: 8px 10px;

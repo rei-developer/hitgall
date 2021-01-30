@@ -31,7 +31,6 @@
 section {
   display: flex;
   justify-content: space-between;
-  &:not(:last-child) {margin-bottom: 1rem}
   > .content-box {width: calc((900px - 1.5rem) / 2)}
 }
 
