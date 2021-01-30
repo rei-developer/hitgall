@@ -8,7 +8,7 @@
         "왜 그런 것일까요.",
         "저도 모르겠습니다."
       ],
-      "bgm": "http://www.hmix.net/music/n/n124.mp3",
+      "bgm": "n124.mp3",
       "se": "0.mp3",
       "background": "https://userdisk.webry.biglobe.ne.jp/012/472/52/N000/000/000/129385824010916303746_BG40a.jpg"
     },
@@ -33,7 +33,7 @@
         "자자, 인생을 걸어봅시다.",
         "얼마나 거시겠어요?"
       ],
-      "bgm": "http://www.hmix.net/music/c/c8.mp3"
+      "bgm": "c8.mp3"
     },
     {
       "actor": "nako/0.png",
