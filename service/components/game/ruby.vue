@@ -18,7 +18,7 @@
         </div>
         <div
           class='content'
-          :style='{backgroundImage: `url(${background})`}'
+          :style='{backgroundImage: `url(/game/ruby/background/${background})`}'
         >
           <div class='actor' v-if='actor'>
             <img :src='`/game/ruby/actor/${actor}`'/>
@@ -251,7 +251,7 @@ export default {
         ? Script[this.scriptId][this.scriptLine].select
         : this.selectList = []
       if (!!Script[this.scriptId][this.scriptLine].bgm) {
-        audio.src = Script[this.scriptId][this.scriptLine].bgm
+        audio.src = `/game/ruby/bgm/${Script[this.scriptId][this.scriptLine].bgm}`
         audio.loop = true
         audio.play()
       }
