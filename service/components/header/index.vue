@@ -1,6 +1,7 @@
 <template>
   <div class='wrapper'>
     <SidebarMenu v-if='isSidebar'/>
+    <RubyGame ref='rubyGame' v-if='isRubyGameRunning'/>
     <header
       :class='[
         "desktop-only",
@@ -76,6 +77,10 @@
             힛갤콘
           </li>
         </nuxt-link>
+        <li @click='onRubyGameClick'>
+          <font-awesome-icon icon='gamepad'/>
+          소녀를 찾아서
+        </li>
         <nuxt-link to='/chat'>
           <li @click='forceUpdate'>
             <font-awesome-icon icon='comments'/>
@@ -201,15 +206,17 @@
     }
     > ul {
       height: 44px;
-      > a {
+      > a, > li {
         height: 44px;
         line-height: 42px;
+        margin: 0;
         padding: 0 .5rem;
         color: #FFF;
         font-size: 13px;
         font-weight: bold;
         text-decoration: none;
         white-space: nowrap;
+        cursor: pointer;
         &:hover {
           color: @primary-hover;
           background: @primary;
@@ -264,12 +271,14 @@
 
 <script>
 import SidebarMenu from '@/components/sidebar/menu'
+import RubyGame from '@/components/game/ruby'
 import BOARD_LIST from '@/data/board-list'
 
 export default {
   name: 'Header',
   components: {
-    SidebarMenu
+    SidebarMenu,
+    RubyGame
   },
   data() {
     return {
@@ -279,7 +288,8 @@ export default {
         .filter(item => item.visible),
       top: 0,
       logo: Math.floor(Math.random() * 4) + 1,
-      isSidebar: false
+      isSidebar: false,
+      isRubyGameRunning: false
     }
   },
   watch: {
@@ -296,9 +306,13 @@ export default {
   },
   mounted() {
     this.$eventBus.$on('SetSidebar', () => this.onSidebarClick())
+    this.$eventBus.$on('RunRubyGame', async () => await this.onRubyGameClick())
+    this.$eventBus.$on('RubyGameClose', () => this.isRubyGameRunning = false)
   },
   beforeDestroy() {
     this.$eventBus.$off('SetSidebar')
+    this.$eventBus.$off('RunRubyGame')
+    this.$eventBus.$off('RubyGameClose')
   },
   async destroyed() {
     try {
@@ -322,6 +336,13 @@ export default {
     },
     onSidebarClick() {
       this.isSidebar = !this.isSidebar
+    },
+    async onRubyGameClick() {
+      if (this.isRubyGameRunning)
+        return
+      this.isRubyGameRunning = true
+      await this.$nextTick()
+      this.$refs.rubyGame.show()
     },
     move(path) {
       if (this.$nuxt.$route.name === 'board-domain-write')
@@ -362,113 +383,3 @@ export default {
   }
 }
 </script>
-
-
-<!--<template>-->
-<!--  <div>-->
-<!--    <nav>-->
-<!--      &lt;!&ndash; main part &ndash;&gt;-->
-<!--      <ul>-->
-<!--        &lt;!&ndash; logo &ndash;&gt;-->
-<!--        <li class='logo' v-shortkey.once='["m"]' @shortkey='move("/")' @click='forceUpdate'>-->
-<!--          <nuxt-link to='/'>-->
-<!--            HitGall.com-->
-<!--          </nuxt-link>-->
-<!--        </li>-->
-<!--        &lt;!&ndash; sidebar &ndash;&gt;-->
-<!--        <li class='sidebar mobile-only' v-b-toggle.sidebar-backdrop>-->
-<!--          <span>-->
-<!--            <font-awesome-icon icon='bars'/>-->
-<!--          </span>-->
-<!--        </li>-->
-<!--        &lt;!&ndash; menu &ndash;&gt;-->
-<!--        &lt;!&ndash; <li v-shortkey.once='["h"]' @shortkey='move("/hit")' @click='forceUpdate'>-->
-<!--            <nuxt-link to='/hit'>-->
-<!--                <font-awesome-icon icon='star'/>-->
-<!--                HIT-->
-<!--            </nuxt-link>-->
-<!--        </li>-->
-<!--        <li @click='forceUpdate'>-->
-<!--            <nuxt-link to='/all'>-->
-<!--                <font-awesome-icon icon='folder-open'/>-->
-<!--                전체글-->
-<!--            </nuxt-link>-->
-<!--        </li>-->
-<!--        <li v-shortkey.once='["y"]' @shortkey='move("/gallery")' @click='forceUpdate'>-->
-<!--            <nuxt-link to='/gallery'>-->
-<!--                <font-awesome-icon icon='camera'/>-->
-<!--                짤수집-->
-<!--            </nuxt-link>-->
-<!--        </li> &ndash;&gt;-->
-
-<!--      </ul>-->
-<!--      &lt;!&ndash; login part &ndash;&gt;-->
-<!--      <ul class='right'>-->
-
-<!--      </ul>-->
-<!--    </nav>-->
-<!--    <div class='openSidebar desktop-only'>-->
-<!--      <b-button pill size='lg' variant='primary' v-b-toggle.sidebar-backdrop>-->
-<!--        <font-awesome-icon icon='bars'/>-->
-<!--      </b-button>-->
-<!--    </div>-->
-<!--    &lt;!&ndash;    <div class='appInstall desktop-only'>&ndash;&gt;-->
-<!--    &lt;!&ndash;      <b-button pill size='lg' v-if='installed' variant='info' @click='install()'>&ndash;&gt;-->
-<!--    &lt;!&ndash;        <font-awesome-icon icon='cloud-download-alt'/>&ndash;&gt;-->
-<!--    &lt;!&ndash;      </b-button>&ndash;&gt;-->
-<!--    &lt;!&ndash;    </div>&ndash;&gt;-->
-<!--    <b-sidebar-->
-<!--      id='sidebar-backdrop'-->
-<!--      v-model='visible'-->
-<!--      backdrop-->
-<!--      shadow>-->
-<!--      <ul>-->
-<!--        &lt;!&ndash; <li @click='forceUpdate'><nuxt-link to='/hit'>HIT</nuxt-link></li> &ndash;&gt;-->
-<!--        &lt;!&ndash; <li @click='forceUpdate'><nuxt-link to='/gallery'>짤수집</nuxt-link></li> &ndash;&gt;-->
-<!--        <li @click='forceUpdate'>-->
-<!--          <nuxt-link to='/chat'>-->
-<!--            <font-awesome-icon icon='comments'/>-->
-<!--            시루와 대화하기-->
-<!--          </nuxt-link>-->
-<!--        </li>-->
-<!--        <li @click='forceUpdate'>-->
-<!--          <nuxt-link to='/konomi'>-->
-<!--            <font-awesome-icon icon='image'/>-->
-<!--            인공지능 2D 분석-->
-<!--          </nuxt-link>-->
-<!--        </li>-->
-<!--        <li @click='forceUpdate'>-->
-<!--          <nuxt-link to='/gallery'>갤러리</nuxt-link>-->
-<!--        </li>-->
-<!--        <li @click='forceUpdate'>-->
-<!--          <nuxt-link to='/board/girl'>연예인</nuxt-link>-->
-<!--        </li>-->
-<!--        <li @click='forceUpdate'>-->
-<!--          <nuxt-link to='/board/anime'>애니메이션</nuxt-link>-->
-<!--        </li>-->
-<!--        <li @click='forceUpdate'>-->
-<!--          <nuxt-link to='/board/lastorigin'>라스트 오리진</nuxt-link>-->
-<!--        </li>-->
-<!--        <li @click='forceUpdate'>-->
-<!--          <nuxt-link to='/board/notice'>공지사항</nuxt-link>-->
-<!--        </li>-->
-<!--        <li @click='forceUpdate'>-->
-<!--          <nuxt-link to='/board/feedback'>건의사항</nuxt-link>-->
-<!--        </li>-->
-<!--        <li @click='forceUpdate'>-->
-<!--          <nuxt-link to='/board/request'>갤러리 신청</nuxt-link>-->
-<!--        </li>-->
-<!--        <li>-->
-<!--          <nuxt-link to='/board/admin'>갤러리 관리</nuxt-link>-->
-<!--        </li>-->
-<!--        <li>-->
-<!--          <nuxt-link to='/sticker'>힛갤콘</nuxt-link>-->
-<!--        </li>-->
-<!--        <li class='install' v-if='installed' @click='install()'>-->
-<!--          <font-awesome-icon icon='cloud-download-alt'/>-->
-<!--          앱 설치-->
-<!--        </li>-->
-<!--      </ul>-->
-<!--    </b-sidebar>-->
-<!--  </div>-->
-<!--</template>-->

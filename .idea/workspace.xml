@@ -2,10 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="834b01fe-2b67-436b-9738-6787482c69a0" name="디폴트 변경 목록" comment="서비스 수정">
+      <change afterPath="$PROJECT_DIR$/service/components/game/ruby.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/data/game/ruby/script.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/static/game/ruby/1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/static/game/ruby/nako.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/components/footer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/components/footer.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/components/header/notify.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/components/header/notify.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/pages/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/pages/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/components/header/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/components/header/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/components/sidebar/menu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/components/sidebar/menu.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/service/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/service/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +87,7 @@
       <workItem from="1611745690417" duration="11056000" />
       <workItem from="1611835691594" duration="10340000" />
       <workItem from="1611927019294" duration="15691000" />
-      <workItem from="1611974405586" duration="4510000" />
+      <workItem from="1611974405586" duration="16532000" />
     </task>
     <task id="LOCAL-00001" summary="노무현 갤러리">
       <created>1609160167955</created>
@@ -189,7 +194,21 @@
       <option name="project" value="LOCAL" />
       <updated>1611980903022</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="서비스 수정">
+      <created>1611981346652</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1611981346652</updated>
+    </task>
+    <task id="LOCAL-00017" summary="서비스 수정">
+      <created>1611981396269</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1611981396269</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

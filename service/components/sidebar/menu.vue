@@ -51,6 +51,12 @@
             힛갤콘
           </li>
         </nuxt-link>
+        <li @click='onRubyGameClick'>
+          <div class='icon'>
+            <font-awesome-icon icon='gamepad'/>
+          </div>
+          소녀를 찾아서
+        </li>
         <nuxt-link to='/chat'>
           <li @click='forceUpdate'>
             <div class='icon'>
@@ -101,6 +107,7 @@
     background: #FFF;
     box-shadow: 1px 0 20px rgba(0, 0, 0, .2);
     > .header,
+    > ul > li,
     > ul > a > li {
       display: flex;
       align-items: center;
@@ -126,24 +133,23 @@
       background: #FAFAFA;
       list-style: none;
       overflow-y: auto;
-      > a {
+      > li, > a > li {
+        display: flex;
+        color: @primary;
         text-decoration: none;
-        > li {
+        border-bottom: 1px solid rgba(0, 0, 0, .1);
+        background: #FFF;
+        cursor: pointer;
+        &:hover {
+          color: @primary-hover;
+          background: @primary;
+        }
+        > .icon {
           display: flex;
-          color: @primary;
-          border-bottom: 1px solid rgba(0, 0, 0, .1);
-          background: #FFF;
-          &:hover {
-            color: @primary-hover;
-            background: @primary;
-          }
-          > .icon {
-            display: flex;
-            justify-content: center;
-            width: 1.5rem;
-            margin-left: .5rem;
-            padding-top: 1px;
-          }
+          justify-content: center;
+          width: 1.5rem;
+          margin-left: .5rem;
+          padding-top: 1px;
         }
       }
     }
@@ -167,6 +173,9 @@ export default {
       const board = this.$nuxt.$route.params.board
       if (board === field)
         this.$store.commit('forceUpdate')
+    },
+    onRubyGameClick() {
+      this.$eventBus.$emit('RunRubyGame')
     },
     close() {
       this.$eventBus.$emit('SetSidebar')
