@@ -77,10 +77,16 @@
             힛갤콘
           </li>
         </nuxt-link>
-        <li @click='onRubyGameClick'>
-          <font-awesome-icon icon='gamepad'/>
-          소녀를 찾아서
-        </li>
+        <nuxt-link to='/novel'>
+          <li @shortkey='move("/novel")' @click='forceUpdate'>
+            <font-awesome-icon icon='book'/>
+            웹노벨
+          </li>
+        </nuxt-link>
+        <!--        <li @click='onRubyGameClick'>-->
+        <!--          <font-awesome-icon icon='gamepad'/>-->
+        <!--          소녀를 찾아서-->
+        <!--        </li>-->
         <nuxt-link to='/chat'>
           <li @click='forceUpdate'>
             <font-awesome-icon icon='comments'/>
