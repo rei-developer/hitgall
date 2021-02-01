@@ -1,7 +1,7 @@
 <template>
   <div
     class='backdrop'
-    @click.prevent.self='close'
+    @click.self='close'
   >
     <section>
       <div class='header'>
@@ -13,6 +13,14 @@
         </div>
       </div>
       <ul>
+        <a href='https://mananovel.com' target='_blank'>
+          <li>
+            <div class='icon'>
+              <font-awesome-icon icon='book'/>
+            </div>
+            웹노벨
+          </li>
+        </a>
         <nuxt-link
           :to='`/board/${item.field}`'
           v-for='(item, index) in boardList'
@@ -51,12 +59,6 @@
             힛갤콘
           </li>
         </nuxt-link>
-        <li @click='onRubyGameClick'>
-          <div class='icon'>
-            <font-awesome-icon icon='gamepad'/>
-          </div>
-          소녀를 찾아서
-        </li>
         <nuxt-link to='/chat'>
           <li @click='forceUpdate'>
             <div class='icon'>
@@ -133,10 +135,10 @@
       background: #FAFAFA;
       list-style: none;
       overflow-y: auto;
+      > a {text-decoration: none}
       > li, > a > li {
         display: flex;
         color: @primary;
-        text-decoration: none;
         border-bottom: 1px solid rgba(0, 0, 0, .1);
         background: #FFF;
         cursor: pointer;

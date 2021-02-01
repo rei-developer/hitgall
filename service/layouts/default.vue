@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class='wrapper-body'>
-      <Notify v-if='$store.state.user.isLogged && $store.state.user.noticeCount > 0'/>
+      <Notify class='notify' v-if='$store.state.user.isLogged && $store.state.user.noticeCount > 0'/>
       <Header/>
       <main>
         <div class='content'>
@@ -68,6 +68,11 @@
 
 @media (max-width: 1199px) {
   .wrapper-body > main {width: 100%}
+  .notify {
+    position: fixed;
+    width: 100%;
+    z-index: 100000;
+  }
 }
 </style>
 

@@ -1,0 +1,87 @@
+@primary: #EDA7B2;
+@primary-rgba: rgba(255, 255, 255, .5);
+@primary-focus: #5F5476;
+
+.side-by-side .side {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.nestable {
+  position: relative;
+  font-size: 16px;
+  font-weight: bold;
+  [draggable='true'] {cursor: move}
+  .nestable-list {
+    margin: 0;
+    padding: 0 0 0 20px;
+    list-style-type: none;
+  }
+  > .nestable-list {padding: 0}
+}
+
+.nestable-rtl {
+  direction: rtl;
+  .nestable-list {padding: 0 40px 0 0}
+  .nestable-drag-layer {
+    left: auto;
+    right: 0;
+  }
+  .nestable-drag-layer > .nestable-list {padding: 0}
+}
+
+.nestable-item,
+.nestable-item-copy {
+  &:first-child,
+  &:first-child {
+    margin-top: 0;
+  }
+  .nestable-list,
+  .nestable-list {
+    margin-top: .5rem;
+    padding: .5rem 1rem;
+    border: 2px solid rgba(0, 0, 0, .25);
+    border-radius: 5px;
+    background-color: @primary;
+  }
+}
+
+.nestable-item {
+  position: relative;
+  width: fit-content;
+  .is-dragging .nestable-list {pointer-events: none}
+  .is-dragging * {
+    opacity: 0;
+    filter: alpha(opacity=0);
+  }
+  .is-dragging:before {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: @primary;
+  }
+}
+
+.nestable-drag-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 5rem;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.nestable-drag-layer > .nestable-list {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: .25rem .5rem;
+  border: 2px solid rgba(0, 0, 0, .25);
+  border-radius: 5px;
+  background-color: @primary-rgba;
+}
+
+.nestable-handle {display: inline}

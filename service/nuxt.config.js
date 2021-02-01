@@ -45,9 +45,10 @@ module.exports = {
    ** Global CSS
    */
   css: [
-    '~/assets/bootstrap.less',
-    '~/assets/stylesheets.less',
-    '~/assets/vue-toastification.css'
+    '@/assets/bootstrap.less',
+    '@/assets/stylesheets.less',
+    '@/assets/vue-nestable.less',
+    '@/assets/vue-toastification.css'
   ],
   /*
    ** Plugins to load before mounting the App
@@ -60,6 +61,7 @@ module.exports = {
     {src: '@/plugins/v-viewer.js', mode: 'client'},
     {src: '@/plugins/vue-aplayer.js', mode: 'client'},
     {src: '@/plugins/vue-avatar.js', mode: 'client'},
+    {src: '@/plugins/vue-nestable.js', mode: 'client'},
     {src: '@/plugins/vue-poll.js', mode: 'client'},
     {src: '@/plugins/vue-qriously.js', mode: 'client'},
     {src: '@/plugins/vue-shortkey.js', mode: 'client'},

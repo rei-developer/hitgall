@@ -5802,6 +5802,11 @@ immediate@~3.0.5:
   resolved "https://registry.yarnpkg.com/immediate/-/immediate-3.0.6.tgz#9db1dbd0faf8de6fbe0f5dd5e56bb606280de69b"
   integrity sha1-nbHb0Pr43m++D13V5Wu2BigN5ps=
 
+immutability-helper@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/immutability-helper/-/immutability-helper-3.1.1.tgz#2b86b2286ed3b1241c9e23b7b21e0444f52f77b7"
+  integrity sha512-Q0QaXjPjwIju/28TsugCHNEASwoCcJSyJV3uO1sOIQGI0jKgm9f41Lvz0DZj3n46cNCyAZTsEYoY4C2bVRUzyQ==
+
 import-cwd@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/import-cwd/-/import-cwd-2.1.0.tgz#aa6cf36e722761285cb371ec6519f53e2435b0a9"
@@ -11087,6 +11092,14 @@ vue-meta@^2.4.0:
   integrity sha512-XEeZUmlVeODclAjCNpWDnjgw+t3WA6gdzs6ENoIAgwO1J1d5p1tezDhtteLUFwcaQaTtayRrsx7GL6oXp/m2Jw==
   dependencies:
     deepmerge "^4.2.2"
+
+vue-nestable@^2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/vue-nestable/-/vue-nestable-2.6.0.tgz#731989e7f8b974cd0fd0cd710fce624b752efcfc"
+  integrity sha512-ryhIG2xY1TLAv5u0mYKpSY3V6JsNKwyFOxVvgP8K82zVesWFTw8TyULuuzPQDWEckZCXBicF58oSnrVMAWem6w==
+  dependencies:
+    immutability-helper "^3.1.1"
+    vue "^2.6.12"
 
 vue-no-ssr@^1.1.1:
   version "1.1.1"

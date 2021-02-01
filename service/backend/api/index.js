@@ -2,7 +2,6 @@ const request = require('request').defaults({encoding: null})
 const client = require('nekos.life')
 const Router = require('koa-router')
 
-const v2 = require('./v2')
 const auth = require('./auth')
 const board = require('./board')
 const chat = require('./chat')
@@ -40,7 +39,6 @@ app.get('/random', async ctx => {
     return ctx.body = e
   }
 })
-app.use('/v2', v2.routes())
 app.use('/auth', auth.routes())
 app.use('/board', board.routes())
 app.use('/chat', chat.routes())

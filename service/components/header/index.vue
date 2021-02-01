@@ -1,7 +1,6 @@
 <template>
   <div class='wrapper'>
     <SidebarMenu v-if='isSidebar'/>
-    <RubyGame ref='rubyGame' v-if='isRubyGameRunning'/>
     <header
       :class='[
         "desktop-only",
@@ -45,6 +44,12 @@
       ]'
     >
       <ul>
+        <a href='https://mananovel.com' target='_blank'>
+          <li>
+            <font-awesome-icon icon='book'/>
+            웹노벨
+          </li>
+        </a>
         <nuxt-link
           :to='`/board/${item.field}`'
           v-for='(item, index) in boardList'
@@ -77,16 +82,6 @@
             힛갤콘
           </li>
         </nuxt-link>
-        <nuxt-link to='/novel'>
-          <li @shortkey='move("/novel")' @click='forceUpdate'>
-            <font-awesome-icon icon='book'/>
-            웹노벨
-          </li>
-        </nuxt-link>
-        <!--        <li @click='onRubyGameClick'>-->
-        <!--          <font-awesome-icon icon='gamepad'/>-->
-        <!--          소녀를 찾아서-->
-        <!--        </li>-->
         <nuxt-link to='/chat'>
           <li @click='forceUpdate'>
             <font-awesome-icon icon='comments'/>
@@ -277,15 +272,11 @@
 
 <script>
 import SidebarMenu from '@/components/sidebar/menu'
-import RubyGame from '@/components/game/ruby'
 import BOARD_LIST from '@/data/board-list'
 
 export default {
   name: 'Header',
-  components: {
-    SidebarMenu,
-    RubyGame
-  },
+  components: {SidebarMenu},
   data() {
     return {
       searchText: '',
@@ -294,8 +285,7 @@ export default {
         .filter(item => item.visible),
       top: 0,
       logo: Math.floor(Math.random() * 4) + 1,
-      isSidebar: false,
-      isRubyGameRunning: false
+      isSidebar: false
     }
   },
   watch: {
@@ -312,13 +302,9 @@ export default {
   },
   mounted() {
     this.$eventBus.$on('SetSidebar', () => this.onSidebarClick())
-    this.$eventBus.$on('RunRubyGame', async () => await this.onRubyGameClick())
-    this.$eventBus.$on('RubyGameClose', () => this.isRubyGameRunning = false)
   },
   beforeDestroy() {
     this.$eventBus.$off('SetSidebar')
-    this.$eventBus.$off('RunRubyGame')
-    this.$eventBus.$off('RubyGameClose')
   },
   async destroyed() {
     try {
@@ -342,13 +328,6 @@ export default {
     },
     onSidebarClick() {
       this.isSidebar = !this.isSidebar
-    },
-    async onRubyGameClick() {
-      if (this.isRubyGameRunning)
-        return
-      this.isRubyGameRunning = true
-      await this.$nextTick()
-      this.$refs.rubyGame.show()
     },
     move(path) {
       if (this.$nuxt.$route.name === 'board-domain-write')

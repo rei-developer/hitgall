@@ -1,81 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="834b01fe-2b67-436b-9738-6787482c69a0" name="디폴트 변경 목록" comment="미연시 테스트">
-      <change afterPath="$PROJECT_DIR$/service/backend/api/v2/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/backend/api/v2/novel/controller.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/backend/api/v2/novel/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/backend/api/v2/novel/middleware.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/backend/database/novel/read.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/components/novel/game/content.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/components/novel/game/index.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/components/novel/game/title.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/data/novel/config.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/pages/novel/index.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/util/common.js" afterDir="false" />
+    <list default="true" id="834b01fe-2b67-436b-9738-6787482c69a0" name="디폴트 변경 목록" comment="노벨 추가">
+      <change afterPath="$PROJECT_DIR$/service/assets/vue-nestable.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/plugins/vue-nestable.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/backend/api/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/service/backend/api/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/backend/api/v2/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/backend/api/v2/novel/controller.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/backend/api/v2/novel/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/backend/api/v2/novel/middleware.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/backend/database/novel/read.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/components/game/ruby.vue" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/service/components/header/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/components/header/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/game/ruby/1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/game/ruby/actor/nako/0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/game/ruby/background/0.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/game/ruby/bgm/c8.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/game/ruby/bgm/n124.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/game/ruby/se/0.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/game/ruby/se/1.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/10.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/11.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/12.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/13.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/14.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/15.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/16.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/17.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/18.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/19.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/20.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/21.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/22.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/23.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/24.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/25.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/26.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/27.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/28.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/29.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/30.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/31.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/33.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/34.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/35.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/36.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/37.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/38.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/39.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/40.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/41.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/42.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/43.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/44.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/45.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/46.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/47.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/48.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/49.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/50.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/51.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/52.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static/level/9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/components/novel/game/content.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/components/novel/game/index.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/components/novel/game/title.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/components/sidebar/menu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/components/sidebar/menu.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/data/game/ruby/script.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/data/novel/config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/layouts/default.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/layouts/default.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/nuxt.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/service/nuxt.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/service/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/pages/novel/index.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/service/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +56,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../torrentgun" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -153,7 +101,8 @@
       <workItem from="1611835691594" duration="10340000" />
       <workItem from="1611927019294" duration="15691000" />
       <workItem from="1611974405586" duration="27024000" />
-      <workItem from="1612067508568" duration="20931000" />
+      <workItem from="1612067508568" duration="36040000" />
+      <workItem from="1612180123352" duration="5378000" />
     </task>
     <task id="LOCAL-00001" summary="노무현 갤러리">
       <created>1609160167955</created>
@@ -302,7 +251,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612008698912</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="노벨 추가">
+      <created>1612090497761</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1612090497761</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -329,6 +285,7 @@
     <MESSAGE value="서비스 수정" />
     <MESSAGE value="애미년을 찾아서 개발" />
     <MESSAGE value="미연시 테스트" />
-    <option name="LAST_COMMIT_MESSAGE" value="미연시 테스트" />
+    <MESSAGE value="노벨 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="노벨 추가" />
   </component>
 </project>
