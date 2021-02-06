@@ -1,29 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="834b01fe-2b67-436b-9738-6787482c69a0" name="디폴트 변경 목록" comment="노벨 추가">
-      <change afterPath="$PROJECT_DIR$/service/assets/vue-nestable.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/plugins/vue-nestable.js" afterDir="false" />
+    <list default="true" id="834b01fe-2b67-436b-9738-6787482c69a0" name="디폴트 변경 목록" comment="노벨 제거 및 사이트 CSS 수정">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/backend/api/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/service/backend/api/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/backend/api/v2/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/backend/api/v2/novel/controller.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/backend/api/v2/novel/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/backend/api/v2/novel/middleware.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/backend/database/novel/read.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/components/game/ruby.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/components/header/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/components/header/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/components/novel/game/content.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/components/novel/game/index.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/components/novel/game/title.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/components/sidebar/menu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/components/sidebar/menu.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/data/game/ruby/script.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/data/novel/config.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/layouts/default.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/layouts/default.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/nuxt.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/service/nuxt.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/service/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/pages/novel/index.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/service/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/backend/api/topic/controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/service/backend/api/topic/controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/components/widget/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/components/widget/index.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +83,9 @@
       <workItem from="1611927019294" duration="15691000" />
       <workItem from="1611974405586" duration="27024000" />
       <workItem from="1612067508568" duration="36040000" />
-      <workItem from="1612180123352" duration="5378000" />
+      <workItem from="1612180123352" duration="5803000" />
+      <workItem from="1612274319109" duration="95000" />
+      <workItem from="1612571771229" duration="88000" />
     </task>
     <task id="LOCAL-00001" summary="노무현 갤러리">
       <created>1609160167955</created>
@@ -258,7 +241,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612090497761</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="노벨 제거 및 사이트 CSS 수정">
+      <created>1612190170449</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1612190170449</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -286,6 +276,7 @@
     <MESSAGE value="애미년을 찾아서 개발" />
     <MESSAGE value="미연시 테스트" />
     <MESSAGE value="노벨 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="노벨 추가" />
+    <MESSAGE value="노벨 제거 및 사이트 CSS 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="노벨 제거 및 사이트 CSS 수정" />
   </component>
 </project>

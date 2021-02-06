@@ -48,13 +48,13 @@ module.exports.getTopicWidgetList = async ctx => {
   const sidebar = ctx.request.query.sidebar
   if (sidebar !== 'Y' && sidebar !== 'N')
     ctx.throw(400, 'Invalid parameter value')
-  const girlImageList = await readTopic.getTopicWidgetList({boardDomain: 'girl'}, sidebar === 'Y' ? 15 : 10)
-  const animeImageList = await readTopic.getTopicWidgetList({boardDomain: 'anime'}, sidebar === 'Y' ? 15 : 10)
+  const girlImageList = await readTopic.getTopicWidgetList({boardDomain: 'girl', isImage: 1}, sidebar === 'Y' ? 15 : 10)
+  const animeImageList = await readTopic.getTopicWidgetList({boardDomain: 'anime', isImage: 1}, sidebar === 'Y' ? 15 : 10)
   const girlList = sidebar === 'N'
     ? await readTopic.getTopicWidgetList({boardDomain: 'girl'}, 30)
     : []
   const otherList = sidebar === 'N'
-    ? await readTopic.getTopicWidgetList(null, 30)
+    ? await readTopic.getTopicWidgetList({boardDomain: 'anime'}, 30)
     : []
   ctx.body = {
     status: 'DONE',
