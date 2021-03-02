@@ -79,7 +79,7 @@
               </div>
               <div class='subject'>
                 <div class='thumb' v-if='item.imageUrl'>
-                  <img alt='thumb' :src='`https://cdn.hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
+                  <img alt='thumb' :src='`https://hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
                 </div>
                 <div>
                                     <span :style='item.color !== "" ? `color: #${item.color}` : ""'>
@@ -124,7 +124,7 @@
               </div>
               <div class='subject'>
                 <div class='thumb' v-if='item.imageUrl'>
-                  <img alt='thumb' :src='`https://cdn.hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
+                  <img alt='thumb' :src='`https://hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
                 </div>
                 <div>
                                     <span :style='item.color !== "" ? `color: #${item.color}` : ""'>
@@ -195,7 +195,7 @@
                   </div>
                 </div>
                 <div class='image' v-if='item.imageUrl'>
-                  <img alt='thumb' :src='`https://cdn.hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
+                  <img alt='thumb' :src='`https://hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
                 </div>
                 <div class='comment'>
                                     <span :class='item.postsCount >= 10 ? "hot" : ""'>
@@ -245,7 +245,7 @@
                   </div>
                 </div>
                 <div class='image' v-if='item.imageUrl'>
-                  <img alt='thumb' :src='`https://cdn.hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
+                  <img alt='thumb' :src='`https://hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
                 </div>
                 <div class='comment'>
                   <div v-if='item.postsCount > 0'>

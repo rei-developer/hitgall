@@ -13,7 +13,7 @@
             </div>
             <div class='item'>
                 <img
-                    :src='`https://cdn.hitgall.com/sticker/${id}/${index}.${sticker.ext}`'
+                    :src='`https://hitgall.com/sticker/${id}/${index}.${sticker.ext}`'
                     v-for='index in sticker.number' :key='index'>
             </div>
             <div class='footer'>

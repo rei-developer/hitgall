@@ -9,14 +9,14 @@
             <div class='item'>
                 <img
                     alt=""
-                    :src='`https://cdn.hitgall.com/sticker/${item.id}/1.${item.ext}`'
+                    :src='`https://hitgall.com/sticker/${item.id}/1.${item.ext}`'
                     @click='view(item)'
                     v-for='(item, index) in inventory' :key='index'>
             </div>
             <div class='itemList' v-if='sticker'>
                 <img
                     alt=""
-                    :src='`https://cdn.hitgall.com/sticker/${sticker.id}/${index}.${sticker.ext}`'
+                    :src='`https://hitgall.com/sticker/${sticker.id}/${index}.${sticker.ext}`'
                     @click='use(sticker, index)'
                     v-for='index in sticker.number' :key='index'>
             </div>

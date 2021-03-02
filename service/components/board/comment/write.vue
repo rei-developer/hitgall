@@ -53,7 +53,7 @@
           <div class='item'>
             <div class='image'>
               <img
-                :src='`https://cdn.hitgall.com/sticker/${stickers.sticker.id}/${stickers.select}.${stickers.sticker.ext}`'
+                :src='`https://hitgall.com/sticker/${stickers.sticker.id}/${stickers.select}.${stickers.sticker.ext}`'
                 @error='imageUrlAlt'>
             </div>
             {{ stickers.sticker.name }}

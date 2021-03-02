@@ -559,7 +559,7 @@ export default {
             uuid: file.upload.uuid
           })
           const regex = new RegExp(`<img\\s+[^>]*alt=('|")${file.upload.uuid}('|")[^>]*>`, 'gi')
-          const text = `<img src="https://cdn.hitgall.com${filename}" alt="${data.filename}">`
+          const text = `<img src="https://hitgall.com${filename}" alt="${data.filename}">`
           this.setContent(this.html.replace(regex, text))
         } else {
           this.toast(`${index + 1}번째 이미지 업로드 실패...`, 'danger')

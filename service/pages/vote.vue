@@ -73,7 +73,7 @@
 
 <script>
 const REST_API_KEY = 'aa7f303969993750f8c188c33e241ab2'
-const REDIRECT_URI = 'http://localhost:3000/api/auth/kakao'
+const REDIRECT_URI = '/api/auth/kakao'
 
 export default {
   name: 'VoteIndex',
@@ -95,7 +95,7 @@ export default {
   },
   methods: {
     async vote(id) {
-      const url = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`
+      const url = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${location.origin}${REDIRECT_URI}&response_type=code`
       await this.$nextTick()
       window.open(url, '카카오톡 로그인', 'width=420, height=600')
     }

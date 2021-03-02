@@ -19,7 +19,7 @@
                 @click='view(item)'
                 v-for='(item, index) in stickers' :key='index'>
                 <div class='image'>
-                    <img :src='`https://cdn.hitgall.com/sticker/${item.id}/1.${item.ext}`'>
+                    <img :src='`https://hitgall.com/sticker/${item.id}/1.${item.ext}`'>
                 </div>
                 <div class='info'>
                     <div class='name'>{{ item.name }}</div>
@@ -42,7 +42,7 @@
 
 <script>
     import StickerView from '~/components/sticker/view.vue'
-    
+
     export default {
         components: { StickerView },
         data() {

@@ -9,7 +9,7 @@
                 <ul>
                     <li v-for='(item, index) in topics' :key='index'>
                         <nuxt-link :to='`/${item.id}`'>
-                            <img :src='`https://cdn.hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
+                            <img :src='`https://hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
                             <strong>{{ getBoardName(item.boardDomain) }}</strong>
                             <div>{{ item.title }}</div>
                         </nuxt-link>
@@ -29,7 +29,7 @@
                     <nuxt-link :to='`/${item.id}`'>
                         <div class='content'>
                             <div class='image'>
-                                <img :src='item.imageUrl ? `https://cdn.hitgall.com/img/thumb/${item.imageUrl}` : "/default.png"' @error='imageUrlAlt'>
+                                <img :src='item.imageUrl ? `https://hitgall.com/img/thumb/${item.imageUrl}` : "/default.png"' @error='imageUrlAlt'>
                             </div>
                             <div class='subject'>
                                 <span :style='item.color !== "" ? `color: #${item.color}` : ""'>

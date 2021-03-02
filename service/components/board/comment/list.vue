@@ -52,7 +52,7 @@
                   class='sticker'
                   @click='viewSticker(item.stickerId)'
                   v-if='item.stickerId > 0'>
-                  <img :src='`https://cdn.hitgall.com/sticker/${item.stickerId}/${item.stickerSelect}`'>
+                  <img :src='`https://hitgall.com/sticker/${item.stickerId}/${item.stickerSelect}`'>
                 </div>
                 <div
                   class='sticker'

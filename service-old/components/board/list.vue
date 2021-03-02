@@ -71,7 +71,7 @@
                             </div>
                             <div class='subject'>
                                 <div class='thumb' v-if='item.imageUrl'>
-                                    <img :src='`https://cdn.hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
+                                    <img :src='`https://hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
                                 </div>
                                 <div>
                                     <span :style='item.color !== "" ? `color: #${item.color}` : ""'>
@@ -113,7 +113,7 @@
                             </div>
                             <div class='subject'>
                                 <div class='thumb' v-if='item.imageUrl'>
-                                    <img :src='`https://cdn.hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
+                                    <img :src='`https://hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
                                 </div>
                                 <div>
                                     <span :style='item.color !== "" ? `color: #${item.color}` : ""'>
@@ -149,7 +149,7 @@
                         <nuxt-link :to='`/${item.id}?page=${page}${category !== "" ? "&category=" + category : ""}`'>
                             <div class='content'>
                                 <div class='image'>
-                                    <img :src='item.imageUrl ? `https://cdn.hitgall.com/img/thumb/${item.imageUrl}` : "/default.png"' @error='imageUrlAlt'>
+                                    <img :src='item.imageUrl ? `https://hitgall.com/img/thumb/${item.imageUrl}` : "/default.png"' @error='imageUrlAlt'>
                                 </div>
                                 <div class='subject'>
                                     <span class='notice'>공지</span>
@@ -194,7 +194,7 @@
                         <nuxt-link :to='`/${item.id}?page=${page}${category !== "" ? "&category=" + category : ""}`'>
                             <div class='content'>
                                 <div class='image'>
-                                    <img :src='item.imageUrl ? `https://cdn.hitgall.com/img/thumb/${item.imageUrl}` : "/default.png"' @error='imageUrlAlt'>
+                                    <img :src='item.imageUrl ? `https://hitgall.com/img/thumb/${item.imageUrl}` : "/default.png"' @error='imageUrlAlt'>
                                 </div>
                                 <div class='subject'>
                                     <span class='category' v-if='item.category'>{{ item.category }}</span>
@@ -327,7 +327,7 @@
 				loading: false
             }
         },
-        watch: { 
+        watch: {
             '$store.state.forceUpdate': function() {
                 this.getData(true, true)
 				this.getCount()
@@ -392,7 +392,7 @@
                 this.counts.today = this.numberWithCommas(data.today)
             },
             getCreated(created) {
-                const nowFormat = this.$moment(new Date()).format('YYYY.MM.DD') 
+                const nowFormat = this.$moment(new Date()).format('YYYY.MM.DD')
                 const createdFormat = this.$moment(created).format('YYYY.MM.DD')
                 return nowFormat === createdFormat
                     ? this.$moment(created).format('HH:mm:ss')
@@ -459,7 +459,7 @@
 
 <style lang='less' scoped>
     @primary: #9BA9FB;
-    
+
     article.topic-list {
         > .loading-bar {
             height: 32px;

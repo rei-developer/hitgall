@@ -334,7 +334,7 @@ module.exports.createTopic = async ctx => {
   password = Filter.disable(password)
   title = Filter.disable(title)
   content = Filter.topic(content)
-  content = content.replace(/storage.googleapis.com\/hitgall/gim, 'cdn.hitgall.com')
+  content = content.replace(/storage.googleapis.com\/hitgall/gim, 'hitgall.com')
   if (color !== '')
     color = color.replace('#', '')
   const ip = ctx.get('x-real-ip')
@@ -681,7 +681,7 @@ module.exports.updateTopic = async ctx => {
     }
   title = Filter.disable(title)
   content = Filter.topic(content)
-  content = content.replace(/storage.googleapis.com\/hitgall/gim, 'cdn.hitgall.com')
+  content = content.replace(/storage.googleapis.com\/hitgall/gim, 'hitgall.com')
   if (color !== '')
     color = color.replace('#', '')
   const ip = ctx.get('x-real-ip')
