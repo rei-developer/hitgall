@@ -8,7 +8,7 @@
       <ul>
         <li v-for='(item, index) in getTopics(0)' :key='index'>
           <nuxt-link :to='`${item.id}`'>
-            <img alt="thumb" :src='`https://hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
+            <img alt="thumb" :src='`https://cdn.hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
             <strong>OP</strong>
             <div>{{ item.title }}</div>
           </nuxt-link>
@@ -17,7 +17,7 @@
       <ul>
         <li v-for='(item, index) in getTopics(3)' :key='index'>
           <nuxt-link :to='`${item.id}`'>
-            <img alt="thumb" :src='`https://hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
+            <img alt="thumb" :src='`https://cdn.hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
             <strong>OP</strong>
             <div>{{ item.title }}</div>
           </nuxt-link>

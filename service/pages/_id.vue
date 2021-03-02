@@ -79,7 +79,7 @@
       </h6>
       <div class='profile'>
         <!-- <div class='image'>
-           <img :src='`https://hitgall.com/img/${topic.imageUrl}`' @error='imageUrlAlt'>
+           <img :src='`https://cdn.hitgall.com/img/${topic.imageUrl}`' @error='imageUrlAlt'>
        </div>  -->
         <div class='author'>
           <!-- <img :src='`/level/${topic.level}.png`'> -->
@@ -105,7 +105,7 @@
       </div>
       <div class='content' v-viewer='{ title: false }'>
         <div v-if='boardImageUrl'>
-          <p><img alt='topicimage' :src='`https://hitgall.com/img/${boardImageUrl}`' @error='imageUrlAlt'></p>
+          <p><img alt='topicimage' :src='`https://cdn.hitgall.com/img/${boardImageUrl}`' @error='imageUrlAlt'></p>
         </div>
         <Poll :id='id' v-if='topic.isPoll'/>
         <span v-html='topic.content'/>
@@ -337,7 +337,7 @@ export default {
     },
     async downloadWithAxios(url, name) {
       await fetch(
-        `https://hitgall.com/img/${url}`,
+        `https://cdn.hitgall.com/img/${url}`,
         {
           headers: {'Accept': 'image/*'},
           responseType: 'arraybuffer'
@@ -455,7 +455,7 @@ export default {
         {property: 'og:description', content: this.topic.content.substr(0, 200)},
         {
           property: 'og:image',
-          content: this.topic.imageUrl ? `https://hitgall.com/img/${this.topic.imageUrl}` : '/default.png'
+          content: this.topic.imageUrl ? `https://cdn.hitgall.com/img/${this.topic.imageUrl}` : '/default.png'
         },
         {property: 'og:type', content: 'website'},
         {property: 'og:updated_time', content: this.topic.updated},

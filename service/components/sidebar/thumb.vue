@@ -8,7 +8,7 @@
         >
           <NuxtLink
             class='thumb'
-            :style='{backgroundImage: item.imageUrl ? `url("https://hitgall.com/img/thumb/${item.imageUrl}")` : undefined}'
+            :style='{backgroundImage: item.imageUrl ? `url("https://cdn.hitgall.com/img/thumb/${item.imageUrl}")` : undefined}'
             :to='`/${item.id}`'
           />
         </li>

@@ -29,7 +29,7 @@
             <div class='content'>
               <div class='image'>
                 <img alt="thumb"
-                     :src='item.imageUrl ? `https://hitgall.com/img/thumb/${item.imageUrl}` : "/default.png"'
+                     :src='item.imageUrl ? `https://cdn.hitgall.com/img/thumb/${item.imageUrl}` : "/default.png"'
                      @error='imageUrlAlt'>
               </div>
               <div class='subject'>
