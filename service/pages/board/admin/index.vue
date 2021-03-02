@@ -23,7 +23,7 @@
               <div>{{ index + 1 }}</div>
               <div class='subject'>
                 <!-- <div class='thumb' v-if='item.imageUrl'>
-                    <img :src='`https://cdn.hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
+                    <img :src='`https://cdn.torrentgun.us/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
                 </div> -->
                 <div>
                   <span>
