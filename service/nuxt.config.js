@@ -251,27 +251,4 @@ module.exports = {
       mobileApp: 'mobile-web-app-capable'
     }
   }
-  // firebase:  {
-  //   config: {
-  //     apiKey: 'AIzaSyDLM1hRPZUx6386HL6SFDoiNcIa93ITP9U',
-  //     authDomain: 'hitgall.firebaseapp.com',
-  //     databaseURL: 'https://hitgall.firebaseio.com',
-  //     projectId: 'hitgall',
-  //     storageBucket: 'hitgall.appspot.com',
-  //     messagingSenderId: '307237237837',
-  //     appId: '1:307237237837:web:28979138a3e0a6439f1804',
-  //     //measurementId: '<measurementId>'
-  //   },
-  //   services: {
-  //     auth: false,
-  //     firestore: false,
-  //     functions: false,
-  //     storage: false,
-  //     realtimeDb: false,
-  //     messaging: true,
-  //     performance: false,
-  //     analytics: false,
-  //     remoteConfig: false
-  //   }
-  // }
 }

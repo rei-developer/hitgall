@@ -54,12 +54,12 @@
   }
 
   > .background {
-    width: 4800px;
-    height: 4148px;
+    width: 100%;
+    height: 100%;
     position: fixed;
     top: 8rem;
     left: 0;
-    background-image: url('/background.jpg');
+    //background-image: url('/background.jpg');
     background-size: 25%;
     opacity: .1;
     z-index: -1;
