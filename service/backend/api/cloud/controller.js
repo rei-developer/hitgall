@@ -1,21 +1,35 @@
-const {Storage} = require('@google-cloud/storage')
+const S3 = require('aws-sdk/clients/s3')
+const AWS = require('aws-sdk')
+const wasabiEndpoint = new AWS.Endpoint('s3.us-west-1.wasabisys.com')
 
 const dotenv = require('dotenv')
 
 dotenv.config()
 
-const {BUCKET_NAME} = process.env
-const storage = new Storage({keyFilename: 'key.json'})
+const {
+  BUCKET_NAME,
+  ACCESS_KEY_ID,
+  SECRET_ACCESS_KEY
+} = process.env
 
-const uploadFile = async filename => {
-  await storage.bucket(BUCKET_NAME).upload(filename, {
-    gzip: true,
-    destination: filename,
-    metadata: {
-      cacheControl: 'public, max-age=31536000',
-    },
+const s3 = new S3({
+  endpoint: wasabiEndpoint,
+  region: 'us-west-1',
+  accessKeyId: ACCESS_KEY_ID,
+  secretAccessKey: SECRET_ACCESS_KEY
+})
+
+const uploadFile = async (key, body) => {
+  await s3.putObject({
+    Bucket: BUCKET_NAME,
+    Key: key,
+    Body: body,
+    ACL: 'public-read'
+  }, err => {
+    if (err)
+      console.log(err)
   })
-  console.log(`${filename} uploaded to ${BUCKET_NAME}.`)
+  console.log(`${key} uploaded to ${BUCKET_NAME}.`)
 }
 
 const fs = require('fs')
@@ -34,14 +48,14 @@ module.exports.createImage = type => async ctx => {
             message: err,
             status: 'fail'
           }
-        await uploadFile(`img/${filename}`)
+        await uploadFile(`img/${filename}`, data)
         if (type === 'topic') {
           const thumbnail = sharp(data)
           thumbnail
             .metadata()
             .then(() => thumbnail.resize(100, 100).withMetadata().rotate().toBuffer())
             .then(result => fs.writeFile(`img/thumb/${filename}`, result, async () => {
-              await uploadFile(`img/thumb/${filename}`)
+              await uploadFile(`img/thumb/${filename}`, result)
             }))
         }
         if (type === 'background') {
@@ -50,7 +64,7 @@ module.exports.createImage = type => async ctx => {
             .metadata()
             .then(() => thumbnail.resize(120, 100).withMetadata().rotate().toBuffer())
             .then(result => fs.writeFile(`img/thumb/${filename}`, result, async () => {
-              await uploadFile(`img/thumb/${filename}`)
+              await uploadFile(`img/thumb/${filename}`, result)
             }))
         }
       })
