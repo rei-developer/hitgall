@@ -25,11 +25,11 @@ const uploadFile = async (key, body) => {
     Key: key,
     Body: body,
     ACL: 'public-read'
-  }, err => {
+  }, (err, data) => {
     if (err)
       console.log(err)
+    console.log(`s3 : ${key} - ${data} uploaded to ${BUCKET_NAME}.`)
   })
-  console.log(`${key} uploaded to ${BUCKET_NAME}.`)
 }
 
 const fs = require('fs')

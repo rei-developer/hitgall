@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="834b01fe-2b67-436b-9738-6787482c69a0" name="디폴트 변경 목록" comment="임시 CDN 설정">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/backend/api/board/controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/service/backend/api/board/controller.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/backend/api/cloud/controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/service/backend/api/cloud/controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/key.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +103,8 @@
       <workItem from="1616768924285" duration="556000" />
       <workItem from="1616858501897" duration="214000" />
       <workItem from="1616931408342" duration="2529000" />
-      <workItem from="1617027754106" duration="1231000" />
+      <workItem from="1617027754106" duration="2149000" />
+      <workItem from="1617031458365" duration="342000" />
     </task>
     <task id="LOCAL-00001" summary="노무현 갤러리">
       <created>1609160167955</created>
@@ -308,7 +309,21 @@
       <option name="project" value="LOCAL" />
       <updated>1614684338275</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="와사비 버킷 업데이트">
+      <created>1617029567040</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1617029567040</updated>
+    </task>
+    <task id="LOCAL-00031" summary="와사비 버킷 업데이트 =&gt; CDN 주소 변경">
+      <created>1617029920380</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1617029920380</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -346,6 +361,8 @@
     <MESSAGE value="위젯 버그 수정" />
     <MESSAGE value="원복" />
     <MESSAGE value="임시 CDN 설정" />
-    <option name="LAST_COMMIT_MESSAGE" value="임시 CDN 설정" />
+    <MESSAGE value="와사비 버킷 업데이트" />
+    <MESSAGE value="와사비 버킷 업데이트 =&gt; CDN 주소 변경" />
+    <option name="LAST_COMMIT_MESSAGE" value="와사비 버킷 업데이트 =&gt; CDN 주소 변경" />
   </component>
 </project>
