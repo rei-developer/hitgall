@@ -12,7 +12,7 @@
       >
         <NuxtLink
           class='thumb'
-          :style='{backgroundImage: item.imageUrl ? `url("https://cdn.torrentgun.us/img/thumb/${item.imageUrl}")` : undefined}'
+          :style='{backgroundImage: item.imageUrl ? `url("https://cdn.hitgall.com/img/thumb/${item.imageUrl}")` : undefined}'
           :to='`/${item.id}`'
           v-if='type === "magazine"'
         />

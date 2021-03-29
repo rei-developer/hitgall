@@ -218,7 +218,7 @@
             const regex1 = /<p><\/p>/gim
             const regex2 = /<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>/gim
             data.topic.content = data.topic.content.replace(regex1, '<p><br></p>')
-            data.topic.content = data.topic.content.replace(regex2, `<img src="https://torrentgun.us$1">`)
+            data.topic.content = data.topic.content.replace(regex2, `<img src="https://hitgall.com$1">`)
             return {
                 id,
                 topic: data.topic,

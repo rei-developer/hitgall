@@ -21,7 +21,7 @@
             move-class='item-move'>
             <img
               alt="picture"
-              :src='`https://cdn.torrentgun.us/img/${item.imageUrl}`'
+              :src='`https://cdn.hitgall.com/img/${item.imageUrl}`'
               @error='imageUrlAlt'
               @click='playSound("/se3.mp3")'>
           </waterfall-slot>
