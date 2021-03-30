@@ -383,7 +383,8 @@ export default {
       localStorage.setItem('notUserPW', this.form.password)
     }
   },
-  mounted() {
+  async mounted() {
+    await this.$nextTick()
     this.editor = new Editor({
       // autoFocus: true,
       extensions: [
