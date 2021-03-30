@@ -1,6 +1,7 @@
 const Router = require('koa-router')
 const multer = require('koa-multer')
-const uuidv5 = require('uuid/v5')
+//const uuidv5 = require('uuid/v5')
+const { v5: uuidv5 } = require('uuid');
 const Controller = require('./controller')
 
 const storage = multer.diskStorage({
