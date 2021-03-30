@@ -56,7 +56,6 @@ module.exports = {
   plugins: [
     {src: '@/plugins/event-bus'},
     {src: '@/plugins/service-worker.js', mode: 'client'},
-    //{ src: "@/plugins/firebase-sw.js" },
     // { src: '@/plugins/socket.io.js' },
     {src: '@/plugins/v-viewer.js', mode: 'client'},
     {src: '@/plugins/vue-aplayer.js', mode: 'client'},
@@ -178,8 +177,7 @@ module.exports = {
       orientation: 'portrait',
       background_color: '#FFFFFF',
       theme_color: '#00C7AE',
-      crossorigin: 'use-credentials',
-      gcm_sender_id: '103953800507'
+      crossorigin: 'use-credentials'
     },
 
     icon: {
@@ -188,10 +186,7 @@ module.exports = {
     },
 
     workbox: {
-      //cachingExtensions: '@/plugins/workbox-range-request.js',
       offline: false,
-      //offlinePage:'/offline.html',
-      //offlineAssets: ['/offline.html'],
       enabled: true,
       cacheAssets: false,
       runtimeCaching: [
@@ -202,18 +197,7 @@ module.exports = {
           strategyOptions: {
             cacheName: process.env.npm_package_version_number,
             cacheExpiration: {
-              maxAgeSeconds: 30 * 60
-            }
-          }
-        },
-        {
-          handler: 'StaleWhileRevalidate',
-          urlPattern: 'https://pagead2.googlesyndication.com/js/*',
-          method: 'GET',
-          strategyOptions: {
-            cacheName: process.env.npm_package_version_number,
-            cacheExpiration: {
-              maxAgeSeconds: 30 * 60
+              maxAgeSeconds: 48 * 60 * 60
             }
           }
         },
@@ -224,18 +208,7 @@ module.exports = {
           strategyOptions: {
             cacheName: process.env.npm_package_version_number,
             cacheExpiration: {
-              maxAgeSeconds: 30 * 60
-            }
-          }
-        },
-        {
-          handler: 'cacheFirst',
-          urlPattern: 'https://www.google-analytics.com/analytics.js',
-          method: 'GET',
-          strategyOptions: {
-            cacheName: process.env.npm_package_version_number,
-            cacheExpiration: {
-              maxAgeSeconds: 30 * 60
+              maxAgeSeconds: 48 * 60 * 60
             }
           }
         }
