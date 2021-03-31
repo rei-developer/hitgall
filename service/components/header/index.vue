@@ -82,12 +82,6 @@
             힛갤콘
           </li>
         </nuxt-link>
-        <nuxt-link to='/chat'>
-          <li @click='forceUpdate'>
-            <font-awesome-icon icon='comments'/>
-            시루와 대화하기
-          </li>
-        </nuxt-link>
         <nuxt-link to='/konomi'>
           <li @click='forceUpdate'>
             <font-awesome-icon icon='image'/>

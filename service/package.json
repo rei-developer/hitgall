@@ -1,7 +1,7 @@
 {
     "name": "hitgall",
     "version": "1.0.0",
-    "version_number": "19",
+    "version_number": "20",
     "description": "hitgall 1.0 project",
     "author": "nakochan",
     "private": true,
@@ -30,7 +30,6 @@
         "bootstrap": "^4.6.0",
         "bootstrap-vue": "^2.21.2",
         "cross-env": "^7.0.3",
-        "firestore": "^1.1.6",
         "json-schema": "^0.3.0",
         "koa": "^2.13.1",
         "koa2-ratelimit": "^0.9.0",
@@ -41,6 +40,7 @@
         "nuxt-clipboard2": "^0.2.1",
         "nuxt-dropzone": "^1.0.4",
         "nuxt-fontawesome": "^0.4.0",
+        "prosemirror-utils": "^0.9.6",
         "request": "^2.88.2",
         "socket.io-client": "^4.0.0",
         "tiptap": "1.27.1",
@@ -66,7 +66,7 @@
         "eslint-plugin-nuxt": ">=0.4.2",
         "nodemon": "^2.0.7"
     },
-    "resolutions": {
-        "prosemirror-model": "1.8.2"
-    }
+  "resolutions": {
+    "prosemirror-model": "1.8.2"
+  }
 }
