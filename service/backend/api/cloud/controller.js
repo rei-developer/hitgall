@@ -42,19 +42,10 @@ const Lame = require('node-lame').Lame
 module.exports.createVoice = async ctx => {
   let {blob} = ctx.request.body
   blob = blob.replace(/data:application\/octet-stream;/gim, 'data:audio/mpeg;')
-  const encoder = new Lame.Encoder({
+  const encoder = new Lame({
     output: 'buffer',
-
-    // input
-    channels: 2, // 2 channels (left and right)
-    bitDepth: 16, // 16-bit samples
-    sampleRate: 44100, // 44,100 Hz sample rate
-
-    // output
     bitRate: 192,
-    outSampleRate: 44100,
-
-    // mp3Input: true
+    mp3Input: true
   }).setBuffer(Buffer.from(blob, 'base64'))
   try {
     const buffer = await new Promise((resolve, reject) => {
