@@ -73,7 +73,7 @@
         </div>
         <client-only>
           <div class='editor'>
-            <editor-menu-bar :editor='editor' v-slot='{ commands, isActive }'>
+            <editor-menu-bar :editor='editor' v-slot='{ commands }'>
               <div>
                 <b-button-group vertical>
                   <b-button-group size='sm'>
@@ -91,31 +91,26 @@
                     </b-dropdown>
                     <b-button
                       variant='primary'
-                      :pressed.sync='isActive.bold()'
                       @click='commands.bold'>
                       <font-awesome-icon icon='bold'/>
                     </b-button>
                     <b-button
                       variant='primary'
-                      :pressed.sync='isActive.italic()'
                       @click='commands.italic'>
                       <font-awesome-icon icon='italic'/>
                     </b-button>
                     <b-button
                       variant='primary'
-                      :pressed.sync='isActive.strike()'
                       @click='commands.strike'>
                       <font-awesome-icon icon='strikethrough'/>
                     </b-button>
                     <b-button
                       variant='primary'
-                      :pressed.sync='isActive.underline()'
                       @click='commands.underline'>
                       <font-awesome-icon icon='underline'/>
                     </b-button>
                     <b-button
                       variant='primary'
-                      :pressed.sync='isActive.code()'
                       @click='commands.code'>
                       <font-awesome-icon icon='code'/>
                     </b-button>
@@ -123,31 +118,26 @@
                   <b-button-group size='sm'>
                     <b-button
                       variant='primary'
-                      :pressed.sync='isActive.paragraph()'
                       @click='commands.paragraph'>
                       <font-awesome-icon icon='paragraph'/>
                     </b-button>
                     <b-button
                       variant='primary'
-                      :pressed.sync='isActive.bullet_list()'
                       @click='commands.bullet_list'>
                       <font-awesome-icon icon='list-ul'/>
                     </b-button>
                     <b-button
                       variant='primary'
-                      :pressed.sync='isActive.ordered_list()'
                       @click='commands.ordered_list'>
                       <font-awesome-icon icon='list-ol'/>
                     </b-button>
                     <b-button
                       variant='primary'
-                      :pressed.sync='isActive.blockquote()'
                       @click='commands.blockquote'>
                       <font-awesome-icon icon='quote-right'/>
                     </b-button>
                     <b-button
                       variant='primary'
-                      :pressed.sync='isActive.code_block()'
                       @click='commands.code_block'>
                       <font-awesome-icon icon='code'/>
                     </b-button>
@@ -559,7 +549,7 @@ export default {
             uuid: file.upload.uuid
           })
           const regex = new RegExp(`<img\\s+[^>]*alt=('|")${file.upload.uuid}('|")[^>]*>`, 'gi')
-          const text = `<img src="https://cdn.hitgall.com${filename}" alt="${data.filename}">`
+          const text = `<img src='https://cdn.hitgall.com${filename}' alt='${data.filename}'>`
           this.setContent(this.html.replace(regex, text))
         } else {
           this.toast(`${index + 1}번째 이미지 업로드 실패...`, 'danger')
@@ -568,18 +558,18 @@ export default {
       await this.imageUploadToServer(files, index + 1)
     },
     template() {
-      return `<div class="dz-preview dz-file-preview">
-							<div class="dz-image">
+      return `<div class='dz-preview dz-file-preview'>
+							<div class='dz-image'>
 								<div data-dz-thumbnail-bg></div>
 							</div>
-							<div class="dz-details">
-								<div class="dz-size"><span data-dz-size></span></div>
+							<div class='dz-details'>
+								<div class='dz-size'><span data-dz-size></span></div>
 							</div>
-							<div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
-							<div class="dz-error-message"><span data-dz-errormessage></span></div>
-							<div class="dz-success-mark"><i class="fa fa-check"></i></div>
-							<div class="dz-error-mark"><i class="fa fa-close"></i></div>
-							<a class="dz-remove" data-dz-remove>삭제</a>
+							<div class='dz-progress'><span class='dz-upload' data-dz-uploadprogress></span></div>
+							<div class='dz-error-message'><span data-dz-errormessage></span></div>
+							<div class='dz-success-mark'><i class='fa fa-check'></i></div>
+							<div class='dz-error-mark'><i class='fa fa-close'></i></div>
+							<a class='dz-remove' data-dz-remove>삭제</a>
 						</div>`
     },
     thumbnail(file, dataUrl) {
