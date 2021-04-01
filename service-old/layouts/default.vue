@@ -45,7 +45,7 @@
     import Sidebar from '~/components/sidebar.vue'
     import Footer from '~/components/footer.vue'
     // import Aplayer from '~/components/aplayer.vue'
-    
+
     export default {
         components: {
             Notify,
@@ -96,7 +96,7 @@
                 this.ver.backend = data.version || 0
             },
             checkLogged: async function() {
-                const token = localStorage.tk
+                const token = localStorage._token
                 if (!token)
                     return
                 const data = await this.$axios.$get(
@@ -109,7 +109,7 @@
                 this.$store.commit('user/setUser', data)
             },
             getNotices: async function() {
-                const token = localStorage.tk
+                const token = localStorage._token
                 if (!token)
                     return
                 const data = await this.$axios.$get(

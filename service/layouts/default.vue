@@ -109,7 +109,7 @@ export default {
       this.$store.commit('screenWidth', window.innerWidth)
     },
     checkLogged: async function () {
-      const token = localStorage.tk
+      const token = localStorage._token
       if (!token)
         return
       const data = await this.$axios.$get(
@@ -122,7 +122,7 @@ export default {
       this.$store.commit('user/setUser', data)
     },
     getNotices: async function () {
-      const token = localStorage.tk
+      const token = localStorage._token
       if (!token)
         return
       const data = await this.$axios.$get(
