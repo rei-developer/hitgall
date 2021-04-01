@@ -49,12 +49,12 @@ module.exports.getInventoryItem = async ctx => {
 module.exports.getInventory = async ctx => {
   const user = await User.getUser(ctx.get('x-access-token'))
   const defaultItems = [{
-    id: 130,
+    id: 110,
     number: 22,
     ext: 'jpg',
     name: '페페 야구'
   }, {
-    id: 167,
+    id: 146,
     number: 57,
     ext: 'jpg',
     name: '페페 모음'

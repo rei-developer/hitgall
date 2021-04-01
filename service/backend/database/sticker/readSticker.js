@@ -46,7 +46,7 @@ module.exports.stickers = async (columns, page, limit) => {
   })
   try {
     const result = await pool.query(
-      `SELECT * FROM Stickers WHERE ${keys.map(key => `${key} = ?`).join(' AND ')} LIMIT ?, ?`,
+      `SELECT * FROM Stickers WHERE ${keys.map(key => `${key} = ?`).join(' AND ')} ORDER BY id LIMIT ?, ?`,
       [
         ...values,
         page * limit,
