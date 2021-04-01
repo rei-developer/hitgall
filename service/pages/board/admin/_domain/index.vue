@@ -66,7 +66,7 @@
           </label>
           <b-form-group class='mb-sm-2'>
             <div class='background'>
-              <img alt="thumb" :src='`https://cdn.hitgall.com/img/thumb/${board.imageUrl}`' @error='imageUrlAlt'>
+              <img alt='thumb' :src='`https://cdn.hitgall.com/img/thumb/${board.imageUrl}`' @error='imageUrlAlt'>
             </div>
             <div class='upload' v-b-tooltip.hover title='대문 사진을 변경합니다.'>
               <input type='file' @change='backgroundImageUpload'/>
@@ -145,17 +145,18 @@
                 readonly/>
             </b-input-group>
           </b-form-group>
-          <b-button
-            type='submit'
-            variant='primary'
-            block>
-            설정 완료
-          </b-button>
-          <b-button
-            variant='danger'
-            block>
-            갤러리 폐쇄 신청 (개발중)
-          </b-button>
+          <b-button-group>
+            <b-button size='sm'>
+              갤러리 폐쇄 신청 (미개발)
+            </b-button>
+            <b-button
+              size='sm'
+              type='submit'
+              variant='primary'
+            >
+              설정 완료
+            </b-button>
+          </b-button-group>
         </b-form>
       </div>
       <div class='article' v-if='menu === "blind"'>
@@ -187,8 +188,8 @@
 											</span>
                     </div>
                   </div>
-                  <div>{{ $moment(item.blockDate).format("YY/MM/DD") }}</div>
-                  <div>{{ $moment(item.created).format("YY/MM/DD HH:mm:ss") }}</div>
+                  <div>{{ $moment(item.blockDate).format('YY/MM/DD') }}</div>
+                  <div>{{ $moment(item.created).format('YY/MM/DD HH:mm:ss') }}</div>
                   <div>
                     <b-button
                       size='sm'
@@ -236,7 +237,7 @@
 											</span>
                     </div>
                   </div>
-                  <div>{{ $moment(item.created).format("YY/MM/DD HH:mm:ss") }}</div>
+                  <div>{{ $moment(item.created).format('YY/MM/DD HH:mm:ss') }}</div>
                   <div>{{ item.remover }}</div>
                 </div>
               </li>

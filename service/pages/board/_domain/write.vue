@@ -22,8 +22,8 @@
 							공지사항
 						</b-form-checkbox>
 					</b-form-group>
-					<b-form-group label='색상'>
-						<b-form-input type='color' v-model='form.color' style='width: 120px'/>
+					<b-form-group>
+						<b-form-input size='sm' type='color' v-model='form.color' style='width: 120px'/>
 					</b-form-group>
 				</span>
         <b-form-group v-if='categories.length > 0'>
@@ -37,25 +37,27 @@
         </b-form-group>
         <b-form-group v-if='!$store.state.user.isLogged'>
           <b-form inline>
-            <b-input-group class='mb-2 mr-sm-2 mb-sm-0'>
+            <b-input-group class='mb-2 mr-sm-2 mb-sm-0' size='sm'>
               <b-input placeholder='닉네임' v-model='form.writer' trim/>
             </b-input-group>
-            <b-input-group class='mb-2 mr-sm-2 mb-sm-0'>
+            <b-input-group class='mb-2 mr-sm-2 mb-sm-0' size='sm'>
               <b-input type='password' placeholder='비밀번호' v-model='form.password' trim/>
             </b-input-group>
           </b-form>
         </b-form-group>
         <b-form-group>
-          <b-form-input placeholder='제목' v-model='form.title' autofocus/>
+          <b-form-input size='sm' placeholder='제목' v-model='form.title' autofocus/>
         </b-form-group>
         <div v-if='!poll.hide'>
           <b-form-group label='설문조사 질문'>
             <b-form-input
+              size='sm'
               placeholder='200글자 제한'
               v-model='poll.question'/>
           </b-form-group>
           <b-form-group label='설문조사 항목'>
             <b-form-textarea
+              size='sm'
               placeholder='항목은 개행(Enter Key)으로 구분하세요.'
               v-model='poll.texts'
               rows='3'
@@ -63,6 +65,7 @@
           </b-form-group>
           <b-form-group label='설문조사 종료 일자'>
             <b-form-datepicker
+              size='sm'
               placeholder='종료 일자를 선택하세요.'
               v-model='poll.regdate'
               :min='new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())'/>
@@ -215,13 +218,14 @@
         </dropzone>
         <b-button-group class='submit'>
           <b-button
-            variant='danger'
+            size='sm'
             @click='backHandler'>
             취소
           </b-button>
         </b-button-group>
         <b-button-group class='submit float-right'>
           <b-button
+            size='sm'
             variant='primary'
             @click='submit'>
             <font-awesome-icon icon='pen'/>
@@ -678,6 +682,6 @@ textarea.textBox {
 }
 
 .submit {
-  margin: 1rem 0
+  margin-top: .5rem
 }
 </style>

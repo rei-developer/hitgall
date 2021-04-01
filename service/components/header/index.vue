@@ -71,12 +71,6 @@
             힛갤콘
           </li>
         </nuxt-link>
-        <nuxt-link to='/konomi'>
-          <li @click='forceUpdate'>
-            <font-awesome-icon icon='image'/>
-            인공지능 2D 분석
-          </li>
-        </nuxt-link>
         <nuxt-link to='/help'>
           <li>
             <font-awesome-icon icon='question-circle'/>

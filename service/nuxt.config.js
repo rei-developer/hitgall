@@ -26,15 +26,6 @@ module.exports = {
       {
         href: 'https://fonts.googleapis.com/css2?family=Nunito&display=swap'
       }
-    ],
-    script: [
-      {src: '//cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.1'},
-      {src: '//cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0'}
-      // {
-      //   src:
-      //     "https://www.google.com/recaptcha/api.js?render=6LdGdsAZAAAAAHs2tez4PI-6H0kwQ-AnQeIzW6Lw"
-      // },
-      //{ src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" }
     ]
   },
   /*
@@ -156,7 +147,7 @@ module.exports = {
     '/api': 'http://localhost:3000'
   },
   env: {
-    SOCKET_HOST_URL: 'https://www.hitgall.com',
+    SOCKET_HOST_URL: 'https://hitgall.com',
     packageVersionNumber: process.env.npm_package_version_number
   },
   telemetry: false,
