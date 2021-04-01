@@ -1,6 +1,7 @@
 const S3 = require('aws-sdk/clients/s3')
 const AWS = require('aws-sdk')
 const wasabiEndpoint = new AWS.Endpoint('s3.us-west-1.wasabisys.com')
+const {v5} = require('uuid')
 
 const dotenv = require('dotenv')
 
@@ -47,20 +48,19 @@ module.exports.createVoice = async ctx => {
   try {
     const buffer = await new Promise((resolve, reject) => {
       encoder.encode()
-        .then(() => {
-          const buffer = encoder.getBuffer()
-          resolve(buffer)
-        })
-        .catch(err => {
-          console.log(err)
-          reject(err)
-        })
+        .then(() => resolve(encoder.getBuffer()))
+        .catch(err => reject(err))
     })
-    await uploadFile('test333.mpeg', buffer, {
-      // ContentEncoding: 'base64',
+    const tempName = v5(`${Date.now()}`)
+    await uploadFile(`voice/test-${tempName}.mpeg`, buffer, {
+      ContentEncoding: 'base64',
       ContentType: 'audio/mpeg'
     })
+    ctx.body = {
+      status: 'ok'
+    }
   } catch (e) {
+    console.log(e)
     return ctx.body = e
   }
 }
@@ -72,20 +72,24 @@ module.exports.createImage = type => async ctx => {
   // ex).webp.mp4 형식 수정
   try {
     if (checker) {
-      fs.readFile(`img/${filename}`, async (err, data) => {
+      fs.readFile(`
+    img /${filename}`, async (err, data) => {
         if (err)
           return ctx.body = {
             message: err,
             status: 'fail'
           }
-        await uploadFile(`img/${filename}`, data)
+        await uploadFile(`
+    img /${filename}`, data)
         if (type === 'topic') {
           const thumbnail = sharp(data)
           thumbnail
             .metadata()
             .then(() => thumbnail.resize(100, 100).withMetadata().rotate().toBuffer())
-            .then(result => fs.writeFile(`img/thumb/${filename}`, result, async () => {
-              await uploadFile(`img/thumb/${filename}`, result)
+            .then(result => fs.writeFile(`
+    img / thumb /${filename}`, result, async () => {
+              await uploadFile(`
+    img / thumb /${filename}`, result)
             }))
         }
         if (type === 'background') {
@@ -93,8 +97,10 @@ module.exports.createImage = type => async ctx => {
           thumbnail
             .metadata()
             .then(() => thumbnail.resize(120, 100).withMetadata().rotate().toBuffer())
-            .then(result => fs.writeFile(`img/thumb/${filename}`, result, async () => {
-              await uploadFile(`img/thumb/${filename}`, result)
+            .then(result => fs.writeFile(`
+    img / thumb /${filename}`, result, async () => {
+              await uploadFile(`
+    img / thumb /${filename}`, result)
             }))
         }
       })
@@ -103,7 +109,9 @@ module.exports.createImage = type => async ctx => {
         status: 'ok'
       }
     } else {
-      fs.unlink(`img/${filename}`, () => console.log(`삭제 : img/${filename}`))
+      fs.unlink(`
+    img /${filename}`, () => console.log(`
+    삭제 : img /${filename}`))
       ctx.body = {
         message: 'gif, png, jpg, jpeg, webp만 가능',
         status: 'fail'
