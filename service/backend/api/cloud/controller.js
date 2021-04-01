@@ -43,9 +43,8 @@ module.exports.createVoice = async ctx => {
   let {blob} = ctx.request.body
   blob = blob.replace(/data:application\/octet-stream;/gim, 'data:audio/mpeg;')
   const encoder = new Lame({
-    output: 'buffer',
-    bitrate: 192,
-    mp3Input: true
+    output: 'buffer'
+    // bitrate: 192,
   }).setBuffer(Buffer.from(blob, 'base64'))
   try {
     const buffer = await new Promise((resolve, reject) => {
