@@ -114,6 +114,7 @@ module.exports = {
    */
   build: {
     babel: {
+      compact: true,
       presets({isServer}) {
         return [
           [

@@ -118,7 +118,7 @@
                     this.loading = false
                     return this.message = data.message || '알 수 없는 오류가 발생했습니다. 나중에 다시 시도하세요.'
                 }
-                localStorage.setItem('tk', data.token)
+                localStorage.setItem('_token', data.token)
                 location.href = '/'
             },
             // async checkRecaptcha() {
