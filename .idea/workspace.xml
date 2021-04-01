@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="834b01fe-2b67-436b-9738-6787482c69a0" name="디폴트 변경 목록" comment="글 삭제시 버킷 내 오브젝트 DELETE 처리">
+    <list default="true" id="834b01fe-2b67-436b-9738-6787482c69a0" name="디폴트 변경 목록" comment="async/await">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/pages/board/_domain/write.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/pages/board/_domain/write.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +104,10 @@
       <workItem from="1617027754106" duration="2149000" />
       <workItem from="1617031458365" duration="448000" />
       <workItem from="1617032127860" duration="14000" />
-      <workItem from="1617114426531" duration="1324000" />
+      <workItem from="1617114426531" duration="2164000" />
+      <workItem from="1617119084537" duration="67000" />
+      <workItem from="1617195731382" duration="662000" />
+      <workItem from="1617238299284" duration="1912000" />
     </task>
     <task id="LOCAL-00001" summary="노무현 갤러리">
       <created>1609160167955</created>
@@ -331,7 +333,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617031834673</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="async/await">
+      <created>1617118236570</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1617118236570</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -372,6 +381,7 @@
     <MESSAGE value="와사비 버킷 업데이트" />
     <MESSAGE value="와사비 버킷 업데이트 =&gt; CDN 주소 변경" />
     <MESSAGE value="글 삭제시 버킷 내 오브젝트 DELETE 처리" />
-    <option name="LAST_COMMIT_MESSAGE" value="글 삭제시 버킷 내 오브젝트 DELETE 처리" />
+    <MESSAGE value="async/await" />
+    <option name="LAST_COMMIT_MESSAGE" value="async/await" />
   </component>
 </project>
