@@ -27,29 +27,45 @@
       </div>
       <div class='content'>
         <div class='write-box'>
-                    <textarea
-                      rows='3'
-                      placeholder='이곳에 내용을 입력하세요.'
-                      v-model='content'
-                      v-on:keyup.ctrl.enter='submit'/>
+          <textarea
+            rows='3'
+            placeholder='이곳에 내용을 입력하세요.'
+            v-model='content'
+            v-on:keyup.ctrl.enter='submit'/>
         </div>
         <div class='commit'>
           <div class='sticker' @click='stickers.hide = false'>스티커</div>
           <div class='submit' @click='submit'>
             <input type='hidden'>
             <span v-if='loading'>
-                            <font-awesome-icon class='fa-spin' icon='circle-notch'/>
-                        </span>
+              <font-awesome-icon class='fa-spin' icon='circle-notch'/>
+            </span>
             <span v-else>
-                            <font-awesome-icon icon='pencil-alt'/>
-                        </span>
+              <font-awesome-icon icon='pencil-alt'/>
+            </span>
           </div>
         </div>
       </div>
       <div class='footer'>
+        <client-only>
+          <vue-record-audio
+            mode='press'
+            @result='onResult'
+          />
+        </client-only>
+        <audio
+          controls
+          :src='tempAudio'
+          v-if='tempAudio'
+        >
+          Your browser does not support the
+          <code>audio</code> element.
+        </audio>
+        (보이스 메시지 테스트중)
         <div class='sticker'
              @click='clear'
-             v-if='stickers.sticker'>
+             v-if='stickers.sticker'
+        >
           <div class='item'>
             <div class='image'>
               <img
@@ -83,6 +99,8 @@ export default {
         select: 0,
         hide: true
       },
+      tempAudio: null,
+      tempAudioBlob: null,
       loading: false
     }
   },
@@ -99,7 +117,7 @@ export default {
     this.password = localStorage.notUserPW || ''
   },
   methods: {
-    submit: async function () {
+    async submit() {
       if (this.loading)
         return
       if (!this.stickers.sticker && this.content.trim() === '')
@@ -110,7 +128,7 @@ export default {
       this.loading = true
       let result
       if (this.edit) {
-        const data = await this.$axios.$patch(
+        result = await this.$axios.$patch(
           '/api/topic/edit/post',
           {
             id: this.id,
@@ -124,9 +142,9 @@ export default {
           },
           {headers: {'x-access-token': token}}
         )
-        result = data
       } else {
-        const data = await this.$axios.$post('/api/topic/write/post',
+        result = await this.$axios.$post(
+          '/api/topic/write/post',
           {
             domain: this.domain,
             writer: this.writer,
@@ -144,11 +162,17 @@ export default {
           },
           {headers: {'x-access-token': token}}
         )
-        result = data
       }
       if (result.status === 'fail') {
         this.loading = false
         return this.toast(result.message || '오류가 발생했습니다.', 'danger')
+      }
+      if (this.tempAudio) {
+        const data = await this.$axios.$post(
+          '/api/cloud/voice',
+          {blob: this.tempAudioBlob}
+        )
+        console.log(data)
       }
       this.$store.commit('forceUpdate')
       this.content = ''
@@ -164,6 +188,8 @@ export default {
         select: 0,
         hide: true
       }
+      this.tempAudio = null
+      this.tempAudioBlob = null
     },
     use(item, select) {
       this.stickers = {
@@ -171,6 +197,15 @@ export default {
         select: select,
         hide: true
       }
+    },
+    async onResult(data) {
+      if (data.size > (1024 * 1000) * 5) {
+        return this.toast('보이스 용량이 너무 큽니다.', 'warning')
+      }
+      const reader = new FileReader()
+      reader.readAsDataURL(data)
+      this.tempAudio = window.URL.createObjectURL(data)
+      this.tempAudioBlob = await new Promise((resolve, reject) => reader.onloadend = () => resolve(reader.result))
     },
     imageUrlAlt(event) {
       event.target.src = '/default.png'

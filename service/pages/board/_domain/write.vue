@@ -562,19 +562,21 @@ export default {
       await this.imageUploadToServer(files, index + 1)
     },
     template() {
-      return `<div class='dz-preview dz-file-preview'>
-							<div class='dz-image'>
-								<div data-dz-thumbnail-bg></div>
-							</div>
-							<div class='dz-details'>
-								<div class='dz-size'><span data-dz-size></span></div>
-							</div>
-							<div class='dz-progress'><span class='dz-upload' data-dz-uploadprogress></span></div>
-							<div class='dz-error-message'><span data-dz-errormessage></span></div>
-							<div class='dz-success-mark'><i class='fa fa-check'></i></div>
-							<div class='dz-error-mark'><i class='fa fa-close'></i></div>
-							<a class='dz-remove' data-dz-remove>삭제</a>
-						</div>`
+      return `
+        <div class='dz-preview dz-file-preview'>
+          <div class='dz-image'>
+            <div data-dz-thumbnail-bg></div>
+          </div>
+          <div class='dz-details'>
+            <div class='dz-size'><span data-dz-size></span></div>
+          </div>
+          <div class='dz-progress'><span class='dz-upload' data-dz-uploadprogress></span></div>
+          <div class='dz-error-message'><span data-dz-errormessage></span></div>
+          <div class='dz-success-mark'><i class='fa fa-check'></i></div>
+          <div class='dz-error-mark'><i class='fa fa-close'></i></div>
+          <a class='dz-remove' data-dz-remove>삭제</a>
+        </div>
+      `
     },
     thumbnail(file, dataUrl) {
       let j, len, ref, thumbnailElement
@@ -646,9 +648,8 @@ export default {
 @media (max-width: 730px) {
   .textBox {
     width: 100%;
-    min-height: 400px;
+    min-height: 300px;
     margin: .5rem 0 0;
-    padding: .5rem;
     border: 2px solid #e5e5e5;
     background-color: #fff;
   }
@@ -657,9 +658,8 @@ export default {
 @media (min-width: 731px) {
   .textBox {
     width: 100%;
-    min-height: 620px;
+    min-height: 420px;
     margin: .5rem 0 0;
-    padding: .5rem;
     border: 2px solid #e5e5e5;
     background-color: #fff;
   }

@@ -19,21 +19,51 @@ const s3 = new S3({
   secretAccessKey: SECRET_ACCESS_KEY
 })
 
-const uploadFile = async (key, body) => {
+const uploadFile = async (key, body, options = null) => {
   await s3.putObject({
     Bucket: BUCKET_NAME,
     Key: key,
     Body: body,
-    ACL: 'public-read'
-  }, (err, data) => {
+    ACL: 'public-read',
+    ...options
+  }, err => {
     if (err)
       console.log(err)
-    console.log(`s3 : ${key} - ${data} uploaded to ${BUCKET_NAME}.`)
+    console.log(`s3 : ${key} uploaded to ${BUCKET_NAME}.`)
   })
 }
 
 const fs = require('fs')
 const sharp = require('sharp')
+const Lame = require('node-lame').Lame
+
+module.exports.createVoice = async ctx => {
+  let {blob} = ctx.request.body
+  blob = blob.replace(/data:application\/octet-stream;/gim, 'data:audio/mpeg;')
+  const encoder = new Lame({
+    output: 'buffer',
+    bitrate: 192
+  }).setBuffer(Buffer.from(blob, 'base64'))
+  try {
+    const buffer = await new Promise((resolve, reject) => {
+      encoder.encode()
+        .then(() => {
+          const buffer = encoder.getBuffer()
+          resolve(buffer)
+        })
+        .catch(err => {
+          console.log(err)
+          reject(err)
+        })
+    })
+    await uploadFile('test333.mpeg', buffer, {
+      // ContentEncoding: 'base64',
+      ContentType: 'audio/mpeg'
+    })
+  } catch (e) {
+    return ctx.body = e
+  }
+}
 
 module.exports.createImage = type => async ctx => {
   const checker = /(.gif|.png|.jpg|.jpeg|.webp)/i.test(ctx.req.file.originalname)
