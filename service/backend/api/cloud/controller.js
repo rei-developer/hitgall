@@ -42,14 +42,14 @@ const Lame = require('node-lame').Lame
 module.exports.createVoice = async ctx => {
   let {blob} = ctx.request.body
   blob = blob.replace(/data:application\/octet-stream;/gim, 'data:audio/mpeg;')
-  const encoder = new Lame({
+  const decoder = new Lame({
     output: 'buffer'
     // bitrate: 192,
   }).setBuffer(Buffer.from(blob, 'base64'))
   try {
     const buffer = await new Promise((resolve, reject) => {
-      encoder.encode()
-        .then(() => resolve(encoder.getBuffer()))
+      decoder.decode()
+        .then(() => resolve(decoder.getBuffer()))
         .catch(err => reject(err))
     })
     const tempName = v5(`${Date.now()}`, MY_NAMESPACE)
