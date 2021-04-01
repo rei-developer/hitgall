@@ -13,14 +13,6 @@
         </div>
       </div>
       <ul>
-        <a href='https://mananovel.com' target='_blank'>
-          <li>
-            <div class='icon'>
-              <font-awesome-icon icon='book'/>
-            </div>
-            웹노벨
-          </li>
-        </a>
         <nuxt-link
           :to='`/board/${item.field}`'
           v-for='(item, index) in boardList'
@@ -29,12 +21,6 @@
           <li @click='forceUpdate($event, item.field)'>
             <div class='icon'/>
             {{ item.name }}
-          </li>
-        </nuxt-link>
-        <nuxt-link to='/board/request'>
-          <li @click='forceUpdate'>
-            <div class='icon'/>
-            갤러리 신청
           </li>
         </nuxt-link>
         <nuxt-link to='/board/admin' v-if='$store.state.user.isLogged'>

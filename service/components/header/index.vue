@@ -15,7 +15,7 @@
             </div>
             <div>
               <div>HITGALL.com</div>
-              <div>밤새 갤질 쌉가능?</div>
+              <div>Re:제로부터 시작하는</div>
             </div>
           </li>
         </nuxt-link>
@@ -44,12 +44,6 @@
       ]'
     >
       <ul>
-        <a href='https://mananovel.com' target='_blank'>
-          <li>
-            <font-awesome-icon icon='book'/>
-            웹노벨
-          </li>
-        </a>
         <nuxt-link
           :to='`/board/${item.field}`'
           v-for='(item, index) in boardList'
@@ -58,11 +52,6 @@
           <li @click='forceUpdate($event, item.field)'>
             <div class='icon'/>
             {{ item.name }}
-          </li>
-        </nuxt-link>
-        <nuxt-link to='/board/request'>
-          <li @click='forceUpdate'>
-            갤러리 신청
           </li>
         </nuxt-link>
         <nuxt-link to='/board/admin' v-if='$store.state.user.isLogged'>
