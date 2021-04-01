@@ -9,6 +9,7 @@ dotenv.config()
 
 const {
   BUCKET_NAME,
+  MY_NAMESPACE,
   ACCESS_KEY_ID,
   SECRET_ACCESS_KEY
 } = process.env
@@ -51,7 +52,7 @@ module.exports.createVoice = async ctx => {
         .then(() => resolve(encoder.getBuffer()))
         .catch(err => reject(err))
     })
-    const tempName = v5(`${Date.now()}`)
+    const tempName = v5(`${Date.now()}`, MY_NAMESPACE)
     await uploadFile(`voice/test-${tempName}.mpeg`, buffer, {
       ContentEncoding: 'base64',
       ContentType: 'audio/mpeg'
