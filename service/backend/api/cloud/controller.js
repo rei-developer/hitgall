@@ -41,29 +41,37 @@ const Lame = require('node-lame').Lame
 
 module.exports.createVoice = async ctx => {
   let {blob} = ctx.request.body
-  blob = blob.replace(/data:application\/octet-stream;/gim, 'data:audio/mpeg;')
-  const decoder = new Lame({
-    output: 'buffer'
-    // bitrate: 192,
-  }).setBuffer(Buffer.from(blob, 'base64'))
-  try {
-    const buffer = await new Promise((resolve, reject) => {
-      decoder.decode()
-        .then(() => resolve(decoder.getBuffer()))
-        .catch(err => reject(err))
-    })
-    const tempName = v5(`${Date.now()}`, MY_NAMESPACE)
-    await uploadFile(`voice/test-${tempName}.mpeg`, buffer, {
-      ContentEncoding: 'base64',
-      ContentType: 'audio/mpeg'
-    })
-    ctx.body = {
-      status: 'ok'
-    }
-  } catch (e) {
-    console.log(e)
-    return ctx.body = e
+  blob = blob.replace(/data:application\/octet-stream;/gim, 'data:video/webm;')
+  const tempName = v5(`${Date.now()}`, MY_NAMESPACE)
+  await uploadFile(`voice/test-${tempName}.mpeg`, Buffer.from(blob, 'base64'), {
+    ContentEncoding: 'base64',
+    ContentType: 'video/webm'
+  })
+  ctx.body = {
+    status: 'ok'
   }
+  // const decoder = new Lame({
+  //   output: 'buffer'
+  //   // bitrate: 192,
+  // }).setBuffer(Buffer.from(blob, 'base64'))
+  // try {
+  //   const buffer = await new Promise((resolve, reject) => {
+  //     decoder.decode()
+  //       .then(() => resolve(decoder.getBuffer()))
+  //       .catch(err => reject(err))
+  //   })
+  //   const tempName = v5(`${Date.now()}`, MY_NAMESPACE)
+  //   await uploadFile(`voice/test-${tempName}.mpeg`, buffer, {
+  //     ContentEncoding: 'base64',
+  //     ContentType: 'video/webm'
+  //   })
+  //   ctx.body = {
+  //     status: 'ok'
+  //   }
+  // } catch (e) {
+  //   console.log(e)
+  //   return ctx.body = e
+  // }
 }
 
 module.exports.createImage = type => async ctx => {
