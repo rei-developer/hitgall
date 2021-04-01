@@ -126,7 +126,6 @@ module.exports.createInventoryItem = async ctx => {
     await User.setUpPoint(user, -(sticker.price * buyNum))
   } catch (e) {
     console.log(e)
-    console.log(" 이거 뜨면 스티커 오류다 ")
   }
   ctx.body = {
     date,
