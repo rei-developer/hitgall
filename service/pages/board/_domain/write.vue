@@ -184,7 +184,7 @@
             </editor-menu-bar>
             <div v-if='htmlMode'>
 							<textarea
-                class='textBox'
+                class='textBox custom-scroll-box'
                 placeholder='이곳에 내용을 입력하세요.'
                 @change='changeContent'
                 v-model='html'/>
@@ -641,7 +641,7 @@ export default {
     width: 100%;
     min-height: 300px;
     margin: .5rem 0 0;
-    border: 2px solid #e5e5e5;
+    border: 1px solid @primary;
     background-color: #fff;
   }
 }
@@ -651,7 +651,7 @@ export default {
     width: 100%;
     min-height: 420px;
     margin: .5rem 0 0;
-    border: 2px solid #e5e5e5;
+    border: 1px solid @primary;
     background-color: #fff;
   }
 }

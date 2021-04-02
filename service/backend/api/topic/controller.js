@@ -49,6 +49,7 @@ const readPost = require('../../database/post/readPost')
 const readTopic = require('../../database/topic/readTopic')
 const readUser = require('../../database/user/readUser')
 const updateNotice = require('../../database/notice/updateNotice')
+const updateSticker = require('../../database/sticker/updateSticker')
 const updatePost = require('../../database/post/updatePost')
 const updateTopic = require('../../database/topic/updateTopic')
 const deletePoll = require('../../database/poll/deletePoll')
@@ -586,6 +587,8 @@ module.exports.createPost = async ctx => {
   })
   const postsCount = await readPost.count(topicId)
   const posts = await readPost.posts(topicId, 0, 100)
+  if (sticker.id)
+    await updateSticker.inventoryUpdated(sticker.id)
   if (user) {
     await User.setUpPoint(user, 5)
     const items = []
@@ -850,6 +853,8 @@ module.exports.updatePost = async ctx => {
   if (user && user.isAdmin < 1 && userId !== user.id)
     return
   await updatePost(id, Filter.post(content), sticker.id, sticker.select, image, voice)
+  if (sticker.id)
+    await updateSticker.inventoryUpdated(sticker.id)
   ctx.body = {
     status: 'ok'
   }

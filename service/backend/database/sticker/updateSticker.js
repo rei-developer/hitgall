@@ -4,3 +4,8 @@ module.exports.inventoryItem = async (userId, stickerId, date) => await pool.que
   'UPDATE StickerInventory SET regdate = ? WHERE userId = ? AND stickerId = ?',
   [date, userId, stickerId]
 )
+
+module.exports.inventoryUpdated = async (userId, stickerId) => await pool.query(
+  'UPDATE StickerInventory WHERE userId = ? AND stickerId = ?',
+  [userId, stickerId]
+)
