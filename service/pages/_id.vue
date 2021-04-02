@@ -305,7 +305,7 @@ export default {
       if (this.id < 1)
         return
       // if (!this.$store.state.user.isLogged)
-      //     return this.toast('로그인하세요.', 'warning')
+      //     return this.$toast.warning('로그인하세요.')
       const token = this.$store.state.user.token || ''
       this.$store.commit('setLoading', true)
       const data = await this.$axios.$post(
@@ -315,16 +315,16 @@ export default {
       )
       if (data.status === 'fail') {
         this.$store.commit('setLoading')
-        return this.toast(data.message || '오류가 발생했습니다.', 'danger')
+        return this.$toast.error(data.message || '오류가 발생했습니다.')
       }
       if (data.move === 'BEST')
-        this.toast('HIT 갤러리로 이전됐습니다.', 'primary')
+        this.$toast.info('HIT 갤러리로 이전됐습니다.')
       this.topic.likes = data.likes + (flag ? 1 : 0)
       this.topic.hates = data.hates + (flag ? 0 : 1)
       this.$store.commit('setLoading')
     },
     copyLink: async function (link) {
-      this.toast('링크를 복사했습니다.', 'success')
+      this.$toast.success('링크를 복사했습니다.')
       this.$copyText(link)
     },
     forceFileDownload(blob, name) {
@@ -371,9 +371,9 @@ export default {
       )
       if (data.status === 'fail') {
         this.$store.commit('setLoading')
-        return this.toast(data.message || '오류가 발생했습니다.', 'danger')
+        return this.$toast.error(data.message || '오류가 발생했습니다.')
       }
-      this.toast('글을 삭제했습니다.', 'success')
+      this.$toast.success('글을 삭제했습니다.')
     },
     ban: async function () {
       const token = this.$store.state.user.token || ''
@@ -384,8 +384,8 @@ export default {
         {headers: {'x-access-token': token}}
       )
       if (data.status === 'fail')
-        return this.toast(data.message || '오류가 발생했습니다.', 'danger')
-      this.toast('차단 성공!', 'success')
+        return this.$toast.error(data.message || '오류가 발생했습니다.')
+      this.$toast.success('차단 성공!')
       this.$store.commit('setLoading')
     },
     notice: async function () {
@@ -400,12 +400,12 @@ export default {
       )
       if (data.status === 'fail') {
         this.$store.commit('setLoading')
-        return this.toast(data.message || '오류가 발생했습니다.', 'danger')
+        return this.$toast.error(data.message || '오류가 발생했습니다.')
       }
       this.topic.isNotice = !this.topic.isNotice
       this.topic.isNotice
-        ? this.toast('공지로 적용했습니다.', 'primary')
-        : this.toast('공지를 해제했습니다.', 'success')
+        ? this.$toast.info('공지로 적용했습니다.')
+        : this.$toast.success('공지를 해제했습니다.')
       this.$store.commit('setLoading')
     },
     scrollToTop() {
@@ -435,15 +435,6 @@ export default {
         return
       const audio = new Audio(sound)
       audio.play()
-    },
-    toast(text, variant = 'default') {
-      this.$bvToast.toast(text, {
-        title: '알림',
-        toaster: 'b-toaster-top-center',
-        variant: variant,
-        solid: true,
-        appendToast: true
-      })
     }
   },
   head() {

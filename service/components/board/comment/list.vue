@@ -177,7 +177,7 @@ export default {
       const data = await this.$axios.$post('/api/topic/list/post', {id: this.id, page: this.postsPage - 1})
       if (data.status === 'fail') {
         this.loading = false
-        return this.toast(data.message || '오류가 발생했습니다.', 'danger')
+        return this.$toast.error(data.message || '오류가 발생했습니다.')
       }
       this.postsCount = data.count
       this.newPostsCount = 0
@@ -227,7 +227,7 @@ export default {
       if (item.id < 1)
         return
       if (!this.$store.state.user.isLogged)
-        return this.toast('로그인하세요.', 'warning')
+        return this.$toast.warning('로그인하세요.')
       this.tempPostReplyId = 0
       this.tempPostUpdateId = item.id
     },
@@ -239,7 +239,7 @@ export default {
     },
     remove: async function () {
       if (!this.$store.state.user.isLogged)
-        return this.toast('로그인하세요.', 'warning')
+        return this.$toast.warning('로그인하세요.')
       const token = this.$store.state.user.token
       this.$store.commit('setLoading', true)
       const data = await this.$axios.$delete(
@@ -250,17 +250,17 @@ export default {
         }
       )
       if (data.status === 'fail')
-        return this.toast(data.message || '오류가 발생했습니다.', 'danger')
+        return this.$toast.error(data.message || '오류가 발생했습니다.')
       this.posts = this.posts.filter(post => post.id !== this.tempPostDeleteId)
       --this.postsCount
-      this.toast('댓글 삭제 성공!', 'success')
+      this.$toast.success('댓글 삭제 성공!')
       this.$store.commit('setLoading')
     },
     viewSticker: async function (id) {
       this.$store.commit('setLoading', true)
       const data = await this.$axios.$get(`/api/sticker/view/${id}`)
       if (data.status === 'fail')
-        return this.toast(data.message || '오류가 발생했습니다.', 'danger')
+        return this.$toast.error(data.message || '오류가 발생했습니다.')
       this.sticker.id = id
       this.sticker.sticker = data.sticker
       this.$store.commit('setLoading')
@@ -311,15 +311,6 @@ export default {
         return
       const audio = new Audio(sound)
       audio.play()
-    },
-    toast(text, variant = 'default') {
-      this.$bvToast.toast(text, {
-        title: '알림',
-        toaster: 'b-toaster-top-center',
-        variant: variant,
-        solid: true,
-        appendToast: true
-      })
     }
   }
 }

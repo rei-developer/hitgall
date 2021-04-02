@@ -91,15 +91,6 @@ export default {
     },
     imageUrlAlt(event) {
       event.target.src = '/default.png'
-    },
-    toast(text, variant = 'default') {
-      this.$bvToast.toast(text, {
-        title: '알림',
-        toaster: 'b-toaster-top-center',
-        variant: variant,
-        solid: true,
-        appendToast: true
-      })
     }
   }
 }

@@ -2,7 +2,7 @@
   <article class='notify'>
     <h6 @click='toggle'>
       <strong>{{ $store.state.user.nickname }}</strong>님, 읽지 않은 알림이 <span>{{ $store.state.user.noticeCount }}개</span>
-      있습니다.
+                                                       있습니다.
     </h6>
     <ul v-if='visible'>
       <li v-for='(item, index) in notices' :key='index' @click='forceUpdate'>
@@ -61,7 +61,7 @@ export default {
     },
     getData: async function (forceUpdate = false) {
       if (!this.$store.state.user.isLogged)
-        return this.toast('로그인하세요.', 'warning')
+        return this.$toast.warning('로그인하세요.')
       const token = this.$store.state.user.token
       this.$store.commit('setLoading', true)
       if (forceUpdate) {
@@ -81,7 +81,7 @@ export default {
     },
     read: async function (item) {
       if (!this.$store.state.user.isLogged)
-        return this.toast('로그인하세요.', 'warning')
+        return this.$toast.warning('로그인하세요.')
       const token = this.$store.state.user.token
       this.$store.commit('setLoading', true)
       const data = await this.$axios.$put(
@@ -90,20 +90,20 @@ export default {
         {headers: {'x-access-token': token}}
       )
       if (data.status === 'fail')
-        return this.toast(data.message || '오류가 발생했습니다.', 'danger')
+        return this.$toast.error(data.message || '오류가 발생했습니다.')
       this.notices = this.notices.map(post => {
         if (post.id === item.id)
           post.confirm = item.confirm > 0 ? 0 : 1
         return post
       })
       let count = this.$store.state.user.noticeCount
-      this.toast('알림을 읽음 처리했습니다.', 'success')
+      this.$toast.success('알림을 읽음 처리했습니다.')
       this.$store.commit('user/setNoticeCount', item.confirm > 0 ? --count : ++count)
       this.$store.commit('setLoading')
     },
     readAll: async function () {
       if (!this.$store.state.user.isLogged)
-        return this.toast('로그인하세요.', 'warning')
+        return this.$toast.warning('로그인하세요.')
       const token = this.$store.state.user.token
       this.$store.commit('setLoading', true)
       const data = await this.$axios.$put(
@@ -112,18 +112,18 @@ export default {
         {headers: {'x-access-token': token}}
       )
       if (data.status === 'fail')
-        return this.toast(data.message || '오류가 발생했습니다.', 'danger')
+        return this.$toast.error(data.message || '오류가 발생했습니다.')
       this.notices = this.notices.map(notice => {
         notice.confirm = 1
         return notice
       })
-      this.toast('알림을 모두 읽음 처리했습니다.', 'success')
+      this.$toast.success('알림을 모두 읽음 처리했습니다.')
       this.$store.commit('user/setNoticeCount', 0)
       this.$store.commit('setLoading')
     },
     trash: async function (item) {
       if (!this.$store.state.user.isLogged)
-        return this.toast('로그인하세요.', 'warning')
+        return this.$toast.warning('로그인하세요.')
       const token = this.$store.state.user.token
       this.$store.commit('setLoading', true)
       const data = await this.$axios.$delete(
@@ -131,16 +131,16 @@ export default {
         {headers: {'x-access-token': token}}
       )
       if (data.status === 'fail')
-        return this.toast(data.message || '오류가 발생했습니다.', 'danger')
+        return this.$toast.error(data.message || '오류가 발생했습니다.')
       this.notices = this.notices.filter(notice => notice.id !== item.id)
       let count = this.$store.state.user.noticeCount
-      this.toast('알림을 삭제했습니다.', 'success')
+      this.$toast.success('알림을 삭제했습니다.')
       this.$store.commit('user/setNoticeCount', item.confirm > 0 ? count : --count)
       this.$store.commit('setLoading')
     },
     trashAll: async function () {
       if (!this.$store.state.user.isLogged)
-        return this.toast('로그인하세요.', 'warning')
+        return this.$toast.warning('로그인하세요.')
       const token = this.$store.state.user.token
       this.$store.commit('setLoading', true)
       const data = await this.$axios.$delete(
@@ -148,10 +148,10 @@ export default {
         {headers: {'x-access-token': token}}
       )
       if (data.status === 'fail')
-        return this.toast(data.message || '오류가 발생했습니다.', 'danger')
+        return this.$toast.error(data.message || '오류가 발생했습니다.')
       this.notices = []
       this.page = 0
-      this.toast('알림을 모두 삭제했습니다.', 'success')
+      this.$toast.success('알림을 모두 삭제했습니다.')
       this.$store.commit('user/setNoticeCount', 0)
       this.$store.commit('setLoading')
     },
@@ -166,15 +166,6 @@ export default {
     },
     imageUrlAlt(event) {
       event.target.src = '/default.png'
-    },
-    toast(text, variant = 'default') {
-      this.$bvToast.toast(text, {
-        title: '알림',
-        toaster: 'b-toaster-top-center',
-        variant: variant,
-        solid: true,
-        appendToast: true
-      })
     }
   }
 }

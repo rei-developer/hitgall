@@ -220,7 +220,7 @@ export default {
     // 	if (this.loading || e.target.files.length < 1)
     // 		return
     // 	if (!this.$store.state.user.isLogged)
-    // 		return this.toast('로그인하세요.', 'danger')
+    // 		return this.$toast.error('로그인하세요.')
     // 	const token = this.$store.state.user.token
     // 	const LIMITS = 10485760
     // 	const file = e.target.files[0]
@@ -228,9 +228,9 @@ export default {
     // 	formData.append('type', 'file')
     // 	formData.append('img', file, file.name)
     // 	if (!/(.png|.jpg|.jpeg)/i.test(file.name))
-    // 		return this.toast('이미지 업로드 실패... (png, jpg, jpeg만 가능)', 'danger')
+    // 		return this.$toast.error('이미지 업로드 실패... (png, jpg, jpeg만 가능)')
     // 	if (file.size > LIMITS)
-    // 		return this.toast('이미지 업로드 실패... (10MB 이하만 업로드 가능)', 'danger')
+    // 		return this.$toast.error('이미지 업로드 실패... (10MB 이하만 업로드 가능)')
     // 	this.loading = true
     // 	this.$store.commit('setLoading', true)
     // 	const data = await this.$axios.$post(
@@ -241,7 +241,7 @@ export default {
     // 	if (data.status === 'fail') {
     // 		this.loading = false
     // 		this.$store.commit('setLoading')
-    // 		return this.toast(data.message || '오류가 발생했습니다.', 'danger')
+    // 		return this.$toast.error(data.message || '오류가 발생했습니다.')
     // 	}
     // 	this.editByProfileImage(token, data.filename)
     // },
@@ -254,16 +254,16 @@ export default {
     // 	this.loading = false
     // 	this.$store.commit('setLoading')
     // 	if (data.status === 'fail')
-    // 		return this.toast(data.message || '오류가 발생했습니다.', 'danger')
-    // 	this.toast('프로필 사진을 업로드했습니다.', 'success')
+    // 		return this.$toast.error(data.message || '오류가 발생했습니다.')
+    // 	this.$toast.success('프로필 사진을 업로드했습니다.')
     // 	this.$store.commit('user/setProfileImageUrl', url)
     // },
     onSubmit: async function (evt) {
       evt.preventDefault()
       if (this.newPassword !== this.newPassword2)
-        return this.toast('새 암호가 서로 다릅니다.', 'danger')
+        return this.$toast.error('새 암호가 서로 다릅니다.')
       if (!this.$store.state.user.isLogged)
-        return this.toast('로그인하세요.', 'danger')
+        return this.$toast.error('로그인하세요.')
       const token = this.$store.state.user.token
       this.$store.commit('setLoading', true)
       const data = await this.$axios.$patch(
@@ -279,9 +279,9 @@ export default {
       )
       if (data.status === 'fail') {
         this.$store.commit('setLoading')
-        return this.toast(data.message || '오류가 발생했습니다.', 'danger')
+        return this.$toast.error(data.message || '오류가 발생했습니다.')
       }
-      this.toast('프로필을 편집했습니다.', 'success')
+      this.$toast.success('프로필을 편집했습니다.')
       if (this.username !== '')
         this.$store.commit('user/setUsername', this.username)
       if (this.nickname !== '')
@@ -298,15 +298,6 @@ export default {
     },
     numberWithCommas(x) {
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-    },
-    toast(text, variant = 'default') {
-      this.$bvToast.toast(text, {
-        title: '알림',
-        toaster: 'b-toaster-top-center',
-        variant: variant,
-        solid: true,
-        appendToast: true
-      })
     }
   }
 }

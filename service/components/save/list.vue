@@ -56,7 +56,7 @@
               </div>
               <div class='subject'>
                 <div class='thumb' v-if='item.imageUrl'>
-                  <img alt="thumb" :src='`/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
+                  <img alt='thumb' :src='`/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
                 </div>
                 <div>
                   <span :style='item.color !== "" ? `color: #${item.color}` : ""'>
@@ -74,8 +74,8 @@
                 </div>
               </div>
               <div class='author'>
-                <img alt="level" :src='`/level/${item.level}.png`'>
-                <img class='icon' alt="icon" :src='`/icon/${item.icon}`' v-if='item.icon !== ""'>
+                <img alt='level' :src='`/level/${item.level}.png`'>
+                <img class='icon' alt='icon' :src='`/icon/${item.icon}`' v-if='item.icon !== ""'>
                 {{ item.author }}
               </div>
               <div>{{ getCreated(item.created) }}</div>
@@ -93,7 +93,7 @@
             <nuxt-link :to='`/${item.id}?page=${page}${category !== "" ? "&category=" + category : ""}`'>
               <div class='content'>
                 <div class='image'>
-                  <img alt="thumb" :src='item.imageUrl ? `/img/thumb/${item.imageUrl}` : "/default.png"'
+                  <img alt='thumb' :src='item.imageUrl ? `/img/thumb/${item.imageUrl}` : "/default.png"'
                        @error='imageUrlAlt'>
                 </div>
                 <div class='subject'>
@@ -117,8 +117,8 @@
                     </span>
                   </div>
                   <div class='author'>
-                    <img alt="level" :src='`/level/${item.level}.png`'>
-                    <img class='icon' alt="icon" :src='`/icon/${item.icon}`' v-if='item.icon !== ""'>
+                    <img alt='level' :src='`/level/${item.level}.png`'>
+                    <img class='icon' alt='icon' :src='`/icon/${item.icon}`' v-if='item.icon !== ""'>
                     {{ item.author }}
                   </div>
                 </div>
@@ -280,9 +280,9 @@ export default {
     },
     search() {
       if (this.searches.text === '')
-        return this.toast('검색어를 입력하세요.', 'danger')
+        return this.$toast.error('검색어를 입력하세요.')
       if (this.searches.text.length < 2)
-        return this.toast('검색어는 2글자 이상 입력하세요.', 'danger')
+        return this.$toast.error('검색어는 2글자 이상 입력하세요.')
       this.page = 1
       this.getData(true, true)
       this.getCount()
@@ -319,15 +319,6 @@ export default {
     },
     imageUrlAlt(event) {
       event.target.src = '/default.png'
-    },
-    toast(text, variant = 'default') {
-      this.$bvToast.toast(text, {
-        title: '알림',
-        toaster: 'b-toaster-top-center',
-        variant: variant,
-        solid: true,
-        appendToast: true
-      })
     }
   }
 }

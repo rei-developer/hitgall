@@ -26,8 +26,8 @@ export default {
     getVote: async function () {
       const token = this.$store.state.user.token
       const data = await this.$axios.$get(
-          `/api/poll/${this.id}`,
-          {headers: {'x-access-token': token}}
+        `/api/poll/${this.id}`,
+        {headers: {'x-access-token': token}}
       )
       if (data.status === 'fail')
         return
@@ -54,27 +54,18 @@ export default {
     },
     async addVote(obj) {
       if (!this.$store.state.user.isLogged)
-        return this.toast('로그인하세요.', 'warning')
+        return this.$toast.warning('로그인하세요.')
       const select = obj.value
       const token = this.$store.state.user.token
       const data = await this.$axios.$post(
-          '/api/poll/vote',
-          {id: this.id, select},
-          {headers: {'x-access-token': token}}
+        '/api/poll/vote',
+        {id: this.id, select},
+        {headers: {'x-access-token': token}}
       )
       if (data.status === 'fail')
-        return this.toast(data.message || '오류가 발생했습니다.', 'danger')
-      this.toast('설문조사를 참여했습니다.', 'success')
+        return this.$toast.error(data.message || '오류가 발생했습니다.')
+      this.$toast.success('설문조사를 참여했습니다.')
       this.getVote()
-    },
-    toast(text, variant = 'default') {
-      this.$bvToast.toast(text, {
-        title: '알림',
-        toaster: 'b-toaster-top-center',
-        variant: variant,
-        solid: true,
-        appendToast: true
-      })
     }
   }
 }

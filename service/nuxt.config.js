@@ -37,16 +37,16 @@ module.exports = {
   css: [
     '@/assets/bootstrap.less',
     '@/assets/stylesheets.less',
-    '@/assets/vue-nestable.less',
-    '@/assets/vue-toastification.css'
+    '@/assets/vue-nestable.less'
   ],
   /*
    ** Plugins to load before mounting the App
    */
   plugins: [
-    {src: '@/plugins/event-bus'},
+    {src: '@/plugins/event-bus.js'},
     {src: '@/plugins/service-worker.js', mode: 'client'},
     // { src: '@/plugins/socket.io.js' },
+    {src: '@/plugins/toast.js', mode: 'client'},
     {src: '@/plugins/v-viewer.js', mode: 'client'},
     {src: '@/plugins/vue-aplayer.js', mode: 'client'},
     {src: '@/plugins/vue-avatar.js', mode: 'client'},
@@ -55,7 +55,6 @@ module.exports = {
     {src: '@/plugins/vue-qriously.js', mode: 'client'},
     {src: '@/plugins/vue-shortkey.js', mode: 'client'},
     {src: '@/plugins/vue-spinners.js', mode: 'client'},
-    {src: '@/plugins/vue-toastification.js', mode: 'client'},
     {src: '@/plugins/vue-waterfall.js', mode: 'client'}
   ],
   /*

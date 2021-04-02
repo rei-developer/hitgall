@@ -461,18 +461,18 @@ export default {
       if (this.loading)
         return
       // if (!this.$store.state.user.isLogged)
-      // 	return this.toast('로그인하세요.', 'warning')
+      // 	return this.$toast.warning('로그인하세요.')
       if (this.form.title === '')
-        return this.toast('제목을 입력하세요.', 'danger')
+        return this.$toast.error('제목을 입력하세요.')
       if (this.html === '' || this.html === '<p></p>')
-        return this.toast('본문을 입력하세요.', 'danger')
+        return this.$toast.error('본문을 입력하세요.')
       if (!this.poll.hide) {
         if (this.poll.question === '')
-          return this.toast('설문조사 질문을 입력하세요.', 'danger')
+          return this.$toast.error('설문조사 질문을 입력하세요.')
         if (this.poll.texts === '')
-          return this.toast('설문조사 항목을 입력하세요.', 'danger')
+          return this.$toast.error('설문조사 항목을 입력하세요.')
         if (this.poll.regdate === '')
-          return this.toast('설문조사 종료 기간을 입력하세요.', 'danger')
+          return this.$toast.error('설문조사 종료 기간을 입력하세요.')
       }
       this.loading = true
       await this.imageUploadToServer(this.$refs.dropzone.getAcceptedFiles().reverse())
@@ -500,7 +500,7 @@ export default {
         : await this.$axios.$post(url, form, {headers})
       if (data.status === 'fail') {
         this.loading = false
-        return this.toast(data.message || '오류가 발생했습니다.', 'danger')
+        return this.$toast.error(data.message || '오류가 발생했습니다.')
       }
       this.$router.push({path: `/${data.topicId}`})
     },
@@ -531,9 +531,9 @@ export default {
       formData.append('type', 'file')
       formData.append('img', file, file.name)
       if (!/(.gif|.png|.jpg|.jpeg|.webp)/i.test(file.name))
-        this.toast(`${index + 1}번째 이미지 업로드 실패... (gif, png, jpg, jpeg, webp만 가능)`, 'danger')
+        this.$toast.error(`${index + 1}번째 이미지 업로드 실패... (gif, png, jpg, jpeg, webp만 가능)`)
       else if (file.size > LIMITS)
-        this.toast(`${index + 1}번째 이미지 업로드 실패... (20MB 이하만 업로드 가능)`, 'danger')
+        this.$toast.error(`${index + 1}번째 이미지 업로드 실패... (20MB 이하만 업로드 가능)`)
       else {
         const data = await this.$axios.$post(
           '/api/cloud/topic',
@@ -543,7 +543,7 @@ export default {
         if (data.status === 'ok') {
           const name = file.name
           const filename = `/img/${data.filename}`
-          this.toast(`${index + 1}번째 이미지 (${name}) 업로드 성공!`, 'success')
+          this.$toast.success(`${index + 1}번째 이미지 (${name}) 업로드 성공!`)
           this.images.push({
             name,
             filename: data.filename,
@@ -556,7 +556,7 @@ export default {
           const text = `<img src='https://cdn.hitgall.com${filename}' alt='${data.filename}'>`
           this.setContent(this.html.replace(regex, text))
         } else {
-          this.toast(`${index + 1}번째 이미지 업로드 실패...`, 'danger')
+          this.$toast.error(`${index + 1}번째 이미지 업로드 실패...`)
         }
       }
       await this.imageUploadToServer(files, index + 1)
@@ -612,15 +612,6 @@ export default {
     },
     imageUrlAlt(event) {
       event.target.src = '/default.png'
-    },
-    toast(text, variant = 'default') {
-      this.$bvToast.toast(text, {
-        title: '알림',
-        toaster: 'b-toaster-top-center',
-        variant: variant,
-        solid: true,
-        appendToast: true
-      })
     }
   }
 }

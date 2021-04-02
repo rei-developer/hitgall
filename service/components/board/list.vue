@@ -440,9 +440,9 @@ export default {
     },
     search() {
       if (this.searches.text === '')
-        return this.toast('검색어를 입력하세요.', 'danger')
+        return this.$toast.error('검색어를 입력하세요.')
       if (this.searches.text.length < 2)
-        return this.toast('검색어는 2글자 이상 입력하세요.', 'danger')
+        return this.$toast.error('검색어는 2글자 이상 입력하세요.')
       this.page = 1
       this.getData(true)
       this.getCount()
@@ -485,15 +485,6 @@ export default {
     },
     imageUrlAlt(event) {
       event.target.src = '/default.png'
-    },
-    toast(text, variant = 'default') {
-      this.$bvToast.toast(text, {
-        title: '알림',
-        toaster: 'b-toaster-top-center',
-        variant: variant,
-        solid: true,
-        appendToast: true
-      })
     }
     // noticePermission() {
     //    Notification.requestPermission( function(result) {

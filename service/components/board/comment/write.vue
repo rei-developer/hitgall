@@ -207,7 +207,7 @@ export default {
       }
       if (result.status === 'fail') {
         this.loading = false
-        return this.toast(result.message || '오류가 발생했습니다.', 'danger')
+        return this.$toast.error(result.message || '오류가 발생했습니다.')
       }
       this.$store.commit('forceUpdate')
       this.content = ''
@@ -254,7 +254,7 @@ export default {
           const end = () => stream.getTracks().forEach(track => track.stop())
           resolve({start, stop, end})
         } catch (e) {
-          this.toast('마이크 또는 헤드폰, 헤드셋을 장착하십시오')
+          this.$toast.warning('마이크 또는 헤드폰, 헤드셋을 장착하십시오')
           this.isRunningVoice = false
         }
       })
@@ -309,10 +309,10 @@ export default {
       formData.append('type', 'file')
       formData.append('img', file, file.name)
       if (!/(.gif|.png|.jpg|.jpeg|.webp)/i.test(file.name)) {
-        this.toast(`이미지 업로드 실패... (gif, png, jpg, jpeg, webp만 가능)`, 'danger')
+        this.$toast.error(`이미지 업로드 실패... (gif, png, jpg, jpeg, webp만 가능)`)
         return null
       } else if (file.size > LIMITS) {
-        this.toast(`이미지 업로드 실패... (20MB 이하만 업로드 가능)`, 'danger')
+        this.$toast.error(`이미지 업로드 실패... (20MB 이하만 업로드 가능)`)
         return null
       }
       const {status, filename} = await this.$axios.$post(
@@ -339,14 +339,6 @@ export default {
     },
     imageUrlAlt(event) {
       event.target.src = '/default.png'
-    },
-    toast(text, variant = 'default') {
-      this.$bvToast.toast(text, {
-        title: '알림',
-        toaster: 'b-toaster-top-center',
-        variant: variant,
-        solid: true
-      })
     }
   }
 }

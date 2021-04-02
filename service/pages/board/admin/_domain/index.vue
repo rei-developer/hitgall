@@ -395,16 +395,16 @@ export default {
         }
       )
       if (data.status === 'fail')
-        return this.toast(data.message || '오류가 발생했습니다.', 'danger')
+        return this.$toast.error(data.message || '오류가 발생했습니다.')
       this.blinds = this.blinds.filter(blind => blind.id !== id)
-      this.toast('차단 해제 성공!', 'success')
+      this.$toast.success('차단 해제 성공!')
       this.$store.commit('setLoading')
     },
     backgroundImageUpload: async function (e) {
       if (this.loading || e.target.files.length < 1)
         return
       if (!this.$store.state.user.isLogged)
-        return this.toast('로그인하세요.', 'danger')
+        return this.$toast.error('로그인하세요.')
       const token = this.$store.state.user.token
       const LIMITS = 10485760
       const file = e.target.files[0]
@@ -412,9 +412,9 @@ export default {
       formData.append('type', 'file')
       formData.append('img', file, file.name)
       if (!/(.png|.jpg|.jpeg)/i.test(file.name))
-        return this.toast('이미지 업로드 실패... (png, jpg, jpeg만 가능)', 'danger')
+        return this.$toast.error('이미지 업로드 실패... (png, jpg, jpeg만 가능)')
       if (file.size > LIMITS)
-        return this.toast('이미지 업로드 실패... (10MB 이하만 업로드 가능)', 'danger')
+        return this.$toast.error('이미지 업로드 실패... (10MB 이하만 업로드 가능)')
       this.loading = true
       this.$store.commit('setLoading', true)
       const data = await this.$axios.$post(
@@ -425,7 +425,7 @@ export default {
       if (data.status === 'fail') {
         this.loading = false
         this.$store.commit('setLoading')
-        return this.toast(data.message || '오류가 발생했습니다.', 'danger')
+        return this.$toast.error(data.message || '오류가 발생했습니다.')
       }
       this.editByBackgroundImage(token, data.filename)
     },
@@ -437,20 +437,20 @@ export default {
       )
       if (data.status === 'fail') {
         this.$store.commit('setLoading')
-        return this.toast(data.message || '오류가 발생했습니다.', 'danger')
+        return this.$toast.error(data.message || '오류가 발생했습니다.')
       }
       this.loading = false
       this.$store.commit('setLoading')
       if (data.status === 'fail')
-        return this.toast(data.message || '오류가 발생했습니다.', 'danger')
-      this.toast('대문 사진을 업로드했습니다.', 'success')
+        return this.$toast.error(data.message || '오류가 발생했습니다.')
+      this.$toast.success('대문 사진을 업로드했습니다.')
       this.board.imageUrl = url
       this.$store.commit('setLoading')
     },
     onSubmit: async function (evt) {
       evt.preventDefault()
       if (!this.$store.state.user.isLogged)
-        return this.toast('로그인하세요.', 'danger')
+        return this.$toast.error('로그인하세요.')
       const token = this.$store.state.user.token
       this.$store.commit('setLoading', true)
       const data = await this.$axios.$patch(
@@ -467,9 +467,9 @@ export default {
       )
       if (data.status === 'fail') {
         this.$store.commit('setLoading')
-        return this.toast(data.message || '오류가 발생했습니다.', 'danger')
+        return this.$toast.error(data.message || '오류가 발생했습니다.')
       }
-      this.toast('갤러리를 편집했습니다.', 'success')
+      this.$toast.success('갤러리를 편집했습니다.')
       this.$store.commit('setLoading')
     },
     numberWithCommas(x) {
@@ -477,15 +477,6 @@ export default {
     },
     imageUrlAlt(event) {
       event.target.src = '/default.png'
-    },
-    toast(text, variant = 'default') {
-      this.$bvToast.toast(text, {
-        title: '알림',
-        toaster: 'b-toaster-top-center',
-        variant: variant,
-        solid: true,
-        appendToast: true
-      })
     }
   }
 }
