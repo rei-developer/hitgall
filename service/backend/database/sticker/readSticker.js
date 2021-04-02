@@ -82,7 +82,7 @@ module.exports.inventory = async userId => {
 		FROM StickerInventory si
 		LEFT JOIN Stickers s ON s.id = si.stickerId
 		WHERE si.userId = ? AND TIME_TO_SEC(TIMEDIFF(si.regdate, NOW())) > 0
-		ORDER BY updated DESC`,
+		ORDER BY si.updated DESC`,
     [userId]
   )
   if (result.length < 1)
