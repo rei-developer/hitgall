@@ -84,11 +84,11 @@ module.exports.createImage = type => async ctx => {
       return
     }
     const input = await fs.readFile(path.origin)
-    if (isGIF(path.origin)) {
+    if (isGIF(originalname)) {
       await sharp(input, {animated: true})
         .toFile(path.origin)
     }
-    const data = isGIF(path.origin)
+    const data = isGIF(originalname)
       ? await fs.readFile(path.origin)
       : await sharp(input)
         .metadata()
