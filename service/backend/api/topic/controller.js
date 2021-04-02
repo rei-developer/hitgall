@@ -780,12 +780,12 @@ module.exports.updateTopic = async ctx => {
   const trashImages = imagesByURL.filter(item => !findImages.includes(item))
   if (trashImages) {
     const jobs = trashImages.map(image => new Promise(async resolve => {
-      await deleteFile(`img/${image}`).catch(console.error)
+      await deleteFile(`img/${image.imageUrl}`).catch(console.error)
       resolve(true)
     }))
     await Promise.all(jobs)
     const jobsForThumb = trashImages.map(image => new Promise(async resolve => {
-      await deleteFile(`img/thumb/${image}`).catch(console.error)
+      await deleteFile(`img/thumb/${image.imageUrl}`).catch(console.error)
       resolve(true)
     }))
     await Promise.all(jobsForThumb)
@@ -888,7 +888,7 @@ module.exports.deleteTopic = async ctx => {
     }))
     await Promise.all(jobs)
     const jobsForThumb = images.map(image => new Promise(async resolve => {
-      await deleteFile(`img/thumb/${image}`).catch(console.error)
+      await deleteFile(`img/thumb/${image.imageUrl}`).catch(console.error)
       resolve(true)
     }))
     await Promise.all(jobsForThumb)
