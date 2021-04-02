@@ -46,13 +46,17 @@
         </div>
       </div>
       <div class='footer'>
-        <div class='footer-event'>
+        <div
+          v-b-tooltip.hover title='이미지 댓글'
+          class='footer-event'
+        >
           <font-awesome-icon icon='image'/>
           <div class='input-file'>
             <input id='replyImage' type='file' @change='onChangeReplyImage'/>
           </div>
         </div>
         <button
+          v-b-tooltip.hover title='보이스 댓글'
           :class='[
             "footer-event",
             recorder ? "active" : undefined
@@ -76,6 +80,7 @@
           <font-awesome-icon icon='trash'/>
         </button>
         <button
+          v-b-tooltip.hover title='스티커'
           class='footer-event'
           @click='stickers.hide = false'
         >

@@ -109,19 +109,19 @@
       </ul>
     </nav>
     <b-button
+      class='side-menu'
+      variant='dark'
+      @click='onSidebarClick'
+    >
+      <font-awesome-icon icon='bars'/>
+    </b-button>
+    <b-button
       class='scroll-top'
       variant='dark'
       @click='onScrollTopClick'
       v-if='top >= 100'
     >
       <font-awesome-icon icon='chevron-up'/>
-    </b-button>
-    <b-button
-      class='side-menu'
-      variant='dark'
-      @click='onSidebarClick'
-    >
-      <font-awesome-icon icon='bars'/>
     </b-button>
   </div>
 </template>
@@ -207,18 +207,18 @@
     align-items: center;
     justify-content: center;
     position: fixed;
-    right: 1rem;
+    bottom: 1rem;
     width: 3rem;
     height: 3rem;
     font-size: 2rem;
     border-radius: 500rem;
     z-index: 1000;
     &.scroll-top {
-      bottom: 4.5rem;
+      right: 4.5rem;
       > svg {margin-bottom: 2px}
     }
     &.side-menu {
-      bottom: 1rem;
+      right: 1rem;
       font-size: 1.5rem;
     }
   }
@@ -271,11 +271,8 @@ export default {
     }
   },
   async created() {
-    try {
-      await this.$nextTick()
-      window.addEventListener('scroll', this.handleScroll)
-    } catch (error) {
-    }
+    await this.$nextTick()
+    window.addEventListener('scroll', this.handleScroll)
   },
   mounted() {
     this.$eventBus.$on('SetSidebar', () => this.onSidebarClick())
@@ -284,11 +281,8 @@ export default {
     this.$eventBus.$off('SetSidebar')
   },
   async destroyed() {
-    try {
-      await this.$nextTick()
-      window.removeEventListener('scroll', this.handleScroll)
-    } catch (error) {
-    }
+    await this.$nextTick()
+    window.removeEventListener('scroll', this.handleScroll)
   },
   methods: {
     forceUpdate(event, field = null) {

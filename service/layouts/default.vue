@@ -10,7 +10,11 @@
           </b-alert>
           <Nuxt/>
         </div>
-        <div class='side' v-if='$store.state.isDesktop'>
+        <div
+          class='side'
+          :style='{marginTop: `${top >= 100 ? top - 100 : 0}px`}'
+          v-if='$store.state.isDesktop'
+        >
           <SidebarWidget/>
           <SidebarThumb/>
         </div>
@@ -91,11 +95,20 @@ export default {
     SidebarThumb,
     Footer
   },
+  data() {
+    return {
+      top: 0
+    }
+  },
+  async created() {
+    await this.$nextTick()
+    window.addEventListener('scroll', this.handleScroll)
+  },
   async mounted() {
     await this.$nextTick()
     await this.onResize()
-    this.checkLogged()
-    this.getNotices()
+    await this.checkLogged()
+    await this.getNotices()
     this.updateNotices()
     window.addEventListener('resize', this.onResize)
   },
@@ -103,10 +116,17 @@ export default {
     await this.$nextTick()
     window.removeEventListener('resize', this.onResize)
   },
+  async destroyed() {
+    await this.$nextTick()
+    window.removeEventListener('scroll', this.handleScroll)
+  },
   methods: {
     async onResize() {
       await this.$nextTick()
       this.$store.commit('screenWidth', window.innerWidth)
+    },
+    handleScroll() {
+      this.top = window.top.scrollY
     },
     checkLogged: async function () {
       const token = localStorage._token
