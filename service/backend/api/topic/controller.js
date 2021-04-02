@@ -559,15 +559,6 @@ module.exports.createPost = async ctx => {
         status: 'fail'
       }
   }
-  const random = Math.floor(Math.random() * 5)
-  let randomImageUrl = null
-  if (domain === 'anime' && random === 0) {
-    try {
-      const {url} = await nsfw.eroNeko()
-      randomImageUrl = url
-    } finally {
-    }
-  }
   const postId = await createPost({
     userId: user ? user.id : 0,
     topicId,
@@ -579,7 +570,6 @@ module.exports.createPost = async ctx => {
     content,
     stickerId: sticker.id,
     stickerSelect: sticker.select,
-    randomImageUrl,
     imageUrl: image,
     voiceUrl: voice,
     ip,
