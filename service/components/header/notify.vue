@@ -25,7 +25,7 @@
                 {{ item.tagAuthor }}
               </div>
               <div class='sticker' v-if='item.stickerId > 0'>
-                <img :src='`/sticker/${item.stickerId}/${item.stickerSelect}`' @error='imageUrlAlt'>
+                <img :src='`https://cdn.hitgall.com/sticker/${item.stickerId}/${item.stickerSelect}`'>
               </div>
               <span v-html='item.content'/>
             </div>
@@ -299,7 +299,6 @@ article.notify {
               > img {
                 width: 64px;
                 height: 64px;
-                border-radius: 4px;
               }
             }
           }

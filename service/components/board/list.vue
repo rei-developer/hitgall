@@ -653,17 +653,16 @@ article.topic-list {
 
               > .thumb {
                 position: absolute;
-                left: -100px;
-                top: -35px;
+                top: 40px;
+                left: 8px;
                 z-index: 10;
                 visibility: hidden;
 
                 > img {
                   width: 100px;
                   height: 100px;
-                  padding: 3px;
-                  border: 1px solid @primary;
-                  border-radius: 4px;
+                  padding: 2px;
+                  border: 1px solid #333;
                   background-color: #fff;
                 }
               }

@@ -418,4 +418,6 @@ export default {
   margin-top: 0;
   margin-bottom: .25rem;
 }
+
+.accountForm .input-group-text {width: 100px;}
 </style>
