@@ -1,20 +1,21 @@
+const fs = require('fs')
+const sharp = require('sharp')
 const S3 = require('aws-sdk/clients/s3')
 const AWS = require('aws-sdk')
 const wasabiEndpoint = new AWS.Endpoint('s3.us-west-1.wasabisys.com')
-
 const dotenv = require('dotenv')
-
 dotenv.config()
 
 const {
   BUCKET_NAME,
+  BUCKET_REGION,
   ACCESS_KEY_ID,
   SECRET_ACCESS_KEY
 } = process.env
 
 const s3 = new S3({
   endpoint: wasabiEndpoint,
-  region: 'us-west-1',
+  region: BUCKET_REGION,
   accessKeyId: ACCESS_KEY_ID,
   secretAccessKey: SECRET_ACCESS_KEY
 })
@@ -29,12 +30,22 @@ const uploadFile = async (key, body, options = null) => {
   }, err => {
     if (err)
       console.log(err)
-    console.log(`s3 : ${key} uploaded to ${BUCKET_NAME}.`)
+    console.log(`s3: ${key} uploaded to ${BUCKET_NAME}.`)
   })
 }
 
-const fs = require('fs')
-const sharp = require('sharp')
+const makeThumbnail = (width, height, filename, data) => {
+  const thumbnail = sharp(data)
+  thumbnail
+    .metadata()
+    .then(() => thumbnail.resize(width, height).withMetadata().rotate().toBuffer())
+    .then(result => fs.writeFile(`img/thumb/${filename}`, result, async () => {
+      await uploadFile(`img/thumb/${filename}`, result)
+      deleteFile(`img/thumb/${filename}`)
+    }))
+}
+
+const deleteFile = path => fs.unlink(path, () => console.log(`${path} deleted.`))
 
 module.exports.createVoice = async ctx => {
   const filename = ctx.req.file.filename
@@ -71,27 +82,16 @@ module.exports.createImage = type => async ctx => {
             status: 'fail'
           }
         await uploadFile(`img/${filename}`, data)
-        if (type === 'topic') {
-          const thumbnail = sharp(data)
-          thumbnail
-            .metadata()
-            .then(() => thumbnail.resize(100, 100).withMetadata().rotate().toBuffer())
-            .then(result => fs.writeFile(`img/thumb/${filename}`, result, async () => await uploadFile(`img/thumb/${filename}`, result)))
-        }
-        if (type === 'background') {
-          const thumbnail = sharp(data)
-          thumbnail
-            .metadata()
-            .then(() => thumbnail.resize(120, 100).withMetadata().rotate().toBuffer())
-            .then(result => fs.writeFile(`img/thumb/${filename}`, result, async () => await uploadFile(`img/thumb/${filename}`, result)))
-        }
+        makeThumbnail(type === 'topic' ? 100 : 120, 100, filename, data)
+        if (type === 'topic')
+          deleteFile(`img/${filename}`)
       })
       ctx.body = {
         filename,
         status: 'ok'
       }
     } else {
-      fs.unlink(`img/${filename}`, () => console.log(`삭제 : img/${filename}`))
+      deleteFile(`img/${filename}`)
       ctx.body = {
         message: 'gif, png, jpg, jpeg, webp만 가능',
         status: 'fail'

@@ -1,20 +1,19 @@
 const S3 = require('aws-sdk/clients/s3')
 const AWS = require('aws-sdk')
 const wasabiEndpoint = new AWS.Endpoint('s3.us-west-1.wasabisys.com')
-
 const dotenv = require('dotenv')
-
 dotenv.config()
 
 const {
   BUCKET_NAME,
+  BUCKET_REGION,
   ACCESS_KEY_ID,
   SECRET_ACCESS_KEY
 } = process.env
 
 const s3 = new S3({
   endpoint: wasabiEndpoint,
-  region: 'us-west-1',
+  region: BUCKET_REGION,
   accessKeyId: ACCESS_KEY_ID,
   secretAccessKey: SECRET_ACCESS_KEY
 })
