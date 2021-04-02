@@ -271,8 +271,11 @@ export default {
     }
   },
   async created() {
-    await this.$nextTick()
-    window.addEventListener('scroll', this.handleScroll)
+    try {
+      await this.$nextTick()
+      window.addEventListener('scroll', this.handleScroll)
+    } catch (e) {
+    }
   },
   mounted() {
     this.$eventBus.$on('SetSidebar', () => this.onSidebarClick())
@@ -281,8 +284,11 @@ export default {
     this.$eventBus.$off('SetSidebar')
   },
   async destroyed() {
-    await this.$nextTick()
-    window.removeEventListener('scroll', this.handleScroll)
+    try {
+      await this.$nextTick()
+      window.removeEventListener('scroll', this.handleScroll)
+    } catch (e) {
+    }
   },
   methods: {
     forceUpdate(event, field = null) {

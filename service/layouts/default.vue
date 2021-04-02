@@ -101,33 +101,51 @@ export default {
     }
   },
   async created() {
-    await this.$nextTick()
-    window.addEventListener('scroll', this.handleScroll)
+    try {
+      await this.$nextTick()
+      window.addEventListener('scroll', this.handleScroll)
+    } catch (e) {
+    }
   },
   async mounted() {
-    await this.$nextTick()
-    await this.onResize()
-    await this.checkLogged()
-    await this.getNotices()
-    this.updateNotices()
-    window.addEventListener('resize', this.onResize)
+    try {
+      await this.$nextTick()
+      await this.onResize()
+      await this.checkLogged()
+      await this.getNotices()
+      this.updateNotices()
+      window.addEventListener('resize', this.onResize)
+    } catch (e) {
+    }
   },
   async beforeDestroy() {
-    await this.$nextTick()
-    window.removeEventListener('resize', this.onResize)
+    try {
+      await this.$nextTick()
+      window.removeEventListener('resize', this.onResize)
+    } catch (e) {
+    }
   },
   async destroyed() {
-    await this.$nextTick()
-    window.removeEventListener('scroll', this.handleScroll)
+    try {
+      await this.$nextTick()
+      window.removeEventListener('scroll', this.handleScroll)
+    } catch (e) {
+    }
   },
   methods: {
     async onResize() {
-      await this.$nextTick()
-      this.$store.commit('screenWidth', window.innerWidth)
+      try {
+        await this.$nextTick()
+        this.$store.commit('screenWidth', window.innerWidth)
+      } catch (e) {
+      }
     },
     async handleScroll() {
-      await this.$nextTick()
-      this.top = window.top.scrollY
+      try {
+        await this.$nextTick()
+        this.top = window.top.scrollY
+      } catch (e) {
+      }
     },
     checkLogged: async function () {
       const token = localStorage._token
