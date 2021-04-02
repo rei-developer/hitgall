@@ -52,18 +52,18 @@ module.exports.getInventory = async ctx => {
     id: 110,
     number: 22,
     ext: 'jpg',
-    name: '페페 야구'
+    name: '슬픈 개구리 페페'
   }, {
     id: 146,
     number: 57,
     ext: 'jpg',
-    name: '페페 모음'
+    name: '슬픈 개구리 페페'
   }]
   let inventory = user
     ? (await readSticker.inventory(user.id) || [])
     : []
   ctx.body = {
-    inventory: [...defaultItems, ...inventory],
+    inventory: [...inventory, ...defaultItems],
     status: 'ok'
   }
 }
