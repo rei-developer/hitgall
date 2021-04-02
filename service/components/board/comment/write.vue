@@ -87,7 +87,7 @@
           <div class='item'>
             <div class='image'>
               <img
-                :src='`https://cdn.hitgall.com/sticker/${stickers.sticker.id}/${stickers.select}.${stickers.sticker.ext}`'
+                :src='`https://cdn.hitgall.com/seal/${stickers.sticker.id}/${stickers.select}.webp`'
                 :alt='stickers.sticker.name'
                 @error='imageUrlAlt'
               >
@@ -182,7 +182,7 @@ export default {
             content: this.content,
             sticker: {
               id: this.stickers.sticker ? this.stickers.sticker.id : 0,
-              select: this.stickers.sticker ? `${this.stickers.select}.${this.stickers.sticker.ext}` : ''
+              select: this.stickers.sticker ? `${this.stickers.select}.webp` : ''
             },
             image: imageFilename,
             voice: voiceFilename
@@ -204,7 +204,7 @@ export default {
             content: this.content,
             sticker: {
               id: this.stickers.sticker ? this.stickers.sticker.id : 0,
-              select: this.stickers.sticker ? `${this.stickers.select}.${this.stickers.sticker.ext}` : ''
+              select: this.stickers.sticker ? `${this.stickers.select}.webp` : ''
             },
             image: imageFilename,
             voice: voiceFilename

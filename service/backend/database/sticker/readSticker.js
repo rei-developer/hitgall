@@ -77,7 +77,6 @@ module.exports.inventory = async userId => {
     `SELECT
 			si.stickerId id,
 			s.number,
-			s.ext,
 			s.name
 		FROM StickerInventory si
 		LEFT JOIN Stickers s ON s.id = si.stickerId

@@ -20,7 +20,7 @@
         <div class='content sticker-inventory'>
           <div class='item custom-scroll-box'>
             <img
-              :src='`https://cdn.hitgall.com/sticker/${item.id}/1.${item.ext}`'
+              :src='`https://cdn.hitgall.com/seal/${item.id}/1.webp`'
               alt=''
               @click='view(item)'
               v-for='(item, index) in inventory' :key='index'
@@ -33,7 +33,7 @@
             >
               <div class='no'>{{ index }}</div>
               <img
-                :src='`https://cdn.hitgall.com/sticker/${sticker.id}/${index}.${sticker.ext}`'
+                :src='`https://cdn.hitgall.com/seal/${sticker.id}/${index}.webp`'
                 alt=''
                 @click='use(sticker, index)'
               >
