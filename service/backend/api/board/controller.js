@@ -26,7 +26,7 @@ const deleteFile = async key => {
   }, (err, data) => {
     if (err)
       console.log(err)
-    console.log(`s3 : ${BUCKET_NAME}/${key} - ${data} deleted.`)
+    console.log(`s3 : ${BUCKET_NAME}/${key} - deleted.`)
   })
 }
 

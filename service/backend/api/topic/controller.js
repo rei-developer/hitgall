@@ -1,17 +1,35 @@
 const client = require('nekos.life')
 const {nsfw} = new client()
-const {Storage} = require('@google-cloud/storage')
+const S3 = require('aws-sdk/clients/s3')
+const AWS = require('aws-sdk')
+const wasabiEndpoint = new AWS.Endpoint('s3.us-west-1.wasabisys.com')
 
 const dotenv = require('dotenv')
 
 dotenv.config()
 
-const {BUCKET_NAME} = process.env
-const storage = new Storage({keyFilename: 'key.json'})
+const {
+  BUCKET_NAME,
+  ACCESS_KEY_ID,
+  SECRET_ACCESS_KEY
+} = process.env
 
-const deleteFile = async filename => {
-  await storage.bucket(BUCKET_NAME).file(filename).delete()
-  console.log(`gs://${BUCKET_NAME}/${filename} deleted.`)
+const s3 = new S3({
+  endpoint: wasabiEndpoint,
+  region: 'us-west-1',
+  accessKeyId: ACCESS_KEY_ID,
+  secretAccessKey: SECRET_ACCESS_KEY
+})
+
+const deleteFile = async key => {
+  await s3.deleteObject({
+    Bucket: BUCKET_NAME,
+    Key: key
+  }, (err, data) => {
+    if (err)
+      console.log(err)
+    console.log(`s3 : ${BUCKET_NAME}/${key} - deleted.`)
+  })
 }
 
 const fs = require('fs')
@@ -48,13 +66,21 @@ module.exports.getTopicWidgetList = async ctx => {
   const sidebar = ctx.request.query.sidebar
   if (sidebar !== 'Y' && sidebar !== 'N')
     ctx.throw(400, 'Invalid parameter value')
-  const girlImageList = await readTopic.getTopicWidgetList({boardDomain: 'girl', isImage: 1}, sidebar === 'Y' ? 15 : 10)
-  const animeImageList = await readTopic.getTopicWidgetList({boardDomain: 'anime', isImage: 1}, sidebar === 'Y' ? 15 : 10)
+  const girlImageList = await readTopic.getTopicWidgetList({
+    boardDomain: 'girl',
+    isImage: 1,
+    isAllowed: 1
+  }, sidebar === 'Y' ? 15 : 10)
+  const animeImageList = await readTopic.getTopicWidgetList({
+    boardDomain: 'anime',
+    isImage: 1,
+    isAllowed: 1
+  }, sidebar === 'Y' ? 15 : 10)
   const girlList = sidebar === 'N'
-    ? await readTopic.getTopicWidgetList({boardDomain: 'girl'}, 30)
+    ? await readTopic.getTopicWidgetList({boardDomain: 'girl', isAllowed: 1}, 30)
     : []
   const otherList = sidebar === 'N'
-    ? await readTopic.getTopicWidgetList({boardDomain: 'anime'}, 30)
+    ? await readTopic.getTopicWidgetList({boardDomain: 'anime', isAllowed: 1}, 30)
     : []
   ctx.body = {
     status: 'DONE',
