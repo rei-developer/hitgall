@@ -323,7 +323,6 @@ export default {
 .content-box {
   margin-bottom: 1rem;
   border-radius: 2px;
-  border-radius: 2px;
   background: #FFF;
   box-shadow: 1px 0 10px rgba(0, 0, 0, .1);
 }
@@ -394,8 +393,7 @@ article.comment-view {
             word-break: break-all;
 
             &:nth-child(1) {
-              padding: 8px;
-              padding-bottom: 0;
+              padding: 8px 8px 0;
 
               > img:nth-child(1) {
                 margin-top: -3px
@@ -405,7 +403,6 @@ article.comment-view {
                 width: 16px;
                 height: 16px;
                 margin-top: -3px;
-                border-radius: 2px;
               }
 
               > span.author {
@@ -450,9 +447,6 @@ article.comment-view {
               > .sticker {
                 width: 100px;
                 height: auto;
-                > img {
-                  border-radius: 4px
-                }
               }
 
               > span {
@@ -485,37 +479,6 @@ article.comment-view {
             }
           }
         }
-
-        > .more {
-          position: relative;
-          width: 2rem;
-          background: #f7f8fa;
-
-          > div {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-
-            &.dropdown {
-              z-index: 1;
-
-              .btn-secondary {
-                opacity: 0;
-
-                &:focus, &.focus {
-                  box-shadow: none !important
-                }
-              }
-            }
-
-            > svg {
-              position: absolute;
-              top: calc(50% - 8px);
-              margin-left: 8px;
-              color: @primary;
-            }
-          }
-        }
       }
     }
   }
@@ -533,11 +496,10 @@ article.comment-view {
   font-size: 11px;
   font-weight: bold;
   text-align: center;
-  border-radius: 5px;
 }
 
 .hitomiReader:hover {
   color: #FFF;
-  opacity: 0.8;
+  opacity: .8;
 }
 </style>

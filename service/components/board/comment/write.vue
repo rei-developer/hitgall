@@ -49,15 +49,6 @@
       </div>
       <div class='footer'>
         <div
-          v-b-tooltip.hover title='이미지 댓글'
-          class='footer-event'
-        >
-          <font-awesome-icon icon='image'/>
-          <div class='input-file'>
-            <input id='replyImage' type='file' @change='onChangeReplyImage'/>
-          </div>
-        </div>
-        <button
           v-b-tooltip.hover title='보이스 댓글'
           :class='[
             "footer-event",
@@ -66,28 +57,28 @@
           @click='onClickVoiceReply'
         >
           <font-awesome-icon icon='microphone-alt'/>
-        </button>
-        <button
+        </div>
+        <div
           class='footer-event'
           @click='onClickVoiceReplyPlay'
           v-if='voice'
         >
           <font-awesome-icon icon='play'/>
-        </button>
-        <button
+        </div>
+        <div
           class='footer-event'
           @click='onClickVoiceReplyDelete'
           v-if='voice'
         >
           <font-awesome-icon icon='trash'/>
-        </button>
-        <button
+        </div>
+        <div
           v-b-tooltip.hover title='스티커'
           class='footer-event'
           @click='onClickReplySticker'
         >
           <font-awesome-icon icon='smile'/>
-        </button>
+        </div>
         <div
           class='sticker'
           @click='clear'
@@ -105,6 +96,15 @@
             <div class='remove'>
               <font-awesome-icon icon='times'/>
             </div>
+          </div>
+        </div>
+        <div
+          v-b-tooltip.hover title='이미지 댓글'
+          class='footer-event'
+        >
+          <font-awesome-icon icon='image'/>
+          <div class='input-file'>
+            <input id='replyImage' type='file' @change='onChangeReplyImage'/>
           </div>
         </div>
       </div>
@@ -448,10 +448,10 @@ article.comment-write {
         width: 32px;
         height: 32px;
         margin: 5px 5px 0 0;
-        border: 0;
         background-color: @primary;
         color: #fff;
         font-size: 20px;
+        cursor: pointer;
         &:hover, &:active {background-color: @primary-focus}
         &.active {color: red}
         > .input-file {
@@ -513,7 +513,6 @@ article.comment-write {
     .signin-box {
       width: 100%;
       padding: .5rem 0;
-      border-radius: .5rem;
       font-size: .8rem;
       text-align: center;
       cursor: pointer;
