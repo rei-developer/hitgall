@@ -41,37 +41,29 @@ const Lame = require('node-lame').Lame
 
 module.exports.createVoice = async ctx => {
   let {blob} = ctx.request.body
-  blob = blob.replace(/data:application\/octet-stream;/gim, 'data:video/webm;')
-  const tempName = v5(`${Date.now()}`, MY_NAMESPACE)
-  await uploadFile(`voice/test-${tempName}.mpeg`, Buffer.from(blob, 'base64'), {
-    ContentEncoding: 'base64',
-    ContentType: 'video/webm'
-  })
-  ctx.body = {
-    status: 'ok'
+  blob = blob.replace(/data:application\/octet-stream;/gim, 'data:audio/mpeg;')
+  const encoder = new Lame({
+    output: 'buffer',
+    bitrate: 192
+  }).setBuffer(Buffer.from(blob, 'base64'))
+  try {
+    const buffer = await new Promise((resolve, reject) => {
+      encoder.encode()
+        .then(() => resolve(encoder.getBuffer()))
+        .catch(err => reject(err))
+    })
+    const tempName = v5(`${Date.now()}`, MY_NAMESPACE)
+    await uploadFile(`voice/test-${tempName}.mpeg`, buffer, {
+      ContentEncoding: 'base64',
+      ContentType: 'audio/mpeg'
+    })
+    ctx.body = {
+      status: 'ok'
+    }
+  } catch (e) {
+    console.log(e)
+    return ctx.body = e
   }
-  // const decoder = new Lame({
-  //   output: 'buffer'
-  //   // bitrate: 192,
-  // }).setBuffer(Buffer.from(blob, 'base64'))
-  // try {
-  //   const buffer = await new Promise((resolve, reject) => {
-  //     decoder.decode()
-  //       .then(() => resolve(decoder.getBuffer()))
-  //       .catch(err => reject(err))
-  //   })
-  //   const tempName = v5(`${Date.now()}`, MY_NAMESPACE)
-  //   await uploadFile(`voice/test-${tempName}.mpeg`, buffer, {
-  //     ContentEncoding: 'base64',
-  //     ContentType: 'video/webm'
-  //   })
-  //   ctx.body = {
-  //     status: 'ok'
-  //   }
-  // } catch (e) {
-  //   console.log(e)
-  //   return ctx.body = e
-  // }
 }
 
 module.exports.createImage = type => async ctx => {
@@ -81,36 +73,26 @@ module.exports.createImage = type => async ctx => {
   // ex).webp.mp4 형식 수정
   try {
     if (checker) {
-      fs.readFile(`
-    img /${filename}`, async (err, data) => {
+      fs.readFile(`img/${filename}`, async (err, data) => {
         if (err)
           return ctx.body = {
             message: err,
             status: 'fail'
           }
-        await uploadFile(`
-    img /${filename}`, data)
+        await uploadFile(`img/${filename}`, data)
         if (type === 'topic') {
           const thumbnail = sharp(data)
           thumbnail
             .metadata()
             .then(() => thumbnail.resize(100, 100).withMetadata().rotate().toBuffer())
-            .then(result => fs.writeFile(`
-    img / thumb /${filename}`, result, async () => {
-              await uploadFile(`
-    img / thumb /${filename}`, result)
-            }))
+            .then(result => fs.writeFile(`img/thumb/${filename}`, result, async () => await uploadFile(`img/thumb/${filename}`, result)))
         }
         if (type === 'background') {
           const thumbnail = sharp(data)
           thumbnail
             .metadata()
             .then(() => thumbnail.resize(120, 100).withMetadata().rotate().toBuffer())
-            .then(result => fs.writeFile(`
-    img / thumb /${filename}`, result, async () => {
-              await uploadFile(`
-    img / thumb /${filename}`, result)
-            }))
+            .then(result => fs.writeFile(`img/thumb/${filename}`, result, async () => await uploadFile(`img/thumb/${filename}`, result)))
         }
       })
       ctx.body = {
@@ -118,9 +100,7 @@ module.exports.createImage = type => async ctx => {
         status: 'ok'
       }
     } else {
-      fs.unlink(`
-    img /${filename}`, () => console.log(`
-    삭제 : img /${filename}`))
+      fs.unlink(`img/${filename}`, () => console.log(`삭제 : img/${filename}`))
       ctx.body = {
         message: 'gif, png, jpg, jpeg, webp만 가능',
         status: 'fail'
