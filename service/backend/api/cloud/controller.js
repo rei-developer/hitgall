@@ -22,6 +22,8 @@ const s3 = new S3({
 
 const checkFile = filename => /(.gif|.png|.jpg|.jpeg|.webp)/i.test(filename.toLowerCase())
 
+const isGIF = filename => /.gif/i.test(filename.toLowerCase())
+
 const createThumb = async (path, input, width = 120, height = 120) => {
   const data = await sharp(input)
     .resize(width, height)
@@ -82,15 +84,21 @@ module.exports.createImage = type => async ctx => {
       return
     }
     const input = await fs.readFile(path.origin)
-    const data = await sharp(input)
-      .metadata()
-      .then(({width}) => sharp(input)
-        .rotate()
-        .resize(Math.round(width < 1600 ? width : 1600))
-        .withMetadata()
-        .webp({quality: 80, force: true})
-        .toBuffer()
-      )
+    if (isGIF(path.origin)) {
+      await sharp(input, {animated: true})
+        .toFile(path.origin)
+    }
+    const data = isGIF(path.origin)
+      ? await fs.readFile(path.origin)
+      : await sharp(input)
+        .metadata()
+        .then(({width}) => sharp(input)
+          .rotate()
+          .resize(Math.round(width < 1600 ? width : 1600))
+          .withMetadata()
+          .webp({quality: 80, force: true})
+          .toBuffer()
+        )
     await uploadFile(path.origin, data)
     await deleteFile(path.origin)
     await createThumb(path.thumb, data)
