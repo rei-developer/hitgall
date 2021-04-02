@@ -588,7 +588,7 @@ module.exports.createPost = async ctx => {
   const postsCount = await readPost.count(topicId)
   const posts = await readPost.posts(topicId, 0, 100)
   if (sticker.id)
-    await updateSticker.inventoryUpdated(sticker.id)
+    await updateSticker.inventoryUpdated(user.id, sticker.id)
   if (user) {
     await User.setUpPoint(user, 5)
     const items = []
@@ -854,7 +854,7 @@ module.exports.updatePost = async ctx => {
     return
   await updatePost(id, Filter.post(content), sticker.id, sticker.select, image, voice)
   if (sticker.id)
-    await updateSticker.inventoryUpdated(sticker.id)
+    await updateSticker.inventoryUpdated(user.id, sticker.id)
   ctx.body = {
     status: 'ok'
   }
