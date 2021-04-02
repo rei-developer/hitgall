@@ -125,7 +125,8 @@ export default {
       await this.$nextTick()
       this.$store.commit('screenWidth', window.innerWidth)
     },
-    handleScroll() {
+    async handleScroll() {
+      await this.$nextTick()
       this.top = window.top.scrollY
     },
     checkLogged: async function () {

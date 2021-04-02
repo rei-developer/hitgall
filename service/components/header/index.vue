@@ -290,7 +290,8 @@ export default {
       if (board === field)
         this.$store.commit('forceUpdate')
     },
-    handleScroll() {
+    async handleScroll() {
+      await this.$nextTick()
       this.top = window.top.scrollY
     },
     async onScrollTopClick() {
