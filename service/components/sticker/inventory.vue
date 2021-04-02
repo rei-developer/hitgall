@@ -4,7 +4,7 @@
     @click.self='close'
     v-if='visible'
   >
-    <drag-it-dude :style='{left: `${x}px`, top: `${y}px`}'>
+    <div class='dialog-wrapper' :style='{left: `${x}px`, top: `${y}px`}'>
       <div
         ref='dialog'
         class='dialog'
@@ -44,7 +44,7 @@
           <b-button squared variant='primary' size='sm' @click='close'>닫기</b-button>
         </div>
       </div>
-    </drag-it-dude>
+    </div>
   </div>
 </template>
 
@@ -75,7 +75,7 @@
       width: 100px;
       height: 100px;
       margin: 0 5px 5px 0;
-      border: 1px dashed @primary;
+      border: 1px solid @primary;
       background-color: #efefef;
       float: left;
       &:hover {
@@ -98,11 +98,8 @@
 </style>
 
 <script>
-import DragItDude from 'vue-drag-it-dude'
-
 export default {
   name: 'StickerInventory',
-  components: {DragItDude},
   data() {
     return {
       w: 332,
