@@ -260,7 +260,10 @@ export default {
     },
     onClickVoiceReplyPlay(voiceUrl) {
       const audio = new Audio()
-      audio.src = `https://cdn.hitgall.com/voice/${voiceUrl}`
+      const source = document.createElement('source')
+      source.setAttribute('src', `https://cdn.hitgall.com/voice/${voiceUrl}`)
+      source.setAttribute('type', 'audio/mpeg')
+      audio.append(source)
       audio.play()
     },
     close() {
@@ -321,6 +324,7 @@ export default {
 
 .content-box {
   margin-bottom: 1rem;
+  border-radius: 2px;
   border-radius: 2px;
   background: #FFF;
   box-shadow: 1px 0 10px rgba(0, 0, 0, .1);
@@ -442,7 +446,7 @@ article.comment-view {
                 border: 0;
                 background-color: @primary;
                 color: #fff;
-                &:active {background-color: @primary-focus }
+                &:hover, &:active {background-color: @primary-focus }
               }
 
               > .sticker {

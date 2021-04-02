@@ -209,24 +209,31 @@ export default {
     },
     async recordAudio() {
       return new Promise(async resolve => {
-        const stream = await navigator.mediaDevices.getUserMedia({audio: true})
-        const mediaRecorder = new MediaRecorder(stream)
-        const audioChunks = []
-        mediaRecorder.addEventListener('dataavailable', event => audioChunks.push(event.data))
-        const start = () => mediaRecorder.start()
-        const stop = () =>
-          new Promise(resolve => {
-            mediaRecorder.addEventListener('stop', () => {
-              const audioBlob = new Blob(audioChunks, {type: 'audio/mpeg'})
-              const audioUrl = URL.createObjectURL(audioBlob)
-              const audio = new Audio(audioUrl)
-              const play = () => audio.play()
-              resolve({audioBlob, audioUrl, play})
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({audio: true})
+          console.log('A')
+          const mediaRecorder = new MediaRecorder(stream)
+          console.log('B')
+          const audioChunks = []
+          mediaRecorder.addEventListener('dataavailable', event => audioChunks.push(event.data))
+          const start = () => mediaRecorder.start()
+          const stop = () =>
+            new Promise(resolve => {
+              mediaRecorder.addEventListener('stop', () => {
+                const audioBlob = new Blob(audioChunks, {type: 'audio/mpeg'})
+                const audioUrl = URL.createObjectURL(audioBlob)
+                const audio = new Audio(audioUrl)
+                const play = () => audio.play()
+                resolve({audioBlob, audioUrl, play})
+              })
+              mediaRecorder.stop()
             })
-            mediaRecorder.stop()
-          })
-        const end = () => stream.getTracks().forEach(track => track.stop())
-        resolve({start, stop, end})
+          const end = () => stream.getTracks().forEach(track => track.stop())
+          resolve({start, stop, end})
+        } catch (e) {
+          this.toast('마이크 또는 헤드폰, 헤드셋을 장착하십시오')
+          this.isRunningVoice = false
+        }
       })
     },
     async onClickVoiceReply() {
