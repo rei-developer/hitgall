@@ -14,7 +14,8 @@ const storage = multer.diskStorage({
       .substr(file.originalname.lastIndexOf('.'), file.originalname.length)
       .toLowerCase()
     const filename = uuidv5(`${Date.now()}-${file.originalname}`, MY_NAMESPACE)
-    cb(null, `${filename}${ext}`)
+    const pureExt = ext === '.mpeg' ? '.mpeg' : '.webp'
+    cb(null, `${filename}${pureExt}`)
   }
 })
 const upload = multer({
