@@ -217,7 +217,7 @@ export default {
         const stop = () =>
           new Promise(resolve => {
             mediaRecorder.addEventListener('stop', () => {
-              const audioBlob = new Blob(audioChunks)
+              const audioBlob = new Blob(audioChunks, {type: 'audio/mpeg'})
               const audioUrl = URL.createObjectURL(audioBlob)
               const audio = new Audio(audioUrl)
               const play = () => audio.play()
@@ -254,7 +254,7 @@ export default {
     },
     async uploadVoiceData(blob) {
       const formData = new FormData()
-      formData.append('voice', blob, `${moment().format()}.mp3`)
+      formData.append('voice', blob, `${moment().format()}.mpeg`)
       const {status, filename} = await this.$axios.$post(
         '/api/cloud/voice',
         formData
