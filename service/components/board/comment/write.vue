@@ -47,21 +47,29 @@
         </div>
       </div>
       <div class='footer'>
-        <client-only>
-          <vue-record-audio
-            mode='press'
-            @result='onResult'
-          />
-        </client-only>
-        <audio
-          controls
-          :src='tempAudio'
-          v-if='tempAudio'
+        <button
+          :class='[
+            "voice-reply",
+            recorder ? "active" : undefined
+          ]'
+          @click='onClickVoiceReply'
         >
-          Your browser does not support the
-          <code>audio</code> element.
-        </audio>
-        (보이스 메시지 테스트중)
+          <font-awesome-icon icon='microphone-alt'/>
+        </button>
+        <button
+          class='voice-reply'
+          @click='onClickVoiceReplyPlay'
+          v-if='voice'
+        >
+          <font-awesome-icon icon='play'/>
+        </button>
+        <button
+          class='voice-reply'
+          @click='onClickVoiceReplyDelete'
+          v-if='voice'
+        >
+          <font-awesome-icon icon='trash'/>
+        </button>
         <div class='sticker'
              @click='clear'
              v-if='stickers.sticker'
@@ -84,6 +92,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 import StickerInventory from '~/components/sticker/inventory.vue'
 
 export default {
@@ -99,8 +108,9 @@ export default {
         select: 0,
         hide: true
       },
-      tempAudio: null,
-      tempAudioBlob: null,
+      voice: null,
+      recorder: null,
+      isRunningVoice: false,
       loading: false
     }
   },
@@ -116,14 +126,19 @@ export default {
     this.writer = localStorage.notUserID || 'ㅇㅇ'
     this.password = localStorage.notUserPW || ''
   },
+  beforeDestroy() {
+    this.recorder = null
+  },
   methods: {
     async submit() {
       if (this.loading)
         return
       if (!this.stickers.sticker && this.content.trim() === '')
         return
-      // if (!this.$store.state.user.isLogged)
-      // return this.toast('로그인하세요.', 'warning')
+      let voiceFilename
+      if (this.voice) {
+        voiceFilename = await this.uploadVoiceData(this.voice.audioBlob)
+      }
       const token = this.$store.state.user.token || ''
       this.loading = true
       let result
@@ -138,7 +153,8 @@ export default {
             sticker: {
               id: this.stickers.sticker ? this.stickers.sticker.id : 0,
               select: this.stickers.sticker ? `${this.stickers.select}.${this.stickers.sticker.ext}` : ''
-            }
+            },
+            voice: voiceFilename
           },
           {headers: {'x-access-token': token}}
         )
@@ -158,7 +174,8 @@ export default {
             sticker: {
               id: this.stickers.sticker ? this.stickers.sticker.id : 0,
               select: this.stickers.sticker ? `${this.stickers.select}.${this.stickers.sticker.ext}` : ''
-            }
+            },
+            voice: voiceFilename
           },
           {headers: {'x-access-token': token}}
         )
@@ -166,13 +183,6 @@ export default {
       if (result.status === 'fail') {
         this.loading = false
         return this.toast(result.message || '오류가 발생했습니다.', 'danger')
-      }
-      if (this.tempAudio) {
-        const data = await this.$axios.$post(
-          '/api/cloud/voice',
-          {blob: this.tempAudioBlob}
-        )
-        console.log(data)
       }
       this.$store.commit('forceUpdate')
       this.content = ''
@@ -188,8 +198,7 @@ export default {
         select: 0,
         hide: true
       }
-      this.tempAudio = null
-      this.tempAudioBlob = null
+      this.voice = null
     },
     use(item, select) {
       this.stickers = {
@@ -198,14 +207,61 @@ export default {
         hide: true
       }
     },
-    async onResult(data) {
-      if (data.size > (1024 * 1000) * 5) {
-        return this.toast('보이스 용량이 너무 큽니다.', 'warning')
+    async recordAudio() {
+      return new Promise(async resolve => {
+        const stream = await navigator.mediaDevices.getUserMedia({audio: true})
+        const mediaRecorder = new MediaRecorder(stream)
+        const audioChunks = []
+        mediaRecorder.addEventListener('dataavailable', event => audioChunks.push(event.data))
+        const start = () => mediaRecorder.start()
+        const stop = () =>
+          new Promise(resolve => {
+            mediaRecorder.addEventListener('stop', () => {
+              const audioBlob = new Blob(audioChunks)
+              const audioUrl = URL.createObjectURL(audioBlob)
+              const audio = new Audio(audioUrl)
+              const play = () => audio.play()
+              resolve({audioBlob, audioUrl, play})
+            })
+            mediaRecorder.stop()
+          })
+        const end = () => stream.getTracks().forEach(track => track.stop())
+        resolve({start, stop, end})
+      })
+    },
+    async onClickVoiceReply() {
+      this.isRunningVoice = !this.isRunningVoice
+      if (this.isRunningVoice) {
+        this.recorder = await this.recordAudio()
+        this.recorder.start()
+      } else {
+        if (!this.recorder)
+          return
+        const audio = await this.recorder.stop()
+        audio.play()
+        this.voice = audio
+        await this.recorder.end()
+        this.recorder = null
       }
-      const reader = new FileReader()
-      reader.readAsDataURL(data)
-      this.tempAudio = window.URL.createObjectURL(data)
-      this.tempAudioBlob = await new Promise((resolve, reject) => reader.onloadend = () => resolve(reader.result))
+    },
+    onClickVoiceReplyPlay() {
+      const audio = new Audio()
+      audio.src = this.voice.audioUrl
+      audio.play()
+    },
+    onClickVoiceReplyDelete() {
+      this.voice = null
+    },
+    async uploadVoiceData(blob) {
+      const formData = new FormData()
+      formData.append('voice', blob, `${moment().format()}.mp3`)
+      const {status, filename} = await this.$axios.$post(
+        '/api/cloud/voice',
+        formData
+      )
+      return status === 'ok'
+        ? filename
+        : false
     },
     imageUrlAlt(event) {
       event.target.src = '/default.png'
@@ -232,11 +288,9 @@ article.comment-write {
   border-left: 0;
   border-right: 0;
   background-color: #fff;
-
   > div {
     > .header {
       font-size: .75rem;
-
       > .author {
         display: inline-block;
         width: fit-content;
@@ -246,14 +300,12 @@ article.comment-write {
         border-radius: 500rem;
         background-color: @primary;
       }
-
       > .label {
         display: inline-block;
         color: @primary;
         font-weight: normal;
       }
     }
-
     > .name-box {
       > input {
         width: 120px;
@@ -265,13 +317,10 @@ article.comment-write {
         outline: none;
       }
     }
-
     > .content {
       display: flex;
-
       > .profile {
         margin-right: .25rem;
-
         > img {
           width: 72px;
           height: 72px !important;
@@ -279,12 +328,10 @@ article.comment-write {
           border: 1px solid #ccc;
         }
       }
-
       > .write-box {
         display: flex;
         flex: 1;
         flex-direction: column;
-
         > textarea {
           height: 4.5rem;
           padding: .5rem;
@@ -293,41 +340,43 @@ article.comment-write {
           outline: none !important;
         }
       }
-
       > .commit {
         margin-left: .25rem;
         text-align: center;
         cursor: pointer;
-
         > .sticker {
           width: 4.5rem;
           padding: .25rem 0;
-          border-radius: .25rem .25rem 0;
           background-color: #f7f8fa;
           color: @primary;
           font-size: .8rem;
         }
-
         > .submit {
           width: 4.5rem;
           height: 45px;
           line-height: 44px;
-          border-radius: 0 0 .25rem .25rem;
           background-color: @primary;
           color: #FFF;
           font-size: 1.5rem;
-
-          &:hover {
-            background-color: @primary-focus
-          }
+          &:hover {background-color: @primary-focus}
         }
       }
     }
-
     > .footer {
+      display: flex;
+      > .voice-reply {
+        width: 32px;
+        height: 32px;
+        margin: 5px 5px 0 0;
+        border: 0;
+        background-color: @primary;
+        color: #fff;
+        font-size: 20px;
+        &:hover, &:active {background-color: @primary-focus}
+        &.active {color: red}
+      }
       > .sticker {
         margin-top: .5rem;
-
         > .item {
           display: flex;
           width: fit-content;
@@ -340,28 +389,19 @@ article.comment-write {
           justify-content: center;
           align-items: center;
           cursor: pointer;
-
-          &.item:hover {
-            background-color: @primary-focus
-          }
-
+          &.item:hover {background-color: @primary-focus}
           > .image {
             margin-right: .5rem;
-
             > img {
               width: 2rem;
               height: 2rem;
               border-radius: 500rem;
             }
           }
-
-          > .remove {
-            margin-left: .5rem
-          }
+          > .remove {margin-left: .5rem}
         }
       }
     }
-
     .signin-box {
       width: 100%;
       padding: .5rem 0;
@@ -369,15 +409,10 @@ article.comment-write {
       font-size: .8rem;
       text-align: center;
       cursor: pointer;
-
       &:hover {
         background-color: @primary-focus;
-
-        > a {
-          color: #fff
-        }
+        > a {color: #fff}
       }
-
       > a {
         color: @primary;
         text-decoration: none;

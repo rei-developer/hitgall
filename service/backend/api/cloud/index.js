@@ -5,7 +5,7 @@ const Controller = require('./controller')
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, './img')
+    cb(null, `./${file.fieldname}`)
   },
   filename: (req, file, cb) => {
     const MY_NAMESPACE = '7d849d8b-7294-46ab-87a0-8851fb3c9256'
@@ -26,8 +26,8 @@ const upload = multer({
 
 const app = new Router()
 
-app.post('/voice', Controller.createVoice)
-app.post('/topic', upload.single('image'), Controller.createImage('topic'))
-app.post('/background', upload.single('image'), Controller.createImage('background'))
+app.post('/voice', upload.single('voice'), Controller.createVoice)
+app.post('/topic', upload.single('img'), Controller.createImage('topic'))
+app.post('/background', upload.single('img'), Controller.createImage('background'))
 
 module.exports = app

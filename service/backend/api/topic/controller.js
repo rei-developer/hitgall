@@ -518,7 +518,8 @@ module.exports.createPost = async ctx => {
     postRootId,
     postParentId,
     content,
-    sticker
+    sticker,
+    voice
   } = ctx.request.body
   topicUserId = Number(topicUserId)
   if (postUserId)
@@ -577,6 +578,7 @@ module.exports.createPost = async ctx => {
     content,
     stickerId: sticker.id,
     stickerSelect: sticker.select,
+    voiceUrl: voice,
     randomImageUrl,
     ip,
     header
@@ -834,7 +836,7 @@ module.exports.updatePost = async ctx => {
   const user = await User.getUser(ctx.get('x-access-token'))
   if (!user)
     return
-  const {id, content, sticker} = ctx.request.body
+  const {id, content, sticker, voice} = ctx.request.body
   if (id < 1)
     return ctx.body = {
       status: 'fail'
@@ -846,7 +848,7 @@ module.exports.updatePost = async ctx => {
     }
   if (user && user.isAdmin < 1 && userId !== user.id)
     return
-  await updatePost(id, Filter.post(content), sticker.id, sticker.select)
+  await updatePost(id, Filter.post(content), sticker.id, sticker.select, voice)
   ctx.body = {
     status: 'ok'
   }

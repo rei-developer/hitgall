@@ -26,14 +26,14 @@ const upload = multer({
 
 const app = new Router()
 
-app.post('/profile', upload.single('image'), Controller.createImage())
+app.post('/profile', upload.single('img'), Controller.createImage())
 app.post(
     '/background',
-    upload.single('image'),
+    upload.single('img'),
     Controller.createImage('background')
 )
-app.post('/icon', upload.single('image'), Controller.createImage('icon'))
-app.post('/pick', upload.single('image'), Controller.createImage('pick'))
-app.post('/topic', upload.single('image'), Controller.createImage('topic'))
+app.post('/icon', upload.single('img'), Controller.createImage('icon'))
+app.post('/pick', upload.single('img'), Controller.createImage('pick'))
+app.post('/topic', upload.single('img'), Controller.createImage('topic'))
 
 module.exports = app

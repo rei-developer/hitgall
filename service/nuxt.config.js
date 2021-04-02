@@ -53,7 +53,6 @@ module.exports = {
     {src: '@/plugins/vue-nestable.js', mode: 'client'},
     {src: '@/plugins/vue-poll.js', mode: 'client'},
     {src: '@/plugins/vue-qriously.js', mode: 'client'},
-    {src: '@/plugins/vue-record.js', mode: 'client'},
     {src: '@/plugins/vue-shortkey.js', mode: 'client'},
     {src: '@/plugins/vue-spinners.js', mode: 'client'},
     {src: '@/plugins/vue-toastification.js', mode: 'client'},

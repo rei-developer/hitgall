@@ -1,7 +1,6 @@
 const S3 = require('aws-sdk/clients/s3')
 const AWS = require('aws-sdk')
 const wasabiEndpoint = new AWS.Endpoint('s3.us-west-1.wasabisys.com')
-const {v5} = require('uuid')
 
 const dotenv = require('dotenv')
 
@@ -9,7 +8,6 @@ dotenv.config()
 
 const {
   BUCKET_NAME,
-  MY_NAMESPACE,
   ACCESS_KEY_ID,
   SECRET_ACCESS_KEY
 } = process.env
@@ -37,40 +35,33 @@ const uploadFile = async (key, body, options = null) => {
 
 const fs = require('fs')
 const sharp = require('sharp')
-const Lame = require('node-lame').Lame
 
 module.exports.createVoice = async ctx => {
-  let {blob} = ctx.request.body
-  blob = blob.replace(/data:application\/octet-stream;/gim, 'data:audio/mpeg;')
-  const encoder = new Lame({
-    output: 'buffer',
-    bitrate: 192
-  }).setBuffer(Buffer.from(blob, 'base64'))
+  const filename = ctx.req.file.filename
   try {
-    const buffer = await new Promise((resolve, reject) => {
-      encoder.encode()
-        .then(() => resolve(encoder.getBuffer()))
-        .catch(err => reject(err))
-    })
-    const tempName = v5(`${Date.now()}`, MY_NAMESPACE)
-    await uploadFile(`voice/test-${tempName}.mpeg`, buffer, {
-      ContentEncoding: 'base64',
-      ContentType: 'audio/mpeg'
+    fs.readFile(`voice/${filename}`, async (err, data) => {
+      if (err)
+        return ctx.body = {
+          message: err,
+          status: 'fail'
+        }
+      await uploadFile(`voice/${filename}`, data)
     })
     ctx.body = {
+      filename,
       status: 'ok'
     }
   } catch (e) {
-    console.log(e)
-    return ctx.body = e
+    ctx.body = {
+      message: e.message,
+      status: 'fail'
+    }
   }
 }
 
 module.exports.createImage = type => async ctx => {
-  const checker = /(.gif|.png|.jpg|.jpeg|.webp)/i.test(ctx.req.file.originalname)
-  const checkerByGIF = /.gif/i.test(ctx.req.file.originalname)
+  const checker = /(.gif|.png|.jpg|.jpeg|.webp)/i.test(ctx.req.file.originalname.toLowerCase())
   const filename = ctx.req.file.filename
-  // ex).webp.mp4 형식 수정
   try {
     if (checker) {
       fs.readFile(`img/${filename}`, async (err, data) => {

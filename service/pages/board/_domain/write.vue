@@ -529,7 +529,7 @@ export default {
       const LIMITS = 21504000
       const formData = new FormData()
       formData.append('type', 'file')
-      formData.append('image', file, file.name)
+      formData.append('img', file, file.name)
       if (!/(.gif|.png|.jpg|.jpeg|.webp)/i.test(file.name))
         this.toast(`${index + 1}번째 이미지 업로드 실패... (gif, png, jpg, jpeg, webp만 가능)`, 'danger')
       else if (file.size > LIMITS)

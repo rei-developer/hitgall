@@ -226,7 +226,7 @@ export default {
     // 	const file = e.target.files[0]
     // 	const formData = new FormData()
     // 	formData.append('type', 'file')
-    // 	formData.append('image', file, file.name)
+    // 	formData.append('img', file, file.name)
     // 	if (!/(.png|.jpg|.jpeg)/i.test(file.name))
     // 		return this.toast('이미지 업로드 실패... (png, jpg, jpeg만 가능)', 'danger')
     // 	if (file.size > LIMITS)

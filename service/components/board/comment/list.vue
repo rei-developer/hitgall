@@ -48,6 +48,14 @@
                   <font-awesome-icon icon='at'/>
                   {{ item.tagAuthor }}
                 </div>
+                <button
+                  class='voice-reply'
+                  @click='onClickVoiceReplyPlay(item.voiceUrl)'
+                  v-if='item.voiceUrl'
+                >
+                  <font-awesome-icon icon='play'/>
+                  보이스 리플
+                </button>
                 <div
                   class='sticker'
                   @click='viewSticker(item.stickerId)'
@@ -250,6 +258,11 @@ export default {
       this.sticker.sticker = data.sticker
       this.$store.commit('setLoading')
     },
+    onClickVoiceReplyPlay(voiceUrl) {
+      const audio = new Audio()
+      audio.src = `https://cdn.hitgall.com/voice/${voiceUrl}`
+      audio.play()
+    },
     close() {
       this.sticker.id = 0
       this.sticker.sticker = {}
@@ -304,6 +317,7 @@ export default {
 
 <style lang='less' scope>
 @primary: #EDA7B2;
+@primary-focus: #5F5476;
 
 .content-box {
   margin-bottom: 1rem;
@@ -421,6 +435,14 @@ article.comment-view {
                 font-size: 11px;
                 border-radius: 500rem;
                 background-color: @primary;
+              }
+
+              > .voice-reply {
+                height: 32px;
+                border: 0;
+                background-color: @primary;
+                color: #fff;
+                &:active {background-color: @primary-focus }
               }
 
               > .sticker {
