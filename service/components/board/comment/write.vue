@@ -2,9 +2,11 @@
   <article class='comment-write'>
     <div>
       <StickerInventory
-        v-on:use='use'
-        v-on:close='close'
-        v-if='!stickers.hide'/>
+        ref='sticker'
+        @use='use'
+        @close='close'
+        v-if='!stickers.hide'
+      />
       <div class='header' v-if='author'>
         <div class='author'>
           <font-awesome-icon icon='at'/>
@@ -82,7 +84,7 @@
         <button
           v-b-tooltip.hover title='스티커'
           class='footer-event'
-          @click='stickers.hide = false'
+          @click='onClickReplySticker'
         >
           <font-awesome-icon icon='smile'/>
         </button>
@@ -301,6 +303,15 @@ export default {
     onClickVoiceReplyDelete() {
       this.voice = null
     },
+    async onClickReplySticker() {
+      this.stickers.hide = false
+      await this.$nextTick()
+      this.$refs.sticker.show({
+        icon: 'exclamation-triangle',
+        message: '정말로 모든 액션을 삭제할거니?',
+        doEvent: 'sb.removeAll'
+      })
+    },
     async uploadImageData() {
       const $el = document.getElementById('replyImage')
       if (!$el)
@@ -349,7 +360,7 @@ export default {
 }
 </script>
 
-<style lang='less' scope>
+<style lang='less' scoped>
 @primary: #EDA7B2;
 @primary-focus: #5F5476;
 

@@ -316,7 +316,7 @@ export default {
 }
 </script>
 
-<style lang='less' scope>
+<style lang='less' scoped>
 @primary: #EDA7B2;
 @primary-focus: #5F5476;
 

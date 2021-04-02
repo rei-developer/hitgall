@@ -1,142 +1,159 @@
 <template>
-    <div class='StickerInventory'>
-        <div class='title'>
-            <font-awesome-icon icon='info-circle'/>
-            힛갤콘 인벤토리
-            <button class='close' @click='$emit("close")'>×</button>
+  <div
+    class='backdrop'
+    @click.self='close'
+    v-if='visible'
+  >
+    <drag-it-dude :style='{left: `${x}px`, top: `${y}px`}'>
+      <div
+        ref='dialog'
+        class='dialog'
+        :style='{width: `${w}px`, height: `${h}px`}'
+      >
+        <div class='header'>
+          <font-awesome-icon icon='smile'/>
+          내 힛갤콘
+          <div class='close' @click='close'>
+            <font-awesome-icon icon='times'/>
+          </div>
         </div>
-        <div class='content'>
-            <div class='item'>
-                <img
-                    alt=""
-                    :src='`https://cdn.hitgall.com/sticker/${item.id}/1.${item.ext}`'
-                    @click='view(item)'
-                    v-for='(item, index) in inventory' :key='index'>
+        <div class='content sticker-inventory'>
+          <div class='item custom-scroll-box'>
+            <img
+              :src='`https://cdn.hitgall.com/sticker/${item.id}/1.${item.ext}`'
+              alt=''
+              @click='view(item)'
+              v-for='(item, index) in inventory' :key='index'
+            >
+          </div>
+          <div class='itemList custom-scroll-box' v-if='sticker'>
+            <div
+              class='box-lazy'
+              v-for='index in sticker.number' :key='index'
+            >
+              <div class='no'>{{ index }}</div>
+              <img
+                :src='`https://cdn.hitgall.com/sticker/${sticker.id}/${index}.${sticker.ext}`'
+                alt=''
+                @click='use(sticker, index)'
+              >
             </div>
-            <div class='itemList' v-if='sticker'>
-                <img
-                    alt=""
-                    :src='`https://cdn.hitgall.com/sticker/${sticker.id}/${index}.${sticker.ext}`'
-                    @click='use(sticker, index)'
-                    v-for='index in sticker.number' :key='index'>
-            </div>
+          </div>
         </div>
-    </div>
+        <div class='footer'>
+          <b-button squared variant='primary' size='sm' @click='close'>닫기</b-button>
+        </div>
+      </div>
+    </drag-it-dude>
+  </div>
 </template>
 
-<script>
-    export default {
-        data() {
-            return {
-                inventory: [],
-                sticker: null
-            }
-        },
-        mounted() {
-            this.getData()
-        },
-        methods: {
-            getData: async function() {
-                const token = this.$store.state.user.token || ''
-                const data = await this.$axios.$get(
-                    `/api/sticker/list`,
-                    { headers: { 'x-access-token': token } }
-                )
-                if (data.status === 'fail' || !data.inventory)
-                    return
-                this.inventory = data.inventory
-                this.sticker = this.inventory[0]
-            },
-            view(item) {
-                this.sticker = item
-            },
-            use(item, index) {
-                this.$emit('use', item, index)
-            },
-            numberWithCommas(x) {
-                    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-            },
-        }
-    }
-</script>
+<style lang='less' scoped>
+@primary: #EDA7B2;
 
-<style lang='less' scope>
-    .StickerInventory {
-        position: fixed;
-        left: 35%;
-        top: 6em;
-        width: 670px;
-        height: 423px;
-        margin: 0 0 0 -180px;
+.sticker-inventory {
+  > .item {
+    height: 60px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    > img {
+      width: 50px;
+      height: 50px;
+      &:hover {
+        opacity: .8;
+        cursor: pointer;
+      }
+    }
+  }
+  > .itemList {
+    height: 315px;
+    margin: 5px 0 0 5px;
+    overflow-y: scroll;
+    > .box-lazy {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      margin: 0 5px 5px 0;
+      border: 1px dashed @primary;
+      background-color: #efefef;
+      float: left;
+      &:hover {
         border: 1px solid #333;
-        border-radius: 5px;
-        background: #FFF;
-        z-index: 10000;
-        > .title {
-            margin: 0;
-            padding: 6px;
-            height: 29px;
-            background-color: #29313D;
-            color: #FFF;
-            font-size: .9rem;
-            font-weight: bold;
-            > button.close {
-                position: absolute;
-                top: 2px;
-                right: 2px;
-                width: 24px;
-                height: 24px;
-                line-height: 0;
-                margin: 0;
-                border: none;
-                background: transparent;
-                color: #FFF;
-                text-align: center;
-                outline: none;
-                cursor: pointer;
-            }
-        }
-        > .content {
-            padding: 12px;
-            > .item {
-                height: 64px;
-                margin-bottom: 2px;
-                overflow-x: scroll;
-                overflow-y: hidden;
-                white-space: nowrap;
-                > img {
-                    width: 41px;
-                    height: 41px;
-                    margin: 2px;
-                    border-radius: .25rem;
-                    &:hover {
-                        opacity: .8;
-                        cursor: pointer;
-                    }
-                }
-            }
-            > .itemList {
-                height: 300px;
-                overflow: auto;
-                > img {
-                    margin: 2px;
-                    width: 100px;
-                    height: 100px;
-                    float: left;
-                    &:hover {
-                        border: 1px solid #333;
-                        opacity: .8;
-                        cursor: pointer;
-                    }
-                }
-            }
-        }
+        opacity: .8;
+        cursor: pointer;
+      }
+      > .no {
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        background-color: @primary;
+        color: #fff;
+        font-size: 11px;
+        text-align: center;
+      }
     }
-
-    @media (max-width: 1024px) {
-        .StickerInventory {
-            left: 50%;
-            width: 360px;
-        }
-    }
+  }
+}
 </style>
+
+<script>
+import DragItDude from 'vue-drag-it-dude'
+
+export default {
+  name: 'StickerInventory',
+  components: {DragItDude},
+  data() {
+    return {
+      w: 332,
+      h: 454,
+      x: 0,
+      y: 0,
+      saveX: 0,
+      saveY: 0,
+      inventory: [],
+      sticker: null,
+      visible: false
+    }
+  },
+  mounted() {
+    window.addEventListener('keydown', event => {
+      if (event.keyCode === 27)
+        this.close()
+    })
+  },
+  methods: {
+    async show() {
+      this.visible = true
+      await this.$nextTick()
+      const ch = this.$refs.dialog.clientHeight
+      this.x = (window.innerWidth / 2) - (this.w / 2)
+      this.y = (window.innerHeight / 2) - (ch / 2)
+      await this.getData()
+    },
+    async getData() {
+      const token = this.$store.state.user.token || ''
+      const {status, inventory} = await this.$axios.$get(
+        `/api/sticker/list`,
+        {headers: {'x-access-token': token}}
+      )
+      if (status === 'fail' || !inventory)
+        return
+      this.inventory = inventory
+      this.sticker = this.inventory[0]
+    },
+    view(item) {
+      this.sticker = item
+    },
+    use(item, index) {
+      this.$emit('use', item, index)
+    },
+    close() {
+      this.visible = false
+    },
+    numberWithCommas(x) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    }
+  }
+}
+</script>

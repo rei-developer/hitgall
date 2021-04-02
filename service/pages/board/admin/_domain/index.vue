@@ -482,7 +482,7 @@ export default {
 }
 </script>
 
-<style lang='less' scope>
+<style lang='less' scoped>
 @primary: #EDA7B2;
 
 .board-admin-page {

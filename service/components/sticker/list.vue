@@ -93,7 +93,7 @@
     }
 </script>
 
-<style lang='less' scope>
+<style lang='less' scoped>
     /* Sticker Point Infomation */
     .stickerPointInfo {
         margin-top: .3rem;
