@@ -69,6 +69,13 @@
                 >
                   <img :src='item.randomImageUrl'>
                 </div>
+                <div
+                  class='sticker'
+                  v-viewer
+                  v-if='item.imageUrl'
+                >
+                  <img :src='`https://cdn.hitgall.com/img/${item.imageUrl}`'>
+                </div>
                 <span v-html='item.content'/>
               </div>
             </div>

@@ -34,14 +34,14 @@ const uploadFile = async (key, body, options = null) => {
   })
 }
 
-const makeThumbnail = (width, height, filename, data) => {
+const makeThumbnail = (width, height, fieldname, filename, data) => {
   const thumbnail = sharp(data)
   thumbnail
     .metadata()
     .then(() => thumbnail.resize(width, height).withMetadata().rotate().toBuffer())
-    .then(result => fs.writeFile(`img/thumb/${filename}`, result, async () => {
-      await uploadFile(`img/thumb/${filename}`, result)
-      deleteFile(`img/thumb/${filename}`)
+    .then(result => fs.writeFile(`${fieldname}/thumb/${filename}`, result, async () => {
+      await uploadFile(`${fieldname}/thumb/${filename}`, result)
+      deleteFile(`${fieldname}/thumb/${filename}`)
     }))
 }
 
@@ -72,26 +72,25 @@ module.exports.createVoice = async ctx => {
 
 module.exports.createImage = type => async ctx => {
   const checker = /(.gif|.png|.jpg|.jpeg|.webp)/i.test(ctx.req.file.originalname.toLowerCase())
-  const filename = ctx.req.file.filename
+  const {fieldname, filename} = ctx.req.file
   try {
     if (checker) {
-      fs.readFile(`img/${filename}`, async (err, data) => {
+      fs.readFile(`${fieldname}/${filename}`, async (err, data) => {
         if (err)
           return ctx.body = {
             message: err,
             status: 'fail'
           }
-        await uploadFile(`img/${filename}`, data)
-        makeThumbnail(type === 'topic' ? 100 : 120, 100, filename, data)
-        if (type === 'topic')
-          deleteFile(`img/${filename}`)
+        await uploadFile(`${fieldname}/${filename}`, data)
+        makeThumbnail(type === 'topic' ? 100 : 120, 100, fieldname, filename, data)
+        deleteFile(`${fieldname}/${filename}`)
       })
       ctx.body = {
         filename,
         status: 'ok'
       }
     } else {
-      deleteFile(`img/${filename}`)
+      deleteFile(`${fieldname}/${filename}`)
       ctx.body = {
         message: 'gif, png, jpg, jpeg, webp만 가능',
         status: 'fail'

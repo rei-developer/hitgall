@@ -29,12 +29,11 @@
         <div class='write-box'>
           <textarea
             rows='3'
-            placeholder='이곳에 내용을 입력하세요.'
+            placeholder='이곳에 댓글 내용을 입력하세요.'
             v-model='content'
             v-on:keyup.ctrl.enter='submit'/>
         </div>
         <div class='commit'>
-          <div class='sticker' @click='stickers.hide = false'>스티커</div>
           <div class='submit' @click='submit'>
             <input type='hidden'>
             <span v-if='loading'>
@@ -47,9 +46,15 @@
         </div>
       </div>
       <div class='footer'>
+        <div class='footer-event'>
+          <font-awesome-icon icon='image'/>
+          <div class='input-file'>
+            <input id='replyImage' type='file' @change='onChangeReplyImage'/>
+          </div>
+        </div>
         <button
           :class='[
-            "voice-reply",
+            "footer-event",
             recorder ? "active" : undefined
           ]'
           @click='onClickVoiceReply'
@@ -57,33 +62,50 @@
           <font-awesome-icon icon='microphone-alt'/>
         </button>
         <button
-          class='voice-reply'
+          class='footer-event'
           @click='onClickVoiceReplyPlay'
           v-if='voice'
         >
           <font-awesome-icon icon='play'/>
         </button>
         <button
-          class='voice-reply'
+          class='footer-event'
           @click='onClickVoiceReplyDelete'
           v-if='voice'
         >
           <font-awesome-icon icon='trash'/>
         </button>
-        <div class='sticker'
-             @click='clear'
-             v-if='stickers.sticker'
+        <button
+          class='footer-event'
+          @click='stickers.hide = false'
+        >
+          <font-awesome-icon icon='smile'/>
+        </button>
+        <div
+          class='sticker'
+          @click='clear'
+          v-if='stickers.sticker'
         >
           <div class='item'>
             <div class='image'>
               <img
                 :src='`https://cdn.hitgall.com/sticker/${stickers.sticker.id}/${stickers.select}.${stickers.sticker.ext}`'
-                @error='imageUrlAlt'>
+                :alt='stickers.sticker.name'
+                @error='imageUrlAlt'
+              >
             </div>
             {{ stickers.sticker.name }}
             <div class='remove'>
               <font-awesome-icon icon='times'/>
             </div>
+          </div>
+        </div>
+      </div>
+      <div class='footer' v-if='imagePreview'>
+        <div class='image-preview' @click='onClickImagePreview'>
+          <img :src='imagePreview' alt='이미지 미리보기'>
+          <div class='remove'>
+            <font-awesome-icon icon='times'/>
           </div>
         </div>
       </div>
@@ -108,6 +130,7 @@ export default {
         select: 0,
         hide: true
       },
+      imagePreview: null,
       voice: null,
       recorder: null,
       isRunningVoice: false,
@@ -135,10 +158,10 @@ export default {
         return
       if (!this.stickers.sticker && this.content.trim() === '')
         return
-      let voiceFilename
-      if (this.voice) {
-        voiceFilename = await this.uploadVoiceData(this.voice.audioBlob)
-      }
+      const imageFilename = await this.uploadImageData()
+      const voiceFilename = !!this.voice
+        ? await this.uploadVoiceData(this.voice.audioBlob)
+        : null
       const token = this.$store.state.user.token || ''
       this.loading = true
       let result
@@ -154,6 +177,7 @@ export default {
               id: this.stickers.sticker ? this.stickers.sticker.id : 0,
               select: this.stickers.sticker ? `${this.stickers.select}.${this.stickers.sticker.ext}` : ''
             },
+            image: imageFilename,
             voice: voiceFilename
           },
           {headers: {'x-access-token': token}}
@@ -175,6 +199,7 @@ export default {
               id: this.stickers.sticker ? this.stickers.sticker.id : 0,
               select: this.stickers.sticker ? `${this.stickers.select}.${this.stickers.sticker.ext}` : ''
             },
+            image: imageFilename,
             voice: voiceFilename
           },
           {headers: {'x-access-token': token}}
@@ -211,9 +236,7 @@ export default {
       return new Promise(async resolve => {
         try {
           const stream = await navigator.mediaDevices.getUserMedia({audio: true})
-          console.log('A')
           const mediaRecorder = new MediaRecorder(stream)
-          console.log('B')
           const audioChunks = []
           mediaRecorder.addEventListener('dataavailable', event => audioChunks.push(event.data))
           const start = () => mediaRecorder.start()
@@ -235,6 +258,20 @@ export default {
           this.isRunningVoice = false
         }
       })
+    },
+    onChangeReplyImage(args) {
+      if (args.target.files && args.target.files[0]) {
+        const reader = new FileReader()
+        reader.onload = e => this.imagePreview = e.target.result
+        reader.readAsDataURL(args.target.files[0])
+      }
+    },
+    onClickImagePreview() {
+      const $el = document.getElementById('replyImage')
+      if (!$el)
+        return null
+      $el.value = null
+      this.imagePreview = null
     },
     async onClickVoiceReply() {
       this.isRunningVoice = !this.isRunningVoice
@@ -258,6 +295,36 @@ export default {
     },
     onClickVoiceReplyDelete() {
       this.voice = null
+    },
+    async uploadImageData() {
+      const $el = document.getElementById('replyImage')
+      if (!$el)
+        return null
+      const files = $el.files
+      if (!files || files.length < 1)
+        return null
+      const LIMITS = 21504000
+      const file = files[0]
+      const formData = new FormData()
+      formData.append('type', 'file')
+      formData.append('img', file, file.name)
+      if (!/(.gif|.png|.jpg|.jpeg|.webp)/i.test(file.name)) {
+        this.toast(`이미지 업로드 실패... (gif, png, jpg, jpeg, webp만 가능)`, 'danger')
+        return null
+      } else if (file.size > LIMITS) {
+        this.toast(`이미지 업로드 실패... (20MB 이하만 업로드 가능)`, 'danger')
+        return null
+      }
+      const {status, filename} = await this.$axios.$post(
+        '/api/cloud/topic',
+        formData,
+        {headers: {'content-type': 'multipart/form-data'}}
+      )
+      $el.value = null
+      this.imagePreview = null
+      return status === 'ok'
+        ? filename
+        : null
     },
     async uploadVoiceData(blob) {
       const formData = new FormData()
@@ -351,17 +418,12 @@ article.comment-write {
         margin-left: .25rem;
         text-align: center;
         cursor: pointer;
-        > .sticker {
-          width: 4.5rem;
-          padding: .25rem 0;
-          background-color: #f7f8fa;
-          color: @primary;
-          font-size: .8rem;
-        }
         > .submit {
+          display: flex;
+          align-items: center;
+          justify-content: center;
           width: 4.5rem;
-          height: 45px;
-          line-height: 44px;
+          height: 4.5rem;
           background-color: @primary;
           color: #FFF;
           font-size: 1.5rem;
@@ -371,7 +433,10 @@ article.comment-write {
     }
     > .footer {
       display: flex;
-      > .voice-reply {
+      > .footer-event {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: 32px;
         height: 32px;
         margin: 5px 5px 0 0;
@@ -381,15 +446,25 @@ article.comment-write {
         font-size: 20px;
         &:hover, &:active {background-color: @primary-focus}
         &.active {color: red}
+        > .input-file {
+          position: relative;
+          opacity: 0;
+          cursor: pointer;
+          > input {
+            position: absolute;
+            top: -16px;
+            left: -26px;
+            width: 32px;
+            height: 32px;
+          }
+        }
       }
       > .sticker {
-        margin-top: .5rem;
         > .item {
           display: flex;
           width: fit-content;
-          padding: 3px;
+          margin-top: 5px;
           padding-right: .5rem;
-          border-radius: 500rem;
           background-color: @primary;
           color: #fff;
           font-size: 11px;
@@ -402,10 +477,28 @@ article.comment-write {
             > img {
               width: 2rem;
               height: 2rem;
-              border-radius: 500rem;
             }
           }
           > .remove {margin-left: .5rem}
+        }
+      }
+      > .image-preview {
+        position: relative;
+        width: 100px;
+        height: auto;
+        margin-top: 5px;
+        padding: 2px;
+        border: 1px solid #ccc;
+        > .remove {display: none}
+        &:hover {
+          > img { opacity: .8}
+          > .remove {
+            display: block;
+            position: absolute;
+            top: 0;
+            right: 6px;
+            color: #333;
+          }
         }
       }
     }
