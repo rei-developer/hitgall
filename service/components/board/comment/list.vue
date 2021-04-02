@@ -287,7 +287,7 @@ export default {
         return
       this.$nextTick(() => {
         window.scrollTo({
-          top: this.$refs[`post${this.viewPostId}`][0].offsetTop,
+          top: this.$refs[`post${this.viewPostId}`][0]?.offsetTop,
           behavior: 'smooth'
         })
       })
@@ -295,7 +295,7 @@ export default {
     scrollToCommentList() {
       this.$nextTick(() => {
         window.scrollTo({
-          top: this.$refs.commentList.offsetTop,
+          top: this.$refs.commentList?.offsetTop,
           behavior: 'smooth'
         })
       })

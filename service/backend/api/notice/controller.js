@@ -63,7 +63,9 @@ module.exports.updateNoticeByConfirm = async ctx => {
   if (!user)
     return
   await updateNotice.id(id, user.id, flag)
+  const count = await readNotice.count(user.id)
   ctx.body = {
+    count,
     status: 'ok'
   }
 }

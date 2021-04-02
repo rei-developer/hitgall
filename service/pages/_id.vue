@@ -267,7 +267,7 @@ export default {
         error: true
       }
     if (store.state.user.isLogged)
-      store.commit('user/noticeCount', data.count)
+      store.commit('user/setNoticeCount', data.count)
     const regex = /<p><\/p>/gim
     data.topic.content = data.topic.content.replace(regex, '<p><br></p>')
     // const regex = /<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>/mig
@@ -419,7 +419,7 @@ export default {
     scrollToBoardList() {
       this.$nextTick(() => {
         window.scrollTo({
-          top: this.$refs.boardList.offsetTop,
+          top: this.$refs.boardList?.offsetTop,
           behavior: 'smooth'
         })
       })
