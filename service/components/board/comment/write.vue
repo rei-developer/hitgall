@@ -471,7 +471,7 @@ article.comment-write {
         > .item {
           display: flex;
           width: fit-content;
-          margin-top: 5px;
+          margin: 5px 5px 0 0;
           padding-right: .5rem;
           background-color: @primary;
           color: #fff;
