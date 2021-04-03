@@ -204,7 +204,7 @@ export default {
             content: this.content,
             sticker: {
               id: this.stickers.sticker ? this.stickers.sticker.id : 0,
-              select: this.stickers.sticker ? `${this.stickers.select}.webp` : ''
+              select: this.stickers.sticker ? this.stickers.select : 0
             },
             image: imageFilename,
             voice: voiceFilename

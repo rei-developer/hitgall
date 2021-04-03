@@ -27,7 +27,7 @@
                 {{ item.tagAuthor }}
               </div>
               <div class='sticker' v-if='item.stickerId > 0'>
-                <img :src='`https://cdn.hitgall.com/seal/${item.stickerId}/${item.stickerSelect}`'>
+                <img :src='`https://cdn.hitgall.com/seal/${item.stickerId}/${item.stickerSelect}.webp`'>
               </div>
               <span v-html='item.content'/>
             </div>
