@@ -1,13 +1,14 @@
 <template>
-  <div class='container'>
-    <h2 v-if='error.statusCode === 404'>공사중이거나 없는 페이지입니다.</h2>
-    <h2 v-else>오류가 발생했습니다.<br>
-      <h5>오류코드는 자동으로 기록됩니다.<br><h5>이용에 큰 지장을 초래할경우 관리자에게 알려주세요.</h5></h5>
-    </h2>
-    <div id="error"><img alt="404" src='/404.jpg'></div>
+  <div id='error' class='container'>
+    <h1 v-if='error.statusCode === 404'>404</h1>
+    <h1 v-else>{{ error.statusCode }}</h1>
+    <h6>오류코드는 자동으로 기록됩니다.</h6>
+    <h6>이용에 큰 지장을 초래할경우 관리자에게 알려주세요.</h6>
+    <hr/>
     <nuxt-link to='/'>
-      <b-button variant='primary'>돌아가기</b-button>
+      <b-button size='sm' variant='primary'>돌아가기</b-button>
     </nuxt-link>
+    <div class='img' :style='{backgroundImage: "url(/404.png)"}'/>
   </div>
 </template>
 
@@ -17,10 +18,24 @@ export default {
 }
 </script>
 
-<style scoped>
-
-img.error {
-  width: 70%;
-  height: auto;
+<style lang='less' scoped>
+#error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &.container {
+    border-radius: 2px;
+    background: #FFF;
+    box-shadow: 1px 0 10px rgba(0, 0, 0, .1);
+  }
+  > hr {margin: .5rem 0}
+  > .img {
+    display: flex;
+    width: inherit;
+    height: 50vh;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
 }
 </style>
