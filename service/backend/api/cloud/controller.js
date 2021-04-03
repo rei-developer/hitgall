@@ -1,4 +1,4 @@
-const {promises: fs} = require('fs')
+const fs = require('fs')
 const sharp = require('sharp')
 const S3 = require('aws-sdk/clients/s3')
 const AWS = require('aws-sdk')
@@ -20,9 +20,8 @@ const s3 = new S3({
   secretAccessKey: SECRET_ACCESS_KEY
 })
 
-const checkFile = filename => /(.gif|.png|.jpg|.jpeg|.webp)/i.test(filename.toLowerCase())
-
-const isGIF = filename => /.gif/i.test(filename.toLowerCase())
+const isImageFile = filename => ['gif', 'png', 'jpg', 'jpeg', 'webp'].some(item => filename.toLowerCase().endsWith(item))
+const isGIF = filename => filename.toLowerCase().endsWith('gif')
 
 const createThumb = async (path, input, width = 120, height = 120) => {
   const data = await sharp(input)
@@ -46,15 +45,15 @@ const uploadFile = async (key, body, options = null) => {
 }
 
 const deleteFile = async path => {
-  await fs.unlink(path)
+  await fs.unlinkSync(path)
   console.log(`${path} deleted.`)
 }
 
 module.exports.createVoice = async ctx => {
-  const {fieldname, filename} = ctx.req.file
-  const path = `${fieldname}/${filename}`
+  const {fieldname: field, filename} = ctx.req.file
+  const path = `${field}/${filename}`
   try {
-    const data = await fs.readFile(path)
+    const data = await fs.readFileSync(path)
     await uploadFile(path, data)
     ctx.body = {
       filename,
@@ -69,13 +68,13 @@ module.exports.createVoice = async ctx => {
 }
 
 module.exports.createImage = type => async ctx => {
-  const {fieldname, filename, originalname} = ctx.req.file
+  const {fieldname: field, filename, originalname: origin} = ctx.req.file
   const path = {
-    origin: `${fieldname}/${filename}`,
-    thumb: `${fieldname}/thumb/${filename}`
+    origin: `${field}/${filename}`,
+    thumb: `${field}/thumb/${filename}`
   }
   try {
-    if (!checkFile(originalname)) {
+    if (!isImageFile(origin)) {
       await deleteFile(path.origin)
       ctx.body = {
         message: 'gif, png, jpg, jpeg, webp만 가능',
@@ -83,13 +82,13 @@ module.exports.createImage = type => async ctx => {
       }
       return
     }
-    const input = await fs.readFile(path.origin)
-    if (isGIF(originalname)) {
+    const input = await fs.readFileSync(path.origin)
+    if (isGIF(origin)) {
       await sharp(input, {animated: true})
         .toFile(path.origin)
     }
-    const data = isGIF(originalname)
-      ? await fs.readFile(path.origin)
+    const data = isGIF(origin)
+      ? await fs.readFileSync(path.origin)
       : await sharp(input)
         .metadata()
         .then(({width}) => sharp(input)
