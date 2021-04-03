@@ -15,11 +15,11 @@
       centered>
       정말로 삭제하시겠습니까?
     </b-modal>
-    <StickerView
-      :id='sticker.id'
-      :sticker='sticker.sticker'
-      v-on:close='close'
-      v-if='sticker.id > 0'/>
+    <sticker-view
+      ref='sticker'
+      @close='close'
+      v-if='isStickerViewPopupOpened'
+    />
     <article class='comment-view content-box'>
       <h6>댓글 <span>[{{ numberWithCommas(postsCount) }}]</span></h6>
       <ul v-if='postsCount > 0'>
@@ -140,10 +140,7 @@ export default {
       tempPostReplyId: 0,
       tempPostUpdateId: 0,
       tempPostDeleteId: 0,
-      sticker: {
-        id: 0,
-        sticker: {}
-      },
+      isStickerViewPopupOpened: false,
       loading: false
     }
   },
@@ -251,11 +248,12 @@ export default {
     },
     viewSticker: async function (id) {
       this.$store.commit('setLoading', true)
-      const data = await this.$axios.$get(`/api/sticker/view/${id}`)
-      if (data.status === 'fail')
-        return this.$toast.error(data.message || '오류가 발생했습니다.')
-      this.sticker.id = id
-      this.sticker.sticker = data.sticker
+      const {status, message, sticker} = await this.$axios.$get(`/api/sticker/view/${id}`)
+      if (status === 'fail')
+        return this.$toast.error(message || '오류가 발생했습니다.')
+      this.isStickerViewPopupOpened = true
+      await this.$nextTick()
+      this.$refs.sticker.show(sticker)
       this.$store.commit('setLoading')
     },
     onClickVoiceReplyPlay(voiceUrl) {
@@ -267,8 +265,7 @@ export default {
       audio.play()
     },
     close() {
-      this.sticker.id = 0
-      this.sticker.sticker = {}
+      this.isStickerViewPopupOpened = false
     },
     currentChange(page) {
       this.postsPage = page

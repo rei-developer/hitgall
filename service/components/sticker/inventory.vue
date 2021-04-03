@@ -67,8 +67,8 @@
     }
   }
   > .itemList {
-    height: 315px;
-    margin: 5px 0 0 5px;
+    height: 320px;
+    padding: 5px 0 0 5px;
     overflow-y: scroll;
     > .box-lazy {
       position: relative;
@@ -103,7 +103,7 @@ export default {
   data() {
     return {
       w: 332,
-      h: 454,
+      h: 459,
       x: 0,
       y: 0,
       saveX: 0,
@@ -114,10 +114,7 @@ export default {
     }
   },
   mounted() {
-    window.addEventListener('keydown', event => {
-      if (event.keyCode === 27)
-        this.close()
-    })
+    window.addEventListener('keydown', event => event.key === 'Escape' && this.close())
   },
   methods: {
     async show() {

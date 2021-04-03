@@ -1,7 +1,7 @@
 <template>
   <article class='comment-write'>
     <div>
-      <StickerInventory
+      <sticker-inventory
         ref='sticker'
         @use='use'
         @close='close'
@@ -306,11 +306,7 @@ export default {
     async onClickReplySticker() {
       this.stickers.hide = false
       await this.$nextTick()
-      this.$refs.sticker.show({
-        icon: 'exclamation-triangle',
-        message: '정말로 모든 액션을 삭제할거니?',
-        doEvent: 'sb.removeAll'
-      })
+      this.$refs.sticker.show()
     },
     async uploadImageData() {
       const $el = document.getElementById('replyImage')

@@ -1,9 +1,5 @@
 <template>
   <div>
-    <h5 @click='shuffle'>
-      <font-awesome-icon icon='camera'/>
-      <strong>짤수집</strong>
-    </h5>
     <article class='gallery' v-viewer='{ title: false }'>
       <client-only>
         <waterfall
@@ -11,25 +7,52 @@
           :min-line-gap='100'
           :max-line-gap='235'
           :single-max-width='235'
-          :watch='items'>
+          :watch='items'
+        >
           <waterfall-slot
-            v-for='(item, index) in items'
-            :width='item.width > 0 ? item.width : 235'
-            :height='item.height > 0 ? item.height : 235'
+            move-class='item-move'
+            :width='item.width'
+            :height='item.height'
             :order='index'
-            :key='index'
-            move-class='item-move'>
+            v-for='(item, index) in items' :key='index'
+          >
             <img
-              alt="picture"
               :src='`https://cdn.hitgall.com/img/${item.imageUrl}`'
+              alt='이미지'
               @error='imageUrlAlt'
-              @click='playSound("/se3.mp3")'>
+              @click='playSound("/se3.mp3")'
+            >
           </waterfall-slot>
         </waterfall>
       </client-only>
     </article>
   </div>
 </template>
+
+<style lang='less' scoped>
+@primary: #EDA7B2;
+
+article.gallery {
+  padding: 10px 0 0 10px;
+  border-radius: 2px;
+  background: #FFF;
+  box-shadow: 1px 0 10px rgba(0, 0, 0, .1);
+}
+
+.vue-waterfall-slot {
+  > img {
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+    cursor: pointer;
+    &:hover {opacity: .8}
+  }
+}
+
+.item-move {
+  transition: all .3s cubic-bezier(.55, 0, .1, 1);
+  -webkit-transition: all .3s cubic-bezier(.55, 0, .1, 1);
+}
+</style>
 
 <script>
 export default {
@@ -103,42 +126,3 @@ export default {
   }
 }
 </script>
-
-<style lang='less' scoped>
-@primary: #EDA7B2;
-
-h5 {
-  height: 32px;
-  margin: 0;
-  padding: 3px 6px;
-  border-bottom: 1px solid rgba(0, 0, 0, .2);
-  border-radius: 10px 10px 0 0;
-  background-color: @primary;
-  color: #fff;
-  font-size: 21px;
-  font-weight: 700;
-  text-shadow: #666 1px 1px;
-}
-
-article.gallery {
-  padding: 10px 0 0 10px;
-  background-color: #fff;
-}
-
-.vue-waterfall-slot {
-  > img {
-    width: calc(100% - 10px);
-    height: calc(100% - 10px);
-    cursor: pointer;
-
-    &:hover {
-      opacity: .8
-    }
-  }
-}
-
-.item-move {
-  transition: all .3s cubic-bezier(.55, 0, .1, 1);
-  -webkit-transition: all .3s cubic-bezier(.55, 0, .1, 1);
-}
-</style>

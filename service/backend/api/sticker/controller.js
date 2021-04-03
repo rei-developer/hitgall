@@ -73,7 +73,7 @@ module.exports.getStickers = async ctx => {
     ...body
   } = ctx.request.body
   const page = body.page || 0
-  const limit = body.limit || 20
+  const limit = body.limit || 24
   const tags = body.tags || ''
   const obj = {}
   if (tags !== '전체')

@@ -1,27 +1,20 @@
 <template>
   <div>
-    <StickerView
-      :id='id'
-      :sticker='sticker'
-      v-on:close='close'
-      v-if='id > 0'/>
-    <div class='containerSubject marginTop'>
-      <font-awesome-icon icon='cart-arrow-down'/>
-      힛갤콘샵 ({{ numberWithCommas(count) }})
-      <div class='stickerPointInfo'>
-        <font-awesome-icon icon='gift'/>
-        <span class='bold'>{{ numberWithCommas($store.state.user.point) }}</span>
-      </div>
-    </div>
-    <div class='stickerList'>
+    <sticker-view
+      ref='sticker'
+      @close='close'
+      v-if='isStickerViewPopupOpened'
+    />
+    <div class='h-seal-wrapper'>
       <div
         class='item'
         @click='view(item)'
-        v-for='(item, index) in stickers' :key='index'>
-        <div class='image'>
-          <img :src='`https://cdn.hitgall.com/seal/${item.id}/1.webp`'>
+        v-for='(item, index) in stickers' :key='index'
+      >
+        <div class='preview'>
+          <img :src='`https://cdn.hitgall.com/seal/${item.id}/1.webp`' :alt='item.name'>
         </div>
-        <div class='info'>
+        <div class='info-box'>
           <div class='name'>{{ item.name }}</div>
           <div class='price'>
             <font-awesome-icon icon='gift'/>
@@ -32,16 +25,70 @@
     </div>
     <div class='pagination'>
       <b-pagination
-        :total-rows='count'
-        v-model='page'
         size='sm'
-        pills/>
+        v-model='page'
+        :total-rows='count'
+      />
     </div>
   </div>
 </template>
 
+<style lang='less' scoped>
+@primary: #EDA7B2;
+
+.h-seal-wrapper {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: center;
+  padding: 10px 5px 5px 10px;
+  border-radius: 2px;
+  background: #FFF;
+  box-shadow: 1px 0 10px rgba(0, 0, 0, .1);
+  > .item {
+    display: inline-block;
+    margin: 0 5px 5px 0;
+    border: 1px solid #29313D;
+    &:hover {
+      background: rgba(245, 245, 245, .5);
+      cursor: pointer;
+    }
+    > .preview {
+      width: 102px;
+      height: 102px;
+      > img {padding: 2px}
+    }
+    > .info-box {
+      > .name {
+        width: 102px;
+        height: 23px;
+        line-height: 21px;
+        color: #fff;
+        font-size: 12px;
+        text-align: center;
+        background-color: @primary;
+        overflow: hidden;
+      }
+      > .price {
+        margin: 0 auto;
+        padding-right: 5px;
+        background: #29313D;
+        color: #FFF;
+        font-size: 11px;
+        text-align: right;
+      }
+    }
+  }
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: .5rem;
+}
+</style>
+
 <script>
-import StickerView from '~/components/sticker/view.vue'
+import StickerView from '@/components/sticker/view.vue'
 
 export default {
   components: {StickerView},
@@ -52,23 +99,24 @@ export default {
       sticker: {},
       stickers: [],
       count: 0,
-      page: 1
+      page: 1,
+      isStickerViewPopupOpened: false
     }
   },
   watch: {
-    tags: function () {
+    tags() {
       this.page = 1
       this.getData()
     },
-    page: function () {
+    page() {
       this.getData()
     }
   },
-  mounted() {
-    this.getData()
+  async mounted() {
+    await this.getData()
   },
   methods: {
-    getData: async function () {
+    async getData() {
       this.$store.commit('setLoading', true)
       const data = await this.$axios.$post(
         '/api/sticker/list',
@@ -78,13 +126,13 @@ export default {
       this.count = data.count
       this.$store.commit('setLoading')
     },
-    view(item) {
-      this.id = item.id
-      this.sticker = item
+    async view(item) {
+      this.isStickerViewPopupOpened = true
+      await this.$nextTick()
+      this.$refs.sticker.show(item)
     },
     close() {
-      this.id = 0
-      this.sticker = {}
+      this.isStickerViewPopupOpened = false
     },
     numberWithCommas(x) {
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
@@ -92,60 +140,3 @@ export default {
   }
 }
 </script>
-
-<style lang='less' scoped>
-/* Sticker Point Infomation */
-.stickerPointInfo {
-  margin-top: .3rem;
-  padding: .1rem .5rem;
-  border-radius: 500rem;
-  background: #EAEAEA;
-  color: #29313D;
-  font-size: .75rem;
-  float: right;
-}
-
-.stickerPointInfo span.bold { font-weight: bold }
-
-/* Sticker List */
-.stickerList .item {
-  display: inline-block;
-  margin: .5rem;
-  border-bottom: 1px solid #F5F5F5;
-  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.08);
-  background: rgba(255, 255, 255, .5);
-}
-
-.stickerList .item:hover {
-  background: rgba(245, 245, 245, .5);
-  cursor: pointer;
-}
-
-.stickerList .item .image img {
-  width: 100px;
-  height: 100px;
-  margin: .25rem;
-  margin-bottom: 0;
-  border-radius: .5rem;
-}
-
-.stickerList .item .info { padding-bottom: .25rem }
-
-.stickerList .item .info .name {
-  color: #409EFF;
-  font-size: .8rem;
-  font-weight: bold;
-  text-align: center;
-}
-
-.stickerList .item .info .price {
-  width: fit-content;
-  margin: 0 auto;
-  padding: 0 .5rem .1rem .5rem;
-  border-radius: 500rem;
-  background: #29313D;
-  color: #FFF;
-  font-size: .8rem;
-  text-align: center;
-}
-</style>

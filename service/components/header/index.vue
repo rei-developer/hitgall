@@ -65,8 +65,8 @@
             갤러리
           </li>
         </nuxt-link>
-        <nuxt-link to='/sticker'>
-          <li v-shortkey.once='["t"]' @shortkey='move("/sticker")' @click='forceUpdate'>
+        <nuxt-link to='/seal'>
+          <li v-shortkey.once='["t"]' @shortkey='move("/seal")' @click='forceUpdate'>
             <font-awesome-icon icon='smile'/>
             힛갤콘
           </li>
