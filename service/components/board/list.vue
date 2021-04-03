@@ -518,29 +518,28 @@ export default {
 article.topic-list {
   > a {
     > .loading-bar {
-      height: 36px;
-      border-bottom: 1px solid rgba(0, 0, 0, .1);
+      height: 32px;
       background-color: @primary;
       position: relative;
 
       > .subject {
         position: absolute;
-        top: 1px;
+        top: 3px;
         left: .5rem;
         color: #fff;
-        font-size: 20px;
+        font-size: 16px;
         font-weight: bold;
         word-break: break-all;
       }
 
       > .counter {
         position: absolute;
-        top: 8px;
+        top: 6px;
         right: 6px;
         padding: 0 10px 1px;
-        color: @primary;
+        color: #29313D;
         font-size: 12px;
-        //border-radius: 7px;
+        border-radius: 3px;
         background-color: #fff;
 
         > strong {

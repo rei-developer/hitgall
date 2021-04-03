@@ -3,7 +3,7 @@
     <section>
       <Widget
         type='magazine'
-        name='연예 갤러리 인기글'
+        name='연예인 갤러리 인기글'
         :data='girlImageList'
       />
       <Widget
@@ -16,7 +16,7 @@
       <Widget
         :data='girlList'
         icon='star'
-        name='연예 갤러리'
+        name='연예인 갤러리'
       />
       <Widget
         :data='otherList'
@@ -31,16 +31,16 @@
 section {
   display: flex;
   justify-content: space-between;
-  > .content-box {width: calc((900px - 1.5rem) / 2)}
+  > .content-box {
+    width: calc((900px - 1rem) / 2);
+    margin-bottom: .5rem;
+  }
 }
 
 @media (max-width: 1199px) {
   section {
     flex-direction: column;
-    > .content-box {
-      width: 100vw;
-      &:not(:last-child) {margin-bottom: 1rem}
-    }
+    > .content-box {width: 100vw}
   }
 }
 </style>

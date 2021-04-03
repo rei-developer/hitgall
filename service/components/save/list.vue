@@ -330,8 +330,6 @@ export default {
 article.topic-list {
   > .loading-bar {
     height: 32px;
-    border-bottom: 1px solid rgba(0, 0, 0, .2);
-    //border-radius: 10px 10px 0 0;
     background-color: @primary;
     position: relative;
 
