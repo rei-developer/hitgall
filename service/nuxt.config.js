@@ -65,7 +65,8 @@ module.exports = {
     [
       '@nuxtjs/google-analytics',
       {
-        id: 'UA-122960304-1'
+        id: 'UA-122960304-1',
+        onPageLoad: true
       }
     ]
   ],
