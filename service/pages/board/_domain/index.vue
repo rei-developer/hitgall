@@ -1,5 +1,6 @@
 <template>
   <div>
+    <adsbygoogle />
     <BoardInfo :domain='domain'/>
     <BoardList :id='0' :purePage='$route.query.page || 1' :domain='domain'/>
   </div>

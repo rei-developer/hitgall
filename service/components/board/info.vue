@@ -1,34 +1,41 @@
 <template>
-  <div class='desktop-only content-box'>
-    <div class='board-title'>{{ board.name }} 갤러리</div>
-    <div class='board-info'>
-      <div class='image'>
-        <img alt='thumb' :src='`https://cdn.hitgall.com/img/thumb/${board.imageUrl}`' @error='imageUrlAlt'>
-      </div>
-      <div class='description'>
-        {{ board.description }}
-      </div>
-      <div class='manager'>
-        <div class='label'>
-          <div class='rows master'>· 관리자</div>
-          <div class='rows managers' v-if='managers.length > 0'>· 부관리자</div>
-        </div>
-        <div class='content'>
-          <div class='rows master'>
-            <img class='icon' :src='`/user11.png`' alt='icon'>
-            {{ board.masterName }}
+  <div>
+    <b-overlay
+      :show='!board.name'
+      rounded='sm'
+    >
+      <div class='desktop-only content-box'>
+        <div class='board-title'>{{ board.name }} 갤러리</div>
+        <div class='board-info'>
+          <div class='image'>
+            <img alt='thumb' :src='`https://cdn.hitgall.com/img/thumb/${board.imageUrl}`' @error='imageUrlAlt'>
           </div>
-          <div class='rows managers custom-scroll-box' v-if='managers.length > 0'>
-            <ul>
-              <li v-for='(item, index) in managers' :key='index'>
-                <img class='icon' :src='`/user1${item.level || 0}.png`' alt=''>
-                {{ item.nickname }}
-              </li>
-            </ul>
+          <div class='description'>
+            {{ board.description }}
+          </div>
+          <div class='manager'>
+            <div class='label'>
+              <div class='rows master'>· 관리자</div>
+              <div class='rows managers' v-if='managers.length > 0'>· 부관리자</div>
+            </div>
+            <div class='content'>
+              <div class='rows master'>
+                <img class='icon' :src='`/user11.png`' alt='icon'>
+                {{ board.masterName }}
+              </div>
+              <div class='rows managers custom-scroll-box' v-if='managers.length > 0'>
+                <ul>
+                  <li v-for='(item, index) in managers' :key='index'>
+                    <img class='icon' :src='`/user1${item.level || 0}.png`' alt=''>
+                    {{ item.nickname }}
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </b-overlay>
   </div>
 </template>
 

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <adsbygoogle />
     <section>
       <Widget
         type='magazine'
@@ -31,6 +32,7 @@
 section {
   display: flex;
   justify-content: space-between;
+  margin-top: 1rem;
   > .content-box {
     width: calc((900px - 1rem) / 2);
     margin-bottom: .5rem;

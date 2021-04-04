@@ -88,12 +88,12 @@ module.exports = {
         version: 3
       }
     ],
-    // ["@nuxtjs/google-adsense"],
+    ["@nuxtjs/google-adsense"],
     ['@nuxtjs/moment', ['ko']]
   ],
-  // "google-adsense": {
-  //   id: "ca-pub-4618344904272976"
-  // },
+  "google-adsense": {
+    id: "ca-pub-8655534587792573"
+  },
   fontawesome: {
     imports: [
       {
