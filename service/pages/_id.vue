@@ -46,7 +46,8 @@
         <b-form-datepicker v-model='blindBlockDate'/>
       </b-form-group>
     </b-modal>
-    <b-form-group class='mb-3'>
+    <adsbygoogle />
+    <b-form-group class='mt-3 mb-3'>
       <nuxt-link :to='`/board/${topic.boardDomain}`'>
         <b-button size='sm' variant='primary'>
           <font-awesome-icon icon='file-alt'/>
