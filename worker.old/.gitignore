@@ -80,7 +80,7 @@ dist
 # IDE / Editor
 .idea
 
-# Service worker
+# Service worker.old
 sw.*
 
 # macOS

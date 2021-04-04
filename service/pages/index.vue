@@ -1,6 +1,6 @@
 <template>
   <div>
-    <adsbygoogle />
+    <adsbygoogle ad-format='horizontal'/>
     <section>
       <Widget
         type='magazine'

@@ -1,66 +1,43 @@
-const schedule = require('node-schedule')
-const readWorker = require('./src/database/worker/read')
+(() => {
+  const schedule = require('node-schedule')
+  const Worker = require('./src/Worker')
+  const DOMAIN = 'https://torrentsee46.com'
+  const TIMEOUT = 3000
+  const BOARD_LIST = require('./board-list')
+  global.isRunning = false
+  // const boardList = BOARD_LIST.sort(() => Math.random() - Math.random())
+  new Worker(DOMAIN, TIMEOUT, BOARD_LIST)
+  schedule.scheduleJob('0 0 */4 * * *', () => {
+    if (!global.isRunning)
+      new Worker(DOMAIN, TIMEOUT, BOARD_LIST)
+  })
+})()
 
-const reserved = ({ path, subject, type, label, board, extendedLink, maxPage, limitVotes, timeout, timer }) => {
-    console.log(`[예약] ${subject} - ${timer}`)
-    schedule.scheduleJob(timer, () => {
-        // const cron = require(`./src/crawler/${path}`)
-        // cron({
-        //     type,
-        //     label,
-        //     board,
-        //     extendedLink,
-        //     maxPage,
-        //     limitVotes,
-        //     timeout
-        // })
+/*
+const {getSaveList} = require('./src/database/save/read')
+const {putSaveImage} = require('./src/database/save/create')
+
+const putImage = async () => {
+    const data = await getSaveList()
+    data.map(item => {
+        const content = item.content
+        const match = content.match(/\[img src=\"\/img\/(.*?)\.(.*?)\"\]/g)
+        if (match) {
+            match.map(async (i, imageIdx) => {
+                const saveIdx = item.idx
+                const uuid = i
+                    .replace(/\[img src=\"\/img\//g, '')
+                    .replace(/\.(.*?)\"\]/g, '')
+                await putSaveImage({
+                    saveIdx,
+                    imageIdx,
+                    uuid
+                })
+                console.info(`${item.title} - ${uuid}`)
+            })
+        }
     })
 }
 
-(async () => {
-    const workers = await readWorker()
-    workers.map(item => {
-        reserved({
-            path: item.path,
-            subject: item.subject,
-            type: item.type,
-            label: item.label,
-            board: item.board,
-            extendedLink: item.extendedLink,
-            maxPage: item.maxPage,
-            timeout: item.timeout,
-            timer: item.timer
-        })
-    })
-    console.log(`I'm working start!!`)
-})()
-
-// const cron = require(`./src/crawler/fmkorea`)
-// cron({
-//     type: 'FM',
-//     label: '포텐터짐',
-//     board: 'best',
-//     extendedLink: '&sort_index=popular',
-//     maxPage: 3,
-//     timeout: 15000
-// })
-
-// const cron = require(`./src/crawler/dcinside`)
-// cron({
-//     type: 'DC',
-//     label: '야갤',
-//     board: 'baseball_new9',
-//     extendedLink: '&exception_mode=recommend',
-//     maxPage: 3,
-//     limitVotes: 2000,
-//     timeout: 15000
-// })
-
-// const cron = require(`./src/crawler/theqoo`)
-// cron({
-//     type: 'TQ',
-//     label: 'HOT',
-//     board: 'hot',
-//     maxPage: 3,
-//     timeout: 5000
-// })
+putImage()
+*/

@@ -44,7 +44,7 @@ module.exports = {
    */
   plugins: [
     {src: '@/plugins/event-bus.js'},
-    {src: '@/plugins/service-worker.js', mode: 'client'},
+    {src: '@/plugins/service-worker.old.js', mode: 'client'},
     // { src: '@/plugins/socket.io.js' },
     {src: '@/plugins/toast.js', mode: 'client'},
     {src: '@/plugins/v-viewer.js', mode: 'client'},
