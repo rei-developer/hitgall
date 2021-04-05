@@ -3,4 +3,7 @@ Disallow: /
 
 # Search
 User-agent: Googlebot
-Allow : / 
+User-Agent : Yeti
+User-Agent : Daumoa
+User-agent: Mediapartners-Google
+Allow : /
