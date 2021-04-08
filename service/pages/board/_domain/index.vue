@@ -1,6 +1,5 @@
 <template>
   <div>
-    <adsbygoogle ad-format='horizontal'/>
     <BoardInfo :domain='domain'/>
     <BoardList :id='0' :purePage='$route.query.page || 1' :domain='domain'/>
   </div>

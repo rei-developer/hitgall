@@ -13,7 +13,7 @@ const sticker = require('./sticker')
 const topic = require('./topic')
 const save = require('./save')
 
-const VERSION = 354
+const VERSION = 400
 
 const app = new Router()
 const {nsfw} = new client()

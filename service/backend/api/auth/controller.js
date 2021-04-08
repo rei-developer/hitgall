@@ -229,11 +229,6 @@ exports.updateUserByProfileImage = async ctx => {
   const {url} = ctx.request.body
   if (url === '')
     return
-  if (/imgur/.test(url))
-    return ctx.body = {
-      message: '최신 버전으로 업데이트하세요.',
-      status: 'fail'
-    }
   const user = await User.getUser(ctx.get('x-access-token'))
   if (!user)
     return
