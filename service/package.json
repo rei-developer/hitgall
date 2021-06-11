@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon backend --watch backend",
     "build": "nuxt build",
-    "start": "cross-env NODE_ENV=production pm2 start backend --name 'BAEKEND' -i max --node-args='--max-old-space-size=4096 --prof'",
+    "start": "cross-env NODE_ENV=production pm2 start backend --name 'BAEKEND' -i max --node-args='--max-old-space-size=20480 --prof'",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "analyze": "nuxt build --analyze"
