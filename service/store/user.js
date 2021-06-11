@@ -46,6 +46,7 @@ export const mutations = {
   setUpPoint: (state, point) => state.point += point,
   signOut: state => {
     state.token = ''
+    state.isAdmin = false
     state.isLogged = false
     localStorage.removeItem('_token')
   }
