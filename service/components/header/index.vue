@@ -71,12 +71,12 @@
             힛갤콘
           </li>
         </nuxt-link>
-        <nuxt-link to='/help'>
+        <!-- <nuxt-link to='/help'>
           <li>
             <font-awesome-icon icon='question-circle'/>
             도움말
           </li>
-        </nuxt-link>
+        </nuxt-link> -->
       </ul>
     </nav>
     <nav class='mobile-only fixed'>
@@ -92,12 +92,12 @@
             갤러리
           </li>
         </nuxt-link>
-        <nuxt-link to='/help'>
+        <!-- <nuxt-link to='/help'>
           <li>
             <font-awesome-icon icon='question-circle'/>
             도움말
           </li>
-        </nuxt-link>
+        </nuxt-link> -->
         <nuxt-link class='right' :to='$store.state.user.isLogged ? "/user/edit" : "/signin"'>
           <li v-if='$store.state.user.isLogged'>
             <font-awesome-icon icon='cog'/>
