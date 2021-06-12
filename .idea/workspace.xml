@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="834b01fe-2b67-436b-9738-6787482c69a0" name="디폴트 변경 목록" comment="async/await">
+    <list default="true" id="834b01fe-2b67-436b-9738-6787482c69a0" name="디폴트 변경 목록" comment="퍼블리싱 수정">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/service/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/pages/board/_domain/write.vue" beforeDir="false" afterPath="$PROJECT_DIR$/service/pages/board/_domain/write.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/pages/konomi.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/service/yarn.lock" afterDir="false" />
     </list>
+    <list id="ea6c81b3-3d61-4a5e-be64-89b96e1c6646" name="mashiroo에 따른 변경 내용" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -41,6 +38,8 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="javascript.nodejs.core.library.configured.version" value="14.5.0" />
+    <property name="javascript.nodejs.core.library.typings.version" value="14.14.37" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -49,9 +48,16 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Code With Me" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2020.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
     <property name="vuejs.nuxt.types-notification-shown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\eunna\Documents\GitHub\hitgall\service\static" />
+      <recent name="C:\Users\eunna\Documents\GitHub\hitgall\service\pages\seal" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -112,268 +118,362 @@
       <workItem from="1617114426531" duration="2164000" />
       <workItem from="1617119084537" duration="67000" />
       <workItem from="1617195731382" duration="662000" />
-      <workItem from="1617238299284" duration="9146000" />
+      <workItem from="1617238299284" duration="12732000" />
+      <workItem from="1617277177270" duration="15544000" />
+      <workItem from="1617323957595" duration="53838000" />
+      <workItem from="1617419140297" duration="23401000" />
+      <workItem from="1617502624021" duration="6595000" />
+      <workItem from="1617883802407" duration="2980000" />
+      <workItem from="1617891760358" duration="862000" />
+      <workItem from="1618494995302" duration="773000" />
+      <workItem from="1623418854487" duration="89000" />
+      <workItem from="1623423301980" duration="1510000" />
+      <workItem from="1623456584587" duration="143000" />
     </task>
-    <task id="LOCAL-00001" summary="노무현 갤러리">
-      <created>1609160167955</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
+    <task id="LOCAL-00046" summary="보이스 메시지 테스트">
+      <created>1617296097782</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
       <option name="project" value="LOCAL" />
-      <updated>1609160167955</updated>
+      <updated>1617296097782</updated>
     </task>
-    <task id="LOCAL-00002" summary="시루와 대화하자">
-      <created>1611755182976</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
+    <task id="LOCAL-00047" summary="보이스 메시지 테스트">
+      <created>1617296247024</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
       <option name="project" value="LOCAL" />
-      <updated>1611755182976</updated>
+      <updated>1617296247024</updated>
     </task>
-    <task id="LOCAL-00003" summary="시루와 대화하자">
-      <created>1611755610454</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
+    <task id="LOCAL-00048" summary="보이스 메시지 테스트">
+      <created>1617296385750</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
       <option name="project" value="LOCAL" />
-      <updated>1611755610454</updated>
+      <updated>1617296385750</updated>
     </task>
-    <task id="LOCAL-00004" summary="좀 더 빠르게 하자">
-      <created>1611755714195</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
+    <task id="LOCAL-00049" summary="보이스 메시지 테스트">
+      <created>1617296469657</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
       <option name="project" value="LOCAL" />
-      <updated>1611755714195</updated>
+      <updated>1617296469657</updated>
     </task>
-    <task id="LOCAL-00005" summary="좀 더 빠르게 하자">
-      <created>1611756908692</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
+    <task id="LOCAL-00050" summary="보이스 메시지 테스트">
+      <created>1617296727039</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
       <option name="project" value="LOCAL" />
-      <updated>1611756908692</updated>
+      <updated>1617296727039</updated>
     </task>
-    <task id="LOCAL-00006" summary="인공지능">
-      <created>1611843497757</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
+    <task id="LOCAL-00051" summary="보이스 메시지 테스트">
+      <created>1617296957005</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
       <option name="project" value="LOCAL" />
-      <updated>1611843497757</updated>
+      <updated>1617296957005</updated>
     </task>
-    <task id="LOCAL-00007" summary="인공지능">
-      <created>1611846480532</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
+    <task id="LOCAL-00052" summary="보이스 메시지 테스트">
+      <created>1617297192727</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
       <option name="project" value="LOCAL" />
-      <updated>1611846480532</updated>
+      <updated>1617297192727</updated>
     </task>
-    <task id="LOCAL-00008" summary="인공지능">
-      <created>1611847113866</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
+    <task id="LOCAL-00053" summary="이미지 업로드 버그 해결">
+      <created>1617324134513</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
       <option name="project" value="LOCAL" />
-      <updated>1611847113866</updated>
+      <updated>1617324134513</updated>
     </task>
-    <task id="LOCAL-00009" summary="인공지능">
-      <created>1611847125585</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
+    <task id="LOCAL-00054" summary="이미지 삭제 버그 해결">
+      <created>1617324499649</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
       <option name="project" value="LOCAL" />
-      <updated>1611847125585</updated>
+      <updated>1617324499649</updated>
     </task>
-    <task id="LOCAL-00010" summary="인공지능">
-      <created>1611847171033</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
+    <task id="LOCAL-00055" summary="이미지 삭제 버그 해결">
+      <created>1617324977329</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
       <option name="project" value="LOCAL" />
-      <updated>1611847171033</updated>
+      <updated>1617324977329</updated>
     </task>
-    <task id="LOCAL-00011" summary="인공지능">
-      <created>1611847389955</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
+    <task id="LOCAL-00056" summary="보이스 메시지 기능 개발 완료">
+      <created>1617333114117</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
       <option name="project" value="LOCAL" />
-      <updated>1611847389955</updated>
+      <updated>1617333114117</updated>
     </task>
-    <task id="LOCAL-00012" summary="인공짤 수정">
-      <created>1611935124149</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
+    <task id="LOCAL-00057" summary="보이스 메시지 BLOB FORMAT =&gt; MPEG로 변경">
+      <created>1617334707975</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
       <option name="project" value="LOCAL" />
-      <updated>1611935124149</updated>
+      <updated>1617334707975</updated>
     </task>
-    <task id="LOCAL-00013" summary="서비스 수정">
-      <created>1611945748303</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
+    <task id="LOCAL-00058" summary="보이스 메시지 오류 수정">
+      <created>1617335685717</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
       <option name="project" value="LOCAL" />
-      <updated>1611945748303</updated>
+      <updated>1617335685717</updated>
     </task>
-    <task id="LOCAL-00014" summary="서비스 수정">
-      <created>1611945932631</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
+    <task id="LOCAL-00059" summary="이미지 업로드 로직 수정">
+      <created>1617344776221</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
       <option name="project" value="LOCAL" />
-      <updated>1611945932631</updated>
+      <updated>1617344776221</updated>
     </task>
-    <task id="LOCAL-00015" summary="서비스 수정">
-      <created>1611980903022</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
+    <task id="LOCAL-00060" summary="댓글 이미지 업로드 기능 추가 및 댓글 이벤트 메뉴 정리">
+      <created>1617350631862</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
       <option name="project" value="LOCAL" />
-      <updated>1611980903022</updated>
+      <updated>1617350631862</updated>
     </task>
-    <task id="LOCAL-00016" summary="서비스 수정">
-      <created>1611981346652</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
+    <task id="LOCAL-00061" summary="올드 서비스 제거 및 toast 변경">
+      <created>1617351861761</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
       <option name="project" value="LOCAL" />
-      <updated>1611981346652</updated>
+      <updated>1617351861761</updated>
     </task>
-    <task id="LOCAL-00017" summary="서비스 수정">
-      <created>1611981396269</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
+    <task id="LOCAL-00062" summary="사이드바 로직 수정">
+      <created>1617354028870</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
       <option name="project" value="LOCAL" />
-      <updated>1611981396269</updated>
+      <updated>1617354028870</updated>
     </task>
-    <task id="LOCAL-00018" summary="애미년을 찾아서 개발">
-      <created>1611995948468</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
+    <task id="LOCAL-00063" summary="힛갤콘 인벤토리 로직 수정">
+      <created>1617357058372</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
       <option name="project" value="LOCAL" />
-      <updated>1611995948468</updated>
+      <updated>1617357058372</updated>
     </task>
-    <task id="LOCAL-00019" summary="미연시 테스트">
-      <created>1612008254387</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
+    <task id="LOCAL-00064" summary="window 오류 해결">
+      <created>1617357367792</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
       <option name="project" value="LOCAL" />
-      <updated>1612008254387</updated>
+      <updated>1617357367792</updated>
     </task>
-    <task id="LOCAL-00020" summary="미연시 테스트">
-      <created>1612008585317</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
+    <task id="LOCAL-00065" summary="window 오류 해결">
+      <created>1617357534467</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
       <option name="project" value="LOCAL" />
-      <updated>1612008585317</updated>
+      <updated>1617357534467</updated>
     </task>
-    <task id="LOCAL-00021" summary="미연시 테스트">
-      <created>1612008698912</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
+    <task id="LOCAL-00066" summary="스타일링 버그 수정">
+      <created>1617358504090</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
       <option name="project" value="LOCAL" />
-      <updated>1612008698912</updated>
+      <updated>1617358504090</updated>
     </task>
-    <task id="LOCAL-00022" summary="노벨 추가">
-      <created>1612090497761</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
+    <task id="LOCAL-00067" summary="스타일링 버그 수정">
+      <created>1617358708254</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
       <option name="project" value="LOCAL" />
-      <updated>1612090497761</updated>
+      <updated>1617358708254</updated>
     </task>
-    <task id="LOCAL-00023" summary="노벨 제거 및 사이트 CSS 수정">
-      <created>1612190170449</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
+    <task id="LOCAL-00068" summary="스타일링 버그 수정">
+      <created>1617359044935</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
       <option name="project" value="LOCAL" />
-      <updated>1612190170449</updated>
+      <updated>1617359044935</updated>
     </task>
-    <task id="LOCAL-00024" summary="위젯 버그 수정">
-      <created>1612571870971</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
+    <task id="LOCAL-00069" summary="스티커 업데이트">
+      <created>1617364426394</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
       <option name="project" value="LOCAL" />
-      <updated>1612571870971</updated>
+      <updated>1617364426394</updated>
     </task>
-    <task id="LOCAL-00025" summary="원복">
-      <created>1614682738561</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
+    <task id="LOCAL-00070" summary="스티커 업데이트">
+      <created>1617364524610</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
       <option name="project" value="LOCAL" />
-      <updated>1614682738561</updated>
+      <updated>1617364524610</updated>
     </task>
-    <task id="LOCAL-00026" summary="임시 CDN 설정">
-      <created>1614682922202</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
+    <task id="LOCAL-00071" summary="스티커 업데이트">
+      <created>1617364641030</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
       <option name="project" value="LOCAL" />
-      <updated>1614682922202</updated>
+      <updated>1617364641030</updated>
     </task>
-    <task id="LOCAL-00027" summary="임시 CDN 설정">
-      <created>1614683599753</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
+    <task id="LOCAL-00072" summary="스티커 업데이트">
+      <created>1617364795988</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
       <option name="project" value="LOCAL" />
-      <updated>1614683599753</updated>
+      <updated>1617364795988</updated>
     </task>
-    <task id="LOCAL-00028" summary="임시 CDN 설정">
-      <created>1614684142091</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
+    <task id="LOCAL-00073" summary="스티커 업데이트">
+      <created>1617364893391</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
       <option name="project" value="LOCAL" />
-      <updated>1614684142091</updated>
+      <updated>1617364893391</updated>
     </task>
-    <task id="LOCAL-00029" summary="임시 CDN 설정">
-      <created>1614684338275</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
+    <task id="LOCAL-00074" summary="스타일링 버그 수정">
+      <created>1617365995569</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
       <option name="project" value="LOCAL" />
-      <updated>1614684338275</updated>
+      <updated>1617365995569</updated>
     </task>
-    <task id="LOCAL-00030" summary="와사비 버킷 업데이트">
-      <created>1617029567040</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
+    <task id="LOCAL-00075" summary="알림 개선">
+      <created>1617369363233</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
       <option name="project" value="LOCAL" />
-      <updated>1617029567040</updated>
+      <updated>1617369363233</updated>
     </task>
-    <task id="LOCAL-00031" summary="와사비 버킷 업데이트 =&gt; CDN 주소 변경">
-      <created>1617029920380</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
+    <task id="LOCAL-00076" summary="S3 파일 업로드 로직 개선 및 WEBP 지원">
+      <created>1617377422241</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
       <option name="project" value="LOCAL" />
-      <updated>1617029920380</updated>
+      <updated>1617377422241</updated>
     </task>
-    <task id="LOCAL-00032" summary="글 삭제시 버킷 내 오브젝트 DELETE 처리">
-      <created>1617031834673</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
+    <task id="LOCAL-00077" summary="랜덤 이미지 제거">
+      <created>1617379697242</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
       <option name="project" value="LOCAL" />
-      <updated>1617031834673</updated>
+      <updated>1617379697242</updated>
     </task>
-    <task id="LOCAL-00033" summary="async/await">
-      <created>1617118236570</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
+    <task id="LOCAL-00078" summary="모든 스티커 WEBP 변환 완료">
+      <created>1617385803886</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
       <option name="project" value="LOCAL" />
-      <updated>1617118236570</updated>
+      <updated>1617385803886</updated>
     </task>
-    <task id="LOCAL-00034" summary="스티커 복구중">
-      <created>1617241102694</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
+    <task id="LOCAL-00079" summary="GIF =&gt; WEBP 수정">
+      <created>1617390726731</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
       <option name="project" value="LOCAL" />
-      <updated>1617241102694</updated>
+      <updated>1617390726731</updated>
     </task>
-    <task id="LOCAL-00035" summary="갤러리 신청 및 웹노벨 메뉴 삭제">
-      <created>1617241342608</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
+    <task id="LOCAL-00080" summary="GIF =&gt; WEBP 수정 완료">
+      <created>1617391252206</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
       <option name="project" value="LOCAL" />
-      <updated>1617241342608</updated>
+      <updated>1617391252206</updated>
     </task>
-    <task id="LOCAL-00036" summary="스티커 복구중">
-      <created>1617247701451</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
+    <task id="LOCAL-00081" summary="파일 업로드 로직 개선 및 UPLOAD_MAX_SIZE_MB 확장변수 추가">
+      <created>1617424263306</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
       <option name="project" value="LOCAL" />
-      <updated>1617247701451</updated>
+      <updated>1617424263307</updated>
     </task>
-    <task id="LOCAL-00037" summary="스티커 복구 완료">
-      <created>1617249983027</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
+    <task id="LOCAL-00082" summary="에러 페이지 수정">
+      <created>1617426479043</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
       <option name="project" value="LOCAL" />
-      <updated>1617249983027</updated>
+      <updated>1617426479043</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00083" summary="힛갤콘 정리">
+      <created>1617444912619</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1617444912619</updated>
+    </task>
+    <task id="LOCAL-00084" summary="파일 정리">
+      <created>1617445202644</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1617445202645</updated>
+    </task>
+    <task id="LOCAL-00085" summary="힛갤콘 확장자 제거">
+      <created>1617453579156</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1617453579156</updated>
+    </task>
+    <task id="LOCAL-00086" summary="퍼블리싱 수정">
+      <created>1617460809064</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1617460809064</updated>
+    </task>
+    <task id="LOCAL-00087" summary="AD">
+      <created>1617510367458</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1617510367458</updated>
+    </task>
+    <task id="LOCAL-00088" summary="AD 스타일 수정 및 worker 삭제">
+      <created>1617539083057</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1617539083057</updated>
+    </task>
+    <task id="LOCAL-00089" summary="서비스 워커 수정">
+      <created>1617539227148</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1617539227148</updated>
+    </task>
+    <task id="LOCAL-00090" summary="자동광고 삽입을 위한 애드센스 컴포넌트 제거">
+      <created>1617883964776</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1617883964776</updated>
+    </task>
+    <task id="LOCAL-00091" summary="ads.txt">
+      <created>1617884536567</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1617884536567</updated>
+    </task>
+    <task id="LOCAL-00092" summary="ads.txt">
+      <created>1617884561827</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1617884561827</updated>
+    </task>
+    <task id="LOCAL-00093" summary="메모리 상한선 늘림">
+      <created>1623423394038</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1623423394038</updated>
+    </task>
+    <task id="LOCAL-00094" summary="이미지 용량 상한선 늘림">
+      <created>1623425450012</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1623425450012</updated>
+    </task>
+    <option name="localTasksCounter" value="95" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -398,26 +498,31 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="노무현 갤러리" />
-    <MESSAGE value="시루와 대화하자" />
-    <MESSAGE value="좀 더 빠르게 하자" />
-    <MESSAGE value="인공지능" />
-    <MESSAGE value="인공짤 수정" />
-    <MESSAGE value="서비스 수정" />
-    <MESSAGE value="애미년을 찾아서 개발" />
-    <MESSAGE value="미연시 테스트" />
-    <MESSAGE value="노벨 추가" />
-    <MESSAGE value="노벨 제거 및 사이트 CSS 수정" />
-    <MESSAGE value="위젯 버그 수정" />
-    <MESSAGE value="원복" />
-    <MESSAGE value="임시 CDN 설정" />
-    <MESSAGE value="와사비 버킷 업데이트" />
-    <MESSAGE value="와사비 버킷 업데이트 =&gt; CDN 주소 변경" />
-    <MESSAGE value="글 삭제시 버킷 내 오브젝트 DELETE 처리" />
-    <MESSAGE value="async/await" />
-    <MESSAGE value="갤러리 신청 및 웹노벨 메뉴 삭제" />
-    <MESSAGE value="스티커 복구중" />
-    <MESSAGE value="스티커 복구 완료" />
-    <option name="LAST_COMMIT_MESSAGE" value="스티커 복구 완료" />
+    <MESSAGE value="올드 서비스 제거 및 toast 변경" />
+    <MESSAGE value="사이드바 로직 수정" />
+    <MESSAGE value="힛갤콘 인벤토리 로직 수정" />
+    <MESSAGE value="window 오류 해결" />
+    <MESSAGE value="스티커 업데이트" />
+    <MESSAGE value="스타일링 버그 수정" />
+    <MESSAGE value="알림 개선" />
+    <MESSAGE value="S3 파일 업로드 로직 개선 및 WEBP 지원" />
+    <MESSAGE value="랜덤 이미지 제거" />
+    <MESSAGE value="모든 스티커 WEBP 변환 완료" />
+    <MESSAGE value="GIF =&gt; WEBP 수정" />
+    <MESSAGE value="GIF =&gt; WEBP 수정 완료" />
+    <MESSAGE value="파일 업로드 로직 개선 및 UPLOAD_MAX_SIZE_MB 확장변수 추가" />
+    <MESSAGE value="에러 페이지 수정" />
+    <MESSAGE value="힛갤콘 정리" />
+    <MESSAGE value="파일 정리" />
+    <MESSAGE value="힛갤콘 확장자 제거" />
+    <MESSAGE value="퍼블리싱 수정" />
+    <MESSAGE value="AD" />
+    <MESSAGE value="AD 스타일 수정 및 worker 삭제" />
+    <MESSAGE value="서비스 워커 수정" />
+    <MESSAGE value="자동광고 삽입을 위한 애드센스 컴포넌트 제거" />
+    <MESSAGE value="ads.txt" />
+    <MESSAGE value="메모리 상한선 늘림" />
+    <MESSAGE value="이미지 용량 상한선 늘림" />
+    <option name="LAST_COMMIT_MESSAGE" value="이미지 용량 상한선 늘림" />
   </component>
 </project>
