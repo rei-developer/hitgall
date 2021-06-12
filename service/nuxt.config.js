@@ -25,6 +25,13 @@ module.exports = {
       {
         href: 'https://fonts.googleapis.com/css2?family=Nunito&display=swap'
       }
+    ],
+    script: [
+      {
+        defer: true,
+        hid: 'adsense',
+        src: '/adsense.js',
+      },
     ]
   },
   /*
@@ -89,12 +96,8 @@ module.exports = {
         version: 3
       }
     ],
-    ["@nuxtjs/google-adsense"],
     ['@nuxtjs/moment', ['ko']]
   ],
-  "google-adsense": {
-    id: "ca-pub-8655534587792573"
-  },
   fontawesome: {
     imports: [
       {

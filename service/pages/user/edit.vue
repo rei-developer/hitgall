@@ -192,9 +192,9 @@ export default {
       selected: null,
       options: [
         {value: 0, text: '모두 보이기'},
-        {value: 1, text: '이미지 가리기'},
-        {value: 2, text: '대문 가리기'},
-        {value: 3, text: '대문, 이미지 가리기'}
+        {value: 1, text: '본문 이미지 가리기'},
+        {value: 2, text: '노짤 가리기'},
+        {value: 3, text: '노짤, 본문 이미지 가리기'}
       ]
     }
   },
