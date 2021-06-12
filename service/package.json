@@ -6,9 +6,9 @@
   "author": "nakochan",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development nodemon backend --watch backend",
+    "dev": "pm2 start ecosystem.config.js --only hitgall_DEV",
     "build": "nuxt build",
-    "start": "cross-env NODE_ENV=production pm2 start backend --name 'BAEKEND' -i max --node-args='--max-old-space-size=20480 --prof'",
+    "start": "pm2 start ecosystem.config.js --only hitgall_prod",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "analyze": "nuxt build --analyze"
