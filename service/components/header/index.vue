@@ -169,8 +169,9 @@
   > nav {
     margin-bottom: 1rem;
     color: #FFF;
-    background: @font-color;
+    background: rgba(237, 167, 178, .8);
     box-shadow: 0 5px 10px 0 rgba(0, 64, 128, .2);
+    backdrop-filter: blur(2px);
     &.fixed {
       position: fixed;
       top: 0;
