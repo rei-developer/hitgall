@@ -637,7 +637,7 @@ article.topic-list {
           }
 
           &:visited > .subject > div > span:nth-child(1) {
-            color: #770088
+            color: #AAA
           }
 
           > div {
