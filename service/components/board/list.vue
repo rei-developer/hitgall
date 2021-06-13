@@ -511,7 +511,7 @@ export default {
 .content-box {
   margin-bottom: 1rem;
   border-radius: 2px;
-  background: #FFF;
+  background: #333;
   box-shadow: 1px 0 10px rgba(0, 0, 0, .1);
 }
 
@@ -537,10 +537,10 @@ article.topic-list {
         top: 6px;
         right: 6px;
         padding: 0 10px 1px;
-        color: #29313D;
+        color: #FFF;
         font-size: 12px;
         border-radius: 3px;
-        background-color: #fff;
+        background-color: #333;
 
         > strong {
           font-size: 13px
@@ -559,10 +559,11 @@ article.topic-list {
     > h6 {
       display: flex;
       margin: 0;
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid #666;
 
       > div {
         padding: .5rem;
+        color: #FFF;
         font-size: 13px;
         font-weight: 700;
         text-align: center;
@@ -601,24 +602,24 @@ article.topic-list {
 
       &.notice > li {
         font-weight: 700;
-        border-bottom: 1px solid #ddd;
-        background-color: #f7f8fa;
+        border-bottom: 1px solid #666;
+        background-color: #121212;
 
         &:hover {
-          background-color: #f1f2f6
+          background-color: #121212
         }
       }
 
       > li {
-        border-bottom: 1px solid #ddd;
-        background-color: #fff;
+        border-bottom: 1px solid #666;
+        background-color: #333;
         cursor: pointer;
 
         &.view > {
-          background: @primary-hover;
+          background: @primary;
 
           > a > .subject > div > span:nth-child(1) {
-            color: #000 !important;
+            color: #FFF !important;
             font-weight: bold;
           }
         }
@@ -628,7 +629,7 @@ article.topic-list {
 
           &:hover {
             text-decoration: none;
-            background-color: #f9f9f9;
+            background-color: #121212;
 
             > .subject > .thumb {
               visibility: visible
@@ -641,7 +642,7 @@ article.topic-list {
 
           > div {
             padding: .5rem;
-            color: #212529;
+            color: #FFF;
             font-size: 13px;
             text-align: center;
             white-space: nowrap;
@@ -668,10 +669,10 @@ article.topic-list {
 
               > div {
                 > span {
-                  color: #6c757d;
+                  color: #FFF;
 
                   &:nth-child(1) {
-                    color: #212529;
+                    color: #FFF;
                     text-decoration: none;
                     white-space: normal;
                     word-break: break-all;
@@ -746,7 +747,7 @@ article.topic-list {
   }
 
   > .mobile-only {
-    background-color: #fff;
+    background-color: #333;
 
     > ul {
       margin: 0;
@@ -754,12 +755,12 @@ article.topic-list {
       list-style: none;
 
       &.notice > li {
-        background-color: #f7f8fa
+        background-color: #121212
       }
 
       > li {
         min-height: 58px;
-        border-bottom: 1px solid #ddd;
+        border-bottom: 1px solid #666;
 
         &.view {
           // min-height: 66px;
@@ -767,18 +768,18 @@ article.topic-list {
           border-bottom: 2px solid @primary;
 
           > a > .content > .subject {
-            color: #333 !important;
+            color: #FFF !important;
             font-weight: bold;
           }
         }
 
         > a {
-          color: #333;
+          color: #FFF;
           font-size: 12px;
           text-decoration: none;
 
           &:visited > .content > .subject {
-            color: #770088
+            color: #999
           }
 
           > .content {
@@ -790,7 +791,7 @@ article.topic-list {
               // max-width: calc(100vw - 40px);
               word-break: break-all;
               padding: .5rem 0 .5rem .5rem;
-              color: #212529;
+              color: #FFF;
               font-size: 14px;
               // white-space: nowrap;
               text-overflow: ellipsis;
@@ -865,7 +866,7 @@ article.topic-list {
 
             > .comment {
               width: 40px;
-              background-color: #f7f8fa;
+              background-color: #121212;
 
               > div {
                 width: 30px;
@@ -876,9 +877,9 @@ article.topic-list {
                 font-size: 12px;
                 font-weight: 700;
                 text-align: center;
-                border: 1px solid #ddd;
+                border: 1px solid #666;
                 border-radius: 5px;
-                background-color: #fff;
+                background-color: #333;
 
                 > span.hot {
                   color: #cc0000

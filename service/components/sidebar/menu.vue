@@ -85,7 +85,7 @@
       align-items: center;
       height: 40px;
       padding: 0 .75rem 3px 0;
-      color: #FFF;
+      color: #333;
       background: @font-color;
     }
     > .header {
@@ -102,19 +102,19 @@
       height: calc(100% - 44px);
       margin: 0;
       padding: 0;
-      background: #FAFAFA;
+      background: #121212;
       list-style: none;
       overflow-y: auto;
       > a {text-decoration: none}
       > li, > a > li {
         display: flex;
-        color: @primary;
+        color: #FFF;
         border-bottom: 1px solid rgba(0, 0, 0, .1);
-        background: #FFF;
+        background: #333;
         cursor: pointer;
         &:hover {
           color: @primary-hover;
-          background: @primary;
+          background: @font-color;
         }
         > .icon {
           display: flex;

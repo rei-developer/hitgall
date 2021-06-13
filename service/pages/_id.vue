@@ -464,14 +464,14 @@ export default {
 .content-box {
   margin-bottom: 1rem;
   border-radius: 2px;
-  background: #FFF;
+  background: #333;
   box-shadow: 1px 0 10px rgba(0, 0, 0, .1);
 }
 
 // desktop
 article.topic-view {
-  border-bottom: 1px solid #eee;
-  background-color: #fff;
+  border-bottom: 1px solid #666;
+  background-color: #333;
 
   > h6 {
     height: 100%;
@@ -479,7 +479,7 @@ article.topic-view {
     margin: 0;
     padding: .3rem;
     color: #fff;
-    border-bottom: 1px solid rgba(0, 0, 0, .2);
+    border-bottom: 1px solid rgba(255, 255, 255, .2);
     //border-radius: 7px;
     background-color: @primary;
 
@@ -499,6 +499,7 @@ article.topic-view {
       margin-top: 3px;
       //max-width: calc(100vw - 80px);
       max-width: 1344px;
+      color: #FFF;
       font-size: 14px;
       //white-space: nowrap;
       //text-overflow: ellipsis;
@@ -516,7 +517,7 @@ article.topic-view {
 
   > .profile {
     min-height: 91px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #666;
 
     > .image {
       > img, > div {
@@ -537,7 +538,7 @@ article.topic-view {
     > .author {
       display: inline-block;
       padding: 8px 0 4px 8px;
-      color: #333;
+      color: #FFF;
       font-size: 13px;
 
       > img:nth-child(1) {
@@ -606,7 +607,7 @@ article.topic-view {
   > .content {
     line-height: 1.5;
     padding: 20px;
-    color: #000;
+    color: #FFF;
     font-size: 14px;
     word-break: break-all;
     overflow-wrap: break-word;

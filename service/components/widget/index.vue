@@ -34,7 +34,7 @@
 
 .content-box {
   border-radius: 2px;
-  background: #FFF;
+  background: #333;
   box-shadow: 1px 0 10px rgba(0, 0, 0, .1);
   > .title {
     padding: .25rem 0 .4rem .5rem;
@@ -73,12 +73,10 @@
           &.title {
             display: -webkit-box;
             flex: 1;
-            color: @primary;
+            color: #FFF;
             font-size: 12px;
             text-overflow: ellipsis;
             overflow: hidden;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
             &:hover {color: @font-color}
             &:visited {color: #AAA}
           }
@@ -91,7 +89,7 @@
         padding: .2rem .5rem;
         > a {
           display: block;
-          color: @primary;
+          color: #FFF;
           font-size: 12px;
           text-decoration: none;
           text-overflow: ellipsis;

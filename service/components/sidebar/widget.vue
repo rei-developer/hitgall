@@ -6,17 +6,10 @@
           squared
           size='sm'
           variant='primary'
+          block
         >
           <font-awesome-icon icon='star'/>
           실시간 인기
-        </b-button>
-        <b-button
-          squared
-          size='sm'
-          variant='dark'
-        >
-          <font-awesome-icon icon='clock'/>
-          최근 등록
         </b-button>
       </div>
       <ul>
@@ -45,12 +38,11 @@
   margin-bottom: .5rem;
   padding: .5rem;
   border-radius: 2px;
-  background: #FFF;
+  background: #333;
   box-shadow: 1px 0 10px rgba(0, 0, 0, .1);
   > .title {
     display: flex;
     margin-bottom: 3px;
-    > button {width: 50%}
   }
   > ul {
     margin: 0;
@@ -60,7 +52,7 @@
       padding: .1rem 0 .2rem;
       > a {
         display: block;
-        color: @primary;
+        color: #FFF;
         font-size: 12px;
         text-decoration: none;
         text-overflow: ellipsis;

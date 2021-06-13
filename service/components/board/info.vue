@@ -46,7 +46,7 @@
   height: 142px;
   margin: 1rem 0;
   border-radius: 2px;
-  background: #FFF;
+  background: #333;
   box-shadow: 1px 0 10px rgba(0, 0, 0, .1);
   > .board-title {
     height: 30px;
@@ -60,9 +60,9 @@
   > .board-info {
     display: flex;
     margin: 5px;
-    color: #000;
+    color: #FFF;
     font-size: 14px;
-    border: 1px solid rgba(0, 0, 0, .1);
+    border: 1px solid rgba(255, 255, 255, .1);
     > .image {
       > img {
         width: 100px;
@@ -73,7 +73,7 @@
     > .description {
       flex: 1;
       margin: 5px;
-      color: #333;
+      color: #FFF;
       font-size: 13px;
     }
     > .manager {

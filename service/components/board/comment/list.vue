@@ -313,7 +313,7 @@ export default {
 .content-box {
   margin-bottom: 1rem;
   border-radius: 2px;
-  background: #FFF;
+  background: #333;
   box-shadow: 1px 0 10px rgba(0, 0, 0, .1);
 }
 
@@ -342,8 +342,8 @@ article.comment-view {
     list-style: none;
 
     > li {
-      border-bottom: 1px solid #eee;
-      background-color: #fff;
+      border-bottom: 1px solid #666;
+      background-color: #333;
 
       &:last-child {
         border: 0
@@ -363,8 +363,7 @@ article.comment-view {
           > img, > div {
             width: 56px;
             height: auto;
-            margin: 12px;
-            margin-right: 0;
+            margin: 12px 0 12px 12px;
             padding: 3px;
             background-color: #fff;
             border: 1px solid #ddd;
@@ -396,7 +395,7 @@ article.comment-view {
               }
 
               > span.author {
-                color: rgb(68, 68, 68);
+                color: #AAA;
                 font-weight: 700;
 
                 > span.ip {
@@ -441,7 +440,7 @@ article.comment-view {
 
               > span {
                 line-height: 1.5;
-                color: #000;
+                color: #FFF;
                 overflow-wrap: break-word;
               }
             }

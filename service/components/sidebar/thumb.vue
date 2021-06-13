@@ -27,7 +27,7 @@
   margin-bottom: .5rem;
   padding: .25rem 0 0 .25rem;
   border-radius: 2px;
-  background: #FFF;
+  background: #333;
   box-shadow: 1px 0 10px rgba(0, 0, 0, .1);
   > ul {
     margin: 0;

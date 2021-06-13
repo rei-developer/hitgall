@@ -362,10 +362,10 @@ export default {
 
 article.comment-write {
   padding: 5px;
-  border: 1px solid #eee;
+  border: 1px solid #666;
   border-left: 0;
   border-right: 0;
-  background-color: #fff;
+  background-color: #333;
   > div {
     > .header {
       font-size: .75rem;
@@ -389,9 +389,10 @@ article.comment-write {
         width: 120px;
         margin: 0 0 5px 0;
         padding: .25rem .5rem;
-        color: #000;
+        color: #FFF;
         font-size: 14px;
-        border: 1px solid #ccc;
+        border: 1px solid #666;
+        background: #121212;
         outline: none;
       }
     }
@@ -413,8 +414,10 @@ article.comment-write {
         > textarea {
           height: 4.5rem;
           padding: .5rem;
+          color: #FFF;
           font-size: 14px;
-          border: 1px solid #ccc;
+          border: 1px solid #666;
+          background: #121212;
           outline: none !important;
         }
       }

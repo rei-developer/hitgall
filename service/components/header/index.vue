@@ -11,11 +11,11 @@
         <nuxt-link to='/'>
           <li class='logo'>
             <div>
-              <img :src='`/logo${logo}.png`' alt='힛갤'>
+              <img :src='`/logo${logo}.png`' alt='logo'>
             </div>
             <div>
-              <div>HITGALL.com</div>
-              <div>Re:제로부터 시작하는</div>
+              <div>HITGALL STORAGE</div>
+              <div>실시간 인기글 힛갤저장소</div>
             </div>
           </li>
         </nuxt-link>
@@ -110,14 +110,12 @@
     </nav>
     <b-button
       class='side-menu'
-      variant='dark'
       @click='onSidebarClick'
     >
       <font-awesome-icon icon='bars'/>
     </b-button>
     <b-button
       class='scroll-top'
-      variant='dark'
       @click='onScrollTopClick'
       v-if='top >= 100'
     >
@@ -132,7 +130,7 @@
 @font-color: #EDA7B2;
 
 .wrapper {
-  background: #fff;
+  background: #333;
   > header, nav {
     > ul {
       display: flex;
@@ -173,7 +171,8 @@
   > nav {
     margin-bottom: 1rem;
     color: #FFF;
-    background: @font-color;
+    background: rgba(237, 167, 178, .8);
+    backdrop-filter: blur(2px);
     box-shadow: 0 5px 10px 0 rgba(0, 64, 128, .2);
     &.fixed {
       position: fixed;
@@ -211,6 +210,9 @@
     width: 3rem;
     height: 3rem;
     font-size: 2rem;
+    background: rgba(237, 167, 178, .8);
+    backdrop-filter: blur(2px);
+    border: 0;
     border-radius: 500rem;
     z-index: 1000;
     &.scroll-top {
