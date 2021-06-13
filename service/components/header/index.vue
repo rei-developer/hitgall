@@ -11,7 +11,7 @@
         <nuxt-link to='/'>
           <li class='logo'>
             <div>
-              <img :src='`/logo${logo}.png`' alt='힛갤'>
+              <img src='/logo.png' alt='logo'>
             </div>
           </li>
         </nuxt-link>
