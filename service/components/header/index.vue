@@ -13,10 +13,6 @@
             <div>
               <img :src='`/logo${logo}.png`' alt='힛갤'>
             </div>
-            <div>
-              <div>HITGALL.com</div>
-              <div>Re:제로부터 시작하는</div>
-            </div>
           </li>
         </nuxt-link>
         <li class='right'>
