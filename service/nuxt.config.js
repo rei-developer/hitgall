@@ -4,7 +4,7 @@ module.exports = {
    ** Headers of the page
    */
   head: {
-    title: '힛갤',
+    title: '힛갤저장소 - 실시간 인기글 저장소',
     meta: [
       {charset: 'utf-8'},
       {
@@ -12,13 +12,13 @@ module.exports = {
         content:
           'width=device-width, initial-scale=1, user-scalable=no, shrink-to-fit=no'
       },
-      {name: 'theme-color', content: '#29313D'},
+      {name: 'theme-color', content: '#EDA7B2'},
       {
         name: 'google-site-verification',
         content: 'BxPxwI8rlJTdR-pDX9EMgegVSy0dNLjXvgQLuRk8D5I'
       },
       {name: 'robots', content: 'index, follow'},
-      {hid: 'description', name: 'description', content: '힛갤'}
+      {hid: 'description', name: 'description', content: '힛갤저장소 - 실시간 인기글 저장소'}
     ],
     link: [
       {rel: 'icon', type: 'image/x-icon', href: '/favicon.png'},
@@ -37,7 +37,7 @@ module.exports = {
   /*
    ** Customize the progress-bar color
    */
-  loading: {color: '#2D99E1'},
+  loading: {color: '#EDA7B2'},
   /*
    ** Global CSS
    */
