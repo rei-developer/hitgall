@@ -11,11 +11,7 @@
         <nuxt-link to='/'>
           <li class='logo'>
             <div>
-              <img :src='`/logo${logo}.png`' alt='logo'>
-            </div>
-            <div>
-              <div>HITGALL STORAGE</div>
-              <div>실시간 인기글 힛갤저장소</div>
+              <img :src='LogoCI' alt='logo'>
             </div>
           </li>
         </nuxt-link>
@@ -252,12 +248,14 @@
 <script>
 import SidebarMenu from '@/components/sidebar/menu'
 import BOARD_LIST from '@/data/board-list'
+import LogoCI from '@/assets/logo.png'
 
 export default {
   name: 'Header',
   components: {SidebarMenu},
   data() {
     return {
+      LogoCI,
       searchText: '',
       searchResult: [],
       boardList: BOARD_LIST
