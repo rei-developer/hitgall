@@ -3,7 +3,7 @@ module.exports = {
       {
         name: 'hitgall_prod',
         script: './backend/index.js',
-        node_args: '--max-old-space-size=4096 --prof',
+        node_args: '--max-old-space-size=4096',
         exec_mode: 'cluster',
         instances: 4,
         autorestart: true,
@@ -23,7 +23,7 @@ module.exports = {
       {
         name: 'hitgall_DEV',
         script: './backend/index.js',
-        node_args: '--max-old-space-size=4096 --prof',
+        node_args: '--max-old-space-size=4096',
         autorestart: false,
         watch: false,
         max_memory_restart: '2G',
@@ -39,8 +39,8 @@ module.exports = {
         error: './logs/consoleError.log'
       }
     ],
-    
-  
+
+
     // deploy: {
     //   production: {
     //     user: 'node',

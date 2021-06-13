@@ -6,6 +6,7 @@
   "author": "nakochan",
   "private": true,
   "scripts": {
+    "local": "cross-env NODE_ENV=development nodemon backend --watch backend",
     "dev": "pm2 start ecosystem.config.js --only hitgall_DEV",
     "build": "nuxt build",
     "start": "pm2 start ecosystem.config.js --only hitgall_prod",
