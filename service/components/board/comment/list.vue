@@ -69,7 +69,7 @@
                 >
                   <img :src='`https://cdn.hitgall.com/img/${item.imageUrl}`'>
                 </div>
-                <span v-html='item.content'/>
+                <span class="comment" v-html='item.content'/>
               </div>
             </div>
             <div class='more'>

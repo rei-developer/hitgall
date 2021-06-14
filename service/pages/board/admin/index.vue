@@ -13,20 +13,20 @@
       </div>
       <div class='desktop-only-test'>
         <h6>
-          <div>#</div>
-          <div class='subject'>갤러리 이름</div>
-          <div>관리</div>
+          <div class="dark-listInfo">#</div>
+          <div class='subject dark-listInfo'>갤러리 이름</div>
+          <div class="dark-listInfo">관리</div>
         </h6>
         <ul v-if='boards'>
           <li v-for='(item, index) in boards' :key='index'>
             <div>
-              <div>{{ index + 1 }}</div>
+              <div class="adminpage-list">{{ index + 1 }}</div>
               <div class='subject'>
                 <!-- <div class='thumb' v-if='item.imageUrl'>
                     <img :src='`https://cdn.hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
                 </div> -->
                 <div>
-                  <span>
+                  <span class="adminpage-list">
                     <img class='icon' alt="" :src='`/user1${item.boardLevel || 0}.png`'>
                     {{ item.name }}
                   </span>

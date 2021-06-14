@@ -8,9 +8,10 @@ module.exports = {
         instances: 4,
         autorestart: true,
         watch: false,
-        max_memory_restart: '5G',
+        max_memory_restart: '500M',
         listen_timeout: '2000',
         autorestart: true,
+        exp_backoff_restart_delay: 100,
         env: {
           HOST: process.env.HOST,
           PORT: process.env.PORT,
@@ -25,8 +26,8 @@ module.exports = {
         script: './backend/index.js',
         node_args: '--max-old-space-size=4096',
         autorestart: false,
-        watch: false,
-        max_memory_restart: '2G',
+        watch: true,
+        max_memory_restart: '500M',
         listen_timeout: '2000',
         autorestart: false,
         env: {

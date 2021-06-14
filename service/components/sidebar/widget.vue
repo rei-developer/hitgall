@@ -1,7 +1,7 @@
 <template>
   <b-overlay :show='loading' rounded='sm'>
-    <div class='content-box'>
-      <div class='title'>
+    <div class='content-box dark-widget'>
+      <div class='widget-title'>
         <b-button
           squared
           size='sm'
@@ -25,7 +25,7 @@
           :key='index'
         >
           <NuxtLink
-            class='title'
+            class='widget-title'
             :to='`/${item.id}`'
           >
             {{ item.title }}
@@ -47,7 +47,7 @@
   border-radius: 2px;
   background: #FFF;
   box-shadow: 1px 0 10px rgba(0, 0, 0, .1);
-  > .title {
+  > .widget-title {
     display: flex;
     margin-bottom: 3px;
     > button {width: 50%}

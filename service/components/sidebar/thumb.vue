@@ -1,13 +1,13 @@
 <template>
   <b-overlay :show='loading' rounded='sm'>
-    <div class='content-box'>
+    <div class='content-box dark-widget'>
       <ul>
         <li
           v-for='(item, index) in data'
           :key='index'
         >
           <NuxtLink
-            class='thumb'
+            class='thumb side-thumb'
             :style='{backgroundImage: item.imageUrl ? `url("https://cdn.hitgall.com/img/thumb/${item.imageUrl}")` : undefined}'
             :to='`/${item.id}`'
           />
@@ -39,7 +39,7 @@
       > a {
         text-decoration: none;
         cursor: pointer;
-        &.thumb {
+        &.side-thumb {
           width: calc(100px - .5rem);
           height: calc(100px - .5rem);
           margin: .25rem 0 0 .25rem;

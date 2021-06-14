@@ -67,6 +67,11 @@
             힛갤콘
           </li>
         </nuxt-link>
+        <li @click='toggle();'>
+          <font-awesome-icon icon='leaf'/>
+            다크모드
+        </li>
+          
         <!-- <nuxt-link to='/help'>
           <li>
             <font-awesome-icon icon='question-circle'/>
@@ -79,7 +84,7 @@
       <ul>
         <nuxt-link class='logo' to='/'>
           <li>
-            <img src='/icon.png' alt='힛갤'>
+            <img src='/icon.png' class="logo" alt='logo'>
           </li>
         </nuxt-link>
         <nuxt-link to='/gallery'>
@@ -94,6 +99,10 @@
             도움말
           </li>
         </nuxt-link> -->
+        <li @click='toggle();'>
+          <font-awesome-icon icon='leaf'/>
+            다크모드
+        </li>
         <nuxt-link class='right' :to='$store.state.user.isLogged ? "/user/edit" : "/signin"'>
           <li v-if='$store.state.user.isLogged'>
             <font-awesome-icon icon='cog'/>
@@ -339,6 +348,9 @@ export default {
         }
       })
       this.installPromptEvent = null
+    },
+    toggle() {
+      this.darkmode.toggle()
     }
   }
 }

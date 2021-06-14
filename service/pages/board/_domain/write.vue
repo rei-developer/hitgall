@@ -1,5 +1,5 @@
 <template>
-  <div class='content-box'>
+  <div class='content-box dark-write'>
     <b-modal
       id='bv-back-modal'
       @ok='$router.push({ path: `/board/${domain}` })'

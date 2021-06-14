@@ -90,16 +90,16 @@
         </div>
         <div class='info'>
           <div>
-            <span class='desktop-only'>조회 <strong>{{ numberWithCommas(topic.hits) }}</strong></span>
+            <span class='desktop-only dark-topicInfo'>조회 <strong>{{ numberWithCommas(topic.hits) }}</strong></span>
             <!-- <span class='desktop-only'>댓글 <strong>1</strong></span> -->
-            <span>개념 <strong>{{ numberWithCommas(topic.likes) }}</strong></span>
-            <span>비추 <strong>{{ numberWithCommas(topic.hates) }}</strong></span>
+            <span class='dark-topicInfo'>개념 <strong>{{ numberWithCommas(topic.likes) }}</strong></span>
+            <span class='dark-topicInfo'>비추 <strong>{{ numberWithCommas(topic.hates) }}</strong></span>
           </div>
           <div>
-            <span @click='copyLink(`https://www.hitgall.com/${ id }`)'>https://www.hitgall.com/{{ id }}</span>
+            <span class='dark-topicInfo' @click='copyLink(`https://www.hitgall.com/${ id }`)'>https://www.hitgall.com/{{ id }}</span>
           </div>
           <div class='regdate'>
-            <span>{{ $moment(topic.created).format('YY/MM/DD HH:mm:ss') }}</span>
+            <span class='dark-topicInfo'>{{ $moment(topic.created).format('YY/MM/DD HH:mm:ss') }}</span>
           </div>
         </div>
       </div>
@@ -135,14 +135,14 @@
       </div>
       <div class='file-list' v-if='images.length > 0'>
         <h6>
-          <div>#</div>
+          <div class="dl">#</div>
           <div class='subject'>파일 이름</div>
-          <div>다운로드</div>
+          <div class="dl">다운로드</div>
         </h6>
         <ul>
           <li v-for='(item, index) in images' :key='index'>
-            <div>{{ index + 1 }}</div>
-            <div class='subject'>{{ item.name }}</div>
+            <div class="dl-content">{{ index + 1 }}</div>
+            <div class='subject dl-content'>{{ item.name }}</div>
             <div @click='downloadWithAxios(item.imageUrl, item.name)'>
               <font-awesome-icon icon='download'/>
             </div>

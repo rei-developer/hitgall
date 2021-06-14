@@ -4,7 +4,7 @@
       :show='!board.name'
       rounded='sm'
     >
-      <div class='desktop-only content-box'>
+      <div class='desktop-only content-box dark-info'>
         <div class='board-title'>{{ board.name }} 갤러리</div>
         <div class='board-info'>
           <div class='image'>

@@ -12,25 +12,25 @@
           <font-awesome-icon icon='times'/>
         </div>
       </div>
-      <ul>
+      <ul class="sidebar-menu">
         <nuxt-link
           :to='`/board/${item.field}`'
           v-for='(item, index) in boardList'
           :key='index'
         >
-          <li @click='forceUpdate($event, item.field)'>
+          <li class="sidebar-menu" @click='forceUpdate($event, item.field)'>
             <div class='icon'/>
             {{ item.name }}
           </li>
         </nuxt-link>
         <nuxt-link to='/board/admin' v-if='$store.state.user.isLogged'>
-          <li>
+          <li class="sidebar-menu">
             <div class='icon'/>
             갤러리 관리
           </li>
         </nuxt-link>
         <nuxt-link to='/gallery'>
-          <li @click='forceUpdate'>
+          <li class="sidebar-menu" @click='forceUpdate'>
             <div class='icon'>
               <font-awesome-icon icon='camera'/>
             </div>
@@ -38,21 +38,27 @@
           </li>
         </nuxt-link>
         <nuxt-link to='/seal'>
-          <li v-shortkey.once='["t"]' @shortkey='move("/seal")' @click='forceUpdate'>
+          <li class="sidebar-menu" v-shortkey.once='["t"]' @shortkey='move("/seal")' @click='forceUpdate'>
             <div class='icon'>
               <font-awesome-icon icon='smile'/>
             </div>
             힛갤콘
           </li>
         </nuxt-link>
-        <nuxt-link to='/help'>
+        <!-- <nuxt-link to='/help'>
           <li>
             <div class='icon'>
               <font-awesome-icon icon='question-circle'/>
             </div>
             도움말
           </li>
-        </nuxt-link>
+        </nuxt-link> -->
+        <li class="sidebar-menu" @click='toggle()'>
+          <div class='icon'>
+          <font-awesome-icon icon='leaf'/>
+          </div>
+          다크모드
+        </li>
       </ul>
     </section>
   </div>
@@ -151,6 +157,9 @@ export default {
     },
     close() {
       this.$eventBus.$emit('SetSidebar')
+    },
+    toggle() {
+      this.darkmode.toggle()
     }
   }
 }

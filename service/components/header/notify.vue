@@ -1,6 +1,6 @@
 <template>
   <article class='notify'>
-    <h6 @click='toggle'>
+    <h6 class="dark-notify" @click='toggle'>
       <font-awesome-icon icon='bell'/>
       <span>{{ $store.state.user.noticeCount }}</span>
     </h6>
@@ -14,7 +14,7 @@
           <!--            <img :src='item.profile ? "/profile/" + item.profile : "/profile.png"' @error='imageUrlAlt'>-->
           <!--          </div>-->
           <div class='content'>
-            <div class='author'>
+            <div class='notify-dark-author author'>
               <img :src='`/icon/${item.icon}`' v-if='item.icon !== ""'>
               {{ item.author }}
             </div>

@@ -57,19 +57,19 @@
       </nuxt-link>
       <div class='desktop-only'>
         <h6>
-          <div>#</div>
+          <div class="dark-listInfo">#</div>
           <div class='subject'>제목</div>
-          <div>글쓴이</div>
-          <div>날짜</div>
-          <div>조회</div>
-          <div>추천</div>
+          <div class="dark-listInfo">글쓴이</div>
+          <div class="dark-listInfo">날짜</div>
+          <div class="dark-listInfo">조회</div>
+          <div class="dark-listInfo">추천</div>
         </h6>
         <ul class='notice' v-if='notices.length > 0'>
           <li
             :class='id == item.id ? "view" : ""'
             v-for='item in notices' :key='item.id'>
             <nuxt-link :to='getMoveLink(item)'>
-              <div>
+              <div class='number'>
                                 <span v-if='id == item.id'>
                                     <font-awesome-icon icon='angle-right'/>
                                 </span>
@@ -82,7 +82,7 @@
                   <img alt='thumb' :src='`https://cdn.hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
                 </div>
                 <div>
-                                    <span :style='item.color !== "" ? `color: #${item.color}` : ""'>
+                                    <span class='title' :style='item.color !== "" ? `color: #${item.color}` : ""'>
                                         <span class='category' v-if='item.category'>{{ item.category }}</span>
                                         <strong>{{ item.title }}</strong>
                                       <!-- <span class='newest' v-if='$moment().diff($moment(item.created), "days") <= 1'>N</span> -->
@@ -102,9 +102,9 @@
                 {{ item.author }}
                 <span class='ip' v-if='item.userId < 1 && item.ip !== ""'>({{ item.ip }})</span>
               </div>
-              <div>{{ getCreated(item.created) }}</div>
-              <div>{{ numberWithCommas(item.hits) }}</div>
-              <div>{{ numberWithCommas(item.likes) }}</div>
+              <div class='created'>{{ getCreated(item.created) }}</div>
+              <div class='hits'>{{ numberWithCommas(item.hits) }}</div>
+              <div class='likes-list'>{{ numberWithCommas(item.likes) }}</div>
             </nuxt-link>
           </li>
         </ul>
@@ -114,7 +114,7 @@
             v-for='(item, index) in topics' :key='index'>
             <nuxt-link
               :to='`/${item.id}?page=${page}${best > 0 ? "&best=" + best : ""}${category && category !== "" ? "&category=" + category : ""}`'>
-              <div>
+              <div class='number'>
                                 <span v-if='id == item.id'>
                                     <font-awesome-icon icon='angle-right'/>
                                 </span>
@@ -127,7 +127,7 @@
                   <img alt='thumb' :src='`https://cdn.hitgall.com/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
                 </div>
                 <div>
-                                    <span :style='item.color !== "" ? `color: #${item.color}` : ""'>
+                                    <span class='title' :style='item.color !== "" ? `color: #${item.color}` : ""'>
                                         <span class='category' v-if='item.category'>{{ item.category }}</span>
                                         <img class='icon' alt='icon' src='/star.gif' v-if='item.isBest > 0'>
                                         {{ item.title }}
@@ -148,9 +148,9 @@
                 {{ item.author }}
                 <span class='ip' v-if='item.userId < 1 && item.ip !== ""'>({{ item.ip }})</span>
               </div>
-              <div>{{ getCreated(item.created) }}</div>
-              <div>{{ numberWithCommas(item.hits) }}</div>
-              <div>{{ numberWithCommas(item.likes) }}</div>
+              <div class='created'>{{ getCreated(item.created) }}</div>
+              <div class='hits'>{{ numberWithCommas(item.hits) }}</div>
+              <div class='likes-list'>{{ numberWithCommas(item.likes) }}</div>
             </nuxt-link>
           </li>
         </ul>
@@ -166,7 +166,7 @@
                 <div class='subject'>
                   <span class='notice'>공지</span>
                   <span class='category' v-if='item.category'>{{ item.category }}</span>
-                  <span :style='item.color !== "" ? `color: #${item.color}` : ""'>
+                  <span class='title' :style='item.color !== "" ? `color: #${item.color}` : ""'>
                                         <strong>{{ item.title }}</strong>
                                     </span>
                   <!-- <span class='newest' v-if='$moment().diff($moment(item.created), "days") <= 1'>N</span> -->
@@ -216,7 +216,7 @@
                 <div class='subject'>
                   <span class='category' v-if='item.category'>{{ item.category }}</span>
                   <img class='icon' alt='icon' src='/star.gif' v-if='item.isBest > 0'>
-                  <span :style='item.color !== "" ? `color: #${item.color}` : ""'>
+                  <span class='title' :style='item.color !== "" ? `color: #${item.color}` : ""'>
                                         {{ item.title }}
                                     </span>
                   <!-- <span class='newest' v-if='$moment().diff($moment(item.created), "days") <= 1'>N</span> -->

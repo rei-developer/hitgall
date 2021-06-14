@@ -87,6 +87,7 @@ module.exports = {
     '@nuxtjs/proxy',
     '@nuxtjs/pwa',
     '@nuxtjs/sentry',
+    'nuxtjs-darkmode-js-module',
     ['@nuxtjs/axios', {proxy: true}],
     [
       '@nuxtjs/recaptcha',
@@ -105,6 +106,19 @@ module.exports = {
         icons: ['fas']
       }
     ]
+  },
+  darkmodejs: {
+    bottom: '4.5rem', // default: '32px'
+    right: '1rem', // default: '32px' 
+    time: '0.1s', // default: '0.3s'
+    mixColor: '#DDDDDD', // default: '#fff'
+    backgroundColor: '#fff',  // default: '#fff'
+    buttonColorDark: '#100f2c',  // default: '#100f2c'
+    buttonColorLight: '#eda7b2', // default: '#fff'
+    saveInCookies: true, // default: true,
+    label: '🌓', // default: ''
+    autoMatchOsTheme: false, // default: true
+    disableWidget: true // default: false
   },
   /*
    ** Axios module configuration
