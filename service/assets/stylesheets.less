@@ -351,16 +351,20 @@ article.comment-view {
 @media (min-width: 1200px) {
   .darkmode--activated span.title, .darkmode--activated li.sidebar-menu, .darkmode--activated div.subject,
   .darkmode--activated a.widget-title, .darkmode--activated div.description, .darkmode--activated div.rows.master,
-  .darkmode--activated label.custom-control-label, .darkmode--activated div.dl, .darkmode--activated div.dark-listInfo{
+  .darkmode--activated label.custom-control-label, .darkmode--activated div.dl, .darkmode--activated div.dark-listInfo,
+  .darkmode--activated span.dark-postCount{
     color: rgb(255, 255, 255) !important;
 }
-.darkmode--activated a.title, .darkmode--activated h6,.darkmode--activated p, 
-.darkmode--activated div.number, .darkmode--activated div.author, .darkmode--activated div.created, 
-.darkmode--activated div.hits, .darkmode--activated div.likes-list, .darkmode--activated span.author,
-.darkmode--activated span.regdate, .darkmode--activated span.dark-topicInfo, .darkmode--activated div.dl-content,
+.darkmode--activated a.title, .darkmode--activated h6, .darkmode--activated div.number, 
+.darkmode--activated div.author, .darkmode--activated div.created, .darkmode--activated div.hits, 
+.darkmode--activated div.likes-list, .darkmode--activated span.author,.darkmode--activated span.regdate, 
+.darkmode--activated span.dark-topicInfo, .darkmode--activated div.dl-content,
 .darkmode--activated span.comment, .darkmode--activated div.adminpage-list{ 
   color: rgb(0, 0, 0) !important;
   font-weight: 900 !important;
+}
+.darkmode--activated p {
+  color: rgb(0, 0, 0) !important;
 }
 .darkmode--activated h6, .darkmode--activated div.notify-dark-author, .darkmode--activated span.adminpage-list{
   color: rgb(255, 255, 255) !important;
@@ -371,12 +375,11 @@ article.comment-view {
 .darkmode--activated nav, .darkmode--activated button.btn.btn-primary.btn-sm, .darkmode--activated div.load-more, 
 .darkmode--activated div.name, .darkmode--activated div.price, .darkmode--activated a.thumb,
 .darkmode--activated button.btn.btn-secondary.btn-sm, .darkmode--activated div.tagUser,
-.darkmode--activated article.notify, .darkmode--activated div.label{
+.darkmode--activated article.notify, .darkmode--activated div.label, .darkmode--activated div.write-box{
   isolation: isolate !important;
 }
-.darkmode--activated li.sidebar-menu, .darkmode--activated ul.sidebar-menu, .darkmode--activated div.vue-dropzone.dropzone.dz-clickable, 
-.darkmode--activated div.dark-widget, .darkmode--activated div.dark-info, .darkmode--activated div.more,
-.darkmode--activated div.item-info {
+.darkmode--activated li.sidebar-menu, .darkmode--activated ul.sidebar-menu, .darkmode--activated div.dark-widget, 
+.darkmode--activated div.dark-info, .darkmode--activated div.more,.darkmode--activated div.item-info {
   background-color: #494949 !important;
 }
 .darkmode--activated div.dark-write {
@@ -394,7 +397,7 @@ article.comment-view {
 .darkmode--activated li.sidebar-menu, .darkmode--activated div.subject, .darkmode--activated div.dl{
     color: rgb(255, 255, 255) !important;
 }
-.darkmode--activated h6, .darkmode--activated span.adminpage-list{
+.darkmode--activated h6, .darkmode--activated span.adminpage-list, .darkmode--activated div.notify-dark-author.author{
   color: rgb(255, 255, 255) !important;
   font-weight: 900 !important;
 }
