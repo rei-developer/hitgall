@@ -25,7 +25,7 @@
     color: #FFF;
     background: @font-color;
     > ul {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       width: 1200px;
       height: 44px;

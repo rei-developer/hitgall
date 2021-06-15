@@ -87,7 +87,7 @@
                                         <strong>{{ item.title }}</strong>
                                       <!-- <span class='newest' v-if='$moment().diff($moment(item.created), "days") <= 1'>N</span> -->
                                     </span>
-                  <span v-if='item.postsCount > 0'>
+                  <span class='dark-postCount' v-if='item.postsCount > 0'>
                                         [{{ item.postsCount }}]
                                     </span>
                   <span v-if='item.isImage > 0'>
@@ -616,6 +616,7 @@ article.topic-list {
 
         &.view > {
           background: @primary-hover;
+          isolation: isolate;
 
           > a > .subject > div > span:nth-child(1) {
             color: #000 !important;
@@ -879,9 +880,10 @@ article.topic-list {
                 border: 1px solid #ddd;
                 border-radius: 5px;
                 background-color: #fff;
+                isolation: isolate;
 
                 > span.hot {
-                  color: #cc0000
+                  color: #cc0000;
                 }
               }
             }
