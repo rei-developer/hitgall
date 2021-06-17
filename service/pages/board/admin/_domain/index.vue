@@ -406,12 +406,12 @@ export default {
       if (!this.$store.state.user.isLogged)
         return this.$toast.error('로그인하세요.')
       const token = this.$store.state.user.token
-      const LIMITS = 10485760
+      const LIMITS = 20971520
       const file = e.target.files[0]
       const formData = new FormData()
       formData.append('type', 'file')
       formData.append('img', file, file.name)
-      if (!/(.png|.jpg|.jpeg)/i.test(file.name))
+      if (!/(.webp|.png|.jpg|.jpeg)/i.test(file.name))
         return this.$toast.error('이미지 업로드 실패... (png, jpg, jpeg만 가능)')
       if (file.size > LIMITS)
         return this.$toast.error('이미지 업로드 실패... (10MB 이하만 업로드 가능)')
