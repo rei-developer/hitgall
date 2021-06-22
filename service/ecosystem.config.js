@@ -1,14 +1,14 @@
 module.exports = {
     apps: [
       {
-        name: 'hitgall_prod',
+        name: 'HITGALL PRODUCTION',
         script: './backend/index.js',
-        node_args: '--max-old-space-size=4096',
+        node_args: '--max-old-space-size=20480',
         exec_mode: 'cluster',
         instances: 4,
         autorestart: true,
         watch: false,
-        max_memory_restart: '500M',
+        // max_memory_restart: '500M',
         listen_timeout: '2000',
         autorestart: true,
         exp_backoff_restart_delay: 100,
