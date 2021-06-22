@@ -1,7 +1,7 @@
 module.exports = {
     apps: [
       {
-        name: 'HITGALL PRODUCTION',
+        name: 'HITGALL_PRODUCTION',
         script: './backend/index.js',
         node_args: '--max-old-space-size=20480',
         exec_mode: 'cluster',
